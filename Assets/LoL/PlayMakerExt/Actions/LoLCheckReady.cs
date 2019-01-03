@@ -28,6 +28,10 @@ namespace HutongGames.PlayMaker.Actions.LoL {
                 Finish();
         }
 
+        public override void OnUpdate() {
+            Check();
+        }
+
         void Check() {            
             bool isReady = LoLManager.instance.isReady;
 
