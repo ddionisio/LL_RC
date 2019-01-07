@@ -210,31 +210,26 @@ PolygonCollider2D:
       - {x: -1, y: 10}
       - {x: -1, y: 1}
       - {x: -1, y: 1}
-      - {x: -0.52912, y: 1.00166}
-      - {x: 0.73942, y: 1.00572}
-      - {x: 2.58953, y: 1.01073}
-      - {x: 4.80512, y: 1.01526}
-      - {x: 7.17006, y: 1.01789}
-      - {x: 9.46826, y: 1.01717}
-      - {x: 11.48361, y: 1.01168}
-      - {x: 13, y: 1}
-      - {x: 13, y: 1}
-      - {x: 13.58931, y: 1.91183}
-      - {x: 13.99164, y: 3.31228}
-      - {x: 14.28773, y: 5.00533}
-      - {x: 14.55829, y: 6.795}
-      - {x: 14.88406, y: 8.48529}
-      - {x: 15.34579, y: 9.88022}
-      - {x: 16.02418, y: 10.78378}
-      - {x: 17, y: 11}
-      - {x: 17, y: 11}
-      - {x: 17.96749, y: 10.29379}
-      - {x: 18.60785, y: 8.75185}
-      - {x: 18.98214, y: 6.66078}
-      - {x: 19.15142, y: 4.3072}
-      - {x: 19.17678, y: 1.97772}
-      - {x: 19.11928, y: -0.04104}
-      - {x: 19.04, y: -1.46249}
+      - {x: 14, y: 1}
+      - {x: 14, y: 1}
+      - {x: 18, y: 6}
+      - {x: 18, y: 6}
+      - {x: 18.36935, y: 5.9877}
+      - {x: 19.35512, y: 5.95326}
+      - {x: 20.77389, y: 5.90037}
+      - {x: 22.4422, y: 5.83271}
+      - {x: 24.17664, y: 5.75399}
+      - {x: 25.79376, y: 5.66789}
+      - {x: 27.11014, y: 5.57809}
+      - {x: 27.94234, y: 5.48829}
+      - {x: 27.94234, y: 5.48829}
+      - {x: 28.43966, y: 5.01892}
+      - {x: 27.84045, y: 4.10135}
+      - {x: 26.46226, y: 2.89302}
+      - {x: 24.62259, y: 1.55135}
+      - {x: 22.63901, y: 0.23378}
+      - {x: 20.82902, y: -0.90225}
+      - {x: 19.51017, y: -1.69932}
       - {x: 19, y: -2}
       - {x: 19, y: -2}
       - {x: 5.545, y: -4.791}
@@ -298,19 +293,28 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
-    - position: {x: 13, y: 1, z: 0}
+    - position: {x: 14, y: 1, z: 0}
       leftTangent: {x: -3.1863394, y: 0.04071045, z: 0}
       rightTangent: {x: 1.8925838, y: 1.6058853, z: 0}
-      mode: 2
+      mode: 0
       height: 1
       bevelCutoff: 0
       bevelSize: 0
       spriteIndex: 0
       corner: 1
-    - position: {x: 17, y: 11, z: 0}
-      leftTangent: {x: -3.0704699, y: 0.514117, z: -0}
+    - position: {x: 18, y: 6, z: 0}
+      leftTangent: {x: -0.7346935, y: -2.7419982, z: 0}
+      rightTangent: {x: 0.6243429, y: 2.3301501, z: 0}
+      mode: 0
+      height: 1
+      bevelCutoff: 0
+      bevelSize: 0
+      spriteIndex: 0
+      corner: 0
+    - position: {x: 27.942345, y: 5.4882984, z: 0}
+      leftTangent: {x: -1.4105768, y: 0.23618603, z: 0}
       rightTangent: {x: 3.0704699, y: -0.514117, z: 0}
-      mode: 1
+      mode: 2
       height: 1
       bevelCutoff: 0
       bevelSize: 0
@@ -383,8 +387,8 @@ SpriteShapeRenderer:
   - {fileID: 21300000, guid: 537ce4da5cfe1e6449bfed07673ae5f4, type: 3}
   - {fileID: 21300000, guid: 537ce4da5cfe1e6449bfed07673ae5f4, type: 3}
   m_LocalAABB:
-    m_Center: {x: 3.5898113, y: 3.1045, z: -0.0035}
-    m_Extent: {x: 15.589811, y: 7.8955, z: 0.0035}
+    m_Center: {x: 8.206896, y: 2.6045, z: -0.0045000003}
+    m_Extent: {x: 20.206896, y: 7.3955, z: 0.0045000003}
 --- !u!1 &330875697
 GameObject:
   m_ObjectHideFlags: 0
@@ -415,7 +419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fieldType: 0
-  fieldValue: 9.81
+  fieldValue: 16
   isGlobal: 1
   angle: 180
 --- !u!4 &330875699
@@ -431,6 +435,134 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &611717986
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 611717990}
+  - component: {fileID: 611717989}
+  - component: {fileID: 611717988}
+  - component: {fileID: 611717987}
+  m_Layer: 0
+  m_Name: New Sprite
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!61 &611717987
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611717986}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.125, y: 0.125}
+    newSize: {x: 0.125, y: 0.125}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.125, y: 0.125}
+  m_EdgeRadius: 0
+--- !u!50 &611717988
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611717986}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!212 &611717989
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611717986}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300002, guid: 02cb7109eec577d45a27167e2308de23, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 0.125, y: 0.125}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &611717990
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 611717986}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3, y: -4, z: 0}
+  m_LocalScale: {x: 16, y: 16, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &725534620
 GameObject:
@@ -466,12 +598,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
-  color: {r: 1, g: 1, b: 1, a: 1}
-  radius: 0.78125
+  color: {r: 0.8018868, g: 0.77307767, b: 0.26855645, a: 1}
+  radius: 0.12
   solid: 0
   useCollider: 1
---- !u!58 &725534622
-CircleCollider2D:
+--- !u!70 &725534622
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -479,13 +611,13 @@ CircleCollider2D:
   m_GameObject: {fileID: 725534620}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 9515abea308194a47b824a166fbbde0a, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.78125
+  m_Size: {x: 1.1, y: 1.54}
+  m_Direction: 0
 --- !u!114 &725534623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -556,18 +688,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dirHolder: {fileID: 725534625}
   speedCap: {x: 0, y: 0}
-  moveForce: 30
+  moveForce: 80
   moveAirForce: 5
-  moveMaxSpeed: 10
-  slopSlideForce: 40
-  airMaxSpeed: 6
+  moveMaxSpeedLimit: 1
+  moveMaxSpeed: {x: 15, y: 10000}
+  moveMaxAirSpeed: {x: 4, y: 10000}
+  slideForce: 40
   airDrag: 0.015
-  groundDrag: 5
-  standDrag: 60
+  groundDrag: 10
+  standDrag: 600
   standDragLayer:
     serializedVersion: 2
     m_Bits: 1
-  slopeLimit: 50
+  slopeLimit: 75
   aboveLimit: 145
   slideLimit: 80
   slideDisable: 0
@@ -817,7 +950,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2085240266}
   - component: {fileID: 2085240268}
-  - component: {fileID: 2085240267}
   m_Layer: 0
   m_Name: control
   m_TagString: Untagged
@@ -839,85 +971,6 @@ Transform:
   m_Father: {fileID: 725534625}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2085240267
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2085240265}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcf722df87a047a43a3ebcc680cce0fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  actions:
-  - action: {fileID: 11400000, guid: d1c75cb5a37a4414488f49a2e9bcae8f, type: 2}
-    pressedCallback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2085240268}
-          m_MethodName: InputHorizontalPressed
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: M8.UnityEventInputAction, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-    releasedCallback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2085240268}
-          m_MethodName: InputHorizontalReleased
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: M8.UnityEventInputAction, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-  - action: {fileID: 11400000, guid: 1a6d4b347f2abb34f929f402d88ee275, type: 2}
-    pressedCallback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2085240268}
-          m_MethodName: InputActPressed
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: M8.UnityEventInputAction, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
-    releasedCallback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2085240268}
-          m_MethodName: InputActReleased
-          m_Mode: 0
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: M8.UnityEventInputAction, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!114 &2085240268
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -932,6 +985,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bodyControl: {fileID: 725534626}
   gravityControl: {fileID: 725534623}
+  standMoveFalloffDelay: 0.3
+  jumpForce: 10
+  moveHorzInput: {fileID: 11400000, guid: d1c75cb5a37a4414488f49a2e9bcae8f, type: 2}
+  actInput: {fileID: 11400000, guid: 1a6d4b347f2abb34f929f402d88ee275, type: 2}
 --- !u!1001 &6340022865218464307
 PrefabInstance:
   m_ObjectHideFlags: 0
