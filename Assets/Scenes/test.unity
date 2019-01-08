@@ -204,23 +204,29 @@ PolygonCollider2D:
     - - {x: 5.545, y: -4.791}
       - {x: -10, y: -3}
       - {x: -10, y: -3}
-      - {x: -12, y: 6}
-      - {x: -12, y: 6}
-      - {x: -1, y: 10}
-      - {x: -1, y: 10}
+      - {x: -14, y: 1}
+      - {x: -14, y: 1}
+      - {x: -13, y: 13}
+      - {x: -13, y: 13}
+      - {x: -9, y: 13}
+      - {x: -9, y: 13}
+      - {x: -9, y: 6}
+      - {x: -9, y: 6}
+      - {x: -6, y: 6}
+      - {x: -6, y: 6}
       - {x: -1, y: 1}
       - {x: -1, y: 1}
       - {x: 14, y: 1}
       - {x: 14, y: 1}
-      - {x: 18, y: 6}
-      - {x: 18, y: 6}
-      - {x: 18.36935, y: 5.9877}
-      - {x: 19.35512, y: 5.95326}
-      - {x: 20.77389, y: 5.90037}
-      - {x: 22.4422, y: 5.83271}
-      - {x: 24.17664, y: 5.75399}
-      - {x: 25.79376, y: 5.66789}
-      - {x: 27.11014, y: 5.57809}
+      - {x: 18, y: 5}
+      - {x: 18, y: 5}
+      - {x: 18.36935, y: 5.03066}
+      - {x: 19.35512, y: 5.10951}
+      - {x: 20.77389, y: 5.21677}
+      - {x: 22.4422, y: 5.33271}
+      - {x: 24.17664, y: 5.43759}
+      - {x: 25.79376, y: 5.51164}
+      - {x: 27.11014, y: 5.53512}
       - {x: 27.94234, y: 5.48829}
       - {x: 27.94234, y: 5.48829}
       - {x: 28.43966, y: 5.01892}
@@ -266,7 +272,25 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 0
-    - position: {x: -12, y: 6, z: 0}
+    - position: {x: -14, y: 1, z: 0}
+      leftTangent: {x: 0, y: 0, z: 0}
+      rightTangent: {x: 0, y: 0, z: 0}
+      mode: 0
+      height: 1
+      bevelCutoff: 0
+      bevelSize: 0
+      spriteIndex: 0
+      corner: 0
+    - position: {x: -13, y: 13, z: 0}
+      leftTangent: {x: 0, y: 0, z: 0}
+      rightTangent: {x: 0, y: 0, z: 0}
+      mode: 0
+      height: 1
+      bevelCutoff: 0
+      bevelSize: 0
+      spriteIndex: 0
+      corner: 0
+    - position: {x: -9, y: 13, z: 0}
       leftTangent: {x: 2.1285326, y: -0.60815215, z: 0}
       rightTangent: {x: -0.99000007, y: 1.9800001, z: 0}
       mode: 0
@@ -275,7 +299,16 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 0
-    - position: {x: -1, y: 10, z: 0}
+    - position: {x: -9, y: 6, z: 0}
+      leftTangent: {x: 0, y: 0, z: 0}
+      rightTangent: {x: 0, y: 0, z: 0}
+      mode: 0
+      height: 1
+      bevelCutoff: 0
+      bevelSize: 0
+      spriteIndex: 0
+      corner: 0
+    - position: {x: -6, y: 6, z: 0}
       leftTangent: {x: -3.5434237, y: 1.220746, z: 0}
       rightTangent: {x: 3.5434237, y: -1.220746, z: 0}
       mode: 0
@@ -302,7 +335,7 @@ MonoBehaviour:
       bevelSize: 0
       spriteIndex: 0
       corner: 1
-    - position: {x: 18, y: 6, z: 0}
+    - position: {x: 18, y: 5, z: 0}
       leftTangent: {x: -0.7346935, y: -2.7419982, z: 0}
       rightTangent: {x: 0.6243429, y: 2.3301501, z: 0}
       mode: 0
@@ -387,8 +420,8 @@ SpriteShapeRenderer:
   - {fileID: 21300000, guid: 537ce4da5cfe1e6449bfed07673ae5f4, type: 3}
   - {fileID: 21300000, guid: 537ce4da5cfe1e6449bfed07673ae5f4, type: 3}
   m_LocalAABB:
-    m_Center: {x: 8.206896, y: 2.6045, z: -0.0045000003}
-    m_Extent: {x: 20.206896, y: 7.3955, z: 0.0045000003}
+    m_Center: {x: 7.206896, y: 4.104501, z: -0.006}
+    m_Extent: {x: 21.206896, y: 8.895501, z: 0.006}
 --- !u!1 &330875697
 GameObject:
   m_ObjectHideFlags: 0
@@ -666,7 +699,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 725534620}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: -1, z: 0}
+  m_LocalPosition: {x: 8, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 169337813}
@@ -689,7 +722,7 @@ MonoBehaviour:
   dirHolder: {fileID: 725534625}
   speedCap: {x: 0, y: 0}
   moveForce: 25
-  moveAirForce: 5
+  moveAirForce: 4
   moveMaxSpeedLimit: 1
   moveMaxSpeed: {x: 10, y: 10000}
   moveMaxAirSpeed: {x: 4, y: 10000}
@@ -982,6 +1015,10 @@ MonoBehaviour:
   frictionAir: 0
   frictionGround: 4
   frictionGroundMove: 0.4
+  moveGroundAngleThresholdMin: 0
+  moveGroundAngleThresholdMax: 70
+  moveGroundMin: 25
+  moveGroundMax: 60
   jumpStartForce: 8
   jumpForce: 24
   jumpDelay: 0.3

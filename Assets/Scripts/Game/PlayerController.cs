@@ -17,6 +17,12 @@ public class PlayerController : MonoBehaviour {
     public float frictionGround = 1f;
     public float frictionGroundMove = 0.4f;
 
+    [Header("Move")]
+    public float moveGroundAngleThresholdMin = 0f;
+    public float moveGroundAngleThresholdMax = 70f;
+    public float moveGroundMin = 20f;
+    public float moveGroundMax = 60f;
+
     [Header("Jump")]
     public float jumpStartForce = 20f;
     public float jumpForce = 5f;
@@ -42,7 +48,7 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Update() {
-        //movement
+        //movement        
         mMoveHorz = moveHorzInput.GetAxis();
 
         //determine if we can act
@@ -71,7 +77,11 @@ public class PlayerController : MonoBehaviour {
             return;
 
         //update body control
-        bodyControl.moveHorizontal = mMoveHorz;
+        if(!bodyControl.isSlide) {
+            bodyControl.moveHorizontal = mMoveHorz;
+        }
+        else
+            bodyControl.moveHorizontal = 0f;
 
         switch(mJumpState) {
             case JumpState.JumpStart:
@@ -83,7 +93,7 @@ public class PlayerController : MonoBehaviour {
                 mJumpState = JumpState.Jump;
                 break;
             case JumpState.Jump:
-                if(mJumpCurTime < jumpDelay && actInput.IsDown()) {
+                if(mJumpCurTime < jumpDelay && actInput.IsDown() && (bodyControl.collisionFlags & CollisionFlags.Above) == CollisionFlags.None) {
                     bodyControl.body.AddForce(bodyControl.dirHolder.up * jumpForce, ForceMode2D.Force);
                     mJumpCurTime += Time.fixedDeltaTime;
                 }
@@ -101,6 +111,25 @@ public class PlayerController : MonoBehaviour {
                 newFriction = frictionGroundMove;
             else
                 newFriction = frictionGround;
+            
+            //modify ground move force based on slope
+            var up = bodyControl.dirHolder.up;
+
+            float angle = Vector2.Angle(up, bodyControl.normalGround);
+            
+            float moveForce;
+
+            if(angle >= moveGroundAngleThresholdMin && angle <= moveGroundAngleThresholdMax) {
+                float threshold = Mathf.Abs(angle - moveGroundAngleThresholdMin);
+                float thresholdLen = Mathf.Abs(moveGroundAngleThresholdMax - moveGroundAngleThresholdMin);
+                moveForce = Mathf.Lerp(moveGroundMin, moveGroundMax, threshold / thresholdLen);
+            }            
+            else if(angle > moveGroundAngleThresholdMax)
+                moveForce = moveGroundMax;
+            else
+                moveForce = moveGroundMin;
+
+            bodyControl.moveForce = moveForce;
         }
         else {
             newFriction = frictionAir;
