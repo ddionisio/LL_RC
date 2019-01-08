@@ -12,32 +12,33 @@ public class PlayerController : MonoBehaviour {
     public M8.RigidBodyController2D bodyControl;
     public M8.ForceController2D gravityControl;
 
-    [Header("Move")]
-    public float standMoveFalloffDelay = 0.3f;
-    public float jumpForce = 20f;
+    [Header("Friction")]
+    public float frictionAir = 0f;
+    public float frictionGround = 1f;
+    public float frictionGroundMove = 0.4f;
+
+    [Header("Jump")]
+    public float jumpStartForce = 20f;
+    public float jumpForce = 5f;
+    public float jumpDelay = 0.3f;
 
     [Header("Input")]
     public M8.InputAction moveHorzInput;
     public M8.InputAction actInput;
 
     public bool actIsEnabled { get; private set; }
-    public Vector2 jumpDir { get; private set; }
 
     private float mMoveHorz;
     private JumpState mJumpState;
+    private float mJumpCurTime;
 
     void OnEnable() {
         actIsEnabled = false;
-        jumpDir = bodyControl.dirHolder.up;
 
         mMoveHorz = 0f;
 
-        if(bodyControl) {
-            if(mJumpState != JumpState.None)
-                bodyControl.lockDragCounter--;
-        }
-
         mJumpState = JumpState.None;
+        mJumpCurTime = 0f;
     }
 
     void Update() {
@@ -47,7 +48,6 @@ public class PlayerController : MonoBehaviour {
         //determine if we can act
         if(bodyControl.isGrounded) {
             actIsEnabled = true;
-            jumpDir = bodyControl.dirHolder.up;
         }
         else {
             //check if we are on contact of a side
@@ -57,29 +57,59 @@ public class PlayerController : MonoBehaviour {
 
         if(actIsEnabled) {
             if(mJumpState == JumpState.None) {
-                var actState = actInput.GetButtonState();
-                if(actState == M8.InputAction.ButtonState.Pressed) {
+                //var actState = actInput.GetButtonState();
+                //if(actState == M8.InputAction.ButtonState.Pressed) {
+                if(actInput.IsDown()) { 
                     mJumpState = JumpState.JumpStart;
                 }
             }
         }
     }
 
-    void FixedUpdate() {
+    void FixedUpdate() {        
+        if(!bodyControl.body.simulated || bodyControl.body.isKinematic)
+            return;
+
         //update body control
         bodyControl.moveHorizontal = mMoveHorz;
 
         switch(mJumpState) {
             case JumpState.JumpStart:
-                bodyControl.lockDragCounter++;
-                bodyControl.body.drag = 0f;
+                //determine if we are jumping from side
+                //jumpDir = bodyControl.dirHolder.up;
+
+                mJumpCurTime = 0f;
+                bodyControl.body.AddForce(bodyControl.dirHolder.up * jumpStartForce, ForceMode2D.Impulse);
                 mJumpState = JumpState.Jump;
                 break;
             case JumpState.Jump:
-                bodyControl.body.AddForce(jumpDir * jumpForce, ForceMode2D.Impulse);
-                bodyControl.lockDragCounter--;
-                mJumpState = JumpState.None;
+                if(mJumpCurTime < jumpDelay && actInput.IsDown()) {
+                    bodyControl.body.AddForce(bodyControl.dirHolder.up * jumpForce, ForceMode2D.Force);
+                    mJumpCurTime += Time.fixedDeltaTime;
+                }
+                else
+                    mJumpState = JumpState.None;
                 break;
+        }
+
+        //set friction based on rigid body state
+        var lastFriction = bodyControl.body.sharedMaterial.friction;
+        float newFriction;
+
+        if(bodyControl.isGrounded && !bodyControl.isSlide) {
+            if(bodyControl.moveHorizontal != 0f)
+                newFriction = frictionGroundMove;
+            else
+                newFriction = frictionGround;
+        }
+        else {
+            newFriction = frictionAir;
+        }
+
+        if(newFriction != lastFriction) {
+            bodyControl.body.sharedMaterial.friction = newFriction;
+            bodyControl.bodyCollision.enabled = false;
+            bodyControl.bodyCollision.enabled = true;
         }
     }
 }

@@ -419,7 +419,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fieldType: 0
-  fieldValue: 16
+  fieldValue: 24
   isGlobal: 1
   angle: 180
 --- !u!4 &330875699
@@ -493,7 +493,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 5
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 1
@@ -599,11 +599,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
   color: {r: 0.8018868, g: 0.77307767, b: 0.26855645, a: 1}
-  radius: 0.12
+  radius: 0.78125
   solid: 0
   useCollider: 1
---- !u!70 &725534622
-CapsuleCollider2D:
+--- !u!58 &725534622
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -611,13 +611,13 @@ CapsuleCollider2D:
   m_GameObject: {fileID: 725534620}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 9515abea308194a47b824a166fbbde0a, type: 2}
+  m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_Size: {x: 1.1, y: 1.54}
-  m_Direction: 0
+  serializedVersion: 2
+  m_Radius: 0.78125
 --- !u!114 &725534623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -653,7 +653,7 @@ Rigidbody2D:
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: 9515abea308194a47b824a166fbbde0a, type: 2}
   m_Interpolate: 1
   m_SleepingMode: 1
   m_CollisionDetection: 0
@@ -688,18 +688,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dirHolder: {fileID: 725534625}
   speedCap: {x: 0, y: 0}
-  moveForce: 80
+  moveForce: 25
   moveAirForce: 5
   moveMaxSpeedLimit: 1
-  moveMaxSpeed: {x: 15, y: 10000}
+  moveMaxSpeed: {x: 10, y: 10000}
   moveMaxAirSpeed: {x: 4, y: 10000}
   slideForce: 40
-  airDrag: 0.015
-  groundDrag: 10
-  standDrag: 600
-  standDragLayer:
-    serializedVersion: 2
-    m_Bits: 1
   slopeLimit: 75
   aboveLimit: 145
   slideLimit: 80
@@ -985,8 +979,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bodyControl: {fileID: 725534626}
   gravityControl: {fileID: 725534623}
-  standMoveFalloffDelay: 0.3
-  jumpForce: 10
+  frictionAir: 0
+  frictionGround: 4
+  frictionGroundMove: 0.4
+  jumpStartForce: 8
+  jumpForce: 24
+  jumpDelay: 0.3
   moveHorzInput: {fileID: 11400000, guid: d1c75cb5a37a4414488f49a2e9bcae8f, type: 2}
   actInput: {fileID: 11400000, guid: 1a6d4b347f2abb34f929f402d88ee275, type: 2}
 --- !u!1001 &6340022865218464307
