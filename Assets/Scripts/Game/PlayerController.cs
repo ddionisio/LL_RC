@@ -9,6 +9,12 @@ public class PlayerController : MonoBehaviour {
         Jump
     }
 
+    public enum MoveState {
+        None,
+        Normal,
+        SideStick
+    }
+
     public M8.RigidBodyController2D bodyControl;
     public M8.ForceController2D gravityControl;
 
@@ -16,12 +22,14 @@ public class PlayerController : MonoBehaviour {
     public float frictionAir = 0f;
     public float frictionGround = 1f;
     public float frictionGroundMove = 0.4f;
+    public float frictionSide = 0.2f; //when pressing against the side
 
     [Header("Move")]
     public float moveGroundAngleThresholdMin = 0f;
     public float moveGroundAngleThresholdMax = 70f;
     public float moveGroundMin = 20f;
     public float moveGroundMax = 60f;
+    public float moveSideDelay = 0.15f; //stickiness to the side while against it on air
 
     [Header("Jump")]
     public float jumpStartForce = 20f;
@@ -36,13 +44,17 @@ public class PlayerController : MonoBehaviour {
 
     public bool actIsEnabled { get; private set; }
 
+    private MoveState mMoveState;
     private float mMoveHorz;
+    private float mMoveSideCurTime;
+
     private JumpState mJumpState;
     private float mJumpCurTime;
 
     void OnEnable() {
         actIsEnabled = false;
 
+        mMoveState = MoveState.Normal;
         mMoveHorz = 0f;
 
         mJumpState = JumpState.None;
@@ -59,17 +71,46 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Update() {
-        //movement        
-        mMoveHorz = moveHorzInput.GetAxis();
+        //movement
+        switch(mMoveState) {
+            case MoveState.Normal:
+                mMoveHorz = moveHorzInput.GetAxis();
 
-        //determine if we can act
+                //check if we are sticking to side
+                if(!bodyControl.isGrounded && (bodyControl.collisionFlags & CollisionFlags.Sides) != CollisionFlags.None) {
+                    if(bodyControl.sideFlags == M8.RigidBodyController2D.SideFlags.Left && mMoveHorz < 0f || bodyControl.sideFlags == M8.RigidBodyController2D.SideFlags.Right && mMoveHorz > 0f) {
+                        mMoveState = MoveState.SideStick;
+                    }
+                }
+                break;
+            case MoveState.SideStick:
+                if(bodyControl.isGrounded || (bodyControl.collisionFlags & CollisionFlags.Sides) == CollisionFlags.None) { //revert
+                    mMoveState = MoveState.Normal;
+                    mMoveHorz = moveHorzInput.GetAxis();
+                }
+                else {
+                    var inpHorz = moveHorzInput.GetAxis();
+                    if(bodyControl.sideFlags == M8.RigidBodyController2D.SideFlags.Left && inpHorz < 0f || bodyControl.sideFlags == M8.RigidBodyController2D.SideFlags.Right && inpHorz > 0f) {
+                        mMoveSideCurTime = 0f; //reset delay
+                    }
+                    else if(mMoveSideCurTime < moveSideDelay)
+                        mMoveSideCurTime += Time.deltaTime;
+                    else {
+                        mMoveState = MoveState.Normal;
+                        mMoveHorz = moveHorzInput.GetAxis();
+                    }
+                }
+                break;
+        }
+                
+        //determine if we can jump
         if(bodyControl.isGrounded) {
             actIsEnabled = true;
         }
         else {
             //check if we are on contact of a side
             //determine actDir
-            actIsEnabled = (bodyControl.collisionFlags & CollisionFlags.CollidedSides) != CollisionFlags.None;
+            actIsEnabled = mMoveState == MoveState.SideStick;// (bodyControl.collisionFlags & CollisionFlags.CollidedSides) != CollisionFlags.None;
         }
 
         if(actIsEnabled) {
@@ -98,6 +139,11 @@ public class PlayerController : MonoBehaviour {
             case JumpState.JumpStart:
                 //determine if we are jumping from side
                 //jumpDir = bodyControl.dirHolder.up;
+
+                //reset y-vel. for body (hack to make jumps consistent)
+                var lvel = bodyControl.localVelocity;
+                lvel.y = 0f;
+                bodyControl.localVelocity = lvel;
 
                 mJumpCurTime = 0f;
 
@@ -134,7 +180,9 @@ public class PlayerController : MonoBehaviour {
         var lastFriction = bodyControl.body.sharedMaterial.friction;
         float newFriction;
 
-        if(bodyControl.isGrounded && !bodyControl.isSlide) {
+        if(mMoveState == MoveState.SideStick)
+            newFriction = frictionSide;
+        else if(bodyControl.isGrounded && !bodyControl.isSlide) {
             if(bodyControl.moveHorizontal != 0f)
                 newFriction = frictionGroundMove;
             else
