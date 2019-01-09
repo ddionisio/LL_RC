@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour {
     public float jumpStartForce = 20f;
     public float jumpForce = 5f;
     public float jumpDelay = 0.3f;
+    public float jumpSideAngle = 45f; //angle rotate based on side normal
+    public float jumpSideStartForce = 30f;
 
     [Header("Input")]
     public M8.InputAction moveHorzInput;
@@ -47,6 +49,15 @@ public class PlayerController : MonoBehaviour {
         mJumpCurTime = 0f;
     }
 
+    void OnDisable() {
+        if(bodyControl) {
+            bodyControl.moveForce = moveGroundMin;
+
+            if(bodyControl.body)
+                bodyControl.body.sharedMaterial.friction = frictionGroundMove;
+        }
+    }
+
     void Update() {
         //movement        
         mMoveHorz = moveHorzInput.GetAxis();
@@ -58,14 +69,14 @@ public class PlayerController : MonoBehaviour {
         else {
             //check if we are on contact of a side
             //determine actDir
-            actIsEnabled = false;
+            actIsEnabled = (bodyControl.collisionFlags & CollisionFlags.CollidedSides) != CollisionFlags.None;
         }
 
         if(actIsEnabled) {
             if(mJumpState == JumpState.None) {
-                //var actState = actInput.GetButtonState();
-                //if(actState == M8.InputAction.ButtonState.Pressed) {
-                if(actInput.IsDown()) { 
+                var actState = actInput.GetButtonState();
+                if(actState == M8.InputAction.ButtonState.Pressed) {
+                //if(actInput.IsDown()) { 
                     mJumpState = JumpState.JumpStart;
                 }
             }
@@ -89,9 +100,26 @@ public class PlayerController : MonoBehaviour {
                 //jumpDir = bodyControl.dirHolder.up;
 
                 mJumpCurTime = 0f;
-                bodyControl.body.AddForce(bodyControl.dirHolder.up * jumpStartForce, ForceMode2D.Impulse);
-                mJumpState = JumpState.Jump;
+
+                if(bodyControl.collisionFlags == CollisionFlags.Sides) {
+                    var jumpDir = bodyControl.normalSide;
+
+                    if((bodyControl.sideFlags & M8.RigidBodyController2D.SideFlags.Left) != M8.RigidBodyController2D.SideFlags.None)
+                        jumpDir = M8.MathUtil.RotateAngle(jumpDir, -jumpSideAngle);
+                    else
+                        jumpDir = M8.MathUtil.RotateAngle(jumpDir, jumpSideAngle);
+
+                    bodyControl.body.AddForce(jumpDir * jumpSideStartForce, ForceMode2D.Impulse);
+
+                    mJumpState = JumpState.None;
+                }
+                else {
+                    bodyControl.body.AddForce(bodyControl.dirHolder.up * jumpStartForce, ForceMode2D.Impulse);
+
+                    mJumpState = JumpState.Jump;
+                }
                 break;
+
             case JumpState.Jump:
                 if(mJumpCurTime < jumpDelay && actInput.IsDown() && (bodyControl.collisionFlags & CollisionFlags.Above) == CollisionFlags.None) {
                     bodyControl.body.AddForce(bodyControl.dirHolder.up * jumpForce, ForceMode2D.Force);
