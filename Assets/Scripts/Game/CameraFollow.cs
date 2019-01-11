@@ -84,7 +84,10 @@ public class CameraFollow : MonoBehaviour
                     Vector2 toPos = Vector2.SmoothDamp(curPt, followPt, ref mFollowVel, followDelay);
 
                     transform.position = toPos;
-                    transform.eulerAngles = mCurFollow.eulerAngles;
+
+                    var r = transform.eulerAngles;
+                    r.z = mCurFollow.eulerAngles.z;
+                    transform.eulerAngles = r;
                 }
                 else
                     state = State.None;

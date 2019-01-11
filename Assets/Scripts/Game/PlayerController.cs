@@ -37,6 +37,7 @@ public class PlayerController : MonoBehaviour {
     public float jumpDelay = 0.3f;
     public float jumpSideAngle = 45f; //angle rotate based on side normal
     public float jumpSideStartForce = 30f;
+    public float jumpLastGroundDelay = 0.2f; //allow jumping if we left ground after a delay
 
     [Header("Input")]
     public M8.InputAction moveHorzInput;
@@ -51,6 +52,8 @@ public class PlayerController : MonoBehaviour {
     private JumpState mJumpState;
     private float mJumpCurTime;
 
+    private float mLastGroundTime;
+
     void OnEnable() {
         actIsEnabled = false;
 
@@ -59,6 +62,8 @@ public class PlayerController : MonoBehaviour {
 
         mJumpState = JumpState.None;
         mJumpCurTime = 0f;
+
+        mLastGroundTime = 0f;
     }
 
     void OnDisable() {
@@ -106,11 +111,15 @@ public class PlayerController : MonoBehaviour {
         //determine if we can jump
         if(bodyControl.isGrounded) {
             actIsEnabled = true;
+            mLastGroundTime = Time.time;
         }
         else {
             //check if we are on contact of a side
             //determine actDir
-            actIsEnabled = mMoveState == MoveState.SideStick;// (bodyControl.collisionFlags & CollisionFlags.CollidedSides) != CollisionFlags.None;
+            if(Time.time - mLastGroundTime <= jumpLastGroundDelay)
+                actIsEnabled = true;
+            else
+                actIsEnabled = mMoveState == MoveState.SideStick;// (bodyControl.collisionFlags & CollisionFlags.CollidedSides) != CollisionFlags.None;
         }
 
         if(actIsEnabled) {
@@ -180,26 +189,27 @@ public class PlayerController : MonoBehaviour {
         var lastFriction = bodyControl.body.sharedMaterial.friction;
         float newFriction;
 
-        if(mMoveState == MoveState.SideStick)
+        if(mMoveState == MoveState.SideStick && bodyControl.localVelocity.y < 0f) {
             newFriction = frictionSide;
+        }
         else if(bodyControl.isGrounded && !bodyControl.isSlide) {
             if(bodyControl.moveHorizontal != 0f)
                 newFriction = frictionGroundMove;
             else
                 newFriction = frictionGround;
-            
+
             //modify ground move force based on slope
             var up = bodyControl.dirHolder.up;
 
             float angle = Vector2.Angle(up, bodyControl.normalGround);
-            
+
             float moveForce;
 
             if(angle >= moveGroundAngleThresholdMin && angle <= moveGroundAngleThresholdMax) {
                 float threshold = Mathf.Abs(angle - moveGroundAngleThresholdMin);
                 float thresholdLen = Mathf.Abs(moveGroundAngleThresholdMax - moveGroundAngleThresholdMin);
                 moveForce = Mathf.Lerp(moveGroundMin, moveGroundMax, threshold / thresholdLen);
-            }            
+            }
             else if(angle > moveGroundAngleThresholdMax)
                 moveForce = moveGroundMax;
             else
