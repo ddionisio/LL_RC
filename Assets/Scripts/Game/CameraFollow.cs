@@ -44,6 +44,16 @@ public class CameraFollow : MonoBehaviour
 
     private Vector2 mFollowVel;
 
+    /// <summary>
+    /// Allow camera to move back to follow (useful when teleporting)
+    /// </summary>
+    public void GotoCurrentFollow() {
+        if(mCurFollow) {
+            state = State.Goto;
+            ApplyCurState();
+        }
+    }
+
     void OnDisable() {
         state = State.None;
         mCurFollow = null;
