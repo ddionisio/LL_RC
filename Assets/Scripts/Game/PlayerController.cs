@@ -3,228 +3,179 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
-    public enum JumpState {
-        None,
-        JumpStart,
-        Jump
-    }
-
-    public enum MoveState {
-        None,
-        Normal,
-        SideStick
-    }
-
+    public M8.StateController stateControl;
     public M8.RigidBodyController2D bodyControl;
-    public M8.ForceController2D gravityControl;
+    public PlayerInput input;
 
-    [Header("Friction")]
-    public float frictionAir = 0f;
-    public float frictionGround = 1f;
-    public float frictionGroundMove = 0.4f;
-    public float frictionSide = 0.2f; //when pressing against the side
+    [Header("Camera")]
+    [M8.TagSelector]
+    public string cameraTagFollow;
+    public bool cameraSnapOnAwake = true; //if true, set camera's position/rotation to player on Awake
 
-    [Header("Move")]
-    public float moveGroundAngleThresholdMin = 0f;
-    public float moveGroundAngleThresholdMax = 70f;
-    public float moveGroundMin = 20f;
-    public float moveGroundMax = 60f;
-    public float moveSideDelay = 0.15f; //stickiness to the side while against it on air
+    [Header("States")]
+    public M8.State stateSpawn;
+    public M8.State stateDespawn;
+    public M8.State stateNormal;
+    public M8.State stateDeath;
 
-    [Header("Jump")]
-    public float jumpStartForce = 20f;
-    public float jumpForce = 5f;
-    public float jumpDelay = 0.3f;
-    public float jumpSideAngle = 45f; //angle rotate based on side normal
-    public float jumpSideStartForce = 30f;
-    public float jumpLastGroundDelay = 0.2f; //allow jumping if we left ground after a delay
+    [Header("Animations")]
+    public M8.Animator.Animate animator;
+    [M8.Animator.TakeSelector(animatorField = "animator")]
+    public string takeSpawn;
+    [M8.Animator.TakeSelector(animatorField = "animator")]
+    public string takeDespawn;
+    [M8.Animator.TakeSelector(animatorField = "animator")]
+    public string takeDeath;
 
-    [Header("Input")]
-    public M8.InputAction moveHorzInput;
-    public M8.InputAction actInput;
+    [Header("Signal Listen")]
+    public M8.Signal signalGameReady;
+    public M8.Signal signalInputLock;
+    public M8.Signal signalInputUnlock;
 
-    public bool actIsEnabled { get; private set; }
+    [Header("Signal Invoke")]
+    public M8.Signal signalDespawn;
 
-    private MoveState mMoveState;
-    private float mMoveHorz;
-    private float mMoveSideCurTime;
+    public bool inputEnabled {
+        get { return mInputEnabled && stateControl.state == stateNormal; }
+        set {
+            if(mInputEnabled != value) {
+                mInputEnabled = value;
 
-    private JumpState mJumpState;
-    private float mJumpCurTime;
-
-    private float mLastGroundTime;
-
-    void OnEnable() {
-        actIsEnabled = false;
-
-        mMoveState = MoveState.Normal;
-        mMoveHorz = 0f;
-
-        mJumpState = JumpState.None;
-        mJumpCurTime = 0f;
-
-        mLastGroundTime = 0f;
+                input.enabled = inputEnabled;
+            }
+        }
     }
+
+    private bool mInputEnabled = true;
+
+    private CameraFollow mCameraFollow;
+
+    private Coroutine mCurRout;
 
     void OnDisable() {
-        if(bodyControl) {
-            bodyControl.moveForce = moveGroundMin;
-
-            if(bodyControl.body)
-                bodyControl.body.sharedMaterial.friction = frictionGroundMove;
+        if(mCurRout != null) {
+            StopCoroutine(mCurRout);
+            mCurRout = null;
         }
     }
 
-    void Update() {
-        //movement
-        switch(mMoveState) {
-            case MoveState.Normal:
-                mMoveHorz = moveHorzInput.GetAxis();
+    void OnDestroy() {
+        signalGameReady.callback -= OnGameReady;
+        signalInputLock.callback -= OnInputLock;
+        signalInputUnlock.callback -= OnInputUnlock;
+    }
 
-                //check if we are sticking to side
-                if(!bodyControl.isGrounded && (bodyControl.collisionFlags & CollisionFlags.Sides) != CollisionFlags.None) {
-                    if(bodyControl.sideFlags == M8.RigidBodyController2D.SideFlags.Left && mMoveHorz < 0f || bodyControl.sideFlags == M8.RigidBodyController2D.SideFlags.Right && mMoveHorz > 0f) {
-                        mMoveState = MoveState.SideStick;
-                    }
-                }
-                break;
-            case MoveState.SideStick:
-                if(bodyControl.isGrounded || (bodyControl.collisionFlags & CollisionFlags.Sides) == CollisionFlags.None) { //revert
-                    mMoveState = MoveState.Normal;
-                    mMoveHorz = moveHorzInput.GetAxis();
-                }
-                else {
-                    var inpHorz = moveHorzInput.GetAxis();
-                    if(bodyControl.sideFlags == M8.RigidBodyController2D.SideFlags.Left && inpHorz < 0f || bodyControl.sideFlags == M8.RigidBodyController2D.SideFlags.Right && inpHorz > 0f) {
-                        mMoveSideCurTime = 0f; //reset delay
-                    }
-                    else if(mMoveSideCurTime < moveSideDelay)
-                        mMoveSideCurTime += Time.deltaTime;
-                    else {
-                        mMoveState = MoveState.Normal;
-                        mMoveHorz = moveHorzInput.GetAxis();
-                    }
-                }
-                break;
+    void Awake() {
+        var camFollowGO = GameObject.FindGameObjectWithTag(cameraTagFollow);
+        mCameraFollow = camFollowGO.GetComponent<CameraFollow>();
+
+        if(cameraSnapOnAwake) {
+            var cameraFollowTrans = mCameraFollow.transform;
+            cameraFollowTrans.position = transform.position;
+            cameraFollowTrans.rotation = transform.rotation;
         }
-                
-        //determine if we can jump
-        if(bodyControl.isGrounded) {
-            actIsEnabled = true;
-            mLastGroundTime = Time.time;
+
+        stateControl.stateChangedEvent.AddListener(OnStateChanged);
+
+        signalGameReady.callback += OnGameReady;
+        signalInputLock.callback += OnInputLock;
+        signalInputUnlock.callback += OnInputUnlock;
+
+        animator.ResetTake(takeSpawn);
+    }
+
+    void OnStateChanged(M8.State state) {
+        if(mCurRout != null) {
+            StopCoroutine(mCurRout);
+            mCurRout = null;
+        }
+
+        bool physicsEnable = false;
+
+        if(state == stateSpawn) {
+            //apply checkpoint
+            if(Checkpoint.globalAvailable) {
+                transform.position = Checkpoint.globalPosition;
+                transform.eulerAngles = new Vector3(0f, 0f, Checkpoint.globalRotation);
+
+                Checkpoint.RemoveGlobal();
+            }
+            else if(Checkpoint.localAvailable) {
+                transform.position = Checkpoint.localPosition;
+                transform.eulerAngles = new Vector3(0f, 0f, Checkpoint.localRotation);
+            }
+            else { //apply current to checkpoint local
+                Checkpoint.localPosition = transform.position;
+                Checkpoint.localRotation = transform.eulerAngles.z;
+            }
+
+            mCurRout = StartCoroutine(DoSpawn());
+        }
+        else if(state == stateDespawn) {
+            mCurRout = StartCoroutine(DoDespawn());
+        }
+        else if(state == stateDeath) {
+            mCurRout = StartCoroutine(DoDeath());
+        }
+        else if(state == stateNormal) {
+            physicsEnable = true;
+        }
+
+        if(physicsEnable) {
+            bodyControl.body.simulated = true;
+            bodyControl.enabled = true;
         }
         else {
-            //check if we are on contact of a side
-            //determine actDir
-            if(Time.time - mLastGroundTime <= jumpLastGroundDelay)
-                actIsEnabled = true;
-            else
-                actIsEnabled = mMoveState == MoveState.SideStick;// (bodyControl.collisionFlags & CollisionFlags.CollidedSides) != CollisionFlags.None;
+            bodyControl.body.simulated = false;
+            bodyControl.body.velocity = Vector2.zero;
+            bodyControl.body.angularVelocity = 0f;
+            bodyControl.enabled = false;
         }
 
-        if(actIsEnabled) {
-            if(mJumpState == JumpState.None) {
-                var actState = actInput.GetButtonState();
-                if(actState == M8.InputAction.ButtonState.Pressed) {
-                //if(actInput.IsDown()) { 
-                    mJumpState = JumpState.JumpStart;
-                }
-            }
-        }
+        input.enabled = inputEnabled;
     }
 
-    void FixedUpdate() {        
-        if(!bodyControl.body.simulated || bodyControl.body.isKinematic)
-            return;
+    void OnInputLock() {
+        inputEnabled = false;
+    }
 
-        //update body control
-        if(!bodyControl.isSlide) {
-            bodyControl.moveHorizontal = mMoveHorz;
-        }
+    void OnInputUnlock() {
+        inputEnabled = true;
+    }
+
+    void OnGameReady() {
+        stateControl.state = stateSpawn;
+    }
+
+    IEnumerator DoSpawn() {
+        if(mCameraFollow.follow != transform)
+            mCameraFollow.follow = transform;
         else
-            bodyControl.moveHorizontal = 0f;
+            mCameraFollow.GotoCurrentFollow();
 
-        switch(mJumpState) {
-            case JumpState.JumpStart:
-                //determine if we are jumping from side
-                //jumpDir = bodyControl.dirHolder.up;
+        while(mCameraFollow.state == CameraFollow.State.Goto)
+            yield return null;
 
-                //reset y-vel. for body (hack to make jumps consistent)
-                var lvel = bodyControl.localVelocity;
-                lvel.y = 0f;
-                bodyControl.localVelocity = lvel;
+        yield return animator.PlayWait(takeSpawn);
 
-                mJumpCurTime = 0f;
+        stateControl.state = stateNormal;
+    }
 
-                if(bodyControl.collisionFlags == CollisionFlags.Sides) {
-                    var jumpDir = bodyControl.normalSide;
+    IEnumerator DoDeath() {
+        if(mCameraFollow.follow == transform)
+            mCameraFollow.follow = null;
 
-                    if((bodyControl.sideFlags & M8.RigidBodyController2D.SideFlags.Left) != M8.RigidBodyController2D.SideFlags.None)
-                        jumpDir = M8.MathUtil.RotateAngle(jumpDir, -jumpSideAngle);
-                    else
-                        jumpDir = M8.MathUtil.RotateAngle(jumpDir, jumpSideAngle);
+        yield return animator.PlayWait(takeDeath);
+                
+        stateControl.state = stateSpawn;
+    }
 
-                    bodyControl.body.AddForce(jumpDir * jumpSideStartForce, ForceMode2D.Impulse);
+    IEnumerator DoDespawn() {
+        if(mCameraFollow.follow == transform)
+            mCameraFollow.follow = null;
 
-                    mJumpState = JumpState.None;
-                }
-                else {
-                    bodyControl.body.AddForce(bodyControl.dirHolder.up * jumpStartForce, ForceMode2D.Impulse);
+        yield return animator.PlayWait(takeDespawn);
 
-                    mJumpState = JumpState.Jump;
-                }
-                break;
-
-            case JumpState.Jump:
-                if(mJumpCurTime < jumpDelay && actInput.IsDown() && (bodyControl.collisionFlags & CollisionFlags.Above) == CollisionFlags.None) {
-                    bodyControl.body.AddForce(bodyControl.dirHolder.up * jumpForce, ForceMode2D.Force);
-                    mJumpCurTime += Time.fixedDeltaTime;
-                }
-                else
-                    mJumpState = JumpState.None;
-                break;
-        }
-
-        //set friction based on rigid body state
-        var lastFriction = bodyControl.body.sharedMaterial.friction;
-        float newFriction;
-
-        if(mMoveState == MoveState.SideStick && bodyControl.localVelocity.y < 0f) {
-            newFriction = frictionSide;
-        }
-        else if(bodyControl.isGrounded && !bodyControl.isSlide) {
-            if(bodyControl.moveHorizontal != 0f)
-                newFriction = frictionGroundMove;
-            else
-                newFriction = frictionGround;
-
-            //modify ground move force based on slope
-            var up = bodyControl.dirHolder.up;
-
-            float angle = Vector2.Angle(up, bodyControl.normalGround);
-
-            float moveForce;
-
-            if(angle >= moveGroundAngleThresholdMin && angle <= moveGroundAngleThresholdMax) {
-                float threshold = Mathf.Abs(angle - moveGroundAngleThresholdMin);
-                float thresholdLen = Mathf.Abs(moveGroundAngleThresholdMax - moveGroundAngleThresholdMin);
-                moveForce = Mathf.Lerp(moveGroundMin, moveGroundMax, threshold / thresholdLen);
-            }
-            else if(angle > moveGroundAngleThresholdMax)
-                moveForce = moveGroundMax;
-            else
-                moveForce = moveGroundMin;
-
-            bodyControl.moveForce = moveForce;
-        }
-        else {
-            newFriction = frictionAir;
-        }
-
-        if(newFriction != lastFriction) {
-            bodyControl.body.sharedMaterial.friction = newFriction;
-            bodyControl.bodyCollision.enabled = false;
-            bodyControl.bodyCollision.enabled = true;
-        }
+        signalDespawn.Invoke();
     }
 }
