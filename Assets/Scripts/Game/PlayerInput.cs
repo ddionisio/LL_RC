@@ -60,25 +60,16 @@ public class PlayerInput : MonoBehaviour {
     private float mLastGroundTime;
 
     private const int actInvokeCapacity = 4;
-    private M8.CacheList<IActInvoke> mActInvokes = new M8.CacheList<IActInvoke>(actInvokeCapacity);
+    private M8.CacheList<PlayerAction> mActInvokes = new M8.CacheList<PlayerAction>(actInvokeCapacity);
 
     void OnTriggerEnter2D(Collider2D collision) {
         if(!string.IsNullOrEmpty(tagActionFilter) && !collision.CompareTag(tagActionFilter))
             return;
 
-        if(collision is IActInvoke) {
-            var actInvoke = (IActInvoke)collision;
-
-            int actInvokeInd = -1;
-            for(int i = 0; i < mActInvokes.Count; i++) {
-                if(mActInvokes[i] == actInvoke) {
-                    actInvokeInd = i;
-                    break;
-                }
-            }
-
-            if(actInvokeInd != -1)
-                mActInvokes.Add(actInvoke);
+        var action = collision.GetComponent<PlayerAction>();
+        if(action) {
+            if(!mActInvokes.Exists(action))
+                mActInvokes.Add(action);
         }
     }
 
@@ -86,10 +77,9 @@ public class PlayerInput : MonoBehaviour {
         if(!string.IsNullOrEmpty(tagActionFilter) && !collision.CompareTag(tagActionFilter))
             return;
 
-        if(collision is IActInvoke) {
-            var actInvoke = (IActInvoke)collision;
-            mActInvokes.Remove(actInvoke);
-        }
+        var action = collision.GetComponent<PlayerAction>();
+        if(action)
+            mActInvokes.Remove(action);
     }
 
     void OnEnable() {
@@ -166,8 +156,13 @@ public class PlayerInput : MonoBehaviour {
         var actState = actInput.GetButtonState();
         if(actState == M8.InputAction.ButtonState.Pressed) {
             if(mActInvokes.Count > 0) {
-                for(int i = 0; i < mActInvokes.Count; i++)
-                    mActInvokes[i].ActInvoke();
+                for(int i = mActInvokes.Count - 1; i >= 0; i--) {
+                    var act = mActInvokes[i];
+                    if(act && act.enabled && act.gameObject.activeInHierarchy)
+                        act.ActionInvoke();
+                    else
+                        mActInvokes.RemoveAt(i);
+                }
             }
             else if(canJump && mJumpState == JumpState.None)
                 mJumpState = JumpState.JumpStart;

@@ -33,7 +33,7 @@ namespace HutongGames.PlayMaker.Actions.LoL {
         }
 
         void Check() {            
-            bool isReady = LoLManager.instance.isReady;
+            bool isReady = LoLManager.isInstantiated ? LoLManager.instance.isReady : true;
 
             if(!storeResult.IsNone)
                 storeResult.Value = isReady;
