@@ -6,11 +6,10 @@ public class PlayerController : MonoBehaviour {
     public M8.StateController stateControl;
     public M8.RigidBodyController2D bodyControl;
     public PlayerInput input;
-
+    
     [Header("Camera")]
     [M8.TagSelector]
     public string cameraTagFollow;
-    public bool cameraSnapOnAwake = true; //if true, set camera's position/rotation to player on Awake
 
     [Header("States")]
     public M8.State stateSpawn;
@@ -66,14 +65,19 @@ public class PlayerController : MonoBehaviour {
     }
 
     void Awake() {
+        if(Checkpoint.startAvailable) {
+            transform.position = Checkpoint.startPosition;
+            transform.eulerAngles = new Vector3(0f, 0f, Checkpoint.startRotation);
+
+            Checkpoint.RemoveStart();
+        }
+
         var camFollowGO = GameObject.FindGameObjectWithTag(cameraTagFollow);
         mCameraFollow = camFollowGO.GetComponent<CameraFollow>();
 
-        if(cameraSnapOnAwake) {
-            var cameraFollowTrans = mCameraFollow.transform;
-            cameraFollowTrans.position = transform.position;
-            cameraFollowTrans.rotation = transform.rotation;
-        }
+        var cameraFollowTrans = mCameraFollow.transform;
+        cameraFollowTrans.position = transform.position;
+        cameraFollowTrans.rotation = transform.rotation;
 
         stateControl.stateChangedEvent.AddListener(OnStateChanged);
 
@@ -94,13 +98,7 @@ public class PlayerController : MonoBehaviour {
 
         if(state == stateSpawn) {
             //apply checkpoint
-            if(Checkpoint.globalAvailable) {
-                transform.position = Checkpoint.globalPosition;
-                transform.eulerAngles = new Vector3(0f, 0f, Checkpoint.globalRotation);
-
-                Checkpoint.RemoveGlobal();
-            }
-            else if(Checkpoint.localAvailable) {
+            if(Checkpoint.localAvailable) {
                 transform.position = Checkpoint.localPosition;
                 transform.eulerAngles = new Vector3(0f, 0f, Checkpoint.localRotation);
             }

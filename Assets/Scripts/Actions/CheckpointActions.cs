@@ -8,19 +8,19 @@ namespace HutongGames.PlayMaker.Actions.Game {
         [RequiredField]
         public FsmOwnerDefault target;
 
-        public bool global;
+        public bool start;
 
         public override void Reset() {
             target = null;
-            global = false;
+            start = false;
         }
 
         public override void OnEnter() {
             var go = Fsm.GetOwnerDefaultTarget(target);
             if(go) {
-                if(global) {
-                    Checkpoint.globalPosition = go.transform.position;
-                    Checkpoint.globalRotation = go.transform.eulerAngles.z;
+                if(start) {
+                    Checkpoint.startPosition = go.transform.position;
+                    Checkpoint.startRotation = go.transform.eulerAngles.z;
                 }
                 else {
                     Checkpoint.localPosition = go.transform.position;
@@ -37,19 +37,19 @@ namespace HutongGames.PlayMaker.Actions.Game {
         [RequiredField]
         public FsmOwnerDefault target;
 
-        public bool global;
+        public bool start;
 
         public override void Reset() {
             target = null;
-            global = false;
+            start = false;
         }
 
         public override void OnEnter() {
             var go = Fsm.GetOwnerDefaultTarget(target);
             if(go) {
-                if(global) {
-                    go.transform.position = Checkpoint.globalPosition;
-                    go.transform.eulerAngles = new Vector3(0f, 0f, Checkpoint.globalRotation);
+                if(start) {
+                    go.transform.position = Checkpoint.startPosition;
+                    go.transform.eulerAngles = new Vector3(0f, 0f, Checkpoint.startRotation);
                 }
                 else {
                     go.transform.position = Checkpoint.localPosition;
@@ -62,16 +62,16 @@ namespace HutongGames.PlayMaker.Actions.Game {
     }
 
     [ActionCategory("Game")]
-    public class CheckpointRemoveGlobal : FsmStateAction {
+    public class CheckpointRemoveStart : FsmStateAction {
         public override void OnEnter() {
-            Checkpoint.RemoveGlobal();
+            Checkpoint.RemoveStart();
 
             Finish();
         }
     }
 
     [ActionCategory("Game")]
-    public class CheckpointCheckGlobalExists : FsmStateAction {
+    public class CheckpointCheckStartExists : FsmStateAction {
         [UIHint(UIHint.Variable)]
         public FsmBool storeResult;
 
@@ -100,7 +100,7 @@ namespace HutongGames.PlayMaker.Actions.Game {
         }
 
         void DoCheck() {
-            var exists = Checkpoint.globalAvailable;
+            var exists = Checkpoint.startAvailable;
 
             storeResult = exists;
 

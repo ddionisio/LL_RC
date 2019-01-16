@@ -70,12 +70,27 @@ public class CameraFollow : MonoBehaviour
     void Update() {
         switch(state) {
             case State.Goto:
-                if(mCurTime < gotoDelay) {
+                Vector2 curPos = transform.position;
+                float curRot = transform.eulerAngles.z;
+
+                Vector2 followPos;
+                float followRot;
+
+                if(mCurFollow) {
+                    followPos = mCurFollow.position;
+                    followRot = mCurFollow.eulerAngles.z;
+                }
+                else {
+                    followPos = curPos;
+                    followRot = curRot;
+                }
+
+                if(mCurTime < gotoDelay && curPos != followPos && curRot != followRot) {
                     mCurTime += Time.deltaTime;
 
                     float t = mGotoTweenFunc(mCurTime, gotoDelay, 0f, 0f);
 
-                    transform.position = Vector2.Lerp(mGotoStartPos, mCurFollow.position, t);
+                    transform.position = Vector2.Lerp(mGotoStartPos, followPos, t);
 
                     float rotStep = gotoRotateSpeed * Time.deltaTime;
 

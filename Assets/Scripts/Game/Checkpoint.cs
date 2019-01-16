@@ -10,9 +10,30 @@ public struct Checkpoint {
     public const string sceneVarPositionY = "checkpointPosY";
     public const string sceneVarRotation = "checkpointRot";
 
-    public static bool globalAvailable {
+    public static string startSceneVarPositionX {
         get {
-            return M8.SceneState.instance.global.Contains(sceneVarPositionX);
+            var activeScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+            return sceneVarPositionX + activeScene.name;
+        }
+    }
+
+    public static string startSceneVarPositionY {
+        get {
+            var activeScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+            return sceneVarPositionY + activeScene.name;
+        }
+    }
+
+    public static string startSceneVarRotation {
+        get {
+            var activeScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene();
+            return sceneVarRotation + activeScene.name;
+        }
+    }
+
+    public static bool startAvailable {
+        get {
+            return M8.SceneState.instance.global.Contains(startSceneVarPositionX);
         }
     }
 
@@ -22,28 +43,28 @@ public struct Checkpoint {
         }
     }
 
-    public static Vector2 globalPosition {
+    public static Vector2 startPosition {
         get {
             var sceneState = M8.SceneState.instance.global;
-            return new Vector2(sceneState.GetValueFloat(sceneVarPositionX), sceneState.GetValueFloat(sceneVarPositionY));
+            return new Vector2(sceneState.GetValueFloat(startSceneVarPositionX), sceneState.GetValueFloat(startSceneVarPositionY));
         }
 
         set {
             var sceneState = M8.SceneState.instance.global;
-            sceneState.SetValueFloat(sceneVarPositionX, value.x, false);
-            sceneState.SetValueFloat(sceneVarPositionY, value.y, false);
+            sceneState.SetValueFloat(startSceneVarPositionX, value.x, false);
+            sceneState.SetValueFloat(startSceneVarPositionY, value.y, false);
         }
     }
 
-    public static float globalRotation {
+    public static float startRotation {
         get {
             var sceneState = M8.SceneState.instance.global;
-            return sceneState.GetValueFloat(sceneVarRotation);
+            return sceneState.GetValueFloat(startSceneVarRotation);
         }
 
         set {
             var sceneState = M8.SceneState.instance.global;
-            sceneState.SetValueFloat(sceneVarRotation, value, false);
+            sceneState.SetValueFloat(startSceneVarRotation, value, false);
         }
     }
 
@@ -72,10 +93,10 @@ public struct Checkpoint {
         }
     }
 
-    public static void RemoveGlobal() {
+    public static void RemoveStart() {
         var sceneState = M8.SceneState.instance.global;
-        sceneState.RemoveValue(sceneVarPositionX, false);
-        sceneState.RemoveValue(sceneVarPositionY, false);
-        sceneState.RemoveValue(sceneVarRotation, false);
+        sceneState.RemoveValue(startSceneVarPositionX, false);
+        sceneState.RemoveValue(startSceneVarPositionY, false);
+        sceneState.RemoveValue(startSceneVarRotation, false);
     }
 }
