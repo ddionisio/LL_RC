@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "rock", menuName = "Game/Rock")]
-public class RockData : ScriptableObject {
+public class InfoData : ScriptableObject {
     [M8.Localize]
     public string titleRef;
     [M8.Localize]
