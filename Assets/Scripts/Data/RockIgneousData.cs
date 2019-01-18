@@ -14,4 +14,5 @@ public class RockIgneousData : RockData {
     public bool vesicular;
     [M8.Localize]
     public string crystalSizeTextRef;
+    public M8.RangeFloat felsicMaficScale;
 }

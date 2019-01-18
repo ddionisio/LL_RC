@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Collect : MonoBehaviour {
     [Header("Info")]
+    public InfoData itemData;
     public int amount = 1;
 
     [Header("Data")]
@@ -70,6 +71,9 @@ public class Collect : MonoBehaviour {
 
         if(fsm && !string.IsNullOrEmpty(fsmCollectEvent))
             fsm.SendEvent(fsmCollectEvent);
+
+        if(itemData)
+            itemData.count += amount;
 
         signalCollect.Invoke(amount);
     }
