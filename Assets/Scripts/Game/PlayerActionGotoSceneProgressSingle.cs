@@ -5,7 +5,9 @@ using UnityEngine;
 /// <summary>
 /// Add this to a trigger
 /// </summary>
-public class PlayerActionGotoScene : PlayerAction {
+public class PlayerActionGotoSceneProgressSingle : PlayerAction {
+    
+    public int[] progressMatch;
     public M8.SceneAssetPath scene;
 
     public bool saveStartCheckpoint;
@@ -16,6 +18,13 @@ public class PlayerActionGotoScene : PlayerAction {
         if(saveStartCheckpoint)
             Checkpoint.SetStart(player.transform);
 
-        scene.Load();
+        int progress = LoLManager.isInstantiated ? LoLManager.instance.curProgress : 0;
+
+        for(int i = 0; i < progressMatch.Length; i++) {
+            if(progress == progressMatch[i]) {
+                scene.Load();
+                break;
+            }
+        }
     }
 }

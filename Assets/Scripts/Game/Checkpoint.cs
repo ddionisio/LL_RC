@@ -93,6 +93,16 @@ public struct Checkpoint {
         }
     }
 
+    public static void SetStart(Transform t) {
+        startPosition = t.position;
+        startRotation = t.eulerAngles.z;
+    }
+
+    public static void SetLocal(Transform t) {
+        localPosition = t.position;
+        localRotation = t.eulerAngles.z;
+    }
+
     public static void RemoveStart() {
         var sceneState = M8.SceneState.instance.global;
         sceneState.RemoveValue(startSceneVarPositionX, false);

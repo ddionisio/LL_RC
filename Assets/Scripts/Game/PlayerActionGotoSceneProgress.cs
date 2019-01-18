@@ -14,9 +14,13 @@ public class PlayerActionGotoSceneProgress : PlayerAction {
 
     public Info[] infos;
 
-    public override void ActionInvoke() {
-        if(M8.SceneManager.instance.isLoading)
-            return;
+    public bool saveStartCheckpoint;
+
+    public override void ActionInvoke(PlayerController player) {
+        player.stateControl.state = player.stateDespawn;
+
+        if(saveStartCheckpoint)
+            Checkpoint.SetStart(player.transform);
 
         int progress = LoLManager.isInstantiated ? LoLManager.instance.curProgress : 0;
 

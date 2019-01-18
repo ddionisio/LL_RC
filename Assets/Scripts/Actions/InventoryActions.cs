@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 namespace HutongGames.PlayMaker.Actions.Game {
+    #region General Items
     [ActionCategory("Game")]
-    public class InventoryGetCount : FsmStateAction {
+    public class InventoryItemGetCount : FsmStateAction {
         [RequiredField]
         [ObjectType(typeof(InfoData))]
         public FsmObject data;
@@ -28,7 +29,7 @@ namespace HutongGames.PlayMaker.Actions.Game {
     }
 
     [ActionCategory("Game")]
-    public class InventorySetCount : FsmStateAction {
+    public class InventoryItemSetCount : FsmStateAction {
         [RequiredField]
         [ObjectType(typeof(InfoData))]
         public FsmObject data;
@@ -50,7 +51,7 @@ namespace HutongGames.PlayMaker.Actions.Game {
     }
 
     [ActionCategory("Game")]
-    public class InventorySetSeen : FsmStateAction {
+    public class InventoryItemSetSeen : FsmStateAction {
         [RequiredField]
         [ObjectType(typeof(InfoData))]
         public FsmObject data;
@@ -69,7 +70,7 @@ namespace HutongGames.PlayMaker.Actions.Game {
     }
 
     [ActionCategory("Game")]
-    public class InventoryCheckSeen : FsmStateAction {
+    public class InventoryItemCheckSeen : FsmStateAction {
         [RequiredField]
         [ObjectType(typeof(InfoData))]
         public FsmObject data;
@@ -123,7 +124,35 @@ namespace HutongGames.PlayMaker.Actions.Game {
             return "";
         }
     }
+    #endregion
 
+    #region Magma
+    [ActionCategory("Game")]
+    public class InventoryMagmaGetCapacity : FsmStateAction {
+        [RequiredField]
+        [ObjectType(typeof(MagmaData))]
+        public FsmObject data;
+
+        [RequiredField]
+        [UIHint(UIHint.Variable)]
+        public FsmInt output;
+
+        public override void Reset() {
+            data = null;
+            output = null;
+        }
+
+        public override void OnEnter() {
+            var infData = data.Value as MagmaData;
+            if(infData)
+                output.Value = infData.capacity;
+
+            Finish();
+        }
+    }
+    #endregion
+
+    #region Inventory
     [ActionCategory("Game")]
     public class InventoryGetMineralsCount : FsmStateAction {
         [RequiredField]
@@ -168,10 +197,12 @@ namespace HutongGames.PlayMaker.Actions.Game {
     }
 
     [ActionCategory("Game")]
-    public class InventoryClearAllCounts : FsmStateAction {
+    public class InventoryDeleteAll : FsmStateAction {
         [RequiredField]
         [ObjectType(typeof(InventoryData))]
         public FsmObject inventory;
+
+        public bool deleteSeen; //if true, also remove seen
 
         public override void Reset() {
             inventory = null;
@@ -180,9 +211,10 @@ namespace HutongGames.PlayMaker.Actions.Game {
         public override void OnEnter() {
             var inv = inventory.Value as InventoryData;
             if(inv)
-                inv.ClearAllCounts();
+                inv.DeleteAll(deleteSeen);
 
             Finish();
         }
     }
+    #endregion
 }

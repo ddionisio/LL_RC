@@ -15,6 +15,9 @@ public class PlayerInput : MonoBehaviour {
         SideStick
     }
 
+    //return true if process succeeded, will not allow jump
+    public delegate bool ActionCallback();
+
     public M8.RigidBodyController2D bodyControl;
     public M8.ForceController2D gravityControl;
 
@@ -39,17 +42,13 @@ public class PlayerInput : MonoBehaviour {
     public float jumpSideAngle = 45f; //angle rotate based on side normal
     public float jumpSideStartForce = 30f;
     public float jumpLastGroundDelay = 0.2f; //allow jumping if we left ground after a delay
-
-    [Header("Action")]
-    [M8.TagSelector]
-    public string tagActionFilter;
-
+        
     [Header("Input")]
     public M8.InputAction moveHorzInput;
     public M8.InputAction actInput;
 
     public bool canJump { get; private set; }
-
+        
     private MoveState mMoveState;
     private float mMoveHorz;
     private float mMoveSideCurTime;
@@ -59,27 +58,22 @@ public class PlayerInput : MonoBehaviour {
 
     private float mLastGroundTime;
 
-    private const int actInvokeCapacity = 4;
-    private M8.CacheList<PlayerAction> mActInvokes = new M8.CacheList<PlayerAction>(actInvokeCapacity);
+    private M8.CacheList<ActionCallback> mActionCallbacks = new M8.CacheList<ActionCallback>(4);
 
-    void OnTriggerEnter2D(Collider2D collision) {
-        if(!string.IsNullOrEmpty(tagActionFilter) && !collision.CompareTag(tagActionFilter))
-            return;
-
-        var action = collision.GetComponent<PlayerAction>();
-        if(action) {
-            if(!mActInvokes.Exists(action))
-                mActInvokes.Add(action);
+    public void ActionAddCallback(ActionCallback cb) {
+        int actInd = -1;
+        for(int i = 0; i < mActionCallbacks.Count; i++) {
+            if(mActionCallbacks[i] == cb) {
+                actInd = i;
+                break;
+            }
         }
+        if(actInd == -1)
+            mActionCallbacks.Add(cb);
     }
 
-    void OnTriggerExit2D(Collider2D collision) {
-        if(!string.IsNullOrEmpty(tagActionFilter) && !collision.CompareTag(tagActionFilter))
-            return;
-
-        var action = collision.GetComponent<PlayerAction>();
-        if(action)
-            mActInvokes.Remove(action);
+    public void ActionRemoveCallback(ActionCallback cb) {
+        mActionCallbacks.Remove(cb);
     }
 
     void OnEnable() {
@@ -101,8 +95,6 @@ public class PlayerInput : MonoBehaviour {
             if(bodyControl.body)
                 bodyControl.body.sharedMaterial.friction = frictionGroundMove;
         }
-
-        mActInvokes.Clear();
     }
 
     void Update() {
@@ -155,16 +147,13 @@ public class PlayerInput : MonoBehaviour {
         //act or jump
         var actState = actInput.GetButtonState();
         if(actState == M8.InputAction.ButtonState.Pressed) {
-            if(mActInvokes.Count > 0) {
-                for(int i = mActInvokes.Count - 1; i >= 0; i--) {
-                    var act = mActInvokes[i];
-                    if(act && act.enabled && act.gameObject.activeInHierarchy)
-                        act.ActionInvoke();
-                    else
-                        mActInvokes.RemoveAt(i);
-                }
+            bool isAct = false;
+            for(int i = 0; i < mActionCallbacks.Count; i++) {
+                if(mActionCallbacks[i]())
+                    isAct = true;
             }
-            else if(canJump && mJumpState == JumpState.None)
+
+            if(!isAct && canJump && mJumpState == JumpState.None)
                 mJumpState = JumpState.JumpStart;
         }
     }

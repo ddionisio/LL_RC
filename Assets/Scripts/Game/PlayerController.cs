@@ -6,7 +6,11 @@ public class PlayerController : MonoBehaviour {
     public M8.StateController stateControl;
     public M8.RigidBodyController2D bodyControl;
     public PlayerInput input;
-    
+
+    [Header("Action")]
+    [M8.TagSelector]
+    public string tagActionFilter = "Action";
+
     [Header("Camera")]
     [M8.TagSelector]
     public string cameraTagFollow;
@@ -49,9 +53,34 @@ public class PlayerController : MonoBehaviour {
 
     private CameraFollow mCameraFollow;
 
+    private const int actInvokeCapacity = 4;
+    private M8.CacheList<PlayerAction> mActInvokes = new M8.CacheList<PlayerAction>(actInvokeCapacity);
+
     private Coroutine mCurRout;
 
+    void OnTriggerEnter2D(Collider2D collision) {
+        if(!string.IsNullOrEmpty(tagActionFilter) && !collision.CompareTag(tagActionFilter))
+            return;
+
+        var action = collision.GetComponent<PlayerAction>();
+        if(action) {
+            if(!mActInvokes.Exists(action))
+                mActInvokes.Add(action);
+        }
+    }
+
+    void OnTriggerExit2D(Collider2D collision) {
+        if(!string.IsNullOrEmpty(tagActionFilter) && !collision.CompareTag(tagActionFilter))
+            return;
+
+        var action = collision.GetComponent<PlayerAction>();
+        if(action)
+            mActInvokes.Remove(action);
+    }
+
     void OnDisable() {
+        mActInvokes.Clear();
+
         if(mCurRout != null) {
             StopCoroutine(mCurRout);
             mCurRout = null;
@@ -59,6 +88,9 @@ public class PlayerController : MonoBehaviour {
     }
 
     void OnDestroy() {
+        if(input)
+            input.ActionRemoveCallback(OnAct);
+
         signalGameReady.callback -= OnGameReady;
         signalInputLock.callback -= OnInputLock;
         signalInputUnlock.callback -= OnInputUnlock;
@@ -86,6 +118,20 @@ public class PlayerController : MonoBehaviour {
         signalInputUnlock.callback += OnInputUnlock;
 
         animator.ResetTake(takeSpawn);
+
+        if(input)
+            input.ActionAddCallback(OnAct);
+    }
+
+    bool OnAct() {
+        if(mActInvokes.Count > 0) {
+            for(int i = 0; i < mActInvokes.Count; i++)
+                mActInvokes[i].ActionInvoke(this);
+
+            return true;
+        }
+
+        return false;
     }
 
     void OnStateChanged(M8.State state) {

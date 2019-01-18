@@ -30,26 +30,53 @@ public class InventoryData : ScriptableObject {
             minerals[i].count = 0;
     }
 
-    public void ClearAllCounts() {
-        for(int i = 0; i < rocksIgneous.Length; i++)
+    public void DeleteAll(bool deleteSeen) {
+        for(int i = 0; i < rocksIgneous.Length; i++) {
             rocksIgneous[i].count = 0;
 
-        for(int i = 0; i < rocksSedimentary.Length; i++)
+            if(deleteSeen)
+                rocksIgneous[i].isSeen = false;
+        }
+
+        for(int i = 0; i < rocksSedimentary.Length; i++) {
             rocksSedimentary[i].count = 0;
 
-        for(int i = 0; i < rocksMetamorphic.Length; i++)
+            if(deleteSeen)
+                rocksSedimentary[i].isSeen = false;
+        }
+
+        for(int i = 0; i < rocksMetamorphic.Length; i++) {
             rocksMetamorphic[i].count = 0;
 
-        for(int i = 0; i < minerals.Length; i++)
+            if(deleteSeen)
+                rocksMetamorphic[i].isSeen = false;
+        }
+
+        for(int i = 0; i < minerals.Length; i++) {
             minerals[i].count = 0;
 
-        for(int i = 0; i < gems.Length; i++)
+            if(deleteSeen)
+                minerals[i].isSeen = false;
+        }
+
+        for(int i = 0; i < gems.Length; i++) {
             gems[i].count = 0;
 
-        for(int i = 0; i < organics.Length; i++)
+            if(deleteSeen)
+                gems[i].isSeen = false;
+        }
+
+        for(int i = 0; i < organics.Length; i++) {
             organics[i].count = 0;
 
+            if(deleteSeen)
+                organics[i].isSeen = false;
+        }
+
         magma.count = 0;
+
+        if(deleteSeen)
+            magma.isSeen = false;
 
         M8.SceneState.instance.userData.Save();
     }

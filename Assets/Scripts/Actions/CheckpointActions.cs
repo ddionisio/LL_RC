@@ -18,14 +18,10 @@ namespace HutongGames.PlayMaker.Actions.Game {
         public override void OnEnter() {
             var go = Fsm.GetOwnerDefaultTarget(target);
             if(go) {
-                if(start) {
-                    Checkpoint.startPosition = go.transform.position;
-                    Checkpoint.startRotation = go.transform.eulerAngles.z;
-                }
-                else {
-                    Checkpoint.localPosition = go.transform.position;
-                    Checkpoint.localRotation = go.transform.eulerAngles.z;
-                }
+                if(start)
+                    Checkpoint.SetStart(go.transform);
+                else
+                    Checkpoint.SetLocal(go.transform);
             }
 
             Finish();
