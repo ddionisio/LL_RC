@@ -13,8 +13,6 @@ GameObject:
   - component: {fileID: 6359358890572012289}
   - component: {fileID: 8251312111022440988}
   - component: {fileID: 1412373138960850114}
-  - component: {fileID: 6922559301196869373}
-  - component: {fileID: 693901006803914800}
   m_Layer: 5
   m_Name: nextButton
   m_TagString: Untagged
@@ -119,19 +117,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6922559301196869373}
-        m_MethodName: Invoke
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 693901006803914800}
-        m_MethodName: Execute
+      - m_Target: {fileID: 2030588671368144486}
+        m_MethodName: Proceed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -156,34 +143,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 8251312111022440988}
---- !u!114 &6922559301196869373
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1377013690252763471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9516b223fc924ba42887fd3910d47d59, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  increment: 1
---- !u!114 &693901006803914800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1377013690252763471}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 884b11af739af6543a2d38d274acddf1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _scene:
-    name: start
-    path: Assets/Scenes/start.unity
 --- !u!1 &2022528007603550037
 GameObject:
   m_ObjectHideFlags: 0
@@ -1113,7 +1072,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8588730083214571631}
-  - component: {fileID: 7307467591740313180}
+  - component: {fileID: 2030588671368144486}
   m_Layer: 5
   m_Name: victory
   m_TagString: Untagged
@@ -1143,7 +1102,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7307467591740313180
+--- !u!114 &2030588671368144486
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1152,10 +1111,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 4509594151033938023}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8417d679ed76c1c489e26fa44a12b604, type: 3}
+  m_Script: {fileID: 11500000, guid: 53b494480e025224eb4c25d04a1a01d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _exclusive: 0
+  inventory: {fileID: 11400000, guid: 6db3994718a294946b660b26f2c14a25, type: 2}
+  toScene:
+    name: start
+    path: Assets/Scenes/start.unity
 --- !u!1 &6413830661411288977
 GameObject:
   m_ObjectHideFlags: 0
@@ -1313,6 +1276,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6769405561914212883}
   - component: {fileID: 1111212720726693407}
+  - component: {fileID: 5387347970159028593}
   - component: {fileID: 6016393808552736236}
   m_Layer: 5
   m_Name: options
@@ -1355,6 +1319,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _exclusive: 0
+--- !u!114 &5387347970159028593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6845024384493123161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a188f0ad3f8f10428be87ce486bcc82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6016393808552736236
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1373,7 +1349,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 1111212720726693407}
-          m_MethodName: Close
+          m_MethodName: CloseIfTop
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -1746,8 +1722,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   modalManager:
-    mode: 0
-    managerRef: {fileID: 0}
+    mode: 1
+    managerRef: {fileID: 4630985132963591375}
   modal: options
   onlyIfEmpty: 1
   closeIfOpened: 0

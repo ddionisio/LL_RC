@@ -369,6 +369,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 394449371}
+  - component: {fileID: 394449372}
   - component: {fileID: 394449370}
   m_Layer: 0
   m_Name: gameController
@@ -704,15 +705,23 @@ MonoBehaviour:
       transitions: []
       actionData:
         actionNames:
+        - HutongGames.PlayMaker.Actions.M8.ModalManagerCloseAll
         - HutongGames.PlayMaker.Actions.M8.ModalManagerOpen
         customNames:
         - 
-        actionEnabled: 01
-        actionIsOpen: 01
-        actionStartIndex: 00000000
-        actionHashCodes: 6bee5d02
+        - 
+        actionEnabled: 0101
+        actionIsOpen: 0101
+        actionStartIndex: 0000000003000000
+        actionHashCodes: ee23fa026bee5d02
         unityObjectParams: []
         fsmGameObjectParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: {fileID: 0}
         - useVariable: 0
           name: 
           tooltip: 
@@ -746,24 +755,28 @@ MonoBehaviour:
         fsmRectParams: []
         fsmQuaternionParams: []
         stringParams: []
-        byteData: 00000000
+        byteData: 0000000000000000
         arrayParamSizes: 0000000000000000
         arrayParamTypes:
         - HutongGames.PlayMaker.FsmString
         - HutongGames.PlayMaker.FsmVar
-        customTypeSizes: 02000000
+        customTypeSizes: 0200000002000000
         customTypeNames:
         - HutongGames.PlayMaker.Actions.M8.FsmModalManager
-        paramDataType: 120000000c0000000c000000280000000700000013000000
+        - HutongGames.PlayMaker.Actions.M8.FsmModalManager
+        paramDataType: 280000000700000013000000120000000c0000000c000000280000000700000013000000
         paramName:
+        - manager
+        - from
+        - gameObject
         - modal
         - paramNames
         - paramObjects
         - manager
         - from
         - gameObject
-        paramDataPos: 000000000000000001000000000000000000000000000000
-        paramByteDataSize: 000000000000000000000000000000000400000000000000
+        paramDataPos: 000000000000000000000000000000000000000001000000010000000400000001000000
+        paramByteDataSize: 000000000400000000000000000000000000000000000000000000000400000000000000
     events:
     - name: FINISHED
       isSystemEvent: 1
@@ -846,6 +859,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &394449372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 394449369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cae59de13d05ed947b72f772947ab99e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mode: {fileID: 11400000, guid: 2c56f977e9adce44986418c8c2365747, type: 2}
+  signalModeChanged: {fileID: 11400000, guid: 4f9dce914f15a6c4b8c0af0d08028ac5, type: 2}
 --- !u!1 &430691371
 GameObject:
   m_ObjectHideFlags: 0
@@ -2348,6 +2375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a782cdceb035b3d4baccc0566a5b2adb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemData: {fileID: 0}
   amount: 5
   playerTag: Player
   fsm: {fileID: 0}
