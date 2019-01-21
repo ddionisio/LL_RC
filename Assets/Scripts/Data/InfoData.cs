@@ -30,20 +30,22 @@ public class InfoData : ScriptableObject {
             return mUserVarSeenStr;
         }
     }
-
-    private string mUserVarCountStr;
-    private string mUserVarSeenStr;
-
+        
     /// <summary>
     /// Get inventory count, saved value, set to 0 to remove from UserData
     /// </summary>
     public int count {
-        get { return M8.SceneState.instance.userData.GetInt(name + userVarCount); }
+        get { return M8.SceneState.instance.userData.GetInt(userVarCount); }
         set {
-            if(value > 0)
-                M8.SceneState.instance.userData.SetInt(name + userVarCount, value);            
-            else
-                M8.SceneState.instance.userData.Remove(name + userVarCount);
+            if(count != value) {
+                if(value > 0)
+                    M8.SceneState.instance.userData.SetInt(userVarCount, value);
+                else
+                    M8.SceneState.instance.userData.Remove(userVarCount);
+
+                if(countCallback != null)
+                    countCallback(this);
+            }
         }
     }
 
@@ -51,12 +53,17 @@ public class InfoData : ScriptableObject {
     /// Check if seen, saved value
     /// </summary>
     public bool isSeen {
-        get { return M8.SceneState.instance.userData.GetInt(name + userVarSeen) != 0; }
+        get { return M8.SceneState.instance.userData.GetInt(userVarSeen) != 0; }
         set {
             if(value)
-                M8.SceneState.instance.userData.SetInt(name + userVarSeen, 1);
+                M8.SceneState.instance.userData.SetInt(userVarSeen, 1);
             else
-                M8.SceneState.instance.userData.Remove(name + userVarSeen);
+                M8.SceneState.instance.userData.Remove(userVarSeen);
         }
     }
+
+    public event System.Action<InfoData> countCallback;
+
+    private string mUserVarCountStr;
+    private string mUserVarSeenStr;
 }

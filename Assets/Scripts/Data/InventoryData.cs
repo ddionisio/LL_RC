@@ -25,6 +25,19 @@ public class InventoryData : ScriptableObject {
         }
     }
 
+    public int rocksCount {
+        get {
+            int amt = 0;
+            for(int i = 0; i < rocksIgneous.Length; i++)
+                amt += rocksIgneous[i].count;
+            for(int i = 0; i < rocksSedimentary.Length; i++)
+                amt += rocksSedimentary[i].count;
+            for(int i = 0; i < rocksMetamorphic.Length; i++)
+                amt += rocksMetamorphic[i].count;
+            return amt;
+        }
+    }
+
     public void ClearMineralsCount() {
         for(int i = 0; i < minerals.Length; i++)
             minerals[i].count = 0;
