@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class MagmaChamberController : GameModeController<MagmaChamberController> {
     [Header("Data")]
@@ -13,24 +14,49 @@ public class MagmaChamberController : GameModeController<MagmaChamberController>
     public RockSelectWidget rockSelector;
     public Button exitButton;
 
-    public void MagmaProcess() {
+    public void MineralProcess() {
         inventory.ClearMineralsCount();
 
         inventory.magma.count += inventory.magma.capacity;
 
         RefreshInterfaces();
+
+        //animation
+    }
+
+    public void RockProcess(InfoData dat) {
+        if(dat.count > 1)
+            dat.count--;
+
+        rockSelector.RefreshRock(dat);
+
+        //animation
+    }
+
+    protected override void OnInstanceDeinit() {
+        base.OnInstanceDeinit();
+
+        if(rockSelector)
+            rockSelector.processRockCallback -= RockProcess;
     }
 
     protected override void OnInstanceInit() {
         base.OnInstanceInit();
 
-        RefreshInterfaces();
+        rockSelector.processRockCallback += RockProcess;
+
+        EventSystem.current.SetSelectedGameObject(null);
+        mineralsProcessor.interactable = false;
+        rockSelector.interactable = false;
+
+        exitButton.onClick.AddListener(OnExitClicked);
     }
 
     protected override IEnumerator Start() {
         yield return base.Start();
 
         //animation entrance
+        RefreshInterfaces();
     }
 
     void OnExitClicked() {

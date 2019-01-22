@@ -3,9 +3,9 @@
 namespace HutongGames.PlayMaker.Actions.TextMeshPro {
     [ActionCategory("Text Mesh Pro")]
     [Tooltip("Sets the text value of a TextMeshProUGUI component.")]
-    public class TextMeshProSetText : ComponentAction<TextMeshProUGUI> {
+    public class TextMeshProSetText : ComponentAction<TMP_Text> {
         [RequiredField]
-        [CheckForComponent(typeof(TextMeshProUGUI))]
+        [CheckForComponent(typeof(TMP_Text))]
         [Tooltip("The GameObject with the UI Text component.")]
         public FsmOwnerDefault gameObject;
 
@@ -19,7 +19,7 @@ namespace HutongGames.PlayMaker.Actions.TextMeshPro {
         [Tooltip("Repeats every frame")]
         public bool everyFrame;
 
-        private TextMeshProUGUI uiText;
+        private TMP_Text uiText;
         private string originalString;
 
         public override void Reset() {

@@ -11,11 +11,7 @@ public class RockSelectWidget : Selectable {
         Processing,
         Proceed
     }
-
-    [Header("UI")]
-    public GameObject selectActiveGO;
-    public GameObject disableGO;
-
+    
     [Header("Inventory")]
     public InventoryData inventory;
 
@@ -24,14 +20,19 @@ public class RockSelectWidget : Selectable {
     public M8.InputAction selectAxisInput; //axis input to select prev/next (-1 = left/down, 1 = right/up)
 
     [Header("Rock")]
-    public Text rockTitleText;
-    public Text rockCountText;
+    public TMPro.TMP_Text rockTitleText;
+    public TMPro.TMP_Text rockCountText;
     public string rockCountFormat = "00";
 
     public float rockProcessDelay = 1f; //delay before processing while pointer is down
     public int rockDisplayCount = 3;
+    
+    public RockSelectItemWidget rockItemTemplate;
+
+    public float rockPlacementRadius = 150f;
+    public int rockPlacementCount = 5;
+
     public Transform rockRotate;
-    public RockSelectItemWidget[] rockItems;
     public float rockRotateAmount;
     public float rockRotateDelay = 0.3f;
         
@@ -44,14 +45,14 @@ public class RockSelectWidget : Selectable {
 
     public event System.Action<InfoData> processRockCallback;
 
+    private RockSelectItemWidget[] mRockItems;
+
     private List<InfoData> mRockList = new List<InfoData>();
 
     private State mCurState = State.None;
     private float mCurTime;
     private bool mIsRotateLeft;
-
-    private bool mIsInteractible;
-
+    
     private DG.Tweening.EaseFunction mRotateTweenFunc;
 
     public void RefreshRock(InfoData dat) {
@@ -125,20 +126,20 @@ public class RockSelectWidget : Selectable {
             if(rockTitleText) rockTitleText.text = "";
             if(rockCountText) rockCountText.text = "";
 
-            for(int i = 0; i < rockItems.Length; i++) {
-                if(rockItems[i])
-                    rockItems[i].gameObject.SetActive(false);
+            for(int i = 0; i < mRockItems.Length; i++) {
+                if(mRockItems[i])
+                    mRockItems[i].gameObject.SetActive(false);
             }
 
             return;
         }
 
         //setup mid
-        int midInd = rockItems.Length / 2;
+        int midInd = mRockItems.Length / 2;
 
         var rockItem = mRockList[mCurRockInd];
-        rockItems[midInd].Init(rockItem);
-        rockItems[midInd].gameObject.SetActive(true);
+        mRockItems[midInd].Init(rockItem, true);
+        mRockItems[midInd].gameObject.SetActive(true);
 
         if(rockTitleText)
             rockTitleText.text = rockItem.titleString;
@@ -150,7 +151,7 @@ public class RockSelectWidget : Selectable {
         for(int i = midInd - 1, selectInd = mCurRockInd - 1; i >= 0; i--, selectInd--) {
             if(selectInd < 0) {
                 if(mRockList.Count <= rockDisplayCount) {
-                    rockItems[i].gameObject.SetActive(false);
+                    mRockItems[i].gameObject.SetActive(false);
                     continue;
                 }
 
@@ -158,15 +159,15 @@ public class RockSelectWidget : Selectable {
             }
 
             rockItem = mRockList[selectInd];
-            rockItems[i].Init(rockItem);
-            rockItems[i].gameObject.SetActive(true);
+            mRockItems[i].Init(rockItem, false);
+            mRockItems[i].gameObject.SetActive(true);
         }
 
         //setup right side
-        for(int i = midInd + 1, selectInd = mCurRockInd + 1; i < rockItems.Length; i++, selectInd++) {
+        for(int i = midInd + 1, selectInd = mCurRockInd + 1; i < mRockItems.Length; i++, selectInd++) {
             if(selectInd >= mRockList.Count) {
                 if(mRockList.Count <= rockDisplayCount) {
-                    rockItems[i].gameObject.SetActive(false);
+                    mRockItems[i].gameObject.SetActive(false);
                     continue;
                 }
 
@@ -174,8 +175,8 @@ public class RockSelectWidget : Selectable {
             }
 
             rockItem = mRockList[selectInd];
-            rockItems[i].Init(rockItem);
-            rockItems[i].gameObject.SetActive(true);
+            mRockItems[i].Init(rockItem, false);
+            mRockItems[i].gameObject.SetActive(true);
         }
 
         rockRotate.rotation = Quaternion.identity;
@@ -192,32 +193,51 @@ public class RockSelectWidget : Selectable {
     protected override void OnDisable() {
         base.OnDisable();
 
-        ClearRocks();
+        if(Application.isPlaying) {
+            ClearRocks();
+        }
     }
 
     protected override void OnEnable() {
         base.OnEnable();
 
-        EventSystem es = EventSystem.current;
-        if(es)
-            SetSelected(es.currentSelectedGameObject == gameObject);
+        if(Application.isPlaying) {
+            EventSystem es = EventSystem.current;
+            if(es)
+                SetSelected(es.currentSelectedGameObject == gameObject);
 
-        mIsInteractible = interactable;
-        UpdateDisable();
+            rockRotate.rotation = Quaternion.identity;
 
-        rockRotate.rotation = Quaternion.identity;
-
-        Refresh(true);
+            Refresh(true);
+        }
     }
 
     protected override void Awake() {
         base.Awake();
-        
-        for(int i = 0; i < rockItems.Length; i++) {
-            rockItems[i].gameObject.SetActive(false);
-        }
 
-        mRotateTweenFunc = DG.Tweening.Core.Easing.EaseManager.ToEaseFunction(DG.Tweening.Ease.OutSine);
+        if(Application.isPlaying) {
+            //generate rock items
+            float rockPlaceRot = -rockRotateAmount * Mathf.Round(rockPlacementCount / 2);
+            mRockItems = new RockSelectItemWidget[rockPlacementCount];
+            for(int i = 0; i < mRockItems.Length; i++) {
+                mRockItems[i] = Instantiate(rockItemTemplate, rockRotate);
+
+                var t = mRockItems[i].transform;
+                t.position = M8.MathUtil.RotateAngle(Vector2.up, rockPlaceRot) * rockPlacementRadius;
+                t.localEulerAngles = new Vector3(0f, 0f, rockPlaceRot);
+                t.localScale = Vector3.one;
+
+                rockPlaceRot += rockRotateAmount;
+
+                mRockItems[i].gameObject.name = i.ToString();
+                mRockItems[i].gameObject.SetActive(false);
+            }
+
+            rockItemTemplate.gameObject.SetActive(false);
+            //
+
+            mRotateTweenFunc = DG.Tweening.Core.Easing.EaseManager.ToEaseFunction(DG.Tweening.Ease.OutSine);
+        }
     }
 
     public override void OnSelect(BaseEventData eventData) {
@@ -245,10 +265,8 @@ public class RockSelectWidget : Selectable {
     }
 
     void Update() {
-        if(mIsInteractible != interactable) {
-            mIsInteractible = interactable;
-            UpdateDisable();
-        }
+        if(!Application.isPlaying)
+            return;
 
         switch(mCurState) {
             case State.None:
@@ -282,22 +300,22 @@ public class RockSelectWidget : Selectable {
 
                     float t = Mathf.Clamp01(mCurTime / rockProcessDelay);
                     
-                    int midInd = rockItems.Length / 2;
-                    rockItems[midInd].fill = t;
+                    int midInd = mRockItems.Length / 2;
+                    mRockItems[midInd].fill = t;
 
                     if(t >= 1f)
                         mCurState = State.Proceed;
                 }
                 else {
-                    int midInd = rockItems.Length / 2;
-                    rockItems[midInd].fill = 0f;
+                    int midInd = mRockItems.Length / 2;
+                    mRockItems[midInd].fill = 0f;
                     mCurState = State.None;
                 }
                 break;
 
             case State.Proceed: {
-                    int midInd = rockItems.Length / 2;
-                    rockItems[midInd].fill = 0f;
+                    int midInd = mRockItems.Length / 2;
+                    mRockItems[midInd].fill = 0f;
 
                     if(processRockCallback != null)
                         processRockCallback(mRockList[mCurRockInd]);
@@ -336,19 +354,26 @@ public class RockSelectWidget : Selectable {
         }
     }
 
-    void SetSelected(bool selected) {
-        mIsSelected = selected;
-        if(selectActiveGO) selectActiveGO.SetActive(selected);
+    void OnDrawGizmos() {
+        if(rockRotate && rockPlacementRadius > 0f && rockPlacementCount > 0) {
+            Gizmos.color = Color.yellow;
+            
+            float rockPlaceRot = -rockRotateAmount * Mathf.Round(rockPlacementCount / 2);
+            for(int i = 0; i < rockPlacementCount; i++) {
+                Gizmos.DrawLine(rockRotate.position, rockRotate.position + (Vector3)M8.MathUtil.RotateAngle(Vector2.up, rockPlaceRot) * rockPlacementRadius);
+                rockPlaceRot += rockRotateAmount;
+            }
+        }
     }
 
-    void UpdateDisable() {
-        if(disableGO) disableGO.SetActive(mIsInteractible);
+    void SetSelected(bool selected) {
+        mIsSelected = selected;
     }
     
     private void ClearRocks() {
-        for(int i = 0; i < rockItems.Length; i++) {
-            if(rockItems[i])
-                rockItems[i].gameObject.SetActive(false);
+        for(int i = 0; i < mRockItems.Length; i++) {
+            if(mRockItems[i])
+                mRockItems[i].gameObject.SetActive(false);
         }
 
         mRockList.Clear();

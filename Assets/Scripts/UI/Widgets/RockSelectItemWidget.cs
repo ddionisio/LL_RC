@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class RockSelectItemWidget : MonoBehaviour {
     public Image iconImage;
     public Image iconFillImage;
+    public M8.UI.Graphics.ColorGroup colorGroup;
 
     public float fill {
         get { return iconFillImage ? iconFillImage.fillAmount : 0f; }
@@ -15,12 +16,17 @@ public class RockSelectItemWidget : MonoBehaviour {
         }
     }
     
-    public void Init(InfoData aData) {
+    public void Init(InfoData aData, bool active) {
         if(iconImage) {
             iconImage.sprite = aData.icon;
             iconImage.SetNativeSize();
         }
 
         fill = 0f;
+
+        if(active)
+            colorGroup.Revert();
+        else
+            colorGroup.ApplyColor(); //start disabled
     }
 }
