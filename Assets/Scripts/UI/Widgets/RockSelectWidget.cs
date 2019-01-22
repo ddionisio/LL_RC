@@ -38,6 +38,12 @@ public class RockSelectWidget : Selectable {
         
     public bool isProcess { get; private set; } //pointer remains down after delay
 
+    public int rockCount {
+        get {
+            return mRockList != null ? mRockList.Count : 0;
+        }
+    }
+
     private bool mIsSelected;
     private bool mIsDown;
 
@@ -222,9 +228,11 @@ public class RockSelectWidget : Selectable {
             for(int i = 0; i < mRockItems.Length; i++) {
                 mRockItems[i] = Instantiate(rockItemTemplate, rockRotate);
 
+                var up = M8.MathUtil.RotateAngle(Vector2.up, rockPlaceRot);
+
                 var t = mRockItems[i].transform;
-                t.position = M8.MathUtil.RotateAngle(Vector2.up, rockPlaceRot) * rockPlacementRadius;
-                t.localEulerAngles = new Vector3(0f, 0f, rockPlaceRot);
+                t.localPosition = up * rockPlacementRadius;
+                t.up = up;
                 t.localScale = Vector3.one;
 
                 rockPlaceRot += rockRotateAmount;
@@ -284,7 +292,7 @@ public class RockSelectWidget : Selectable {
 
                         //check if we can't move left/right
                         if(mRockList.Count <= rockDisplayCount) {
-                            if((mIsRotateLeft && mCurRockInd == 0) || mCurRockInd == mRockList.Count - 1)
+                            if((mIsRotateLeft && mCurRockInd == 0) || (!mIsRotateLeft && mCurRockInd == mRockList.Count - 1))
                                 break;
                         }
 
@@ -338,11 +346,19 @@ public class RockSelectWidget : Selectable {
                 else {
                     //change select
                     if(mIsRotateLeft) {
-                        if(mCurRockInd > 0)
+                        if(mCurRockInd == 0) {
+                            if(mRockList.Count > rockDisplayCount)
+                                mCurRockInd = mRockList.Count - 1;
+                        }
+                        else
                             mCurRockInd--;
                     }
                     else {
-                        if(mCurRockInd < mRockList.Count - 1)
+                        if(mCurRockInd == mRockList.Count - 1) {
+                            if(mRockList.Count > rockDisplayCount)
+                                mCurRockInd = 0;
+                        }
+                        else
                             mCurRockInd++;
                     }
 

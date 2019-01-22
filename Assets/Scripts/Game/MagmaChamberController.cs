@@ -25,10 +25,16 @@ public class MagmaChamberController : GameModeController<MagmaChamberController>
     }
 
     public void RockProcess(InfoData dat) {
-        if(dat.count > 1)
+        if(dat.count > 0) {
             dat.count--;
 
+            inventory.magma.count += inventory.magma.rockValue;
+        }
+
         rockSelector.RefreshRock(dat);
+
+        if(rockSelector.rockCount == 0)
+            RefreshInterfaces();
 
         //animation
     }
