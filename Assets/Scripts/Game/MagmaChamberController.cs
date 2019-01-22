@@ -75,6 +75,8 @@ public class MagmaChamberController : GameModeController<MagmaChamberController>
             mineralsProcessor.interactable = false;
             rockSelector.interactable = false;
 
+            exitNavigation.mode = Navigation.Mode.None;
+
             exitButton.Select();
         }
         else if(mineralsCounts > 0) {
@@ -83,6 +85,7 @@ public class MagmaChamberController : GameModeController<MagmaChamberController>
 
             rockSelector.interactable = false;
 
+            exitNavigation.mode = Navigation.Mode.Explicit;
             exitNavigation.selectOnUp = mineralsProcessor;
         }
         else {
@@ -91,6 +94,7 @@ public class MagmaChamberController : GameModeController<MagmaChamberController>
             rockSelector.interactable = true;
             rockSelector.Select();
 
+            exitNavigation.mode = Navigation.Mode.Explicit;
             exitNavigation.selectOnUp = rockSelector;
         }
 
