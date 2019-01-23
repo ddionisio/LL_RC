@@ -9,6 +9,8 @@ public enum IgneousFormation {
 
 [CreateAssetMenu(fileName = "rockIgneous", menuName = "Game/Rock Igneous")]
 public class RockIgneousData : RockData {
+    public override string modal { get { return "infoIgneous"; } }
+
     [Header("Igneous Info")]
     public IgneousFormation formation;
     public bool vesicular;

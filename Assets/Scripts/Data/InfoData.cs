@@ -12,6 +12,8 @@ public class InfoData : ScriptableObject {
     public Sprite icon;
     public Sprite illustration;
 
+    public virtual string modal { get { return "info"; } }
+
     public string titleString { get { return M8.Localize.Get(titleRef); } }
     public string descString { get { return M8.Localize.Get(descRef); } }
 
