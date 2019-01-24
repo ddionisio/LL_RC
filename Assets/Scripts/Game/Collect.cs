@@ -18,7 +18,7 @@ public class Collect : MonoBehaviour {
     public GameObject collectedGO;
     
     [Header("Signals")]
-    public SignalInteger signalCollect;
+    public SignalCollect signalCollect;
 
     public bool isCollected { get; private set; }
 
@@ -75,6 +75,6 @@ public class Collect : MonoBehaviour {
         if(itemData)
             itemData.count += amount;
 
-        signalCollect.Invoke(amount);
+        signalCollect.Invoke(itemData, amount);
     }
 }
