@@ -69,10 +69,13 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
     public SequenceInfo rockResultSequence;
     public InfoDataListWidget rockResultWidget;
     public Button rockResultContinueButton;
-
+    
     [Header("Exit")]
     public Button exitButton;
     public M8.SceneAssetPath exitScene;
+
+    [Header("Signals")]
+    public M8.Signal signalRockResultUpdate;
 
     private bool mIsCoolingStop;
     private bool mIsRockResultContinue;
@@ -346,6 +349,9 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
             yield return null;
 
         yield return rockResultSequence.Exit();
+
+        if(signalRockResultUpdate)
+            signalRockResultUpdate.Invoke();
 
         StartCoroutine(DoProcessSelect());
     }

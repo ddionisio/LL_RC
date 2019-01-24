@@ -14,6 +14,11 @@ public class MagmaChamberController : GameModeController<MagmaChamberController>
     public RockSelectWidget rockSelector;
     public Button exitButton;
 
+    [Header("Signals")]
+    public M8.Signal signalRockIgneousUpdate;
+    public M8.Signal signalRockSedimentaryUpdate;
+    public M8.Signal signalRockMetamorphicUpdate;
+
     public void MineralProcess() {
         inventory.ClearMineralsCount();
 
@@ -29,6 +34,19 @@ public class MagmaChamberController : GameModeController<MagmaChamberController>
             dat.count--;
 
             inventory.magma.count += inventory.magma.rockValue;
+
+            if(dat is RockIgneousData) {
+                if(signalRockIgneousUpdate)
+                    signalRockIgneousUpdate.Invoke();
+            }
+            else if(dat is RockSedimentaryData) {
+                if(signalRockSedimentaryUpdate)
+                    signalRockSedimentaryUpdate.Invoke();
+            }
+            else if(dat is RockMetamorphicData) {
+                if(signalRockMetamorphicUpdate)
+                    signalRockMetamorphicUpdate.Invoke();
+            }
         }
 
         rockSelector.RefreshRock(dat);
