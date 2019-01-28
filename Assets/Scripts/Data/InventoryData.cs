@@ -38,6 +38,15 @@ public class InventoryData : ScriptableObject {
         }
     }
 
+    public int organicsCount {
+        get {
+            int amt = 0;
+            for(int i = 0; i < organics.Length; i++)
+                amt += organics[i].count;
+            return amt;
+        }
+    }
+
     public void ClearMineralsCount() {
         for(int i = 0; i < minerals.Length; i++)
             minerals[i].count = 0;

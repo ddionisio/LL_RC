@@ -11,9 +11,22 @@ public class RockSelectWidget : Selectable {
         Processing,
         Proceed
     }
+
+    [System.Flags]
+    public enum Filter {
+        None = 0x0,
+        Igneous = 0x1,
+        Sedimentary = 0x2,
+        Metamorphic = 0x4,
+        Minerals = 0x8,
+        Organics = 0x10,
+        Gems = 0x20
+    }
     
     [Header("Inventory")]
     public InventoryData inventory;
+    [M8.EnumMask]
+    public Filter inventoryFilter = Filter.Igneous | Filter.Sedimentary | Filter.Metamorphic;
 
     [Header("Input")]
     public M8.InputAction processInput; //use the accept input action
@@ -80,22 +93,52 @@ public class RockSelectWidget : Selectable {
         ClearRocks();
 
         //add rocks with count > 0
-        for(int i = 0; i < inventory.rocksIgneous.Length; i++) {
-            var rock = inventory.rocksIgneous[i];
-            if(rock.count > 0)
-                mRockList.Add(rock);
+        if((inventoryFilter & Filter.Igneous) != Filter.None) {
+            for(int i = 0; i < inventory.rocksIgneous.Length; i++) {
+                var rock = inventory.rocksIgneous[i];
+                if(rock.count > 0)
+                    mRockList.Add(rock);
+            }
         }
 
-        for(int i = 0; i < inventory.rocksSedimentary.Length; i++) {
-            var rock = inventory.rocksSedimentary[i];
-            if(rock.count > 0)
-                mRockList.Add(rock);
+        if((inventoryFilter & Filter.Sedimentary) != Filter.None) {
+            for(int i = 0; i < inventory.rocksSedimentary.Length; i++) {
+                var rock = inventory.rocksSedimentary[i];
+                if(rock.count > 0)
+                    mRockList.Add(rock);
+            }
         }
 
-        for(int i = 0; i < inventory.rocksMetamorphic.Length; i++) {
-            var rock = inventory.rocksMetamorphic[i];
-            if(rock.count > 0)
-                mRockList.Add(rock);
+        if((inventoryFilter & Filter.Metamorphic) != Filter.None) {
+            for(int i = 0; i < inventory.rocksMetamorphic.Length; i++) {
+                var rock = inventory.rocksMetamorphic[i];
+                if(rock.count > 0)
+                    mRockList.Add(rock);
+            }
+        }
+
+        if((inventoryFilter & Filter.Minerals) != Filter.None) {
+            for(int i = 0; i < inventory.minerals.Length; i++) {
+                var rock = inventory.minerals[i];
+                if(rock.count > 0)
+                    mRockList.Add(rock);
+            }
+        }
+
+        if((inventoryFilter & Filter.Organics) != Filter.None) {
+            for(int i = 0; i < inventory.organics.Length; i++) {
+                var rock = inventory.organics[i];
+                if(rock.count > 0)
+                    mRockList.Add(rock);
+            }
+        }
+
+        if((inventoryFilter & Filter.Gems) != Filter.None) {
+            for(int i = 0; i < inventory.gems.Length; i++) {
+                var rock = inventory.gems[i];
+                if(rock.count > 0)
+                    mRockList.Add(rock);
+            }
         }
 
         if(resetIndex) {

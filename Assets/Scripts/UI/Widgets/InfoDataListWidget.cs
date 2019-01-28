@@ -8,6 +8,7 @@ public class InfoDataListWidget : MonoBehaviour {
 
     [Header("Info")]
     public InfoDataWidget template;
+    public bool navigationAuto = false;
 
     private M8.CacheList<InfoDataWidget> mItemActives = new M8.CacheList<InfoDataWidget>(itemCapacity);
     private M8.CacheList<InfoDataWidget> mItemCache = new M8.CacheList<InfoDataWidget>(itemCapacity);
@@ -50,16 +51,25 @@ public class InfoDataListWidget : MonoBehaviour {
 
             newItem.Init(data[i]);
 
-            if(prevItem) {
-                var prevNav = prevItem.navigation;
-                prevNav.mode = Navigation.Mode.Explicit;
-                prevNav.selectOnRight = newItem;
+            if(navigationAuto) {
+                var nav = newItem.navigation;
+                nav.mode = Navigation.Mode.Automatic;
+                newItem.navigation = nav;
             }
+            else {
+                if(prevItem) {
+                    var prevNav = prevItem.navigation;
+                    prevNav.mode = Navigation.Mode.Explicit;
+                    prevNav.selectOnRight = newItem;
+                    prevItem.navigation = prevNav;
+                }
 
-            var nav = newItem.navigation;
-            nav.mode = Navigation.Mode.Explicit;
-            nav.selectOnLeft = prevItem;
-            nav.selectOnDown = downSelect;
+                var nav = newItem.navigation;
+                nav.mode = Navigation.Mode.Explicit;
+                nav.selectOnLeft = prevItem;
+                nav.selectOnDown = downSelect;
+                newItem.navigation = nav;
+            }
 
             mItemActives.Add(newItem);
         }

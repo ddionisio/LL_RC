@@ -5,34 +5,6 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
-    [System.Serializable]
-    public struct SequenceInfo {
-        public GameObject go;
-        public M8.Animator.Animate animator;
-        [M8.Animator.TakeSelector(animatorField = "animator")]
-        public string takeEnter;
-        [M8.Animator.TakeSelector(animatorField = "animator")]
-        public string takeExit;
-
-        public void Init() {
-            if(go) go.SetActive(false);
-        }
-
-        public IEnumerator Enter() {
-            if(go) go.SetActive(true);
-
-            if(animator && !string.IsNullOrEmpty(takeEnter))
-                yield return animator.PlayWait(takeEnter);
-        }
-
-        public IEnumerator Exit() {
-            if(animator && !string.IsNullOrEmpty(takeExit))
-                yield return animator.PlayWait(takeExit);
-
-            if(go) go.SetActive(false);
-        }
-    }
-
     [Header("Data")]
     public InventoryData inventory;
     public RockIgneousData[] intrusiveRocks; //which type of rock to produce based on cooling delay
@@ -78,10 +50,9 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
     public M8.Signal signalRockResultUpdate;
 
     private bool mIsCoolingStop;
+
     private bool mIsRockResultContinue;
-
     private List<InfoData> mRockResultList = new List<InfoData>();
-
     private M8.GenericParams mRockModalParms = new M8.GenericParams();
 
     protected override void OnInstanceInit() {
@@ -121,49 +92,13 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
             int progress = LoLManager.isInstantiated ? LoLManager.instance.curProgress : 0;
 
             //determine if intrusive/extrusive locked
-            if(processIntrusiveDisableProgress == progress) {
-                processIntrusiveButton.interactable = false;
-
-                var nav = processExtrusiveButton.navigation;
-                nav.selectOnLeft = null;
-                processExtrusiveButton.navigation = nav;
-            }
-            else {
-                processIntrusiveButton.interactable = true;
-            }
-
-            if(processExtrusiveDisableProgress == progress) {
-                processExtrusiveButton.interactable = false;
-
-                var nav = processIntrusiveButton.navigation;
-                nav.selectOnRight = null;
-                processIntrusiveButton.navigation = nav;
-            }
-            else {
-                processExtrusiveButton.interactable = true;
-            }
+            processIntrusiveButton.interactable = processIntrusiveDisableProgress != progress;
+            processExtrusiveButton.interactable = processExtrusiveDisableProgress != progress;
             //
 
             yield return processSequence.Enter();
-
-            var exitNav = exitButton.navigation;
-
-            if(processIntrusiveButton.interactable) {
-                exitNav.selectOnUp = processIntrusiveButton;
-                processIntrusiveButton.Select();
-            }
-            else if(processExtrusiveButton.interactable) {
-                exitNav.selectOnUp = processExtrusiveButton;
-                processExtrusiveButton.Select();
-            }
-
-            exitButton.navigation = exitNav;
         }
         else { //show nothing, just exit
-            var exitNav = exitButton.navigation;
-            exitNav.selectOnUp = null;
-            exitButton.navigation = exitNav;
-
             exitButton.Select();
         }
     }
@@ -175,11 +110,7 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
         yield return processSequence.Exit();
 
         yield return intrusiveSequence.Enter();
-
-        var exitNav = exitButton.navigation;
-        exitNav.selectOnUp = intrusiveProceedButton;
-        exitButton.navigation = exitNav;
-
+        
         intrusiveProceedButton.Select();
     }
 
@@ -203,11 +134,7 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
 
         //cooling
         yield return coolingSequence.Enter();
-
-        var exitNav = exitButton.navigation;
-        exitNav.selectOnUp = coolingStopButton;
-        exitButton.navigation = exitNav;
-
+        
         coolingStopButton.Select();
                 
         int intrusiveRockInd = 0;
@@ -266,11 +193,7 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
         yield return processSequence.Exit();
 
         yield return extrusiveSequence.Enter();
-
-        var exitNav = exitButton.navigation;
-        exitNav.selectOnUp = extrusiveProceedButton;
-        exitButton.navigation = exitNav;
-
+        
         extrusiveProceedButton.Select();
     }
 
@@ -339,10 +262,6 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
         }
 
         //wait for rock continue
-        var exitNav = exitButton.navigation;
-        exitNav.selectOnUp = rockResultContinueButton;
-        exitButton.navigation = exitNav;
-
         rockResultContinueButton.Select();
         mIsRockResultContinue = false;
         while(!mIsRockResultContinue)
