@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class InfoDataWidget : Selectable, IPointerClickHandler {
+public class InfoDataWidget : Selectable, IPointerClickHandler, ISubmitHandler {
     [Header("Info")]
     public Image iconImage;
     public bool iconResize;
@@ -47,6 +47,14 @@ public class InfoDataWidget : Selectable, IPointerClickHandler {
     }
 
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData) {
+        OpenInfo();
+    }
+
+    void ISubmitHandler.OnSubmit(BaseEventData eventData) {
+        OpenInfo();
+    }
+
+    void OpenInfo() {
         if(!interactable)
             return;
 

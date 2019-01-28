@@ -1159,7 +1159,7 @@ MonoBehaviour:
         actionNames:
         - HutongGames.PlayMaker.Actions.Game.InventoryDeleteAll
         - HutongGames.PlayMaker.Actions.LoL.LoLIncrementProgress
-        - HutongGames.PlayMaker.Actions.M8.SignalInvoke
+        - HutongGames.PlayMaker.Actions.Game.OffscreenIndicatorSetActive
         customNames:
         - 
         - 
@@ -1167,10 +1167,18 @@ MonoBehaviour:
         actionEnabled: 010101
         actionIsOpen: 010101
         actionStartIndex: 000000000200000002000000
-        actionHashCodes: c204ed04000000001cdb2302
+        actionHashCodes: c204ed040000000015264c01
         unityObjectParams: []
         fsmGameObjectParams: []
-        fsmOwnerDefaultParams: []
+        fsmOwnerDefaultParams:
+        - ownerOption: 1
+          gameObject:
+            useVariable: 1
+            name: goalIndicatorGO
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            value: {fileID: 0}
         animationCurveParams: []
         functionCallParams: []
         fsmTemplateControlParams: []
@@ -1186,19 +1194,18 @@ MonoBehaviour:
           networkSync: 0
           typeName: InventoryData
           value: {fileID: 11400000, guid: 6db3994718a294946b660b26f2c14a25, type: 2}
-        - useVariable: 0
-          name: 
-          tooltip: 
-          showInInspector: 0
-          networkSync: 0
-          typeName: M8.Signal
-          value: {fileID: 11400000, guid: 639e3a00c6e5d6a468b0762512980c7b, type: 2}
         fsmVarParams: []
         fsmArrayParams: []
         fsmEnumParams: []
         fsmFloatParams: []
         fsmIntParams: []
-        fsmBoolParams: []
+        fsmBoolParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
         fsmVector2Params: []
         fsmVector3Params: []
         fsmColorParams: []
@@ -1210,13 +1217,14 @@ MonoBehaviour:
         arrayParamTypes: []
         customTypeSizes: 
         customTypeNames: []
-        paramDataType: 180000000100000018000000
+        paramDataType: 18000000010000001400000011000000
         paramName:
         - inventory
         - deleteSeen
-        - signal
-        paramDataPos: 000000000000000001000000
-        paramByteDataSize: 000000000100000000000000
+        - gameObject
+        - active
+        paramDataPos: 00000000000000000000000000000000
+        paramByteDataSize: 00000000010000000000000000000000
     - name: Unlock Player
       description: 
       colorIndex: 0
@@ -5313,16 +5321,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -32
       objectReference: {fileID: 0}
-    - target: {fileID: 5661861907701124243, guid: bd2c96afbf382f147bc59d1c0df73069,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5661861907701124243, guid: bd2c96afbf382f147bc59d1c0df73069,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5661861906943443357, guid: bd2c96afbf382f147bc59d1c0df73069,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -5343,16 +5341,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -32
       objectReference: {fileID: 0}
-    - target: {fileID: 5661861907728138919, guid: bd2c96afbf382f147bc59d1c0df73069,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5661861907728138919, guid: bd2c96afbf382f147bc59d1c0df73069,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5661861907574442918, guid: bd2c96afbf382f147bc59d1c0df73069,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -5372,6 +5360,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -32
+      objectReference: {fileID: 0}
+    - target: {fileID: 5661861907701124243, guid: bd2c96afbf382f147bc59d1c0df73069,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5661861907701124243, guid: bd2c96afbf382f147bc59d1c0df73069,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5661861907728138919, guid: bd2c96afbf382f147bc59d1c0df73069,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5661861907728138919, guid: bd2c96afbf382f147bc59d1c0df73069,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5661861908013490673, guid: bd2c96afbf382f147bc59d1c0df73069,
         type: 3}

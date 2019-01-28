@@ -3,14 +3,13 @@ using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
 
-[CustomEditor(typeof(GameDebug))]
-public class GameDebugInspector : Editor {
-
+[CustomEditor(typeof(LoLManager), true)]
+public class LoLManagerInspector : Editor {
     private int mProgressInput;
 
     void OnEnable() {
         if(Application.isPlaying) {
-            mProgressInput = LoLManager.instance.curProgress;
+            mProgressInput = ((LoLManager)target).curProgress;
         }
     }
 
@@ -20,18 +19,18 @@ public class GameDebugInspector : Editor {
         if(Application.isPlaying) {
             GUILayout.BeginVertical(GUI.skin.box);
 
-            var dat = (GameDebug)target;
+            var dat = (LoLManager)target;
 
-            GUILayout.Label("Current Progress: " + LoLManager.instance.curProgress);
+            GUILayout.Label(string.Format("Current Progress: {0}/{1}", dat.curProgress, dat.progressMax));
+            GUILayout.Label(string.Format("Current Score: {0}", dat.curScore));
 
             GUILayout.BeginHorizontal();
             mProgressInput = EditorGUILayout.IntField("Progress", mProgressInput);
             if(GUILayout.Button("Apply", GUILayout.Width(60f))) {
-                LoLManager.instance.ApplyProgress(mProgressInput);
-                dat.signalProgressChanged.Invoke();
+                dat.ApplyProgress(mProgressInput);
             }
             GUILayout.EndHorizontal();
-            
+
             GUILayout.EndVertical();
         }
     }

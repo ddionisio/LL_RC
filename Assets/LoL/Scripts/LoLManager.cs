@@ -74,6 +74,9 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
     [SerializeField]
     float _speakQueueStartDelay = 0.3f;
 
+    [Header("Signals")]
+    public M8.Signal signalProgressUpdate;
+
     protected int mCurProgress;
     protected int mCurScore;
     
@@ -333,6 +336,9 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
     protected void ProgressCallback() {
         if(progressCallback != null)
             progressCallback(this);
+
+        if(signalProgressUpdate)
+            signalProgressUpdate.Invoke();
     }
 
     public void ApplyCurrentProgress() {

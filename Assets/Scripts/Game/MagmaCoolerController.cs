@@ -97,6 +97,13 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
             //
 
             yield return processSequence.Enter();
+
+            if(processIntrusiveButton.interactable)
+                processIntrusiveButton.Select();
+            else if(processExtrusiveButton.interactable)
+                processExtrusiveButton.Select();
+            else
+                exitButton.Select();
         }
         else { //show nothing, just exit
             exitButton.Select();
