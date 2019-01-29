@@ -6,5 +6,4 @@ using UnityEngine;
 public class MagmaData : InfoData {
     [Header("Magma Info")]
     public int capacity;
-    public int rockValue = 10;
 }

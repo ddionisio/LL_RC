@@ -19,8 +19,7 @@ public class RockSelectWidget : Selectable {
         Sedimentary = 0x2,
         Metamorphic = 0x4,
         Minerals = 0x8,
-        Organics = 0x10,
-        Gems = 0x20
+        Organics = 0x10
     }
     
     [Header("Inventory")]
@@ -93,7 +92,7 @@ public class RockSelectWidget : Selectable {
         }
     }
 
-    public void Refresh(bool resetIndex) {
+    public void Refresh(bool resetIndex, List<InfoData> hideFilter) {
         Init();
         ClearRocks();
 
@@ -101,51 +100,63 @@ public class RockSelectWidget : Selectable {
         if((inventoryFilter & Filter.Igneous) != Filter.None) {
             for(int i = 0; i < inventory.rocksIgneous.Length; i++) {
                 var rock = inventory.rocksIgneous[i];
-                if(rock.count > 0)
+                if(rock.count > 0) {
+                    if(hideFilter != null && hideFilter.Contains(rock))
+                        continue;
+
                     mRockList.Add(rock);
+                }
             }
         }
 
         if((inventoryFilter & Filter.Sedimentary) != Filter.None) {
             for(int i = 0; i < inventory.rocksSedimentary.Length; i++) {
                 var rock = inventory.rocksSedimentary[i];
-                if(rock.count > 0)
+                if(rock.count > 0) {
+                    if(hideFilter != null && hideFilter.Contains(rock))
+                        continue;
+
                     mRockList.Add(rock);
+                }
             }
         }
 
         if((inventoryFilter & Filter.Metamorphic) != Filter.None) {
             for(int i = 0; i < inventory.rocksMetamorphic.Length; i++) {
                 var rock = inventory.rocksMetamorphic[i];
-                if(rock.count > 0)
+                if(rock.count > 0) {
+                    if(hideFilter != null && hideFilter.Contains(rock))
+                        continue;
+
                     mRockList.Add(rock);
+                }
             }
         }
 
         if((inventoryFilter & Filter.Minerals) != Filter.None) {
             for(int i = 0; i < inventory.minerals.Length; i++) {
                 var rock = inventory.minerals[i];
-                if(rock.count > 0)
+                if(rock.count > 0) {
+                    if(hideFilter != null && hideFilter.Contains(rock))
+                        continue;
+
                     mRockList.Add(rock);
+                }
             }
         }
 
         if((inventoryFilter & Filter.Organics) != Filter.None) {
             for(int i = 0; i < inventory.organics.Length; i++) {
                 var rock = inventory.organics[i];
-                if(rock.count > 0)
+                if(rock.count > 0) {
+                    if(hideFilter != null && hideFilter.Contains(rock))
+                        continue;
+
                     mRockList.Add(rock);
+                }
             }
         }
-
-        if((inventoryFilter & Filter.Gems) != Filter.None) {
-            for(int i = 0; i < inventory.gems.Length; i++) {
-                var rock = inventory.gems[i];
-                if(rock.count > 0)
-                    mRockList.Add(rock);
-            }
-        }
-
+        
         if(resetIndex) {
             if(mRockList.Count == 3)
                 mCurRockInd = 1;
@@ -262,7 +273,7 @@ public class RockSelectWidget : Selectable {
 
             rockRotate.rotation = Quaternion.identity;
 
-            Refresh(true);
+            Refresh(true, null);
         }
     }
 

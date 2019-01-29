@@ -19,4 +19,5 @@ public class RockData : InfoData {
     public string[] compositionTextRefs;
 
     public InfoData[] input; //specific to process to determine the output
+    public RockMetamorphicData metaOutput; //specific metamorphic output
 }

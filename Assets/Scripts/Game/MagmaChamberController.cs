@@ -33,7 +33,9 @@ public class MagmaChamberController : GameModeController<MagmaChamberController>
         if(dat.count > 0) {
             dat.count--;
 
-            inventory.magma.count += inventory.magma.rockValue;
+            int magmaValue = 1;
+
+            inventory.magma.count += magmaValue;
 
             if(dat is RockIgneousData) {
                 if(signalRockIgneousUpdate)

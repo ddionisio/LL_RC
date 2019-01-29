@@ -11,10 +11,13 @@ public class InventoryData : ScriptableObject {
 
     [Header("Others")]
     public MineralData[] minerals;
-    public GemData[] gems;
     public OrganicData[] organics;
 
     public MagmaData magma;
+
+    [Header("Data")]
+    public int igneousOutput = 5;
+    public int sedimentaryRockCount = 3; //for both input and output, output for organic
 
     public int mineralsCount {
         get {
@@ -34,6 +37,28 @@ public class InventoryData : ScriptableObject {
                 amt += rocksSedimentary[i].count;
             for(int i = 0; i < rocksMetamorphic.Length; i++)
                 amt += rocksMetamorphic[i].count;
+            return amt;
+        }
+    }
+
+    /// <summary>
+    /// Count the type of rocks that have at least one count.
+    /// </summary>
+    public int rockTypeValidCount {
+        get {
+            int amt = 0;
+            for(int i = 0; i < rocksIgneous.Length; i++) {
+                if(rocksIgneous[i].count > 0)
+                    amt++;
+            }
+            for(int i = 0; i < rocksSedimentary.Length; i++) {
+                if(rocksSedimentary[i].count > 0)
+                    amt++;
+            }
+            for(int i = 0; i < rocksMetamorphic.Length; i++) {
+                if(rocksMetamorphic[i].count > 0)
+                    amt++;
+            }
             return amt;
         }
     }
@@ -80,14 +105,7 @@ public class InventoryData : ScriptableObject {
             if(deleteSeen)
                 minerals[i].isSeen = false;
         }
-
-        for(int i = 0; i < gems.Length; i++) {
-            gems[i].count = 0;
-
-            if(deleteSeen)
-                gems[i].isSeen = false;
-        }
-
+        
         for(int i = 0; i < organics.Length; i++) {
             organics[i].count = 0;
 

@@ -178,9 +178,9 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
         mRockResultList.Clear();
 
         var rock = intrusiveRocks[intrusiveRockInd];
-        rock.count++;
+        rock.count += inventory.igneousOutput;
 
-        var magmaCount = inventory.magma.count - inventory.magma.rockValue;
+        var magmaCount = inventory.magma.count - inventory.igneousOutput;
         if(magmaCount < 0)
             magmaCount = 0;
         inventory.magma.count = magmaCount;
@@ -230,9 +230,9 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
         mRockResultList.Clear();
         for(int i = 0; i < extrusiveResultCount; i++) {            
             var rock = extrusiveRocks[i];
-            rock.count++;
+            rock.count += inventory.igneousOutput;
 
-            magmaCount -= inventory.magma.rockValue;
+            magmaCount -= inventory.igneousOutput;
             if(magmaCount < 0)
                 magmaCount = 0;
 
