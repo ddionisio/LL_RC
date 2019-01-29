@@ -118,8 +118,8 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
         int rockCount = inventory.rocksCount;
         int organicCount = inventory.organicsCount;
 
-        processRockButton.interactable = rockCount == 0;
-        processOrganicButton.interactable = organicCount == 0;
+        processRockButton.interactable = rockCount > 0;
+        processOrganicButton.interactable = organicCount > 0;
 
         yield return processSequence.Enter();
 
@@ -192,6 +192,7 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
             //setup rock output
             var rockList = mOrganicOutput[mSourceSelected];
             var rockOutput = rockList[Random.Range(0, rockList.Count)];
+            rockOutput.count++;
             mRockResultList.Add(rockOutput);
 
             //setup compaction material
@@ -201,6 +202,7 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
             var grainType = (GrainSize)(mErosionCount - 1);
             var rockList = mClasticOutput[grainType];
             var rockOutput = rockList[Random.Range(0, rockList.Count)];
+            rockOutput.count++;
             mRockResultList.Add(rockOutput);
 
             //setup compaction material

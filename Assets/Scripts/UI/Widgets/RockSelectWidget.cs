@@ -74,7 +74,11 @@ public class RockSelectWidget : Selectable {
     
     private DG.Tweening.EaseFunction mRotateTweenFunc;
 
+    private bool mIsInit;
+
     public void RefreshRock(InfoData dat) {
+        Init();
+
         if(dat.count == 0) {
             if(mRockList.Remove(dat)) {
                 if(mCurRockInd >= mRockList.Count)
@@ -90,6 +94,7 @@ public class RockSelectWidget : Selectable {
     }
 
     public void Refresh(bool resetIndex) {
+        Init();
         ClearRocks();
 
         //add rocks with count > 0
@@ -265,29 +270,7 @@ public class RockSelectWidget : Selectable {
         base.Awake();
 
         if(Application.isPlaying) {
-            //generate rock items
-            float rockPlaceRot = -rockRotateAmount * Mathf.Round(rockPlacementCount / 2);
-            mRockItems = new RockSelectItemWidget[rockPlacementCount];
-            for(int i = 0; i < mRockItems.Length; i++) {
-                mRockItems[i] = Instantiate(rockItemTemplate, rockRotate);
-
-                var up = M8.MathUtil.RotateAngle(Vector2.up, rockPlaceRot);
-
-                var t = mRockItems[i].transform;
-                t.localPosition = up * rockPlacementRadius;
-                t.up = up;
-                t.localScale = Vector3.one;
-
-                rockPlaceRot += rockRotateAmount;
-
-                mRockItems[i].gameObject.name = i.ToString();
-                mRockItems[i].gameObject.SetActive(false);
-            }
-
-            rockItemTemplate.gameObject.SetActive(false);
-            //
-
-            mRotateTweenFunc = DG.Tweening.Core.Easing.EaseManager.ToEaseFunction(DG.Tweening.Ease.OutSine);
+            Init();
         }
     }
 
@@ -428,7 +411,38 @@ public class RockSelectWidget : Selectable {
     void SetSelected(bool selected) {
         mIsSelected = selected;
     }
-    
+
+    private void Init() {
+        if(mIsInit)
+            return;
+
+        //generate rock items
+        float rockPlaceRot = -rockRotateAmount * Mathf.Round(rockPlacementCount / 2);
+        mRockItems = new RockSelectItemWidget[rockPlacementCount];
+        for(int i = 0; i < mRockItems.Length; i++) {
+            mRockItems[i] = Instantiate(rockItemTemplate, rockRotate);
+
+            var up = M8.MathUtil.RotateAngle(Vector2.up, rockPlaceRot);
+
+            var t = mRockItems[i].transform;
+            t.localPosition = up * rockPlacementRadius;
+            t.up = up;
+            t.localScale = Vector3.one;
+
+            rockPlaceRot += rockRotateAmount;
+
+            mRockItems[i].gameObject.name = i.ToString();
+            mRockItems[i].gameObject.SetActive(false);
+        }
+
+        rockItemTemplate.gameObject.SetActive(false);
+        //
+
+        mRotateTweenFunc = DG.Tweening.Core.Easing.EaseManager.ToEaseFunction(DG.Tweening.Ease.OutSine);
+
+        mIsInit = true;
+    }
+
     private void ClearRocks() {
         for(int i = 0; i < mRockItems.Length; i++) {
             if(mRockItems[i])
