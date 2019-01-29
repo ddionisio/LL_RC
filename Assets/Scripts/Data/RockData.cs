@@ -17,4 +17,6 @@ public class RockData : InfoData {
     public string textureTextRef;
     [M8.Localize]
     public string[] compositionTextRefs;
+
+    public InfoData[] input; //specific to process to determine the output
 }
