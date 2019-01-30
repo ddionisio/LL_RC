@@ -16,9 +16,14 @@ public class MagmaChamberController : GameModeController<MagmaChamberController>
     public Button exitButton;
 
     public void MineralProcess() {
+        int mineralsCount = inventory.mineralsCount;
+
         inventory.ClearMineralsCount();
 
-        inventory.magma.count += inventory.magma.capacity;
+        if(mineralsCount < inventory.magma.capacity)
+            inventory.magma.count += inventory.magma.capacity;
+        else
+            inventory.magma.count += mineralsCount;
 
         RefreshInterfaces();
 
