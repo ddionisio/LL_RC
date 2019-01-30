@@ -7,17 +7,13 @@ using UnityEngine.EventSystems;
 public class MagmaChamberController : GameModeController<MagmaChamberController> {
     [Header("Data")]
     public InventoryData inventory;
+    public CriteriaData criteria;
     public M8.SceneAssetPath exitScene;
 
     [Header("UI")]
     public Selectable mineralsProcessor;
     public RockSelectWidget rockSelector;
     public Button exitButton;
-
-    [Header("Signals")]
-    public M8.Signal signalRockIgneousUpdate;
-    public M8.Signal signalRockSedimentaryUpdate;
-    public M8.Signal signalRockMetamorphicUpdate;
 
     public void MineralProcess() {
         inventory.ClearMineralsCount();
@@ -37,18 +33,7 @@ public class MagmaChamberController : GameModeController<MagmaChamberController>
 
             inventory.magma.count += magmaValue;
 
-            if(dat is RockIgneousData) {
-                if(signalRockIgneousUpdate)
-                    signalRockIgneousUpdate.Invoke();
-            }
-            else if(dat is RockSedimentaryData) {
-                if(signalRockSedimentaryUpdate)
-                    signalRockSedimentaryUpdate.Invoke();
-            }
-            else if(dat is RockMetamorphicData) {
-                if(signalRockMetamorphicUpdate)
-                    signalRockMetamorphicUpdate.Invoke();
-            }
+            criteria.InvokeUpdate(dat);
         }
 
         rockSelector.RefreshRock(dat);

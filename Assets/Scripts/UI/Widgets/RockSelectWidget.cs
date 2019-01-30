@@ -340,6 +340,13 @@ public class RockSelectWidget : Selectable {
                 break;
 
             case State.Processing:
+                if(!interactable || !mIsSelected || mRockList.Count == 0) {
+                    int midInd = mRockItems.Length / 2;
+                    mRockItems[midInd].fill = 0f;
+                    mCurState = State.None;
+                    break;
+                }
+
                 if(mIsDown || processInput.IsDown()) {
                     mCurTime += Time.deltaTime;
 
@@ -421,6 +428,9 @@ public class RockSelectWidget : Selectable {
 
     void SetSelected(bool selected) {
         mIsSelected = selected;
+
+        if(!mIsSelected)
+            mIsDown = false;
     }
 
     private void Init() {

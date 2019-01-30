@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 public class SedimentaryController : GameModeController<SedimentaryController> {
     [Header("Data")]
     public InventoryData inventory;
+    public CriteriaData criteria;
     [M8.EnumMask]
     public RockSelectWidget.Filter rockFilter = RockSelectWidget.Filter.Igneous | RockSelectWidget.Filter.Sedimentary | RockSelectWidget.Filter.Metamorphic;
     [M8.EnumMask]
@@ -38,10 +39,7 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
     [Header("Exit")]
     public Button exitButton;
     public M8.SceneAssetPath exitScene;
-
-    [Header("Signals")]
-    public M8.Signal signalRockResultUpdate;
-
+    
     private int mErosionCount = 0;
     private bool mIsErosionFinish;
 
@@ -63,6 +61,12 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
 
     protected override void OnInstanceInit() {
         base.OnInstanceInit();
+
+        processSequence.Init();
+        sourceSequence.Init();
+        rockErosionSequence.Init();
+        compactCementSequence.Init();
+        rockResultSequence.Init();
 
         mClasticOutput = new Dictionary<GrainSize, List<RockSedimentaryData>>();
         mOrganicOutput = new Dictionary<InfoData, List<RockSedimentaryData>>();
@@ -188,25 +192,29 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
 
     IEnumerator DoCompactCementationClastic() {
         yield return compactCementSequence.Enter();
+                                                
+        //clear out source, decrement count for each item
+        if(mSourceSelects != null) {
+            for(int i = 0; i < mSourceSelects.Count; i++) {
+                if(mSourceSelects[i].count > 0) {
+                    mSourceSelects[i].count--;
 
-        mRockResultList.Clear();
+                    criteria.InvokeUpdate(mSourceSelects[i]);
+                }
+            }
+
+            mSourceSelects.Clear();
+        }
 
         //setup rock output
         var grainType = (GrainSize)(mErosionCount - 1);
         var rockList = mClasticOutput[grainType];
         var rockOutput = rockList[Random.Range(0, rockList.Count)];
         rockOutput.count += inventory.sedimentaryRockCount;
+        mRockResultList.Clear();
         mRockResultList.Add(rockOutput);
 
-        //clear out source, decrement count for each item
-        if(mSourceSelects != null) {
-            for(int i = 0; i < mSourceSelects.Count; i++) {
-                if(mSourceSelects[i].count > 0)
-                    mSourceSelects[i].count--;
-            }
-
-            mSourceSelects.Clear();
-        }
+        criteria.InvokeUpdate(rockOutput);
 
         //setup compaction material
 
@@ -239,6 +247,8 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
         rockOutput.count += inventory.sedimentaryRockCount;
         mRockResultList.Add(rockOutput);
 
+        criteria.InvokeUpdate(rockOutput);
+
         //clear out source
         if(source.count > 0)
             source.count--;
@@ -259,7 +269,7 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
         yield return rockResultSequence.Enter();
 
         //fill rock list widget
-        rockResultWidget.Init(mRockResultList, rockResultContinueButton);
+        rockResultWidget.Init(mRockResultList, null);
 
         yield return rockResultSequence.Enter();
 
@@ -283,9 +293,6 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
             yield return null;
 
         yield return rockResultSequence.Exit();
-
-        if(signalRockResultUpdate)
-            signalRockResultUpdate.Invoke();
 
         StartCoroutine(DoProcessSelect());
     }

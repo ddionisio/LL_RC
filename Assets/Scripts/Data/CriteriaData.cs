@@ -83,4 +83,22 @@ public class CriteriaData : M8.SingletonScriptableObject<CriteriaData> {
             }
         }
     }
+
+    public void InvokeAllUpdates() {
+        if(signalUpdateIgneous) signalUpdateIgneous.Invoke();
+        if(signalUpdateSedimentary) signalUpdateSedimentary.Invoke();
+        if(signalUpdateMetamorphic) signalUpdateMetamorphic.Invoke();
+    }
+
+    public void InvokeUpdate(InfoData dat) {
+        if(dat is RockIgneousData) {
+            if(signalUpdateIgneous) signalUpdateIgneous.Invoke();
+        }
+        else if(dat is RockSedimentaryData) {
+            if(signalUpdateSedimentary) signalUpdateSedimentary.Invoke();
+        }
+        else if(dat is RockMetamorphicData) {
+            if(signalUpdateMetamorphic) signalUpdateMetamorphic.Invoke();
+        }
+    }
 }

@@ -1026,7 +1026,7 @@ GameObject:
   - component: {fileID: 1367129676}
   - component: {fileID: 1367129675}
   m_Layer: 0
-  m_Name: controller
+  m_Name: magmaChamberController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1197,18 +1197,13 @@ MonoBehaviour:
   mode: {fileID: 0}
   signalModeChanged: {fileID: 11400000, guid: 4f9dce914f15a6c4b8c0af0d08028ac5, type: 2}
   inventory: {fileID: 11400000, guid: 6db3994718a294946b660b26f2c14a25, type: 2}
+  criteria: {fileID: 11400000, guid: 978ccb4b5b4e8aa46945712ec292895f, type: 2}
   exitScene:
     name: start
     path: Assets/Scenes/start.unity
   mineralsProcessor: {fileID: 1043899851}
   rockSelector: {fileID: 201201925}
   exitButton: {fileID: 983344813}
-  signalRockIgneousUpdate: {fileID: 11400000, guid: fec9b945a5a044e46a8d748fca135392,
-    type: 2}
-  signalRockSedimentaryUpdate: {fileID: 11400000, guid: 59e6cc98ba41d0941a8d2ae34dcb9669,
-    type: 2}
-  signalRockMetamorphicUpdate: {fileID: 11400000, guid: bf0964475b5e08f40aabee6634d43204,
-    type: 2}
 --- !u!4 &1367129677
 Transform:
   m_ObjectHideFlags: 0
@@ -1582,6 +1577,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: rockSelects
       objectReference: {fileID: 0}
+    - target: {fileID: 2073398207456525885, guid: 343219d5bbf87114e895ec38291aee4b,
+        type: 3}
+      propertyPath: m_Navigation.m_SelectOnDown
+      value: 
+      objectReference: {fileID: 983344813}
     - target: {fileID: 2073398208554345220, guid: 343219d5bbf87114e895ec38291aee4b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1687,11 +1687,16 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 2073398207456525885, guid: 343219d5bbf87114e895ec38291aee4b,
+    - target: {fileID: 2073398206818676902, guid: 343219d5bbf87114e895ec38291aee4b,
         type: 3}
-      propertyPath: m_Navigation.m_SelectOnDown
-      value: 
-      objectReference: {fileID: 983344813}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2073398206818676902, guid: 343219d5bbf87114e895ec38291aee4b,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.000061035156
+      objectReference: {fileID: 0}
     - target: {fileID: 2073398207035925820, guid: 343219d5bbf87114e895ec38291aee4b,
         type: 3}
       propertyPath: m_havePropertiesChanged

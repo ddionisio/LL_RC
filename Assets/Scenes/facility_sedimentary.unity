@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 64537559}
   - component: {fileID: 64537560}
   m_Layer: 0
-  m_Name: controller
+  m_Name: sedimentaryController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -276,6 +276,7 @@ MonoBehaviour:
   mode: {fileID: 0}
   signalModeChanged: {fileID: 11400000, guid: 4f9dce914f15a6c4b8c0af0d08028ac5, type: 2}
   inventory: {fileID: 11400000, guid: 6db3994718a294946b660b26f2c14a25, type: 2}
+  criteria: {fileID: 11400000, guid: 978ccb4b5b4e8aa46945712ec292895f, type: 2}
   rockFilter: 7
   organicFilter: 16
   processSequence:
@@ -315,8 +316,6 @@ MonoBehaviour:
   exitScene:
     name: start
     path: Assets/Scenes/start.unity
-  signalRockResultUpdate: {fileID: 11400000, guid: 59e6cc98ba41d0941a8d2ae34dcb9669,
-    type: 2}
 --- !u!1 &174917153
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,6 +364,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: rockSelects
+      objectReference: {fileID: 0}
+    - target: {fileID: 2073398207456525885, guid: 343219d5bbf87114e895ec38291aee4b,
+        type: 3}
+      propertyPath: m_Navigation.m_Mode
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2073398208554345220, guid: 343219d5bbf87114e895ec38291aee4b,
         type: 3}
@@ -471,31 +475,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.99999994
       objectReference: {fileID: 0}
-    - target: {fileID: 2073398207456525885, guid: 343219d5bbf87114e895ec38291aee4b,
-        type: 3}
-      propertyPath: m_Navigation.m_Mode
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2073398207035925820, guid: 343219d5bbf87114e895ec38291aee4b,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2073398207035925820, guid: 343219d5bbf87114e895ec38291aee4b,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2073398207580112578, guid: 343219d5bbf87114e895ec38291aee4b,
-        type: 3}
-      propertyPath: m_havePropertiesChanged
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2073398207580112578, guid: 343219d5bbf87114e895ec38291aee4b,
-        type: 3}
-      propertyPath: m_isInputParsingRequired
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2073398206818676902, guid: 343219d5bbf87114e895ec38291aee4b,
         type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -505,6 +484,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0.000022888184
+      objectReference: {fileID: 0}
+    - target: {fileID: 2073398207035925820, guid: 343219d5bbf87114e895ec38291aee4b,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2073398207035925820, guid: 343219d5bbf87114e895ec38291aee4b,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2073398207580112578, guid: 343219d5bbf87114e895ec38291aee4b,
+        type: 3}
+      propertyPath: m_havePropertiesChanged
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2073398207580112578, guid: 343219d5bbf87114e895ec38291aee4b,
+        type: 3}
+      propertyPath: m_isInputParsingRequired
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 343219d5bbf87114e895ec38291aee4b, type: 3}
@@ -1243,11 +1242,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 8877393505538601359, guid: ed4979ab62da47948813659ac8f51271,
-        type: 3}
-      propertyPath: navigationAuto
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8877393504191084013, guid: ed4979ab62da47948813659ac8f51271,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -1267,6 +1261,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -50
+      objectReference: {fileID: 0}
+    - target: {fileID: 8877393505538601359, guid: ed4979ab62da47948813659ac8f51271,
+        type: 3}
+      propertyPath: navigationAuto
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed4979ab62da47948813659ac8f51271, type: 3}

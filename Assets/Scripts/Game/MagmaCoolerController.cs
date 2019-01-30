@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
     [Header("Data")]
     public InventoryData inventory;
+    public CriteriaData criteria;
     public RockIgneousData[] intrusiveRocks; //which type of rock to produce based on cooling delay
     public RockIgneousData[] extrusiveRocks;
     public int extrusiveResultCount = 3;
@@ -46,14 +47,15 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
     public Button exitButton;
     public M8.SceneAssetPath exitScene;
 
-    [Header("Signals")]
-    public M8.Signal signalRockResultUpdate;
-
     private bool mIsCoolingStop;
 
     private bool mIsRockResultContinue;
     private List<InfoData> mRockResultList = new List<InfoData>();
     private M8.GenericParams mRockModalParms = new M8.GenericParams();
+
+    protected override void OnInstanceDeinit() {
+        base.OnInstanceDeinit();
+    }
 
     protected override void OnInstanceInit() {
         base.OnInstanceInit();
@@ -152,7 +154,7 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
         //do cooling and fill animation
         mIsCoolingStop = false;
         while(!mIsCoolingStop) {
-            if(intrusiveRockInd < intrusiveRocks.Length - 1) {                
+            if(intrusiveRockInd < intrusiveRocks.Length) {                
                 if(curTime < coolingDelay) {
                     curTime += Time.deltaTime;
                     float t = Mathf.Clamp01(curTime / coolingDelay);
@@ -176,6 +178,9 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
 
         //generate rock
         mRockResultList.Clear();
+
+        if(intrusiveRockInd >= intrusiveRocks.Length)
+            intrusiveRockInd = intrusiveRocks.Length - 1;
 
         var rock = intrusiveRocks[intrusiveRockInd];
         rock.count += inventory.igneousOutput;
@@ -251,7 +256,7 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
         ClearSelection();
 
         //fill rock list widget
-        rockResultWidget.Init(mRockResultList, rockResultContinueButton);
+        rockResultWidget.Init(mRockResultList, null);
 
         yield return rockResultSequence.Enter();
 
@@ -268,6 +273,8 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
             }
         }
 
+        criteria.signalUpdateIgneous.Invoke();
+
         //wait for rock continue
         rockResultContinueButton.Select();
         mIsRockResultContinue = false;
@@ -275,9 +282,6 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
             yield return null;
 
         yield return rockResultSequence.Exit();
-
-        if(signalRockResultUpdate)
-            signalRockResultUpdate.Invoke();
 
         StartCoroutine(DoProcessSelect());
     }
