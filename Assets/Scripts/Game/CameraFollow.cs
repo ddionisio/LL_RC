@@ -13,9 +13,9 @@ public class CameraFollow : MonoBehaviour
     public Transform startFollow;
 
     public float gotoDelay = 0.4f;
-    public float gotoRotateSpeed = 180f;
 
     public float followDelay = 0.1f;
+    public float followRotateSpeed = 180f;
 
     public State state { get; private set; }
 
@@ -92,8 +92,7 @@ public class CameraFollow : MonoBehaviour
 
                     transform.position = Vector2.Lerp(mGotoStartPos, followPos, t);
 
-                    float rotStep = gotoRotateSpeed * Time.deltaTime;
-
+                    var rotStep = followRotateSpeed * Time.deltaTime;
                     transform.rotation = Quaternion.RotateTowards(transform.rotation, mCurFollow.rotation, rotStep);
                 }
                 else if(mCurFollow)
@@ -110,9 +109,8 @@ public class CameraFollow : MonoBehaviour
 
                     transform.position = toPos;
 
-                    var r = transform.eulerAngles;
-                    r.z = mCurFollow.eulerAngles.z;
-                    transform.eulerAngles = r;
+                    var rotStep = followRotateSpeed * Time.deltaTime;
+                    transform.rotation = Quaternion.RotateTowards(transform.rotation, mCurFollow.rotation, rotStep);
                 }
                 else
                     state = State.None;
