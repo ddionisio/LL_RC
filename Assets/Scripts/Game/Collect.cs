@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Collect : MonoBehaviour {
     [Header("Info")]
-    public InfoData itemData;
     public int amount = 1;
 
     [Header("Data")]
@@ -18,7 +17,7 @@ public class Collect : MonoBehaviour {
     public GameObject collectedGO;
     
     [Header("Signals")]
-    public SignalCollect signalCollect;
+    public SignalInteger signalCollect;
 
     public bool isCollected { get; private set; }
 
@@ -38,6 +37,9 @@ public class Collect : MonoBehaviour {
         if(isCollected)
             return;
 
+        if(!string.IsNullOrEmpty(playerTag) && !collision.CompareTag(playerTag))
+            return;
+
         Collected();
     }
 
@@ -47,7 +49,7 @@ public class Collect : MonoBehaviour {
 
         var go = collision.gameObject;
 
-        if(!go.CompareTag(playerTag))
+        if(!string.IsNullOrEmpty(playerTag) && !go.CompareTag(playerTag))
             return;
 
         //only collect if we are hit from below by rigidbody
@@ -72,9 +74,6 @@ public class Collect : MonoBehaviour {
         if(fsm && !string.IsNullOrEmpty(fsmCollectEvent))
             fsm.SendEvent(fsmCollectEvent);
 
-        if(itemData)
-            itemData.count += amount;
-
-        signalCollect.Invoke(itemData, amount);
+        signalCollect.Invoke(amount);
     }
 }
