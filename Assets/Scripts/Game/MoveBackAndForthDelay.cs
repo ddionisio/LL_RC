@@ -11,6 +11,7 @@ public class MoveBackAndForthDelay : MonoBehaviour {
     public float apexDelay = 0f;
     public float repeatDelay = 1f;
 
+    public bool activeOnEnable = true;
     public bool backEnabled = true; //if false, reset to start on repeat
 
     public DG.Tweening.Ease forwardEase = DG.Tweening.Ease.OutSine;
@@ -30,14 +31,23 @@ public class MoveBackAndForthDelay : MonoBehaviour {
     public bool waitForAnimation = true;
 
     private Rigidbody2D mTargetBody;
-                
+
+    public void Act() {
+        StopAllCoroutines();
+
+        Init();
+        StartCoroutine(DoAction());
+    }
+
     void OnDisable() {
         Init();
     }
 
     void OnEnable() {
-        Init();
-        StartCoroutine(DoAction());
+        if(activeOnEnable)
+            Act();
+        else
+            Init();
     }
 
     void Awake() {
