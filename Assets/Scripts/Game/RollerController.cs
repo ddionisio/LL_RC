@@ -2,8 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RollerController : MonoBehaviour, M8.IPoolSpawn {
+public class RollerController : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn {
     public const string parmForceScale = "forceScale";
+
+    public enum MoveMode {
+        None,
+        GroundOnly,
+        AfterFirstGround
+    }
 
     public M8.StateController stateControl;
     public Rigidbody2D body;
@@ -12,9 +18,10 @@ public class RollerController : MonoBehaviour, M8.IPoolSpawn {
     public M8.State stateMove;
 
     public float groundAngleLimit = 60f;
-    public bool onlyMoveOnGround = true;
+    public MoveMode moveMode = MoveMode.GroundOnly;
     public float force;
-    public float speedLimit;    
+    public float speedLimit;
+    public float firstGroundImpulse;
 
     private bool mIsActive;
     private bool mIsGrounded;
@@ -26,6 +33,8 @@ public class RollerController : MonoBehaviour, M8.IPoolSpawn {
 
     private Vector2 mLastWallNormal;
 
+    private bool mIsFirstGround;
+
     void M8.IPoolSpawn.OnSpawned(M8.GenericParams parms) {
         mForceScale = 1f;
 
@@ -33,6 +42,12 @@ public class RollerController : MonoBehaviour, M8.IPoolSpawn {
             if(parms.ContainsKey(parmForceScale))
                 mForceScale = parms.GetValue<float>(parmForceScale);
         }
+    }
+
+    void M8.IPoolDespawn.OnDespawned() {
+        mIsActive = false;
+        body.velocity = Vector2.zero;
+        body.angularVelocity = 0f;
     }
 
     void OnStateChanged(M8.State state) {
@@ -58,6 +73,7 @@ public class RollerController : MonoBehaviour, M8.IPoolSpawn {
         var moveDir = new Vector2(upDir.y, -upDir.x);
         var wallCheckDir = moveDir * Mathf.Sign(mForceScale);
 
+        bool isFirstGround = mIsFirstGround;
         bool isWallContact = false;
 
         int contactCount = body.GetContacts(mContacts);
@@ -68,8 +84,10 @@ public class RollerController : MonoBehaviour, M8.IPoolSpawn {
                 var normal = contact.normal;
 
                 if(!mIsGrounded) {
-                    if(Vector2.Angle(upDir, normal) < groundAngleLimit)
+                    if(Vector2.Angle(upDir, normal) < groundAngleLimit) {
                         mIsGrounded = true;
+                        isFirstGround = true;
+                    }
                 }
 
                 if(!isWallContact) {
@@ -89,7 +107,27 @@ public class RollerController : MonoBehaviour, M8.IPoolSpawn {
         if(isWallContact)
             mForceScale *= -1.0f;
 
-        if(!onlyMoveOnGround || mIsGrounded) {
+        if(isFirstGround && mIsFirstGround != isFirstGround) {
+            mIsFirstGround = isFirstGround;
+
+            body.AddForce(moveDir * Mathf.Sign(mForceScale) * firstGroundImpulse, ForceMode2D.Impulse);
+        }
+
+        bool canMove = false;
+
+        switch(moveMode) {
+            case MoveMode.GroundOnly:
+                canMove = mIsGrounded;
+                break;
+            case MoveMode.AfterFirstGround:
+                canMove = mIsFirstGround;
+                break;
+            default:
+                canMove = true;
+                break;
+        }
+
+        if(canMove) {
             var curVel = body.velocity;
             var curSpeed = curVel.magnitude;
             var forceDir = curSpeed > 0f ? curVel / curSpeed : moveDir;
