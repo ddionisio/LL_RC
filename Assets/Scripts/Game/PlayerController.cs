@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour {
     public M8.Signal signalInputUnlock;
 
     [Header("Signal Invoke")]
+    public M8.Signal signalDeath;
     public M8.Signal signalDespawn;
 
     public bool inputEnabled {
@@ -206,6 +207,9 @@ public class PlayerController : MonoBehaviour {
     }
 
     IEnumerator DoDeath() {
+        if(signalDeath)
+            signalDeath.Invoke();
+
         if(mCameraFollow.follow == transform)
             mCameraFollow.follow = null;
 

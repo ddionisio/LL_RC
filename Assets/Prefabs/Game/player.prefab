@@ -86,8 +86,8 @@ MonoBehaviour:
   stateControl: {fileID: 4119703811650539705}
   bodyControl: {fileID: 3405980778307861466}
   input: {fileID: 4719789430922937781}
+  tagActionFilter: Action
   cameraTagFollow: GameCamera
-  cameraSnapOnAwake: 1
   stateSpawn: {fileID: 11400000, guid: 82f0756c936630d4d8e5b11480cba79a, type: 2}
   stateDespawn: {fileID: 11400000, guid: 782b0b32bd4c6424695d1f95581e76df, type: 2}
   stateNormal: {fileID: 11400000, guid: d57ca447c1bbff640afe2abf8d088909, type: 2}
@@ -99,6 +99,7 @@ MonoBehaviour:
   signalGameReady: {fileID: 11400000, guid: f5d3b397f5c45794f9b19675718c2849, type: 2}
   signalInputLock: {fileID: 11400000, guid: 1a494e900f735e6479550e8fccb47702, type: 2}
   signalInputUnlock: {fileID: 11400000, guid: 9d61007c79e5c8c4489b1acac2f228f8, type: 2}
+  signalDeath: {fileID: 11400000, guid: 32d5974b1d27d8946aaccd4c2921c2ed, type: 2}
   signalDespawn: {fileID: 11400000, guid: c9e5cd230a4d17e48af1e5587a152d7b, type: 2}
 --- !u!114 &4719789430922937781
 MonoBehaviour:
@@ -130,7 +131,6 @@ MonoBehaviour:
   jumpSideAngle: 50
   jumpSideStartForce: 16
   jumpLastGroundDelay: 0.2
-  tagActionFilter: Action
   moveHorzInput: {fileID: 11400000, guid: d1c75cb5a37a4414488f49a2e9bcae8f, type: 2}
   actInput: {fileID: 11400000, guid: 1a6d4b347f2abb34f929f402d88ee275, type: 2}
 --- !u!114 &4119703811650539705
