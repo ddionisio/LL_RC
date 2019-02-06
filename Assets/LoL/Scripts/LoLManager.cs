@@ -51,6 +51,7 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
     public const string settingsMusicVolumeKey = "mv";
     public const string settingsSoundVolumeKey = "sv";
     public const string settingsFadeVolumeKey = "fv";
+    public const string settingsSpeechMuteKey = "sp";
 
     private const string questionsJSONFilePath = "questions.json";
     private const string startGameJSONFilePath = "startGame.json";
@@ -69,8 +70,6 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
     bool _useFadeMusicScale = false;
     [SerializeField]
     float _fadeMusicScale = 1.0f;
-    [SerializeField]
-    protected bool _ignorePlaySoundOnMute = false;
     [SerializeField]
     float _speakQueueStartDelay = 0.3f;
 
@@ -147,6 +146,12 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
             return mLastSoundBackgroundIsLoop;
         }
     }
+
+    public bool isSpeechMute {
+        get {
+            return mIsSpeechMute;
+        }
+    }
     
     public event OnCallback progressCallback;
     public event OnCallback completeCallback;
@@ -155,6 +160,7 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
     protected float mMusicVolume;
     protected float mSoundVolume;
     protected float mFadeVolume;
+    protected bool mIsSpeechMute;
 
     protected bool mIsQuestionsReceived;
     protected MultipleChoiceQuestionList mQuestionsList;
@@ -188,7 +194,7 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
             //Debug.Log("Stop Background: " + mLastSoundBackgroundPath);
         }
 
-        if(!_ignorePlaySoundOnMute || (background ? mMusicVolume > 0f : mSoundVolume > 0f))
+        if(background ? mMusicVolume > 0f : mSoundVolume > 0f)
             LOLSDK.Instance.PlaySound(path, background, loop);
 
         if(background) {
@@ -208,58 +214,54 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
 
     protected virtual void _SpeakText(string key) {
         //Debug.Log("Speaking: " + key);
-
-        LOLSDK.Instance.SpeakText(key);
+        if(!mIsSpeechMute)
+            LOLSDK.Instance.SpeakText(key);
     }
 
     public void SpeakText(string key) {
-        if(!_ignorePlaySoundOnMute || mSoundVolume > 0f) {
-            //cancel speak queue
-            StopSpeakQueue();
+        //cancel speak queue
+        StopSpeakQueue();
 
-            _SpeakText(key);
+        _SpeakText(key);
 
-            if(speakCallback != null)
-                speakCallback(this, key);
-        }
+        if(speakCallback != null)
+            speakCallback(this, key);
     }
 
     public void SpeakTextQueue(string key, string group, int index) {
-        if(!_ignorePlaySoundOnMute || mSoundVolume > 0f) {
-            //cancel speak queue if we are in a different group
-            if(mSpeakQueueRout != null && group != mSpeakQueueGroup)
-                StopSpeakQueue();
+        //cancel speak queue if we are in a different group
+        if(mSpeakQueueRout != null && group != mSpeakQueueGroup)
+            StopSpeakQueue();
 
-            mSpeakQueueGroup = group;
+        mSpeakQueueGroup = group;
 
-            //don't add to queue if it already exists
-            //add to queue based on index
-            LinkedListNode<SpeakQueueData> nodeToAddBefore = null;
+        //don't add to queue if it already exists
+        //add to queue based on index
+        LinkedListNode<SpeakQueueData> nodeToAddBefore = null;
 
-            for(var node = mSpeakQueues.First; node != null; node = node.Next) {
-                var nodeData = node.Value;
+        for(var node = mSpeakQueues.First; node != null; node = node.Next) {
+            var nodeData = node.Value;
 
-                if(key == nodeData.key) {
-                    //already exists
-                    return;
-                }
-
-                if(nodeToAddBefore == null && index < nodeData.index) {
-                    nodeToAddBefore = node;
-                }
+            if(key == nodeData.key) {
+                //already exists
+                return;
             }
 
-            var newQueue = new SpeakQueueData() { key = key, index = index };
-
-            if(nodeToAddBefore != null)
-                mSpeakQueues.AddBefore(nodeToAddBefore, newQueue);
-            else
-                mSpeakQueues.AddLast(newQueue);
-
-            //start up routine if not yet started
-            if(mSpeakQueueRout == null)
-                mSpeakQueueRout = StartCoroutine(DoSpeakQueue());
+            if(nodeToAddBefore == null && index < nodeData.index) {
+                nodeToAddBefore = node;
+            }
         }
+
+        var newQueue = new SpeakQueueData() { key = key, index = index };
+
+        if(nodeToAddBefore != null)
+            mSpeakQueues.AddBefore(nodeToAddBefore, newQueue);
+        else
+            mSpeakQueues.AddLast(newQueue);
+
+        //start up routine if not yet started
+        if(mSpeakQueueRout == null)
+            mSpeakQueueRout = StartCoroutine(DoSpeakQueue());
     }
 
     public virtual void StopCurrentBackgroundSound() {
@@ -390,6 +392,15 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
         }
     }
 
+    public void ApplySpeechMute(bool isMute, bool save) {
+        mIsSpeechMute = isMute;
+
+        if(save) {
+            if(userSettings)
+                userSettings.SetInt(settingsSpeechMuteKey, mIsSpeechMute ? 1 : 0);
+        }
+    }
+
     /// <summary>
     /// Call this when player quits, or finishes
     /// </summary>
@@ -502,6 +513,7 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
             mMusicVolume = userSettings.GetFloat(settingsMusicVolumeKey, musicVolumeDefault);
             mSoundVolume = userSettings.GetFloat(settingsSoundVolumeKey, soundVolumeDefault);
             mFadeVolume = userSettings.GetFloat(settingsFadeVolumeKey, _useFadeMusicScale ? musicVolumeDefault * _fadeMusicScale : fadeVolumeDefault);
+            mIsSpeechMute = userSettings.GetInt(settingsSpeechMuteKey) != 0;
         }
         else {
             mMusicVolume = musicVolumeDefault;

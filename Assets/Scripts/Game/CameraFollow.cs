@@ -15,7 +15,7 @@ public class CameraFollow : MonoBehaviour
     public float gotoDelay = 0.4f;
 
     public float followDelay = 0.1f;
-    public float followRotateSpeed = 180f;
+    public float followRotateDelay = 0.15f;
 
     public State state { get; private set; }
 
@@ -43,6 +43,7 @@ public class CameraFollow : MonoBehaviour
     private Vector2 mGotoStartPos;
 
     private Vector2 mFollowVel;
+    private float mFollowRotVel;
 
     /// <summary>
     /// Allow camera to move back to follow (useful when teleporting)
@@ -57,6 +58,8 @@ public class CameraFollow : MonoBehaviour
     void OnDisable() {
         state = State.None;
         mCurFollow = null;
+        mFollowVel = Vector2.zero;
+        mFollowRotVel = 0f;
     }
 
     void Awake() {
@@ -92,8 +95,7 @@ public class CameraFollow : MonoBehaviour
 
                     transform.position = Vector2.Lerp(mGotoStartPos, followPos, t);
 
-                    var rotStep = followRotateSpeed * Time.deltaTime;
-                    transform.rotation = Quaternion.RotateTowards(transform.rotation, mCurFollow.rotation, rotStep);
+                    UpdateRotate();
                 }
                 else if(mCurFollow)
                     state = State.Follow;
@@ -109,13 +111,24 @@ public class CameraFollow : MonoBehaviour
 
                     transform.position = toPos;
 
-                    var rotStep = followRotateSpeed * Time.deltaTime;
-                    transform.rotation = Quaternion.RotateTowards(transform.rotation, mCurFollow.rotation, rotStep);
+                    UpdateRotate();
                 }
                 else
                     state = State.None;
                 break;
         }
+    }
+
+    void UpdateRotate() {
+        if(!mCurFollow)
+            return;
+
+        var targetRotZ = mCurFollow.eulerAngles.z;
+        var curRotZ = transform.eulerAngles.z;
+
+        var rotZ = Mathf.SmoothDampAngle(curRotZ, targetRotZ, ref mFollowRotVel, followRotateDelay);
+
+        transform.eulerAngles = new Vector3(0f, 0f, rotZ);
     }
 
     private void ApplyCurState() {

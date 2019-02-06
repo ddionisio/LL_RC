@@ -39,7 +39,7 @@ public class LoLManagerMockup : LoLManager {
                 Debug.LogWarning("Last background path not found? " + mLastSoundBackgroundPath);
         }
 
-        if(!_ignorePlaySoundOnMute || (background ? mMusicVolume > 0f : mSoundVolume > 0f)) {
+        if(background ? mMusicVolume > 0f : mSoundVolume > 0f) {
             AudioSource audioSrc;
             if(mAudioItems.TryGetValue(path, out audioSrc)) {
                 audioSrc.volume = background ? mMusicVolume : mSoundVolume;
