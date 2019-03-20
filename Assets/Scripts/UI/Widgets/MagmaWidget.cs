@@ -9,7 +9,7 @@ public class MagmaWidget : MonoBehaviour {
     public string percentTextFormat = "{0}%";
 
     [Header("UI")]
-    public TMPro.TMP_Text percentText;
+    public Text percentText;
 
     private float mCurPercent;
 

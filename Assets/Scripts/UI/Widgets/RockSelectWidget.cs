@@ -32,8 +32,8 @@ public class RockSelectWidget : Selectable {
     public M8.InputAction selectAxisInput; //axis input to select prev/next (-1 = left/down, 1 = right/up)
 
     [Header("Rock")]
-    public TMPro.TMP_Text rockTitleText;
-    public TMPro.TMP_Text rockCountText;
+    public Text rockTitleText;
+    public Text rockCountText;
     public string rockCountFormat = "00";
 
     public float rockProcessDelay = 1f; //delay before processing while pointer is down

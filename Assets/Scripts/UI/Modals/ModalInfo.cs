@@ -15,8 +15,8 @@ public class ModalInfo : M8.ModalController, M8.IModalActive, M8.IModalPush, M8.
     public Image imageIllustrate;
     public bool isImageIllustrateResize; //if true, set to correct size upon change
 
-    public TMPro.TMP_Text titleLabel;
-    public TMPro.TMP_Text descLabel;
+    public Text titleLabel;
+    public Text descLabel;
 
     public Selectable selectOnActive;
 

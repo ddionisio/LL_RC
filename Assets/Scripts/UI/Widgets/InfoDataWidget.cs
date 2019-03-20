@@ -9,7 +9,7 @@ public class InfoDataWidget : Selectable, IPointerClickHandler, ISubmitHandler {
     public Image iconImage;
     public bool iconResize;
 
-    public TMPro.TMP_Text titleLabel;
+    public Text titleLabel;
 
     public GameObject newActiveGO;
 
