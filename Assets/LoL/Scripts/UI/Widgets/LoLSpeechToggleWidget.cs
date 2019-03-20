@@ -3,37 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LoLSpeechToggleWidget : MonoBehaviour, M8.IModalActive {
+public class LoLSpeechToggleWidget : MonoBehaviour {
     [Header("Display")]
-    public Text toggleLabel;
-    [M8.Localize]
-    public string onStringRef;
-    [M8.Localize]
-    public string offStringRef;
+    public GameObject onActiveGO;
+    public GameObject offActiveGO;
 
     public void ToggleSound() {
         bool isOn = LoLManager.instance.isSpeechMute;
 
         if(isOn) { //turn off
-            LoLManager.instance.ApplySpeechMute(false, true);
+            LoLManager.instance.ApplySpeechMute(false);
         }
         else { //turn on
-            LoLManager.instance.ApplySpeechMute(true, true);
+            LoLManager.instance.ApplySpeechMute(true);
         }
 
         UpdateToggleStates();
     }
 
-    void M8.IModalActive.SetActive(bool aActive) {
-        if(aActive) {
-            UpdateToggleStates();
-        }
+    void OnEnable() {
+        UpdateToggleStates();
     }
 
     private void UpdateToggleStates() {
-        if(toggleLabel) {
-            string txt = LoLManager.instance.isSpeechMute ? M8.Localize.Get(offStringRef) : M8.Localize.Get(onStringRef);
-            toggleLabel.text = txt;
-        }
+        bool isMute = LoLManager.instance.isSpeechMute;
+        
+        if(onActiveGO) onActiveGO.SetActive(!isMute);
+        if(offActiveGO) offActiveGO.SetActive(isMute);
     }
 }

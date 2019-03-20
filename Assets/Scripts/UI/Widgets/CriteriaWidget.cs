@@ -7,7 +7,7 @@ public class CriteriaWidget : MonoBehaviour {
     public Image iconImage;
     public bool iconImageResize = true;
 
-    public TMPro.TMP_Text countText;
+    public Text countText;
     public string countTextFormat = "00";
 
     public GameObject unlockedGO;
