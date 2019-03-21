@@ -23,7 +23,6 @@ public class PlayerController : MonoBehaviour {
 
     [Header("Move Animate")]
     public SpriteRenderer moveSprite;
-    public Transform moveTransform; //use for wall slide to adjust rotation
     public float moveSpeedNormal = 30f; //speed scale
     public float moveSpeedMinScale = 0.1f;
     public float moveToAirDelay = 0.2f; //delay before switching to air animation when not on ground.
@@ -78,6 +77,12 @@ public class PlayerController : MonoBehaviour {
 
     private Coroutine mCurRout;
     private float mGroundLastTime; //last time we are on ground
+
+    private int mTakeIndIdle;
+    private int mTakeIndMove;
+    private int mTakeIndAir;
+    private int mTakeIndWallSlide;
+    private int mTakeIndSlide;
 
     void OnTriggerEnter2D(Collider2D collision) {
         if(!string.IsNullOrEmpty(tagActionFilter) && !collision.CompareTag(tagActionFilter))
@@ -138,6 +143,12 @@ public class PlayerController : MonoBehaviour {
         signalInputLock.callback += OnInputLock;
         signalInputUnlock.callback += OnInputUnlock;
 
+        mTakeIndIdle = animator.GetTakeIndex(takeIdle);
+        mTakeIndMove = animator.GetTakeIndex(takeMove);
+        mTakeIndAir = animator.GetTakeIndex(takeAir);
+        mTakeIndWallSlide = animator.GetTakeIndex(takeWallSlide);
+        mTakeIndSlide = animator.GetTakeIndex(takeSlide);
+
         animator.ResetTake(takeSpawn);
 
         if(input)
@@ -146,7 +157,72 @@ public class PlayerController : MonoBehaviour {
 
     void Update() {
         if(stateControl.state == stateNormal) {
+            if(bodyControl.isSlide) {
+                if(animator.currentPlayingTakeIndex != mTakeIndSlide) {
+                    animator.animScale = 1f;
+                    animator.Play(mTakeIndSlide);
+                }
 
+                //flip sprite based on side
+                moveSprite.flipX = (bodyControl.sideFlags & M8.RigidBodyController2D.SideFlags.Right) != M8.RigidBodyController2D.SideFlags.None;
+            }
+            else {
+                switch(input.moveState) {
+                    case PlayerInput.MoveState.Normal:
+                        //ground
+                        if(bodyControl.isGrounded || (input.jumpState == PlayerInput.JumpState.None && Time.time - mGroundLastTime < moveToAirDelay)) { //ensure air delay when not on ground
+                            //moving
+                            if(input.moveHorz != 0f) {
+                                if(animator.currentPlayingTakeIndex != mTakeIndMove)
+                                    animator.Play(mTakeIndMove);
+
+                                //determine anim scale based on speed
+                                float animScale = Mathf.Abs(bodyControl.localVelocity.x / moveSpeedNormal);
+                                if(animScale < moveSpeedMinScale)
+                                    animScale = moveSpeedMinScale;
+
+                                animator.animScale = animScale;
+
+                                //determine facing based on movement
+                                if(input.moveHorz != 0f)
+                                    moveSprite.flipX = input.moveHorz < 0f;
+                            }
+                            //idle
+                            else {
+                                if(animator.currentPlayingTakeIndex != mTakeIndIdle) {
+                                    animator.animScale = 1f;
+                                    animator.Play(mTakeIndIdle);
+                                }
+                            }
+
+                            if(bodyControl.isGrounded)
+                                mGroundLastTime = Time.time;
+                        }
+                        //air
+                        else {
+                            if(animator.currentPlayingTakeIndex != mTakeIndAir) {
+                                animator.animScale = 1f;
+                                animator.Play(mTakeIndAir);
+                            }
+
+                            //determine facing based on movement
+                            if(input.moveHorz != 0f && input.jumpState == PlayerInput.JumpState.None)
+                                moveSprite.flipX = input.moveHorz < 0f;
+                        }
+                        break;
+
+                    case PlayerInput.MoveState.SideStick:
+                        if(animator.currentPlayingTakeIndex != mTakeIndWallSlide) {
+                            animator.animScale = 1f;
+                            animator.Play(mTakeIndWallSlide);
+                        }
+                        
+                        //flip sprite based on side
+                        if(bodyControl.sideFlags != M8.RigidBodyController2D.SideFlags.None)
+                            moveSprite.flipX = (bodyControl.sideFlags & M8.RigidBodyController2D.SideFlags.Right) != M8.RigidBodyController2D.SideFlags.None;
+                        break;
+                }
+            }
         }
     }
 
@@ -172,7 +248,6 @@ public class PlayerController : MonoBehaviour {
         if(state == stateSpawn) {
             //reset move anim. states
             moveSprite.flipX = false;
-            moveTransform.localRotation = Quaternion.identity;
             
             //apply checkpoint
             if(Checkpoint.localAvailable) {

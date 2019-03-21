@@ -6,7 +6,8 @@ public class PlayerInput : MonoBehaviour {
     public enum JumpState {
         None,
         JumpStart,
-        Jump
+        Jump,
+        JumpWait
     }
 
     public enum MoveState {
@@ -26,13 +27,14 @@ public class PlayerInput : MonoBehaviour {
     public float frictionGround = 1f;
     public float frictionGroundMove = 0.4f;
     public float frictionSide = 0.2f; //when pressing against the side
-
+    
     [Header("Move")]
     public float moveGroundAngleThresholdMin = 0f;
     public float moveGroundAngleThresholdMax = 70f;
     public float moveGroundMin = 20f;
     public float moveGroundMax = 60f;
     public float moveSideDelay = 0.15f; //stickiness to the side while against it on air
+    public float moveSideMinDownSpeed = 10f; //don't allow downward to go faster than this while sticking on wall
 
     [Header("Jump")]
     public bool jumpEnabled = true;
@@ -42,12 +44,17 @@ public class PlayerInput : MonoBehaviour {
     public float jumpSideAngle = 45f; //angle rotate based on side normal
     public float jumpSideStartForce = 30f;
     public float jumpLastGroundDelay = 0.2f; //allow jumping if we left ground after a delay
-        
+
     [Header("Input")]
     public M8.InputAction moveHorzInput;
     public M8.InputAction actInput;
 
     public bool canJump { get; private set; }
+
+    public MoveState moveState { get { return mMoveState; } }
+    public JumpState jumpState { get { return mJumpState; } }
+
+    public float moveHorz { get { return mMoveHorz; } }
         
     private MoveState mMoveState;
     private float mMoveHorz;
@@ -104,16 +111,25 @@ public class PlayerInput : MonoBehaviour {
                 mMoveHorz = moveHorzInput.GetAxis();
 
                 //check if we are sticking to side
-                if(!bodyControl.isGrounded && (bodyControl.collisionFlags & CollisionFlags.Sides) != CollisionFlags.None) {
+                if(!bodyControl.isGrounded && (bodyControl.collisionFlags & CollisionFlags.Sides) != CollisionFlags.None && mJumpState == JumpState.None) {
                     if(bodyControl.sideFlags == M8.RigidBodyController2D.SideFlags.Left && mMoveHorz < 0f || bodyControl.sideFlags == M8.RigidBodyController2D.SideFlags.Right && mMoveHorz > 0f) {
                         mMoveState = MoveState.SideStick;
                     }
                 }
                 break;
             case MoveState.SideStick:
-                if(bodyControl.isGrounded || (bodyControl.collisionFlags & CollisionFlags.Sides) == CollisionFlags.None) { //revert
+                if(bodyControl.isGrounded) { //revert right away if grounded
                     mMoveState = MoveState.Normal;
                     mMoveHorz = moveHorzInput.GetAxis();
+                }
+                else if((bodyControl.collisionFlags & CollisionFlags.Sides) == CollisionFlags.None) {
+                    //delay a bit (avoids stutter with uneven wall)
+                    if(mMoveSideCurTime < moveSideDelay)
+                        mMoveSideCurTime += Time.deltaTime;
+                    else {
+                        mMoveState = MoveState.Normal;
+                        mMoveHorz = moveHorzInput.GetAxis();
+                    }
                 }
                 else {
                     var inpHorz = moveHorzInput.GetAxis();
@@ -153,8 +169,10 @@ public class PlayerInput : MonoBehaviour {
                     isAct = true;
             }
 
-            if(!isAct && canJump && mJumpState == JumpState.None)
+            if(!isAct && canJump && mJumpState == JumpState.None) {
+                mMoveState = MoveState.Normal;
                 mJumpState = JumpState.JumpStart;
+            }
         }
     }
 
@@ -191,7 +209,7 @@ public class PlayerInput : MonoBehaviour {
 
                     bodyControl.body.AddForce(jumpDir * jumpSideStartForce, ForceMode2D.Impulse);
 
-                    mJumpState = JumpState.None;
+                    mJumpState = JumpState.JumpWait; //wait a bit
                 }
                 else {
                     bodyControl.body.AddForce(bodyControl.dirHolder.up * jumpStartForce, ForceMode2D.Impulse);
@@ -208,14 +226,30 @@ public class PlayerInput : MonoBehaviour {
                 else
                     mJumpState = JumpState.None;
                 break;
+
+            case JumpState.JumpWait: //just delay, no force
+                if(mJumpCurTime < jumpDelay && (bodyControl.collisionFlags & CollisionFlags.Above) == CollisionFlags.None)
+                    mJumpCurTime += Time.fixedDeltaTime;
+                else
+                    mJumpState = JumpState.None;
+                break;
         }
 
         //set friction based on rigid body state
         var lastFriction = bodyControl.body.sharedMaterial.friction;
         float newFriction;
 
-        if(mMoveState == MoveState.SideStick && bodyControl.localVelocity.y < 0f) {
+        var bodyLocalVel = bodyControl.localVelocity;
+
+        if(mMoveState == MoveState.SideStick && bodyLocalVel.y < 0f) {
             newFriction = frictionSide;
+
+            //cap down speed
+            var spd = -bodyLocalVel.y;
+            if(spd > moveSideMinDownSpeed) {
+                bodyLocalVel.y = -moveSideMinDownSpeed;
+                bodyControl.localVelocity = bodyLocalVel;
+            }
         }
         else if(bodyControl.isGrounded && !bodyControl.isSlide) {
             if(bodyControl.moveHorizontal != 0f)
