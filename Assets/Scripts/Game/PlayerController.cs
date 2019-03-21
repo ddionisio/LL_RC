@@ -21,6 +21,13 @@ public class PlayerController : MonoBehaviour {
     public M8.State stateNormal;
     public M8.State stateDeath;
 
+    [Header("Move Animate")]
+    public SpriteRenderer moveSprite;
+    public Transform moveTransform; //use for wall slide to adjust rotation
+    public float moveSpeedNormal = 30f; //speed scale
+    public float moveSpeedMinScale = 0.1f;
+    public float moveToAirDelay = 0.2f; //delay before switching to air animation when not on ground.
+
     [Header("Animations")]
     public M8.Animator.Animate animator;
     [M8.Animator.TakeSelector(animatorField = "animator")]
@@ -29,6 +36,18 @@ public class PlayerController : MonoBehaviour {
     public string takeDespawn;
     [M8.Animator.TakeSelector(animatorField = "animator")]
     public string takeDeath;
+
+    //move animate takes
+    [M8.Animator.TakeSelector(animatorField = "animator")]
+    public string takeIdle;
+    [M8.Animator.TakeSelector(animatorField = "animator")]
+    public string takeMove;
+    [M8.Animator.TakeSelector(animatorField = "animator")]
+    public string takeAir;
+    [M8.Animator.TakeSelector(animatorField = "animator")]
+    public string takeWallSlide;
+    [M8.Animator.TakeSelector(animatorField = "animator")]
+    public string takeSlide;
 
     [Header("Signal Listen")]
     public M8.Signal signalGameReady;
@@ -58,6 +77,7 @@ public class PlayerController : MonoBehaviour {
     private M8.CacheList<PlayerAction> mActInvokes = new M8.CacheList<PlayerAction>(actInvokeCapacity);
 
     private Coroutine mCurRout;
+    private float mGroundLastTime; //last time we are on ground
 
     void OnTriggerEnter2D(Collider2D collision) {
         if(!string.IsNullOrEmpty(tagActionFilter) && !collision.CompareTag(tagActionFilter))
@@ -124,6 +144,12 @@ public class PlayerController : MonoBehaviour {
             input.ActionAddCallback(OnAct);
     }
 
+    void Update() {
+        if(stateControl.state == stateNormal) {
+
+        }
+    }
+
     bool OnAct() {
         if(mActInvokes.Count > 0) {
             for(int i = 0; i < mActInvokes.Count; i++)
@@ -144,6 +170,10 @@ public class PlayerController : MonoBehaviour {
         bool physicsEnable = false;
 
         if(state == stateSpawn) {
+            //reset move anim. states
+            moveSprite.flipX = false;
+            moveTransform.localRotation = Quaternion.identity;
+            
             //apply checkpoint
             if(Checkpoint.localAvailable) {
                 transform.position = Checkpoint.localPosition;
