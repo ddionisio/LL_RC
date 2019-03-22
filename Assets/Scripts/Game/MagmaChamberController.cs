@@ -11,9 +11,22 @@ public class MagmaChamberController : GameModeController<MagmaChamberController>
     public M8.SceneAssetPath exitScene;
 
     [Header("UI")]
-    public Selectable mineralsProcessor;
+    public GameObject mineralsProcessorGO;
+    public Selectable mineralsSelector;
+    public GameObject rockProcessorGO;
     public RockSelectWidget rockSelector;
     public Button exitButton;
+
+    [Header("Animation")]
+    public M8.Animator.Animate animator;
+    [M8.Animator.TakeSelector(animatorField = "animator")]
+    public string takeUIEnter;
+    [M8.Animator.TakeSelector(animatorField = "animator")]
+    public string takeUIExit;
+    [M8.Animator.TakeSelector(animatorField = "animator")]
+    public string takeMachineProcess;
+
+    private Selectable mSelectableActive;
 
     public void MineralProcess() {
         int mineralsCount = inventory.mineralsCount;
@@ -25,9 +38,8 @@ public class MagmaChamberController : GameModeController<MagmaChamberController>
         else
             inventory.magma.count += mineralsCount;
 
-        RefreshInterfaces();
-
         //animation
+        StartCoroutine(DoRockProcess());
     }
 
     public void RockProcess(InfoData dat) {
@@ -43,10 +55,11 @@ public class MagmaChamberController : GameModeController<MagmaChamberController>
 
         rockSelector.RefreshRock(dat);
 
-        if(rockSelector.rockCount == 0)
-            RefreshInterfaces();
+        //if(rockSelector.rockCount == 0)
+            //RefreshInterfaces();
 
         //animation
+        StartCoroutine(DoRockProcess());
     }
 
     protected override void OnInstanceDeinit() {
@@ -59,61 +72,105 @@ public class MagmaChamberController : GameModeController<MagmaChamberController>
     protected override void OnInstanceInit() {
         base.OnInstanceInit();
 
+        mineralsProcessorGO.SetActive(false);
+        mineralsSelector.interactable = false;
+
+        rockProcessorGO.SetActive(false);
+        rockSelector.interactable = false;
         rockSelector.processRockCallback += RockProcess;
 
-        EventSystem.current.SetSelectedGameObject(null);
-        mineralsProcessor.interactable = false;
-        rockSelector.interactable = false;
-
         exitButton.onClick.AddListener(OnExitClicked);
+
+        EventSystem.current.SetSelectedGameObject(null);
+
+        if(animator && !string.IsNullOrEmpty(takeUIEnter))
+            animator.ResetTake(takeUIEnter);
+
+        //initialize smelter and background
+        //animate smelter if magma > 0?
     }
 
     protected override IEnumerator Start() {
         yield return base.Start();
+                
+        RefreshInterfaces();
 
         //animation entrance
-        RefreshInterfaces();
+        if(mSelectableActive)
+            StartCoroutine(DoEnterInterface());
+        else {
+            //TODO: dialog about requiring minerals or rocks to process
+        }
     }
 
     void OnExitClicked() {
         exitScene.Load();
     }
 
+    IEnumerator DoEnterInterface() {
+        if(!mSelectableActive) //fail-safe
+            yield break;
+
+        mSelectableActive.interactable = false;
+
+        if(animator && !string.IsNullOrEmpty(takeUIEnter))
+            yield return animator.PlayWait(takeUIEnter);
+
+        mSelectableActive.interactable = true;
+        mSelectableActive.Select();
+    }
+
+    IEnumerator DoRockProcess() {
+        if(mSelectableActive) {
+            if(animator && !string.IsNullOrEmpty(takeUIExit))
+                yield return animator.PlayWait(takeUIExit);
+        }
+
+        if(animator && !string.IsNullOrEmpty(takeMachineProcess))
+            yield return animator.PlayWait(takeMachineProcess);
+
+        RefreshInterfaces();
+
+        StartCoroutine(DoEnterInterface());
+    }
+
     void RefreshInterfaces() {
         int mineralsCounts = inventory.mineralsCount;
         int rocksCounts = inventory.rocksCount;
 
-        var exitNavigation = exitButton.navigation;
+        mineralsProcessorGO.SetActive(false);
+        rockProcessorGO.SetActive(false);
+
+        mSelectableActive = null;
 
         //initialize minerals
         //initialize rocks
         if(mineralsCounts == 0 && rocksCounts == 0) {
-            mineralsProcessor.interactable = false;
-            rockSelector.interactable = false;
-
-            exitNavigation.mode = Navigation.Mode.None;
-
-            exitButton.Select();
+            //no minerals or rocks, just exit
         }
         else if(mineralsCounts > 0) {
-            mineralsProcessor.interactable = true;
-            mineralsProcessor.Select();
-
-            rockSelector.interactable = false;
-
-            exitNavigation.mode = Navigation.Mode.Explicit;
-            exitNavigation.selectOnUp = mineralsProcessor;
+            //minerals
+            mineralsProcessorGO.SetActive(true);
+            mSelectableActive = mineralsSelector;
+            //mineralsProcessor.Select();
         }
         else {
-            mineralsProcessor.interactable = false;
-
-            rockSelector.interactable = true;
-            rockSelector.Select();
-
-            exitNavigation.mode = Navigation.Mode.Explicit;
-            exitNavigation.selectOnUp = rockSelector;
+            //rocks
+            rockProcessorGO.SetActive(true);
+            mSelectableActive = rockSelector;
+            //rockSelector.Select();
         }
 
-        exitButton.navigation = exitNavigation;
+        var exitNavigation = exitButton.navigation;
+
+        if(mSelectableActive) {
+            exitNavigation.mode = Navigation.Mode.Explicit;
+            exitNavigation.selectOnUp = mSelectableActive;
+            exitButton.navigation = exitNavigation;
+        }
+        else {
+            exitNavigation.mode = Navigation.Mode.None;
+            exitButton.Select();
+        }
     }
 }
