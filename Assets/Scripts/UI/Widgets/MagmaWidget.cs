@@ -7,11 +7,22 @@ public class MagmaWidget : MonoBehaviour {
     [Header("Info")]
     public MagmaData magma;
     public string percentTextFormat = "{0}%";
+    public float percentUpdateDelay = 1f;
 
     [Header("UI")]
     public Text percentText;
+    public Image percentSlider;
+    public bool percentSliderInvert = true;
+
+    [Header("Animation")]
+    public M8.Animator.Animate animator;
+    [M8.Animator.TakeSelector(animatorField = "animator")]
+    public string takeUpdate;
 
     private float mCurPercent;
+    private float mPrevPercent;
+    private float mToPercent;
+    private float mLastChangeTime;
 
     void OnDisable() {
         magma.countCallback -= OnMagmaCountUpdate;
@@ -23,6 +34,17 @@ public class MagmaWidget : MonoBehaviour {
         ApplyDisplay(false);
     }
 
+    void Update() {
+        if(mCurPercent != mToPercent) {
+            float t = Mathf.Clamp01((Time.time - mLastChangeTime) / percentUpdateDelay);
+
+            mCurPercent = Mathf.Lerp(mPrevPercent, mToPercent, t);
+
+            ApplyText();
+            ApplySlider();
+        }
+    }
+
     void OnMagmaCountUpdate(InfoData dat) {
         ApplyDisplay(true);
     }
@@ -30,13 +52,30 @@ public class MagmaWidget : MonoBehaviour {
     void ApplyDisplay(bool isUpdate) {
         float percent = (float)magma.count / magma.capacity;
 
-        if(isUpdate) { //animate
-            mCurPercent = percent;
+        if(isUpdate && percentUpdateDelay > 0f) { //animate
+            mPrevPercent = mCurPercent;
+            mToPercent = percent;
+            mLastChangeTime = Time.time;
+
+            if(animator && !string.IsNullOrEmpty(takeUpdate))
+                animator.Play(takeUpdate);
         }
         else { //apply directly
-            mCurPercent = percent;
-        }
+            mCurPercent = mPrevPercent = mToPercent = percent;
 
+            ApplyText();
+            ApplySlider();
+        }
+    }
+
+    void ApplyText() {
         if(percentText) percentText.text = string.Format(percentTextFormat, Mathf.RoundToInt(100f * mCurPercent));
+    }
+
+    void ApplySlider() {
+        if(percentSlider) {
+            var t = Mathf.Clamp01(mCurPercent);
+            percentSlider.fillAmount = percentSliderInvert ? 1f - t : t;
+        }
     }
 }

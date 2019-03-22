@@ -12,6 +12,8 @@ public class CriteriaWidget : MonoBehaviour {
 
     public GameObject unlockedGO;
     public GameObject lockedGO;
+
+    public bool isLocked { get; private set; }
     
     public void SetUnlocked(InfoData dat) {
         if(unlockedGO) unlockedGO.SetActive(true);
@@ -27,10 +29,14 @@ public class CriteriaWidget : MonoBehaviour {
 
         if(countText)
             countText.text = dat.count.ToString(countTextFormat);
+
+        isLocked = false;
     }
 
     public void SetLocked() {
         if(unlockedGO) unlockedGO.SetActive(false);
         if(lockedGO) lockedGO.SetActive(true);
+
+        isLocked = true;
     }
 }

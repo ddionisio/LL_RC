@@ -82,22 +82,22 @@ public class HUDHub : MonoBehaviour {
 
     void OnUpdateIgneous() {
         if(criteraIgneous.gameObject.activeSelf) {
-            criteraIgneous.Refresh();
-            criteraIgneous.UpdatePlay();
+            if(criteraIgneous.Refresh())
+                criteraIgneous.UpdatePlay();
         }
     }
 
     void OnUpdateSedimentary() {
         if(criteraSedimentary.gameObject.activeSelf) {
-            criteraSedimentary.Refresh();
-            criteraSedimentary.UpdatePlay();
+            if(criteraSedimentary.Refresh())
+                criteraSedimentary.UpdatePlay();
         }
     }
 
     void OnUpdateMetamorphic() {
         if(criteraMetamorphic.gameObject.activeSelf) {
-            criteraMetamorphic.Refresh();
-            criteraMetamorphic.UpdatePlay();
+            if(criteraMetamorphic.Refresh())
+                criteraMetamorphic.UpdatePlay();
         }
     }
 }

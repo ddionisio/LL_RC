@@ -33,13 +33,14 @@ public class MagmaChamberController : GameModeController<MagmaChamberController>
 
         inventory.ClearMineralsCount();
 
+        //machine animation
+
         if(mineralsCount < inventory.magma.capacity)
             inventory.magma.count += inventory.magma.capacity;
         else
             inventory.magma.count += mineralsCount;
 
-        //animation
-        StartCoroutine(DoRockProcess());
+        StartCoroutine(DoChangeInterface());
     }
 
     public void RockProcess(InfoData dat) {
@@ -55,11 +56,10 @@ public class MagmaChamberController : GameModeController<MagmaChamberController>
 
         rockSelector.RefreshRock(dat);
 
-        //if(rockSelector.rockCount == 0)
-            //RefreshInterfaces();
+        //machine animation
 
-        //animation
-        StartCoroutine(DoRockProcess());
+        if(rockSelector.rockCount == 0)
+            StartCoroutine(DoChangeInterface());
     }
 
     protected override void OnInstanceDeinit() {
@@ -120,14 +120,17 @@ public class MagmaChamberController : GameModeController<MagmaChamberController>
         mSelectableActive.Select();
     }
 
-    IEnumerator DoRockProcess() {
+    IEnumerator DoChangeInterface() {
         if(mSelectableActive) {
+            var es = EventSystem.current;
+            if(es)
+                es.SetSelectedGameObject(null);
+
+            mSelectableActive.interactable = false;
+
             if(animator && !string.IsNullOrEmpty(takeUIExit))
                 yield return animator.PlayWait(takeUIExit);
         }
-
-        if(animator && !string.IsNullOrEmpty(takeMachineProcess))
-            yield return animator.PlayWait(takeMachineProcess);
 
         RefreshInterfaces();
 

@@ -23,13 +23,17 @@ public class CriteriaListWidget : MonoBehaviour {
     private M8.CacheList<CriteriaWidget> mWidgetCache = new M8.CacheList<CriteriaWidget>(widgetCapacity);
 
     private List<InfoData> mItems;
+    private int mCurUnlockCount;
 
     public void UpdatePlay() {
         if(animator && !string.IsNullOrEmpty(takeUpdate))
             animator.Play(takeUpdate);
     }
 
-    public void Refresh() {
+    /// <summary>
+    /// Returns true if unlock count has changed.
+    /// </summary>
+    public bool Refresh() {
         int widgetInd = 0;
         for(int i = 0; i < mItems.Count; i++) {
             if(widgetInd == mWidgets.Count)
@@ -43,6 +47,11 @@ public class CriteriaListWidget : MonoBehaviour {
             widgetInd++;
         }
 
+        int unlockCount = widgetInd;
+
+        bool isUnlockCountChanged = unlockCount != mCurUnlockCount;
+        mCurUnlockCount = unlockCount;
+
         //lock rest of widgets
         for(int i = widgetInd; i < mWidgets.Count; i++) {
             mWidgets[i].SetLocked();
@@ -53,6 +62,8 @@ public class CriteriaListWidget : MonoBehaviour {
 
         if(completeGO)
             completeGO.SetActive(isComplete);
+
+        return isUnlockCountChanged;
     }
 
     public void Init(CriteriaWidget template, int count, List<InfoData> dataList) {
