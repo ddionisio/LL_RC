@@ -17,16 +17,32 @@ public class MagmaChamberController : GameModeController<MagmaChamberController>
     public RockSelectWidget rockSelector;
     public Button exitButton;
 
+    [Header("Furnace")]
+    public GameObject furnaceMagmaGONone;
+    public GameObject furnaceMagmaGOActive;
+    public GameObject furnaceMagmaGOAction;
+    public float furnaceMagmaActionDelay = 2.0f;
+
+    [Header("Furnace Animation")]
+    public M8.Animator.Animate furnaceAnimator;
+    [M8.Animator.TakeSelector(animatorField = "furnaceAnimator")]
+    public string furnaceTakeAction;
+
+    [Header("Flame")]
+    public GameObject flameMagmaGONone;
+    public GameObject flameMagmaGOActive;
+
     [Header("Animation")]
     public M8.Animator.Animate animator;
     [M8.Animator.TakeSelector(animatorField = "animator")]
     public string takeUIEnter;
     [M8.Animator.TakeSelector(animatorField = "animator")]
     public string takeUIExit;
-    [M8.Animator.TakeSelector(animatorField = "animator")]
-    public string takeMachineProcess;
 
     private Selectable mSelectableActive;
+
+    private float mFurnaceActionLastTime;
+    private Coroutine mFurnaceActionRout;
 
     public void MineralProcess() {
         int mineralsCount = inventory.mineralsCount;
@@ -34,11 +50,19 @@ public class MagmaChamberController : GameModeController<MagmaChamberController>
         inventory.ClearMineralsCount();
 
         //machine animation
+        if(furnaceAnimator && !string.IsNullOrEmpty(furnaceTakeAction))
+            furnaceAnimator.Play(furnaceTakeAction);
+
+        mFurnaceActionLastTime = Time.time;
+        if(mFurnaceActionRout == null)
+            mFurnaceActionRout = StartCoroutine(DoFurnaceAction());
 
         if(mineralsCount < inventory.magma.capacity)
             inventory.magma.count += inventory.magma.capacity;
         else
             inventory.magma.count += mineralsCount;
+
+        RefreshFireDisplay();
 
         StartCoroutine(DoChangeInterface());
     }
@@ -56,7 +80,15 @@ public class MagmaChamberController : GameModeController<MagmaChamberController>
 
         rockSelector.RefreshRock(dat);
 
+        RefreshFireDisplay();
+
         //machine animation
+        if(furnaceAnimator && !string.IsNullOrEmpty(furnaceTakeAction))
+            furnaceAnimator.Play(furnaceTakeAction);
+
+        mFurnaceActionLastTime = Time.time;
+        if(mFurnaceActionRout == null)
+            mFurnaceActionRout = StartCoroutine(DoFurnaceAction());
 
         if(rockSelector.rockCount == 0)
             StartCoroutine(DoChangeInterface());
@@ -87,7 +119,8 @@ public class MagmaChamberController : GameModeController<MagmaChamberController>
             animator.ResetTake(takeUIEnter);
 
         //initialize smelter and background
-        //animate smelter if magma > 0?
+        RefreshFireDisplay();
+        RefreshFurnaceDisplay();
     }
 
     protected override IEnumerator Start() {
@@ -137,6 +170,40 @@ public class MagmaChamberController : GameModeController<MagmaChamberController>
         StartCoroutine(DoEnterInterface());
     }
 
+    IEnumerator DoFurnaceAction() {
+        if(furnaceMagmaGOAction) furnaceMagmaGOAction.SetActive(true);
+        if(furnaceMagmaGONone) furnaceMagmaGONone.SetActive(false);
+        if(furnaceMagmaGOActive) furnaceMagmaGOActive.SetActive(false);
+
+        while(Time.time - mFurnaceActionLastTime < furnaceMagmaActionDelay)
+            yield return null;
+
+        mFurnaceActionRout = null;
+
+        RefreshFurnaceDisplay();
+    }
+
+    void RefreshFireDisplay() {
+        bool isActive = inventory.magma.count > 0;
+
+        if(flameMagmaGONone) flameMagmaGONone.SetActive(!isActive);
+        if(flameMagmaGOActive) flameMagmaGOActive.SetActive(isActive);
+    }
+
+    void RefreshFurnaceDisplay() {
+        if(mFurnaceActionRout != null) {
+            StopCoroutine(mFurnaceActionRout);
+            mFurnaceActionRout = null;
+        }
+
+        if(furnaceMagmaGOAction) furnaceMagmaGOAction.SetActive(false);
+
+        bool isActive = inventory.magma.count > 0;
+
+        if(furnaceMagmaGONone) furnaceMagmaGONone.SetActive(!isActive);
+        if(furnaceMagmaGOActive) furnaceMagmaGOActive.SetActive(isActive);
+    }
+    
     void RefreshInterfaces() {
         int mineralsCounts = inventory.mineralsCount;
         int rocksCounts = inventory.rocksCount;
