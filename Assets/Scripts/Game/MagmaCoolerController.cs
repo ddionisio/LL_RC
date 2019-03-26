@@ -29,6 +29,7 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
     [Header("Cooling")]
     public SequenceInfo coolingSequence;
     public Button coolingStopButton;
+    public GameObject coolingGlowGO;
     public Slider coolingSlider;
     public float coolingDelay = 1f; //delay per rock
     public float coolingSegmentDelay = 0.5f; //delay before resuming cooling
@@ -141,11 +142,13 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
         //do intrusive fill
         yield return new WaitForSeconds(0.5f);
 
+        //initial state
+        coolingGlowGO.SetActive(false);
+        coolingStopButton.interactable = false;
+
         //cooling
         yield return coolingSequence.Enter();
-        
-        coolingStopButton.Select();
-                
+                                
         int intrusiveRockInd = 0;
         float curTime = 0f;
         float curPauseTime = 0f;
@@ -159,6 +162,14 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
                     curTime += Time.deltaTime;
                     float t = Mathf.Clamp01(curTime / coolingDelay);
                     coolingSlider.normalizedValue = (intrusiveRockInd + t) * coolingSegment;
+
+                    //ready to stop
+                    if(t >= 1f) {
+                        coolingGlowGO.SetActive(true);
+
+                        coolingStopButton.interactable = true;
+                        coolingStopButton.Select();
+                    }
                 }
                 else if(curPauseTime < coolingSegmentDelay) {
                     curPauseTime += Time.deltaTime;
@@ -167,6 +178,8 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
                     curTime = 0f;
                     curPauseTime = 0f;
                     intrusiveRockInd++;
+
+                    coolingStopButton.interactable = false;
                 }
             }
 
