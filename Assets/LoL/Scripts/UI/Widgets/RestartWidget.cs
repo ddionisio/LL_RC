@@ -6,7 +6,7 @@ using UnityEngine.UI;
 /// <summary>
 /// Requires M8.SceneState
 /// </summary>
-public class RestartWidget : MonoBehaviour {
+public class RestartWidget : MonoBehaviour, M8.IModalPush {
     public const string sceneVarName = "isRestart";
 
     [Header("Modal")]
@@ -32,14 +32,14 @@ public class RestartWidget : MonoBehaviour {
         }
     }
 
-    void OnEnable() {
-        if(button)
-            button.interactable = allowRestart;
-    }
-
     void Awake() {
         if(button)
             button.onClick.AddListener(OnClick);
+    }
+
+    void M8.IModalPush.Push(M8.GenericParams parms) {
+        if(button)
+            button.interactable = allowRestart;
     }
 
     void OnClick() {

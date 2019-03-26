@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public struct SequenceInfo {
+public class SequenceInfo {
     public GameObject go;
     public M8.Animator.Animate animator;
     [M8.Animator.TakeSelector(animatorField = "animator")]
