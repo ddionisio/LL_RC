@@ -5,6 +5,30 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
 public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
+    public enum Mode {
+        None,
+        Intrusive,
+        Extrusive
+    }
+
+    [System.Serializable]
+    public struct IntrusiveDisplayInfo {
+        public GameObject rootGO;
+        public SpriteShapeColor spriteShapeColor;
+
+        public void Init(bool active) {
+            if(active) {
+                rootGO.SetActive(true);
+
+                var clr = spriteShapeColor.color;
+                clr.a = 1f;
+                spriteShapeColor.color = clr;
+            }
+            else
+                rootGO.SetActive(false);
+        }
+    }
+
     [Header("Data")]
     public InventoryData inventory;
     public CriteriaData criteria;
@@ -33,11 +57,28 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
     public Slider coolingSlider;
     public float coolingDelay = 1f; //delay per rock
     public float coolingSegmentDelay = 0.5f; //delay before resuming cooling
-        
+
+    public IntrusiveDisplayInfo[] intrusiveRockDisplays;
+    public float intrusiveRockDisplayFadeOutDelay = 0.3f;
+
+    public M8.Animator.Animate intrusiveAnimator;
+    [M8.Animator.TakeSelector(animatorField = "intrusiveAnimator")]
+    public string intrusiveTakeEnter;
+    [M8.Animator.TakeSelector(animatorField = "intrusiveAnimator")]
+    public string intrusiveTakeExit;
+    [M8.Animator.TakeSelector(animatorField = "intrusiveAnimator")]
+    public string intrusiveTakeFill;
+
     [Header("Extrusive")]
     public SequenceInfo extrusiveSequence;
     public Button extrusiveReturnButton;
     public Button extrusiveProceedButton;
+
+    public M8.Animator.Animate extrusiveAnimator;
+    [M8.Animator.TakeSelector(animatorField = "extrusiveAnimator")]
+    public string extrusiveTakeEnter;
+    [M8.Animator.TakeSelector(animatorField = "extrusiveAnimator")]
+    public string extrusiveTakeExit;
 
     [Header("Rock Result")]
     public SequenceInfo rockResultSequence;
@@ -54,6 +95,8 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
     private List<InfoData> mRockResultList = new List<InfoData>();
     private M8.GenericParams mRockModalParms = new M8.GenericParams();
 
+    private Mode mCurMode = Mode.None;
+
     protected override void OnInstanceDeinit() {
         base.OnInstanceDeinit();
     }
@@ -66,6 +109,9 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
         coolingSequence.Init();
         extrusiveSequence.Init();
         rockResultSequence.Init();
+
+        if(intrusiveAnimator) intrusiveAnimator.gameObject.SetActive(false);
+        if(extrusiveAnimator) extrusiveAnimator.gameObject.SetActive(false);
 
         processIntrusiveButton.onClick.AddListener(OnProcessIntrusive);
         processExtrusiveButton.onClick.AddListener(OnProcessExtrusive);
@@ -132,6 +178,56 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
         StartCoroutine(DoProcessSelect());
     }
 
+    IEnumerator DoMode(Mode toMode) {
+        if(mCurMode == toMode)
+            yield break;
+
+        M8.Animator.Animate exitAnimator = null;
+        string exitTake = "";
+
+        M8.Animator.Animate enterAnimator = null;
+        string enterTake = "";
+
+        switch(toMode) {
+            case Mode.Intrusive:
+                enterAnimator = intrusiveAnimator;
+                enterTake = intrusiveTakeEnter;
+                break;
+            case Mode.Extrusive:
+                enterAnimator = extrusiveAnimator;
+                enterTake = extrusiveTakeEnter;
+                break;
+        }
+
+        switch(mCurMode) {
+            case Mode.Extrusive:
+                exitAnimator = extrusiveAnimator;
+                exitTake = extrusiveTakeEnter;
+                break;
+
+            case Mode.Intrusive:
+                exitAnimator = intrusiveAnimator;
+                exitTake = intrusiveTakeEnter;
+                break;
+        }
+
+        if(exitAnimator) {
+            if(!string.IsNullOrEmpty(exitTake))
+                yield return exitAnimator.PlayWait(exitTake);
+
+            exitAnimator.gameObject.SetActive(false);
+        }
+
+        if(enterAnimator) {
+            enterAnimator.gameObject.SetActive(true);
+
+            if(!string.IsNullOrEmpty(enterTake))
+                yield return enterAnimator.PlayWait(enterTake);
+        }
+
+        mCurMode = toMode;
+    }
+
     IEnumerator DoIntrusiveProceed() {
         ClearSelection();
 
@@ -139,8 +235,17 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
                 
         yield return intrusiveSequence.Exit();
 
+        //initialize display
+        intrusiveRockDisplays[0].Init(true);
+        for(int i = 1; i < intrusiveRockDisplays.Length; i++)
+            intrusiveRockDisplays[i].Init(false);
+
+        //change mode
+        yield return DoMode(Mode.Intrusive);
+
         //do intrusive fill
-        yield return new WaitForSeconds(0.5f);
+        if(intrusiveAnimator && !string.IsNullOrEmpty(intrusiveTakeFill))
+            yield return intrusiveAnimator.PlayWait(intrusiveTakeFill);
 
         //initial state
         coolingGlowGO.SetActive(false);
@@ -148,39 +253,57 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
 
         //cooling
         yield return coolingSequence.Enter();
+
+        yield return new WaitForSeconds(1f);
                                 
         int intrusiveRockInd = 0;
+        int rockDisplayInd = 0;
         float curTime = 0f;
         float curPauseTime = 0f;
         float coolingSegment = 1.0f / intrusiveRocks.Length;
 
+        //next rock
+        intrusiveRockDisplays[1].rootGO.SetActive(true);
+
         //do cooling and fill animation
         mIsCoolingStop = false;
-        while(!mIsCoolingStop) {
-            if(intrusiveRockInd < intrusiveRocks.Length) {                
-                if(curTime < coolingDelay) {
-                    curTime += Time.deltaTime;
-                    float t = Mathf.Clamp01(curTime / coolingDelay);
-                    coolingSlider.normalizedValue = (intrusiveRockInd + t) * coolingSegment;
+        while(!mIsCoolingStop && intrusiveRockInd < intrusiveRocks.Length) {                
+            if(curTime < coolingDelay) {
+                curTime += Time.deltaTime;
+                float t = Mathf.Clamp01(curTime / coolingDelay);
+                coolingSlider.normalizedValue = (intrusiveRockInd + t) * coolingSegment;
 
-                    //ready to stop
-                    if(t >= 1f) {
-                        coolingGlowGO.SetActive(true);
+                //apply alpha to rock display
+                int nextRockInd = rockDisplayInd + 1;
+                
+                var clr = intrusiveRockDisplays[nextRockInd].spriteShapeColor.color;
+                clr.a = t;
+                intrusiveRockDisplays[nextRockInd].spriteShapeColor.color = clr;
+                //
 
-                        coolingStopButton.interactable = true;
-                        coolingStopButton.Select();
-                    }
-                }
-                else if(curPauseTime < coolingSegmentDelay) {
-                    curPauseTime += Time.deltaTime;
-                }
-                else {
-                    curTime = 0f;
-                    curPauseTime = 0f;
-                    intrusiveRockInd++;
+                //ready to stop
+                if(t >= 1f) {
+                    intrusiveRockDisplays[rockDisplayInd].rootGO.SetActive(false);
+                    rockDisplayInd++;
+                    
+                    coolingGlowGO.SetActive(true);
 
-                    coolingStopButton.interactable = false;
+                    coolingStopButton.interactable = true;
+                    coolingStopButton.Select();
                 }
+            }
+            else if(curPauseTime < coolingSegmentDelay) {
+                curPauseTime += Time.deltaTime;
+            }
+            else {
+                curTime = 0f;
+                curPauseTime = 0f;
+                intrusiveRockInd++;
+
+                if(rockDisplayInd + 1 < intrusiveRockDisplays.Length)
+                    intrusiveRockDisplays[rockDisplayInd + 1].rootGO.SetActive(true);
+
+                coolingStopButton.interactable = false;
             }
 
             yield return null;
@@ -188,6 +311,24 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
 
         yield return coolingSequence.Exit();
         //
+
+        //fade out last rock
+        if(rockDisplayInd < intrusiveRockDisplays.Length) {
+            curTime = 0f;
+            while(curTime < intrusiveRockDisplayFadeOutDelay) {
+                yield return null;
+
+                curTime += Time.deltaTime;
+
+                float t = Mathf.Clamp01(curTime / intrusiveRockDisplayFadeOutDelay);
+
+                var clr = intrusiveRockDisplays[rockDisplayInd].spriteShapeColor.color;
+                clr.a = 1f - t;
+                intrusiveRockDisplays[rockDisplayInd].spriteShapeColor.color = clr;
+            }
+
+            intrusiveRockDisplays[rockDisplayInd].rootGO.SetActive(false);
+        }
 
         //generate rock
         mRockResultList.Clear();
@@ -234,6 +375,11 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
         ClearSelection();
 
         yield return extrusiveSequence.Exit();
+
+        //initialize display
+
+        //change mode
+        yield return DoMode(Mode.Extrusive);
 
         //do extrusive fill
         yield return new WaitForSeconds(0.5f);
