@@ -56,6 +56,14 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
     protected override void OnInstanceDeinit() {
         base.OnInstanceDeinit();
 
+        //undo counts for selects if not cleared
+        if(mSourceSelects != null && mSourceSelects.Count > 0) {
+            for(int i = 0; i < mSourceSelects.Count; i++)
+                mSourceSelects[i].count++;
+
+            mSourceSelects.Clear();
+        }
+
         sourceSelect.processRockCallback -= OnSourceSelectProcess;
     }
 
@@ -118,12 +126,14 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
     IEnumerator DoProcessSelect() {
         ClearSelection();
 
+        //NOTE: uncomment to restrict to select one type per slot
+
         //determine selections
         int rockCount = inventory.rocksCount;
-        int rockTypeCount = inventory.rockTypeValidCount;
+        //int rockTypeCount = inventory.rockTypeValidCount;
         int organicCount = inventory.organicsCount;
 
-        processRockButton.interactable = rockCount > 0 && rockTypeCount >= inventory.sedimentaryRockCount;
+        processRockButton.interactable = rockCount > 0;// && rockTypeCount >= inventory.sedimentaryRockCount;
         processOrganicButton.interactable = organicCount > 0;
 
         yield return processSequence.Enter();
@@ -159,12 +169,6 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
         while(mSourceSelects.Count < mSourceSelectCount)
             yield return null;
 
-        //deposit
-        for(int i = 0; i < mSourceSelects.Count; i++) {
-            if(mSourceSelects[i].count > 0)
-                mSourceSelects[i].count--;
-        }
-
         ClearSelection();
 
         yield return sourceSequence.Exit();
@@ -193,18 +197,9 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
     IEnumerator DoCompactCementationClastic() {
         yield return compactCementSequence.Enter();
                                                 
-        //clear out source, decrement count for each item
-        if(mSourceSelects != null) {
-            for(int i = 0; i < mSourceSelects.Count; i++) {
-                if(mSourceSelects[i].count > 0) {
-                    mSourceSelects[i].count--;
-
-                    criteria.InvokeUpdate(mSourceSelects[i]);
-                }
-            }
-
+        //clear out source selects
+        if(mSourceSelects != null)
             mSourceSelects.Clear();
-        }
 
         //setup rock output
         var grainType = (GrainSize)(mErosionCount - 1);
@@ -241,19 +236,14 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
         }
 
         var source = mSourceSelects[0];
-        
+        mSourceSelects.Clear();
+
         var rockList = mOrganicOutput[source];
         var rockOutput = rockList[Random.Range(0, rockList.Count)];
         rockOutput.count += inventory.sedimentaryRockCount;
         mRockResultList.Add(rockOutput);
 
         criteria.InvokeUpdate(rockOutput);
-
-        //clear out source
-        if(source.count > 0)
-            source.count--;
-
-        mSourceSelects.Clear();
 
         //setup compaction material
 
@@ -327,14 +317,19 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
     }
 
     void OnSourceSelectProcess(InfoData dat) {
-        if(!mSourceSelects.Contains(dat)) {
-            mSourceSelects.Add(dat);
+        //NOTE: uncomment to restrict to select one type per slot
+        //if(!mSourceSelects.Contains(dat)) {
+        
+        dat.count--;
+        criteria.InvokeUpdate(dat);
 
-            if(mSourceSelects.Count < mSourceSelectCount) //refresh selection with hide filter
-                sourceSelect.Refresh(false, mSourceSelects);
+        mSourceSelects.Add(dat);
 
-            //drop source animation
-        }
+        sourceSelect.Refresh(false, null);//sourceSelect.Refresh(false, mSourceSelects);
+
+        //drop source animation
+
+        //}
     }
 
     void OnRockResultContinueClick() {

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D;
 
 [System.Serializable]
 public struct RockColorInfo {
@@ -17,6 +18,9 @@ public class RockData : InfoData {
     public string textureTextRef;
     [M8.Localize]
     public string[] compositionTextRefs;
+
+    [Header("Rock Display")]
+    public SpriteShape spriteShape;
 
     public InfoData[] input; //specific to process to determine the output
     public RockMetamorphicData metaOutput; //specific metamorphic output
