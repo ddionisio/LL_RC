@@ -4,8 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class CriteriaWidget : MonoBehaviour {
-    public Image iconImage;
-    public bool iconImageResize = true;
+    public RawImage iconImage;
 
     public Text countText;
     public string countTextFormat = "00";
@@ -20,10 +19,9 @@ public class CriteriaWidget : MonoBehaviour {
         if(lockedGO) lockedGO.SetActive(false);
 
         if(iconImage) {
-            if(dat.icon) {
-                iconImage.sprite = dat.icon;
-                if(iconImageResize)
-                    iconImage.SetNativeSize();
+            var rockDat = dat as RockData;
+            if(rockDat && rockDat.spriteShape) {
+                iconImage.texture = rockDat.spriteShape.fillTexture;
             }
         }
 

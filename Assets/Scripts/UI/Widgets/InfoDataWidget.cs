@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 public class InfoDataWidget : Selectable, IPointerClickHandler, ISubmitHandler {
     [Header("Info")]
     public Image iconImage;
-    public bool iconResize;
+    public RawImage iconRawImage;
 
     public Text titleLabel;
 
@@ -20,15 +20,26 @@ public class InfoDataWidget : Selectable, IPointerClickHandler, ISubmitHandler {
 
         if(newActiveGO) newActiveGO.SetActive(!data.isSeen);
 
-        if(iconImage) {
-            if(data.icon) {
-                iconImage.gameObject.SetActive(true);
-                iconImage.sprite = data.icon;
-                if(iconResize)
-                    iconImage.SetNativeSize();
-            }
-            else
+        if(data.icon) {
+            iconImage.gameObject.SetActive(true);
+            iconRawImage.gameObject.SetActive(false);
+
+            iconImage.sprite = data.icon;
+            iconImage.SetNativeSize();
+        }
+        else {
+            //TODO: only rock data for now
+            var rockData = dat as RockData;
+            if(rockData && rockData.spriteShape) {
                 iconImage.gameObject.SetActive(false);
+                iconRawImage.gameObject.SetActive(true);
+
+                iconRawImage.texture = rockData.spriteShape.fillTexture;
+            }
+            else {
+                iconImage.gameObject.SetActive(false);
+                iconRawImage.gameObject.SetActive(false);
+            }
         }
 
         if(titleLabel) {

@@ -37,8 +37,11 @@ public class InfoData : ScriptableObject {
     /// Get inventory count, saved value, set to 0 to remove from UserData
     /// </summary>
     public int count {
-        get { return M8.SceneState.instance.userData.GetInt(userVarCount); }
+        get { return M8.SceneState.isInstantiated ? M8.SceneState.instance.userData.GetInt(userVarCount) : 0; }
         set {
+            if(!M8.SceneState.isInstantiated)
+                return;
+
             if(count != value) {
                 if(value > 0)
                     M8.SceneState.instance.userData.SetInt(userVarCount, value);
