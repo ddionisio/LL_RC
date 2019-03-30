@@ -12,6 +12,53 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
         Organic
     }
 
+    [System.Serializable]
+    public class RockSpawnInfo {
+        public RockSpawnController spawner;
+        public SpriteShapeController layerSpriteCtrl;
+        public SpriteShapeColor layerSpriteColor;
+        public float postWaitDelay = 1f;
+
+        public bool isSpawning { get; private set; }
+
+        public void Reset() {
+            layerSpriteCtrl.gameObject.SetActive(false);
+            isSpawning = false;
+        }
+
+        public IEnumerator Spawn(SpriteShape spriteShape, float delay) {
+            layerSpriteCtrl.gameObject.SetActive(true);
+
+            var layerClr = layerSpriteColor.color;
+            layerClr.a = 0f;
+
+            layerSpriteColor.color = layerClr;
+
+            isSpawning = true;
+
+            float rockSpawnDelay = delay / spawner.capacity;
+
+            spawner.SpawnAll(spriteShape, rockSpawnDelay);
+
+            var curTime = 0f;
+            while(isSpawning && curTime < delay) {
+                yield return null;
+
+                curTime += Time.deltaTime;
+                var t = Mathf.Clamp01(curTime / delay);
+
+                layerClr.a = t;
+                layerSpriteColor.color = layerClr;
+            }
+
+            yield return new WaitForSeconds(postWaitDelay);
+
+            spawner.Clear();
+
+            isSpawning = false;
+        }
+    }
+
     [Header("Data")]
     public InventoryData inventory;
     public CriteriaData criteria;
@@ -28,18 +75,21 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
     [Header("Source Select")]
     public SequenceInfo sourceSequence;
     public RockSelectWidget sourceSelect;
+    public ParticleSystem sourceWindFX;
 
-    [Header("Rock Spawn")]
-    public RockSpawnController rockSpawner;
+    [Header("Source Spawn")]
+    public RockSpawnInfo[] sourceSpawners;
+    public float sourceSpawnDelay = 1f;
 
     [Header("Rock Erosion")]
     public SequenceInfo rockErosionSequence;
     public Button erosionButton;
     public Button erosionFinishButton;
-    public int erosionCapacity = 4; //how many times can we erode the rock
-    public int erosionBreakCount = 3; //how many times to do break animation
-    public M8.Signal erosionSignalRockJump;
-    public float erosionJumpDelay = 0.3f;
+
+    public SpriteShapeController erosionSpriteLayer;
+    public SpriteShape[] erosionSpriteShapes;
+
+    public int erosionCapacity = 4;
 
     public M8.Animator.Animate erosionAnimator;
     [M8.Animator.TakeSelector(animatorField = "erosionAnimator")]
@@ -47,12 +97,21 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
     [M8.Animator.TakeSelector(animatorField = "erosionAnimator")]
     public string erosionTakeExit; //crush rocks
 
+    public float erosionDelay = 0.5f;
+        
+    public Text erosionGrainText;
+    [M8.Localize]
+    public string erosionGrainSizeTitleTextRef;
+
     [Header("Compact/Cement")]
     public SpriteShapeController sedimentaryRockSprite;
     public M8.Animator.Animate compactCementAnimator;
     [M8.Animator.TakeSelector(animatorField = "compactCementAnimator")]
     public string compactCementTakePlay; //crush rocks
+    [M8.Animator.TakeSelector(animatorField = "compactCementAnimator")]
     public string compactCementTakeFadeOut;
+
+    public float compactCementDelay = 1.5f;
 
     [Header("Rock Result")]
     public SequenceInfo rockResultSequence;
@@ -100,9 +159,14 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
         rockErosionSequence.Init();
         rockResultSequence.Init();
 
+        for(int i = 0; i < sourceSpawners.Length; i++)
+            sourceSpawners[i].Reset();
+
         if(erosionAnimator) erosionAnimator.gameObject.SetActive(false);
         if(compactCementAnimator) compactCementAnimator.gameObject.SetActive(false);
-        
+
+        erosionSpriteLayer.gameObject.SetActive(false);
+
         mClasticOutput = new Dictionary<GrainSize, List<RockSedimentaryData>>();
         mOrganicOutput = new Dictionary<InfoData, List<RockSedimentaryData>>();
 
@@ -216,7 +280,7 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
         yield return sourceSequence.Exit();
 
         //wait for rock spawn to be finish and all rocks asleep
-        yield return DoRockSpawnWait();
+        yield return DoSourceSpawnWait();
 
         switch(mCurMode) {
             case SourceMode.Rock:
@@ -237,7 +301,7 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
         erosionFinishButton.interactable = false;
 
         if(erosionAnimator) erosionAnimator.gameObject.SetActive(true);
-
+                
         mErosionCount = 0;
         mIsErosionFinish = false;
 
@@ -255,66 +319,80 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
 
             erosionButton.interactable = false;
 
-            int rockInd = mErosionCount;
-            int rockNextInd = rockInd + 1;
+            mErosionCount++;
 
-            if(rockNextInd < rockSpawner.rockTemplates.Length) {
-                int rockCount = rockSpawner.GetActiveCount(rockInd);
+            //do erosion enter
+            if(erosionAnimator && !string.IsNullOrEmpty(erosionTakeEnter))
+                erosionAnimator.Play(erosionTakeEnter);
 
-                int rockBreakCount = rockCount / erosionBreakCount;
+            //apply erosion level
+            int erosionInd = mErosionCount - 1;
 
-                while(rockSpawner.GetActiveCount(rockInd) > 0) {
-                    if(erosionAnimator && !string.IsNullOrEmpty(erosionTakeEnter))
-                        erosionAnimator.Play(erosionTakeEnter);
+            erosionSpriteLayer.spriteShape = erosionSpriteShapes[erosionInd];
 
-                    yield return new WaitForSeconds(0.3f); //temp
+            if(erosionInd == 0) {
+                //clear out rock layer display
+                for(int i = 0; i < sourceSpawners.Length; i++)
+                    sourceSpawners[i].Reset();
 
-                    erosionSignalRockJump.Invoke();
-                    yield return new WaitForSeconds(erosionJumpDelay);
+                erosionSpriteLayer.gameObject.SetActive(true);
+            }
+            //
 
-                    //break rocks
-                    for(int i = 0; i < rockBreakCount; i++)
-                        rockSpawner.SpawnSplitFrom(rockInd);
-
-                    yield return new WaitForSeconds(0.3f); //temp
-
-                    if(erosionAnimator && !string.IsNullOrEmpty(erosionTakeExit))
-                        erosionAnimator.Play(erosionTakeExit);
-                }
-
-                //do animation, break rocks
+            //change text
+            if(erosionGrainText) {
+                var grainType = (GrainSize)(mErosionCount - 1);
+                erosionGrainText.text = string.Format("{0}: {1}", M8.Localize.Get(erosionGrainSizeTitleTextRef), M8.Localize.Get(RockSedimentaryData.GetGrainSizeTextRef(grainType)));
             }
 
-            mErosionCount++;
-            if(mErosionCount > 0)
+            yield return new WaitForSeconds(erosionDelay);
+
+            //erosion exit
+            if(erosionAnimator && !string.IsNullOrEmpty(erosionTakeExit))
+                erosionAnimator.Play(erosionTakeExit);
+
+            if(mErosionCount > 0) //ready to proceed
                 erosionFinishButton.interactable = true;
 
-            if(mErosionCount == erosionCapacity) {
-                mIsErosionFinish = true;
+            if(mErosionCount == erosionCapacity)
                 break;
-            }
         }
 
         if(erosionAnimator) erosionAnimator.gameObject.SetActive(false);
 
         erosionButton.interactable = false;
+
+        //finish needs to be pressed?
+        if(!mIsErosionFinish) {
+            erosionFinishButton.Select();
+            erosionFinishButton.interactable = true;
+            
+            while(!mIsErosionFinish)
+                yield return null;
+        }
+
         erosionFinishButton.interactable = false;
 
         yield return rockErosionSequence.Exit();
-
-        //wait for rocks to be asleep
-        yield return DoRockSpawnWait();
-
+        
         StartCoroutine(DoCompactCementation());
     }
 
-    IEnumerator DoRockSpawnWait() {
-        while(rockSpawner.isSpawnQueueBusy)
-            yield return null;
+    IEnumerator DoSourceSpawnWait() {        
+        while(true) {
+            bool isSpawning = false;
+            for(int i = 0; i < sourceSpawners.Length; i++) {
+                if(sourceSpawners[i].isSpawning) {
+                    isSpawning = true;
+                    break;
+                }
+            }
 
-        float mLastTime = Time.time;
-        while(!rockSpawner.isAllRockAsleep && Time.time - mLastTime < 2f)
+            if(!isSpawning)
+                break;
+
             yield return null;
+        }
     }
 
     IEnumerator DoCompactCementation() {
@@ -355,12 +433,14 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
                 yield return compactCementAnimator.PlayWait(compactCementTakePlay);
         }
 
-        rockSpawner.Clear();
-
+        erosionSpriteLayer.gameObject.SetActive(false);
+                
         mRockResultList.Clear();
         mRockResultList.Add(rockOutput);
 
         criteria.InvokeUpdate(rockOutput);
+
+        yield return new WaitForSeconds(compactCementDelay);
 
         StartCoroutine(DoRockResult());
     }
@@ -427,7 +507,13 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
     void OnSourceSelectProcess(InfoData dat) {
         //NOTE: uncomment to restrict to select one type per slot
         //if(!mSourceSelects.Contains(dat)) {
-        
+
+        int rockInd = mSourceSelects.Count;
+        if(rockInd >= sourceSpawners.Length)
+            rockInd = sourceSpawners.Length - 1;
+
+        var rockSpawner = sourceSpawners[rockInd];
+
         dat.count--;
         criteria.InvokeUpdate(dat);
 
@@ -437,12 +523,14 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
 
         if(dat is RockData) {
             var rockData = dat as RockData;
-            rockSpawner.SpawnQueue(0, rockData.spriteShape, 1);
+            StartCoroutine(rockSpawner.Spawn(rockData.spriteShape, sourceSpawnDelay));
         }
         else if(dat is OrganicData) {
             var organicDat = dat as OrganicData;
-            rockSpawner.SpawnQueue(2, organicDat.spriteShape, rockSpawner.rockTemplates[2].capacity);
+            StartCoroutine(rockSpawner.Spawn(organicDat.spriteShape, sourceSpawnDelay));
         }
+
+        if(sourceWindFX) sourceWindFX.Play();
     }
 
     void OnRockResultContinueClick() {

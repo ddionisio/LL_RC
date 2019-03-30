@@ -4,22 +4,13 @@ using UnityEngine;
 using UnityEngine.U2D;
 
 public class Rock : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn {
+    public const string parmDir = "dir";
     public const string parmSpriteShape = "spriteShape";
 
     [Header("Data")]
     public SpriteShapeController spriteShapeCtrl;
-    public Transform[] spawnPoints;
-
-    [Header("Jump")]
-    public M8.RangeFloat jumpAngle = new M8.RangeFloat { min = -15f, max = 15f };
-    public M8.RangeFloat jumpImpulse = new M8.RangeFloat { min = 10f, max = 15f };
-
-    [Header("Despawn")]
-    public ParticleSystem disappearFX;
-    public float disappearDelay;
-
-    [Header("Signals")]
-    public M8.Signal signalJump;
+    public M8.RangeFloat dirAngleRange = new M8.RangeFloat { min = -10f, max = 10f };
+    public M8.RangeFloat impulseRange = new M8.RangeFloat { min = 10f, max = 15f };
 
     public bool isAsleep {
         get {
@@ -29,10 +20,6 @@ public class Rock : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn {
 
     private Rigidbody2D mBody;
     private M8.PoolDataController mPoolData;
-
-    public void Despawn() {
-        StartCoroutine(DoDespawn());
-    }
 
     public void Release() {
         if(mPoolData)
@@ -48,10 +35,13 @@ public class Rock : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn {
             mPoolData = GetComponent<M8.PoolDataController>();
 
         SpriteShape spriteShape = null;
+        Vector2 dir = Vector2.zero;
 
         if(parms != null) {
             if(parms.ContainsKey(parmSpriteShape))
                 spriteShape = parms.GetValue<SpriteShape>(parmSpriteShape);
+            if(parms.ContainsKey(parmDir))
+                dir = parms.GetValue<Vector2>(parmDir);
         }
 
         if(spriteShape) {
@@ -64,27 +54,11 @@ public class Rock : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn {
 
         mBody.simulated = true;
 
-        signalJump.callback += OnSignalJump;
+        dir = M8.MathUtil.RotateAngle(dir, dirAngleRange.random);
+        mBody.AddForce(dir * impulseRange.random, ForceMode2D.Impulse);
     }
 
     void M8.IPoolDespawn.OnDespawned() {
-        signalJump.callback -= OnSignalJump;
-    }
-
-    IEnumerator DoDespawn() {
-        spriteShapeCtrl.enabled = false;
-        mBody.simulated = false;
-
-        if(disappearFX) {
-            disappearFX.Play();
-            yield return new WaitForSeconds(disappearDelay);
-        }
-
-        Release();
-    }
-
-    void OnSignalJump() {
-        var up = M8.MathUtil.RotateAngle(Vector2.up, jumpAngle.random);
-        mBody.AddForce(up * jumpImpulse.random, ForceMode2D.Impulse);
+        
     }
 }

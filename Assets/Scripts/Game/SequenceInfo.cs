@@ -12,6 +12,9 @@ public class SequenceInfo {
     public string takeExit;
 
     public void Init() {
+        if(animator && !string.IsNullOrEmpty(takeEnter))
+            animator.ResetTake(takeEnter);
+
         if(go) go.SetActive(false);
     }
 

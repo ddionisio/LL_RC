@@ -13,12 +13,16 @@ public enum GrainSize {
 }
 
 [CreateAssetMenu(fileName = "rockSedimentary", menuName = "Game/Rock Sedimentary")]
-public class RockSedimentaryData : RockData {
+public class RockSedimentaryData : RockData {    
     public override string modal { get { return "infoSedimentary"; } }
 
     [Header("Sedimentary Info")]
     public GrainSize grainSize;
     public bool isOrganicOrChemicallyFormed;
 
-    public string grainSizeTextRef { get { return "grainSize_" + grainSize.ToString(); } }
+    public string grainSizeTextRef { get { return GetGrainSizeTextRef(grainSize); } }
+
+    public static string GetGrainSizeTextRef(GrainSize type) {
+        return "grainSize_" + type.ToString();
+    }
 }
