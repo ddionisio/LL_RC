@@ -24,6 +24,8 @@ public class MagmaWidget : MonoBehaviour {
     private float mToPercent;
     private float mLastChangeTime;
 
+    private bool mIsStarted;
+
     void OnDisable() {
         magma.countCallback -= OnMagmaCountUpdate;
     }
@@ -31,7 +33,13 @@ public class MagmaWidget : MonoBehaviour {
     void OnEnable() {
         magma.countCallback += OnMagmaCountUpdate;
 
+        if(mIsStarted)
+            ApplyDisplay(false);
+    }
+
+    void Start() {
         ApplyDisplay(false);
+        mIsStarted = true;
     }
 
     void Update() {
