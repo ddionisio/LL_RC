@@ -12,10 +12,11 @@ GameObject:
   - component: {fileID: 534566097972179574}
   - component: {fileID: 1726973756708800458}
   - component: {fileID: 7334050040955978782}
+  - component: {fileID: 4439001894642558228}
   - component: {fileID: 5679655991538001165}
   - component: {fileID: 4003550325231628322}
   - component: {fileID: 7999924208420595710}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: rock2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49,12 +50,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteShapeCtrl: {fileID: 7334050040955978782}
+  spriteShapeColor: {fileID: 4439001894642558228}
   dirAngleRange:
     min: -10
     max: 10
   impulseRange:
-    min: 10
-    max: 15
+    min: 5
+    max: 10
+  aliveDelay: 1
+  fadeDelay: 1
 --- !u!1971053207 &1726973756708800458
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -89,9 +93,9 @@ SpriteShapeRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 399516817
+  m_SortingLayer: -1
+  m_SortingOrder: 5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 2800000, guid: 7cb5b55fed0017945968d937a9a8f6aa, type: 3}
@@ -158,6 +162,19 @@ MonoBehaviour:
   m_ColliderDetail: 4
   m_ColliderOffset: 0
   m_ColliderCornerType: 0
+--- !u!114 &4439001894642558228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9222407801817554211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67191f6d4c1ea0a43a99e458aa9cdc63, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 7334050040955978782}
 --- !u!50 &5679655991538001165
 Rigidbody2D:
   serializedVersion: 4

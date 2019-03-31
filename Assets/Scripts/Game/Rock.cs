@@ -3,14 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.U2D;
 
-public class Rock : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn {
+public class Rock : MonoBehaviour, M8.IPoolSpawn {
     public const string parmDir = "dir";
     public const string parmSpriteShape = "spriteShape";
 
     [Header("Data")]
     public SpriteShapeController spriteShapeCtrl;
+    public SpriteShapeColor spriteShapeColor;
     public M8.RangeFloat dirAngleRange = new M8.RangeFloat { min = -10f, max = 10f };
     public M8.RangeFloat impulseRange = new M8.RangeFloat { min = 10f, max = 15f };
+    public float aliveDelay = 1f; //how long to stay alive after hitting ground
+    public float fadeDelay = 1f; //how long to fade out till release
+
+    private Color mDefaultColor;
+    private ContactPoint2D[] mContacts = new ContactPoint2D[8];
 
     public bool isAsleep {
         get {
@@ -28,6 +34,7 @@ public class Rock : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn {
 
     void Awake() {
         mBody = GetComponent<Rigidbody2D>();
+        mDefaultColor = spriteShapeColor.color;
     }
     
     void M8.IPoolSpawn.OnSpawned(M8.GenericParams parms) {
@@ -56,9 +63,43 @@ public class Rock : MonoBehaviour, M8.IPoolSpawn, M8.IPoolDespawn {
 
         dir = M8.MathUtil.RotateAngle(dir, dirAngleRange.random);
         mBody.AddForce(dir * impulseRange.random, ForceMode2D.Impulse);
+
+        spriteShapeColor.color = mDefaultColor;
+
+        StartCoroutine(DoAlive());
     }
 
-    void M8.IPoolDespawn.OnDespawned() {
-        
+    IEnumerator DoAlive() {
+        bool isGrounded = false;
+        while(!isGrounded) {
+            yield return new WaitForFixedUpdate();
+
+            int contactCount = mBody.GetContacts(mContacts);
+            for(int i = 0; i < contactCount; i++) {
+                var contact = mContacts[i];
+                if(Vector2.Angle(contact.normal, Vector2.up) < 45f) {
+                    isGrounded = true;
+                    break;
+                }
+            }
+        }
+
+        yield return new WaitForSeconds(aliveDelay);
+
+        //fade out
+        var clr = mDefaultColor;
+
+        var curTime = 0f;
+        while(curTime < fadeDelay) {
+            yield return null;
+
+            curTime += Time.deltaTime;
+
+            var t = Mathf.Clamp01(curTime / fadeDelay);
+            clr.a = 1f - t;
+            spriteShapeColor.color = clr;
+        }
+
+        Release();
     }
 }
