@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.U2D;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
@@ -17,6 +18,27 @@ public class MetamorphicController : GameModeController<MagmaCoolerController> {
     public SequenceInfo rockResultSequence;
     public InfoDataListWidget rockResultWidget;
     public Button rockResultContinueButton;
+
+    [Header("Rock")]
+    public SpriteShapeController rockSpriteShape;
+    public M8.Animator.Animate rockAnimator;
+    [M8.Animator.TakeSelector(animatorField = "rockAnimator")]
+    public string rockTakeEnter;
+
+    [Header("Metamorph")]
+    public M8.Animator.Animate metaMorphAnimator;
+    [M8.Animator.TakeSelector(animatorField = "metaMorphAnimator")]
+    public string metaMorphTakeEnter;
+    [M8.Animator.TakeSelector(animatorField = "metaMorphAnimator")]
+    public string metaMorphTakeExit;
+
+    [Header("Rock Result")]
+    public SpriteShapeController rockResultSpriteShape;
+    public M8.Animator.Animate rockResultAnimator;
+    [M8.Animator.TakeSelector(animatorField = "rockResultAnimator")]
+    public string rockResultTakeEnter;
+    [M8.Animator.TakeSelector(animatorField = "rockResultAnimator")]
+    public string rockResultTakeExit;
 
     [Header("Exit")]
     public Button exitButton;
@@ -38,6 +60,12 @@ public class MetamorphicController : GameModeController<MagmaCoolerController> {
 
     protected override void OnInstanceInit() {
         base.OnInstanceInit();
+        
+        rockAnimator.gameObject.SetActive(false);
+
+        metaMorphAnimator.gameObject.SetActive(false);
+        
+        rockResultAnimator.gameObject.SetActive(false);
 
         rockSelectSequence.Init();
         rockResultSequence.Init();
@@ -70,7 +98,12 @@ public class MetamorphicController : GameModeController<MagmaCoolerController> {
 
             yield return rockSelectSequence.Exit();
 
-            //animation of transformation
+            //fail-safe if no metaOutput
+            if(!mRockSelect.metaOutput) {
+                Debug.LogWarning("Rock does not have a meta output: "+mRockSelect.name);
+                StartCoroutine(DoRockSelect());
+                yield break;
+            }
 
             //generate rock
             if(mRockSelect.count > 0) {
@@ -79,11 +112,41 @@ public class MetamorphicController : GameModeController<MagmaCoolerController> {
             }
 
             mRockSelect.metaOutput.count++;
-            criteria.InvokeUpdate(mRockSelect.metaOutput);
-
+            
             mRockResultList.Clear();
             mRockResultList.Add(mRockSelect.metaOutput);
             //
+
+            //animation
+
+            //rock enter
+            rockSpriteShape.spriteShape = mRockSelect.spriteShape;
+            
+            rockAnimator.gameObject.SetActive(true);
+                        
+            yield return rockAnimator.PlayWait(rockTakeEnter);
+
+            //meta morph enter
+            metaMorphAnimator.gameObject.SetActive(true);
+
+            yield return metaMorphAnimator.PlayWait(metaMorphTakeEnter);
+
+            //rock result play
+            rockResultSpriteShape.spriteShape = mRockSelect.metaOutput.spriteShape;
+            
+            rockResultAnimator.gameObject.SetActive(true);
+
+            yield return rockResultAnimator.PlayWait(rockResultTakeEnter);
+            //
+            
+            rockAnimator.gameObject.SetActive(false);
+
+            //meta morph leave
+            yield return metaMorphAnimator.PlayWait(metaMorphTakeExit);
+
+            metaMorphAnimator.gameObject.SetActive(false);
+
+            criteria.InvokeUpdate(mRockSelect.metaOutput);
 
             StartCoroutine(DoRockResult());
         }
@@ -95,8 +158,6 @@ public class MetamorphicController : GameModeController<MagmaCoolerController> {
     }
 
     IEnumerator DoRockResult() {
-        yield return rockResultSequence.Enter();
-
         //fill rock list widget
         rockResultWidget.Init(mRockResultList, null);
 
@@ -122,7 +183,12 @@ public class MetamorphicController : GameModeController<MagmaCoolerController> {
             yield return null;
 
         yield return rockResultSequence.Exit();
+
+        //rock result leave
+        yield return rockResultAnimator.PlayWait(rockResultTakeExit);
         
+        rockResultAnimator.gameObject.SetActive(false);
+
         StartCoroutine(DoRockSelect());
     }
 
