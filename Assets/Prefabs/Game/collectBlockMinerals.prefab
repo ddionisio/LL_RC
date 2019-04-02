@@ -4894,6 +4894,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2498542074732383948}
   - component: {fileID: 1847439523286630608}
+  - component: {fileID: 7363624449075436708}
   m_Layer: 8
   m_Name: displayRoot
   m_TagString: Untagged
@@ -4910,7 +4911,7 @@ Transform:
   m_GameObject: {fileID: 5078834739752064056}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.031287, y: 1.031287, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7422023870028742917}
   - {fileID: 8230550656929750319}
@@ -4933,16 +4934,16 @@ MonoBehaviour:
   takeData:
   - name: collected
     frameRate: 30
-    endFramePadding: 0
+    endFramePadding: 30
     numLoop: 1
     loopMode: 0
     loopBackToFrame: 0
-    trackCounter: 3
+    trackCounter: 7
     groupCounter: 0
     rootGroup:
       group_name: Group0
       group_id: 0
-      elements: 0200000003000000
+      elements: 060000000500000007000000
       foldout: 1
     groupValues: []
   _defaultTakeName: 
@@ -4960,7 +4961,7 @@ MonoBehaviour:
     _cameraSwitcherTracks: []
     _cameraSwitcherKeys: []
     _eventTracks:
-    - id: 3
+    - id: 5
       name: Track2
       foldout: 1
       _targetPath: 
@@ -4969,7 +4970,7 @@ MonoBehaviour:
     _eventKeys:
     - version: 0
       interp: 0
-      frame: 2
+      frame: 1
       easeType: 1
       amplitude: 0
       period: 0
@@ -4977,14 +4978,63 @@ MonoBehaviour:
       useSendMessage: 0
       parameters: []
       methodName: Play
-    _goSetActiveTracks: []
-    _goSetActiveKeys: []
+    _goSetActiveTracks:
+    - id: 7
+      name: Track3
+      foldout: 1
+      _targetPath: 
+      obj: {fileID: 4274635786170987503}
+      startActive: 1
+    _goSetActiveKeys:
+    - version: 1
+      interp: 1
+      frame: 2
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      setActive: 0
+      endFrame: -1
     _materialTracks: []
     _materialKeys: []
     _orientationTracks: []
     _orientationKeys: []
-    _propertyTracks: []
-    _propertyKeys: []
+    _propertyTracks:
+    - id: 6
+      name: Track3
+      foldout: 1
+      _targetPath: 
+      valueType: 6
+      obj: {fileID: 5078834739752064056}
+      component: {fileID: 7363624449075436708}
+      componentName: SpriteColorGroup
+      fieldName: 
+      propertyName: color
+    _propertyKeys:
+    - version: 2
+      interp: 1
+      frame: 2
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: 10
+      val: 0
+      valString: 
+      valObj: {fileID: 0}
+      vect4: {x: 1, y: 1, z: 1, w: 1}
+    - version: 2
+      interp: 1
+      frame: 10
+      easeType: 1
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: -1
+      val: 0
+      valString: 
+      valObj: {fileID: 0}
+      vect4: {x: 0, y: 0, z: 0, w: 0}
     _rotationEulerTracks: []
     _rotationEulerKeys: []
     _rotationTracks: []
@@ -4993,49 +5043,36 @@ MonoBehaviour:
     _translationKeys: []
     _unityAnimationTracks: []
     _unityAnimationKeys: []
-    _scaleTracks:
-    - id: 2
-      name: Track1
-      foldout: 1
-      _targetPath: 
-      axis: -1
-      _obj: {fileID: 2498542074732383948}
-    _scaleKeys:
-    - version: 1
-      interp: 1
-      frame: 1
-      easeType: 3
-      amplitude: 0
-      period: 0
-      customEase: []
-      scale: {x: 1, y: 1, z: 1}
-      endFrame: 11
-    - version: 1
-      interp: 1
-      frame: 11
-      easeType: 2
-      amplitude: 0
-      period: 0
-      customEase: []
-      scale: {x: 1.2, y: 1.2, z: 1}
-      endFrame: 15
-    - version: 1
-      interp: 1
-      frame: 15
-      easeType: 1
-      amplitude: 0
-      period: 0
-      customEase: []
-      scale: {x: 0, y: 0, z: 1}
-      endFrame: -1
+    _scaleTracks: []
+    _scaleKeys: []
     _trackLookups:
-    - type: 11
-      index: 0
-      keyIndices: 000000000100000002000000
     - type: 3
       index: 0
       keyIndices: 00000000
-    _takeTrackCounts: 02000000
+    - type: 7
+      index: 0
+      keyIndices: 0000000001000000
+    - type: 4
+      index: 0
+      keyIndices: 00000000
+    _takeTrackCounts: 03000000
+--- !u!114 &7363624449075436708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5078834739752064056}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a35ca283318625e4997cdc9b5a47f2e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  type: 1
+  initOnAwake: 1
+  spriteRenders:
+  - {fileID: 7422023870028742914}
+  - {fileID: 5794495021353544492}
 --- !u!1 &7422023869978704393
 GameObject:
   m_ObjectHideFlags: 0
@@ -5094,8 +5131,8 @@ MonoBehaviour:
   colliderExtra: {fileID: 7602422305458847525}
   amount: 5
   playerTag: Player
-  collectGO: {fileID: 5078834739752064056}
-  collectedGO: {fileID: 0}
+  coll: {fileID: 7422023869978704439}
+  activator: {fileID: 4519990861211706932}
   animator: {fileID: 1847439523286630608}
   takeCollect: collected
   signalCollect: {fileID: 11400000, guid: 7069bd468c0fb354eb77d7c888a0e368, type: 2}

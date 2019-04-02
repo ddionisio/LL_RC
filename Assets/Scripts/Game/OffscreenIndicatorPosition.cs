@@ -16,6 +16,14 @@ public class OffscreenIndicatorPosition : MonoBehaviour {
     Camera _camera = null;
 
     public Transform displayRoot;
+
+    [Header("Radius Anchor")]
+    public bool useAnchorLimit;
+    [M8.TagSelector]
+    public string anchorLimitTag;
+    public float anchorLimitRadius;
+
+    private GameObject mAnchorGO;
         
     public Camera cameraSource {
         get {
@@ -61,11 +69,44 @@ public class OffscreenIndicatorPosition : MonoBehaviour {
             displayRoot.gameObject.SetActive(true);
 
             Vector3 pos = cameraSource.ViewportToWorldPoint(vp);
-            displayRoot.position = new Vector3(pos.x, pos.y, 0f);
-            displayRoot.up = ((Vector2)(displayRoot.position - cameraSource.transform.position)).normalized;// new Vector3(vp.x - 0.5f, vp.y - 0.5f, 0.0f);
+
+            if(useAnchorLimit) {
+                if(!mAnchorGO)
+                    mAnchorGO = GameObject.FindGameObjectWithTag(anchorLimitTag);
+
+                if(mAnchorGO) {
+                    Vector2 fromPos = mAnchorGO.transform.position;
+                    Vector2 toPos = pos;
+
+                    Vector2 dPos = toPos - fromPos;
+                    float len = dPos.magnitude;
+                    if(len > 0f) {
+                        Vector2 dir = dPos / len;
+
+                        if(len > anchorLimitRadius)
+                            toPos = fromPos + dir * anchorLimitRadius;
+
+                        displayRoot.position = toPos;
+                        displayRoot.up = dir;
+                    }
+                }
+            }
+            else {
+                displayRoot.position = new Vector3(pos.x, pos.y, 0f);
+                displayRoot.up = ((Vector2)(displayRoot.position - cameraSource.transform.position)).normalized;// new Vector3(vp.x - 0.5f, vp.y - 0.5f, 0.0f);
+            }
         }
         else {
             displayRoot.gameObject.SetActive(false);
+        }
+    }
+
+    void OnDrawGizmos() {
+        if(useAnchorLimit) {
+            if(anchorLimitRadius > 0f) {
+                Gizmos.color = new Color(0f, 1f, 0f);
+                Gizmos.DrawWireSphere(transform.position, anchorLimitRadius);
+            }
         }
     }
 }

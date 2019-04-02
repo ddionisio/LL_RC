@@ -20,11 +20,9 @@ public class Collect : MonoBehaviour {
     [Header("Data")]
     [M8.TagSelector]
     public string playerTag = "Player";
+    public Collider2D coll;
+    public M8.GOActivator activator;
     
-    [Header("Display")]
-    public GameObject collectGO;
-    public GameObject collectedGO;
-
     [Header("Animation")]
     public M8.Animator.Animate animator;
     [M8.Animator.TakeSelector(animatorField = "animator")]
@@ -34,25 +32,7 @@ public class Collect : MonoBehaviour {
     public SignalInteger signalCollect;
 
     public bool isCollected { get; private set; }
-
-    private Collider2D mCollider;
-
-    void OnEnable() {
-        if(Application.isPlaying) {
-            if(collectGO) collectGO.SetActive(!isCollected);
-            if(collectedGO) collectedGO.SetActive(isCollected);
-        }
-    }
-
-    void Awake() {
-        if(Application.isPlaying) {
-            if(collectGO) collectGO.SetActive(true);
-            if(collectedGO) collectedGO.SetActive(false);
-
-            mCollider = GetComponent<Collider2D>();
-        }
-    }
-
+    
     void OnTriggerEnter2D(Collider2D collision) {
         if(isCollected)
             return;
@@ -82,13 +62,15 @@ public class Collect : MonoBehaviour {
         }
     }
 
+    void Awake() {
+        if(!coll)
+            coll = GetComponent<Collider2D>();
+    }
+
 #if UNITY_EDITOR
     void Update() {
         if(!Application.isPlaying) {
-            if(!mCollider)
-                mCollider = GetComponent<Collider2D>();
-
-            var boxCollider = mCollider as BoxCollider2D;
+            var boxCollider = coll as BoxCollider2D;
             if(boxCollider)
                 boxCollider.size = size;
 
@@ -111,8 +93,8 @@ public class Collect : MonoBehaviour {
     void Collected() {
         isCollected = true;
 
-        if(mCollider)
-            mCollider.enabled = false;
+        if(coll) coll.enabled = false;
+        if(activator) { activator.Release(); activator.enabled = false; }
 
         signalCollect.Invoke(amount);
 
@@ -120,15 +102,13 @@ public class Collect : MonoBehaviour {
         if(animator && !string.IsNullOrEmpty(takeCollect))
             StartCoroutine(DoCollectedAnimate());
         else {
-            if(collectGO) collectGO.SetActive(false);
-            if(collectedGO) collectedGO.SetActive(true);
+            gameObject.SetActive(false);
         }
     }
 
     IEnumerator DoCollectedAnimate() {
         yield return animator.PlayWait(takeCollect);
-
-        if(collectGO) collectGO.SetActive(false);
-        if(collectedGO) collectedGO.SetActive(true);
+        
+        gameObject.SetActive(false);
     }
 }
