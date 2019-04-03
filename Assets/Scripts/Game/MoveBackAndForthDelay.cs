@@ -23,6 +23,7 @@ public class MoveBackAndForthDelay : MonoBehaviour {
 
     [Header("Display")]
     public GameObject activeGO; //when moving, set active (display)
+    public ParticleSystem readyFX; //ensure it is not looping
 
     [Header("Animation")]
     public M8.Animator.Animate animator;
@@ -77,6 +78,12 @@ public class MoveBackAndForthDelay : MonoBehaviour {
                     while(animator.isPlaying)
                         yield return null;
                 }
+            }
+
+            if(readyFX) {
+                readyFX.Play();
+                while(readyFX.isPlaying)
+                    yield return null;
             }
 
             float curTime = 0f;
