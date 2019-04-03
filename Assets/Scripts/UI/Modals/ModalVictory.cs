@@ -1,9 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ModalVictory : M8.ModalController, M8.IModalPush {
+    [Header("Data")]
     public M8.SceneAssetPath toScene;
+
+    [Header("UI")]
+    public InfoDataListWidget infoList;
 
     public void Proceed() {
         //
@@ -18,5 +23,7 @@ public class ModalVictory : M8.ModalController, M8.IModalPush {
         CollectController.instance.ApplyOutcome();
 
         //setup display of collections
+        var collects = CollectController.instance.collectList;
+        infoList.Init(collects, null);
     }
 }

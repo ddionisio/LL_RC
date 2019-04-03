@@ -2,6 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ModalInfoMetamorphic : ModalInfo {
+public class ModalInfoMetamorphic : ModalInfoRock {
     
 }

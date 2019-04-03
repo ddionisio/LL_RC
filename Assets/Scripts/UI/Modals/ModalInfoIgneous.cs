@@ -2,6 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ModalInfoIgneous : ModalInfo {
+public class ModalInfoIgneous : ModalInfoRock {
 
 }

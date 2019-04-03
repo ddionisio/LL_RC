@@ -43,6 +43,24 @@ public class ModalInfo : M8.ModalController, M8.IModalActive, M8.IModalPush, M8.
         else
             infoData = null;
 
+        ApplyInfoData();
+    }
+
+    public virtual void SetActive(bool aActive) {
+        if(aActive) {
+            if(selectOnActive)
+                selectOnActive.Select();
+
+            //play speech
+            if(!string.IsNullOrEmpty(mTitleTextRef))
+                LoLManager.instance.SpeakTextQueue(mTitleTextRef, speechGroup, 0);
+
+            if(!string.IsNullOrEmpty(mDescTextRef))
+                LoLManager.instance.SpeakTextQueue(mDescTextRef, speechGroup, 1);
+        }
+    }
+
+    protected virtual void ApplyInfoData() {
         if(infoData) {
             infoData.isSeen = true; //tag as seen
 
@@ -91,20 +109,6 @@ public class ModalInfo : M8.ModalController, M8.IModalActive, M8.IModalPush, M8.
 
             if(mTitleLabelSpeakText) mTitleLabelSpeakText.key = mTitleTextRef;
             if(mDescLabelSpeakText) mDescLabelSpeakText.key = mDescTextRef;
-        }
-    }
-
-    public virtual void SetActive(bool aActive) {
-        if(aActive) {
-            if(selectOnActive)
-                selectOnActive.Select();
-
-            //play speech
-            if(!string.IsNullOrEmpty(mTitleTextRef))
-                LoLManager.instance.SpeakTextQueue(mTitleTextRef, speechGroup, 0);
-
-            if(!string.IsNullOrEmpty(mDescTextRef))
-                LoLManager.instance.SpeakTextQueue(mDescTextRef, speechGroup, 1);
         }
     }
 }
