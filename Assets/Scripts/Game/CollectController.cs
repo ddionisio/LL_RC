@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CollectController : M8.SingletonBehaviour<CollectController> {
+public class CollectController : MonoBehaviour {
     [System.Serializable]
     public struct CollectOutcome {
         public InfoData dat;
@@ -26,8 +26,10 @@ public class CollectController : M8.SingletonBehaviour<CollectController> {
     public void ApplyOutcome() {
         if(!mIsOutcomeApplied) {
             for(int i = 0; i < collectOutcomes.Length; i++) {
-                if(collectOutcomes[i].dat)
+                if(collectOutcomes[i].dat) {
                     collectOutcomes[i].dat.count += collectOutcomes[i].count;
+                    collectOutcomes[i].dat.isSeen = true;
+                }
             }
 
             mIsOutcomeApplied = true;

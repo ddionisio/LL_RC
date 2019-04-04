@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class CollectPercentWidget : MonoBehaviour {
+    [M8.TagSelector]
+    public string collectControllerTag;
+
     [Header("UI")]
     public Text numberText;
     public string numberTextFormat = "{0}%";
@@ -29,6 +32,8 @@ public class CollectPercentWidget : MonoBehaviour {
     private float mPrevPercent;
     private float mToPercent;
     private float mLastChangeTime;
+
+    private CollectController mCollectCtrl;
 
     void OnDestroy() {
         signalPlayReady.callback -= OnSignalPlayReady;
@@ -71,9 +76,20 @@ public class CollectPercentWidget : MonoBehaviour {
     }
 
     void OnSignalCollect(int amt) {
+        if(!mCollectCtrl) {
+            var go = GameObject.FindGameObjectWithTag(collectControllerTag);
+            if(go)
+                mCollectCtrl = go.GetComponent<CollectController>();
+        }
+
+        if(!mCollectCtrl) {
+            Debug.LogWarning("Collect Controller Not Found!");
+            return;
+        }
+
         mCurCollectCount += amt;
 
-        mToPercent = (float)mCurCollectCount / CollectController.instance.collectMaxCount;
+        mToPercent = (float)mCurCollectCount / mCollectCtrl.collectMaxCount;
         mPrevPercent = mCurPercent;
         mLastChangeTime = Time.time;
 

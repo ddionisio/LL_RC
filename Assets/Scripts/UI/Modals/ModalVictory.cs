@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class ModalVictory : M8.ModalController, M8.IModalPush {
     [Header("Data")]
+    [M8.TagSelector]
+    public string collectControllerTag;
+
     public M8.SceneAssetPath toScene;
 
     [Header("UI")]
@@ -20,10 +23,21 @@ public class ModalVictory : M8.ModalController, M8.IModalPush {
 
     void M8.IModalPush.Push(M8.GenericParams parms) {
         //apply outcome
-        CollectController.instance.ApplyOutcome();
+        CollectController collectCtrl = null;
+
+        var go = GameObject.FindGameObjectWithTag(collectControllerTag);
+        if(go)
+            collectCtrl = go.GetComponent<CollectController>();
+
+        if(!collectCtrl) {
+            Debug.LogWarning("Collect Controller Not Found!");
+            return;
+        }
+
+        collectCtrl.ApplyOutcome();
 
         //setup display of collections
-        var collects = CollectController.instance.collectList;
+        var collects = collectCtrl.collectList;
         infoList.Init(collects, null);
     }
 }

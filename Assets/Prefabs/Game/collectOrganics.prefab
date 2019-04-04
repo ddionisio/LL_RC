@@ -45,12 +45,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a782cdceb035b3d4baccc0566a5b2adb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  size: {x: 0, y: 0}
+  sizeSpriteBaseOfs: {x: 0, y: 0}
+  sizeColliderExtraOfs: {x: 0, y: 0}
+  spriteBases: []
+  spriteFrame: {fileID: 0}
+  colliderExtra: {fileID: 0}
   amount: 1
   playerTag: Player
-  fsm: {fileID: 0}
-  fsmCollectEvent: COLLECT
-  collectGO: {fileID: 6098910897758432902}
-  collectedGO: {fileID: 0}
+  coll: {fileID: 0}
+  activator: {fileID: 0}
+  animator: {fileID: 0}
+  takeCollect: 
   signalCollect: {fileID: 11400000, guid: 7069bd468c0fb354eb77d7c888a0e368, type: 2}
 --- !u!58 &8307890449047059318
 CircleCollider2D:

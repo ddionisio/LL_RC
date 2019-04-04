@@ -423,13 +423,15 @@ MonoBehaviour:
         actionNames:
         - HutongGames.PlayMaker.Actions.M8.ModalManagerCloseAll
         - HutongGames.PlayMaker.Actions.M8.ModalManagerOpen
+        - HutongGames.PlayMaker.Actions.M8.SceneValueSet
         customNames:
         - 
         - 
-        actionEnabled: 0101
-        actionIsOpen: 0101
-        actionStartIndex: 0000000003000000
-        actionHashCodes: ee23fa026bee5d02
+        - 
+        actionEnabled: 010101
+        actionIsOpen: 010101
+        actionStartIndex: 000000000300000009000000
+        actionHashCodes: ee23fa026bee5d026ef60a03
         unityObjectParams: []
         fsmGameObjectParams:
         - useVariable: 0
@@ -458,13 +460,55 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: victory
+        - useVariable: 1
+          name: sceneVarIsFromExpedition
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: isFromExpedition
         fsmObjectParams: []
-        fsmVarParams: []
+        fsmVarParams:
+        - variableName: 
+          objectType: UnityEngine.Object
+          useVariable: 0
+          type: 2
+          floatValue: 0
+          intValue: 0
+          boolValue: 1
+          stringValue: 
+          vector4Value: {x: 0, y: 0, z: 0, w: 0}
+          objectReference: {fileID: 0}
+          arrayValue:
+            useVariable: 0
+            name: 
+            tooltip: 
+            showInInspector: 0
+            networkSync: 0
+            type: -1
+            objectTypeName: 
+            floatValues: []
+            intValues: 
+            boolValues: 
+            stringValues: []
+            vector4Values: []
+            objectReferences: []
         fsmArrayParams: []
         fsmEnumParams: []
         fsmFloatParams: []
         fsmIntParams: []
-        fsmBoolParams: []
+        fsmBoolParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 1
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 0
         fsmVector2Params: []
         fsmVector3Params: []
         fsmColorParams: []
@@ -480,7 +524,7 @@ MonoBehaviour:
         customTypeNames:
         - HutongGames.PlayMaker.Actions.M8.FsmModalManager
         - HutongGames.PlayMaker.Actions.M8.FsmModalManager
-        paramDataType: 280000000700000013000000120000000c0000000c000000280000000700000013000000
+        paramDataType: 280000000700000013000000120000000c0000000c00000028000000070000001300000012000000110000002700000011000000
         paramName:
         - manager
         - from
@@ -491,8 +535,12 @@ MonoBehaviour:
         - manager
         - from
         - gameObject
-        paramDataPos: 000000000000000000000000000000000000000001000000010000000400000001000000
-        paramByteDataSize: 000000000400000000000000000000000000000000000000000000000400000000000000
+        - name
+        - global
+        - value
+        - persistent
+        paramDataPos: 00000000000000000000000000000000000000000100000001000000040000000100000001000000000000000000000001000000
+        paramByteDataSize: 00000000040000000000000000000000000000000000000000000000040000000000000000000000000000000000000000000000
     events:
     - name: FINISHED
       isSystemEvent: 1
