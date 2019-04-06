@@ -60,15 +60,28 @@ public class InfoData : ScriptableObject {
     public bool isSeen {
         get { return M8.SceneState.instance.userData.GetInt(userVarSeen) != 0; }
         set {
-            if(value)
+            if(value) {
+                if(!isSeen)
+                    isNewlySeen = true;
+
                 M8.SceneState.instance.userData.SetInt(userVarSeen, 1);
+            }
             else
                 M8.SceneState.instance.userData.Remove(userVarSeen);
         }
+    }
+
+    public bool isNewlySeen {
+        get;
+        private set;
     }
 
     public event System.Action<InfoData> countCallback;
 
     private string mUserVarCountStr;
     private string mUserVarSeenStr;
+
+    public void ClearNewlySeen() {
+        isNewlySeen = false;
+    }
 }
