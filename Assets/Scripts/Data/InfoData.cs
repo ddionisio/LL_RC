@@ -66,8 +66,10 @@ public class InfoData : ScriptableObject {
 
                 M8.SceneState.instance.userData.SetInt(userVarSeen, 1);
             }
-            else
+            else {
+                isNewlySeen = false;
                 M8.SceneState.instance.userData.Remove(userVarSeen);
+            }
         }
     }
 

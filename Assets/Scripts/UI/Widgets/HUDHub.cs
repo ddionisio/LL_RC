@@ -30,6 +30,7 @@ public class HUDHub : MonoBehaviour {
     public bool criteriaMetamorphicEnabled = true;
 
     [Header("Signal")]
+    public M8.Signal signalHide;
     public M8.Signal signalProgressUpdate;
 
     void Awake() {
@@ -41,6 +42,7 @@ public class HUDHub : MonoBehaviour {
         criteria.signalUpdateSedimentary.callback -= OnUpdateSedimentary;
         criteria.signalUpdateMetamorphic.callback -= OnUpdateMetamorphic;
 
+        signalHide.callback -= OnHide;
         signalProgressUpdate.callback -= OnUpdateProgress;
     }
 
@@ -49,9 +51,16 @@ public class HUDHub : MonoBehaviour {
         criteria.signalUpdateSedimentary.callback += OnUpdateSedimentary;
         criteria.signalUpdateMetamorphic.callback += OnUpdateMetamorphic;
 
+        signalHide.callback += OnHide;
         signalProgressUpdate.callback += OnUpdateProgress;
 
         OnUpdateProgress();
+    }
+
+    void OnHide() {
+        criteraIgneous.gameObject.SetActive(false);
+        criteraSedimentary.gameObject.SetActive(false);
+        criteraMetamorphic.gameObject.SetActive(false);
     }
 
     void OnUpdateProgress() {
