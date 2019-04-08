@@ -9,6 +9,8 @@ public class AnimatorEnterExit : MonoBehaviour {
     [M8.Animator.TakeSelector(animatorField = "animator")]
     public string takeExit;
 
+    public bool isPlaying { get { return animator ? animator.isPlaying : false; } }
+
     public void PlayEnter() {
         animator.Play(takeEnter);
     }
