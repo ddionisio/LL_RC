@@ -12,6 +12,8 @@ public class CollectionItemWidget : MonoBehaviour {
     public M8.Animator.Animate animator;
     [M8.Animator.TakeSelector(animatorField = "animator")]
     public string takeNewlySeen;
+    [M8.Animator.TakeSelector(animatorField = "animator")]
+    public string takeSeen;
 
     public Color rockShapeColor {
         get { return mRockShapeImage ? mRockShapeImage.color : Color.clear; }
@@ -76,6 +78,9 @@ public class CollectionItemWidget : MonoBehaviour {
             }
             else {
                 rockShapeColor = Color.white;
+
+                if(animator && !string.IsNullOrEmpty(takeSeen))
+                    animator.ResetTake(takeSeen);
             }
         }
         else {

@@ -35,8 +35,9 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
     public RockIgneousData[] intrusiveRocks; //which type of rock to produce based on cooling delay
     public RockIgneousData[] extrusiveRocks;
     public int extrusiveResultCount = 3;
-    
+
     [Header("Process")]
+    public GameObject magmaEmptyGO;
     public SequenceInfo processSequence;
 
     public Button processIntrusiveButton;
@@ -57,6 +58,7 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
     public Slider coolingSlider;
     public float coolingDelay = 1f; //delay per rock
     public float coolingSegmentDelay = 0.5f; //delay before resuming cooling
+    public GameObject coolingInstructionGO;
 
     public IntrusiveDisplayInfo[] intrusiveRockDisplays;
     public float intrusiveRockDisplayFadeOutDelay = 0.3f;
@@ -115,6 +117,10 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
         extrusiveSequence.Init();
         rockResultSequence.Init();
 
+        if(magmaEmptyGO) magmaEmptyGO.SetActive(false);
+
+        if(coolingInstructionGO) coolingInstructionGO.SetActive(false);
+
         if(intrusiveAnimator) intrusiveAnimator.gameObject.SetActive(false);
         if(extrusiveAnimator) extrusiveAnimator.gameObject.SetActive(false);
 
@@ -160,6 +166,8 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
                 exitButton.Select();
         }
         else { //show nothing, just exit
+            if(magmaEmptyGO) magmaEmptyGO.SetActive(true);
+
             exitButton.Select();
         }
     }
@@ -255,6 +263,15 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
         //initial state
         coolingGlowGO.SetActive(false);
         coolingStopButton.interactable = false;
+
+        //check if we have seen the instruction
+        bool isInstructionSeen = false;
+        if(M8.SceneState.instance.global.GetValue("magmaCoolerIntrusiveInstructionSeen") == 1)
+            isInstructionSeen = true;
+        else
+            M8.SceneState.instance.global.SetValue("magmaCoolerIntrusiveInstructionSeen", 1, false);
+
+        if(coolingInstructionGO) coolingInstructionGO.SetActive(!isInstructionSeen);
 
         //cooling
         yield return coolingSequence.Enter();
