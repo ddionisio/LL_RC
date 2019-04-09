@@ -59,17 +59,20 @@ public class CollectGather : MonoBehaviour {
     }
 
     IEnumerator DoGather() {
+        rockSpriteShape.gameObject.SetActive(true);
+        rockAnimator.ResetTake(rockTakeEnter);
+
         //go through newly seen rocks
         yield return DoRockListGather(inventory.rocksIgneous);
         yield return DoRockListGather(inventory.rocksSedimentary);
         yield return DoRockListGather(inventory.rocksMetamorphic);
 
+        rockSpriteShape.gameObject.SetActive(false);
+
         signalFinish.Invoke();
     }
 
     IEnumerator DoRockListGather(RockData[] rocks) {
-        rockSpriteShape.gameObject.SetActive(true);
-
         Vector2 startPos = mPlayerTrans.position;
         Vector2 endPos = destination.position;
 
