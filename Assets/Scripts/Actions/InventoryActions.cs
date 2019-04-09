@@ -197,6 +197,30 @@ namespace HutongGames.PlayMaker.Actions.Game {
     }
 
     [ActionCategory("Game")]
+    public class InventoryGetRocksCount : FsmStateAction {
+        [RequiredField]
+        [ObjectType(typeof(InventoryData))]
+        public FsmObject inventory;
+
+        [RequiredField]
+        [UIHint(UIHint.Variable)]
+        public FsmInt output;
+
+        public override void Reset() {
+            inventory = null;
+            output = null;
+        }
+
+        public override void OnEnter() {
+            var inv = inventory.Value as InventoryData;
+            if(inv)
+                output.Value = inv.rocksCount;
+
+            Finish();
+        }
+    }
+
+    [ActionCategory("Game")]
     public class InventoryDeleteAll : FsmStateAction {
         [RequiredField]
         [ObjectType(typeof(InventoryData))]

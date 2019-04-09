@@ -71,6 +71,7 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
     public SequenceInfo processSequence;
     public Button processRockButton;
     public Button processOrganicButton;
+    public GameObject processRockRequireGO;
 
     [Header("Source Select")]
     public SequenceInfo sourceSequence;
@@ -197,6 +198,8 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
             }
         }
 
+        if(processRockRequireGO) processRockRequireGO.SetActive(false);
+
         processRockButton.onClick.AddListener(OnProcessRockClick);
         processOrganicButton.onClick.AddListener(OnProcessOrganicClick);
 
@@ -226,13 +229,17 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
         //int rockTypeCount = inventory.rockTypeValidCount;
         int organicCount = inventory.organicsCount;
 
-        processRockButton.interactable = rockCount > 0;// && rockTypeCount >= inventory.sedimentaryRockCount;
+        processRockButton.interactable = rockCount >= inventory.sedimentaryRockCount;// && rockTypeCount >= inventory.sedimentaryRockCount;
         processOrganicButton.interactable = organicCount > 0;
 
         yield return processSequence.Enter();
 
-        if(!(processRockButton.interactable || processOrganicButton.interactable))
+        if(!(processRockButton.interactable || processOrganicButton.interactable)) {
+            //tell user to make some rocks
+            if(processRockRequireGO) processRockRequireGO.SetActive(true);
+
             exitButton.Select();
+        }
         else if(processRockButton.interactable)
             processRockButton.Select();
         else
