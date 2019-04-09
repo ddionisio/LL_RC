@@ -13,6 +13,7 @@ public class MetamorphicController : GameModeController<MagmaCoolerController> {
     [Header("Rock Select")]
     public SequenceInfo rockSelectSequence;
     public RockSelectWidget rockSelect;
+    public GameObject noRocksGO;
 
     [Header("Rock Result")]
     public SequenceInfo rockResultSequence;
@@ -53,6 +54,8 @@ public class MetamorphicController : GameModeController<MagmaCoolerController> {
 
     protected override void OnInstanceDeinit() {
         base.OnInstanceDeinit();
+
+        if(noRocksGO) noRocksGO.SetActive(false);
 
         if(rockSelect)
             rockSelect.processRockCallback += OnRockSelect;
@@ -152,6 +155,7 @@ public class MetamorphicController : GameModeController<MagmaCoolerController> {
         }
         else {
             //notify that rocks are needed.
+            if(noRocksGO) noRocksGO.SetActive(true);
 
             exitButton.Select();
         }
