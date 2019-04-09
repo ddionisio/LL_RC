@@ -48,6 +48,12 @@ public class PlayerController : MonoBehaviour {
     [M8.Animator.TakeSelector(animatorField = "animator")]
     public string takeSlide;
 
+    [Header("Sound")]
+    [M8.SoundPlaylist]
+    public string soundSpawn;
+    [M8.SoundPlaylist]
+    public string soundDeath;
+
     [Header("Signal Listen")]
     public M8.Signal signalGameReady;
     public M8.Signal signalInputLock;
@@ -306,6 +312,8 @@ public class PlayerController : MonoBehaviour {
         while(mCameraFollow.state == CameraFollow.State.Goto)
             yield return null;
 
+        M8.SoundPlaylist.instance.Play(soundSpawn, false);
+
         yield return animator.PlayWait(takeSpawn);
 
         stateControl.state = stateNormal;
@@ -317,6 +325,8 @@ public class PlayerController : MonoBehaviour {
 
         if(mCameraFollow.follow == transform)
             mCameraFollow.follow = null;
+
+        M8.SoundPlaylist.instance.Play(soundDeath, false);
 
         yield return animator.PlayWait(takeDeath);
                 

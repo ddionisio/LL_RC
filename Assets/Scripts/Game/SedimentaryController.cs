@@ -125,6 +125,12 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
     public Button exitButton;
     public M8.SceneAssetPath exitScene;
 
+    [Header("Audio")]
+    [M8.SoundPlaylist]
+    public string soundWind;
+    [M8.SoundPlaylist]
+    public string soundRain;
+
     private bool mIsErosionClicked;
     private int mErosionCount = 0;
     private bool mIsErosionFinish;
@@ -139,6 +145,8 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
     private Dictionary<InfoData, List<RockSedimentaryData>> mOrganicOutput;
     
     private SourceMode mCurMode = SourceMode.None;
+
+    private bool mIsWindSoundPlaying;
 
     protected override void OnInstanceDeinit() {
         base.OnInstanceDeinit();
@@ -444,6 +452,8 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
                 sedimentaryRockSprite.spriteShape = rockOutput.spriteShape;
         }
 
+        M8.SoundPlaylist.instance.Play(soundRain, false);
+
         //play animation
         if(compactCementAnimator) {
             compactCementAnimator.gameObject.SetActive(true);
@@ -569,6 +579,11 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
         else if(dat is OrganicData) {
             var organicDat = dat as OrganicData;
             StartCoroutine(rockSpawner.Spawn(organicDat.spriteShape, sourceSpawnDelay));
+        }
+
+        if(!mIsWindSoundPlaying) {
+            mIsWindSoundPlaying = true;
+            M8.SoundPlaylist.instance.Play(soundWind, delegate (M8.GenericParams parms) { mIsWindSoundPlaying = false; }, null);
         }
 
         if(sourceWindFX) sourceWindFX.Play();

@@ -12,6 +12,10 @@ public class CollectController : MonoBehaviour {
     public CollectOutcome[] collectOutcomes;
     public int collectMaxCount = 5;
 
+    [Header("Sound")]
+    [M8.SoundPlaylist]
+    public string soundComplete;
+
     [Header("Signals")]
     public SignalInteger signalCollect; //listen to get amount collected
     public M8.Signal signalCollectComplete; //open up exit
@@ -55,6 +59,9 @@ public class CollectController : MonoBehaviour {
 
         if(!mIsCollectComplete && collectCurrent >= collectMaxCount) {
             mIsCollectComplete = true;
+
+            M8.SoundPlaylist.instance.Play(soundComplete, false);
+
             signalCollectComplete.Invoke();
         }
     }

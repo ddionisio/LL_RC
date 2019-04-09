@@ -58,6 +58,7 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
     public Slider coolingSlider;
     public float coolingDelay = 1f; //delay per rock
     public float coolingSegmentDelay = 0.5f; //delay before resuming cooling
+    public ParticleSystem coolingFX;
     public GameObject coolingInstructionGO;
 
     public IntrusiveDisplayInfo[] intrusiveRockDisplays;
@@ -94,6 +95,12 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
     [Header("Exit")]
     public Button exitButton;
     public M8.SceneAssetPath exitScene;
+
+    [Header("Audio")]
+    [M8.SoundPlaylist]
+    public string soundMagmaRise;
+    [M8.SoundPlaylist]
+    public string soundCoolingEnd;
 
     private bool mIsCoolingStop;
 
@@ -257,6 +264,8 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
         yield return DoMode(Mode.Intrusive);
 
         //do intrusive fill
+        M8.SoundPlaylist.instance.Play(soundMagmaRise, false);
+
         if(intrusiveAnimator && !string.IsNullOrEmpty(intrusiveTakeFill))
             yield return intrusiveAnimator.PlayWait(intrusiveTakeFill);
 
@@ -306,6 +315,10 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
 
                 //ready to stop
                 if(t >= 1f) {
+                    M8.SoundPlaylist.instance.Play(soundCoolingEnd, false);
+
+                    if(coolingFX) coolingFX.Play();
+
                     intrusiveRockDisplays[mIntrusiveRockInd].rootGO.SetActive(false);
                     mIntrusiveRockInd++;
                     

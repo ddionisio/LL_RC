@@ -49,6 +49,10 @@ public class PlayerInput : MonoBehaviour {
     public M8.InputAction moveHorzInput;
     public M8.InputAction actInput;
 
+    [Header("Sound")]
+    [M8.SoundPlaylist]
+    public string soundJump;
+
     public bool canJump { get; private set; }
 
     public MoveState moveState { get { return mMoveState; } }
@@ -216,6 +220,8 @@ public class PlayerInput : MonoBehaviour {
 
                     mJumpState = JumpState.Jump;
                 }
+
+                M8.SoundPlaylist.instance.Play(soundJump, false);
                 break;
 
             case JumpState.Jump:

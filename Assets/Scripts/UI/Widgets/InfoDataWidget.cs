@@ -13,6 +13,10 @@ public class InfoDataWidget : Selectable, IPointerClickHandler, ISubmitHandler {
 
     public GameObject newActiveGO;
 
+    [Header("Audio")]
+    [M8.SoundPlaylist]
+    public string soundClick;
+
     public InfoData data { get; private set; }
 
     public void Init(InfoData dat) {
@@ -71,6 +75,8 @@ public class InfoDataWidget : Selectable, IPointerClickHandler, ISubmitHandler {
 
         if(!data)
             return;
+
+        M8.SoundPlaylist.instance.Play(soundClick, false);
 
         //open modal
         var parms = new M8.GenericParams();

@@ -22,6 +22,10 @@ public class CollectGather : MonoBehaviour {
 
     public Transform destination;
 
+    [Header("Sound")]
+    [M8.SoundPlaylist]
+    public string soundGather;
+
     [Header("Signal Listen")]
     public M8.Signal signalStart;
 
@@ -86,6 +90,9 @@ public class CollectGather : MonoBehaviour {
 
             mRockTrans.position = startPos;
             mRockTrans.eulerAngles = new Vector3(0f, 0f, Random.Range(0f, 360f));
+
+            if(!string.IsNullOrEmpty(soundGather))
+                M8.SoundPlaylist.instance.Play(soundGather, false);
 
             yield return rockAnimator.PlayWait(rockTakeEnter);
 

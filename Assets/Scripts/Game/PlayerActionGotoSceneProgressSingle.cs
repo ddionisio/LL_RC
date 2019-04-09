@@ -9,10 +9,15 @@ public class PlayerActionGotoSceneProgressSingle : PlayerAction {
     
     public int[] progressMatch;
     public M8.SceneAssetPath scene;
+    [M8.SoundPlaylist]
+    public string soundFX;
 
     public bool saveStartCheckpoint;
 
     public override void ActionInvoke(PlayerController player) {
+        if(!string.IsNullOrEmpty(soundFX))
+            M8.SoundPlaylist.instance.Play(soundFX, false);
+
         player.stateControl.state = player.stateDespawn;
 
         if(saveStartCheckpoint)

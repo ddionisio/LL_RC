@@ -45,6 +45,10 @@ public class MetamorphicController : GameModeController<MagmaCoolerController> {
     public Button exitButton;
     public M8.SceneAssetPath exitScene;
 
+    [Header("Audio")]
+    [M8.SoundPlaylist]
+    public string soundMorph;
+
     private RockData mRockSelect;
 
     private bool mIsRockResultContinue;
@@ -135,6 +139,8 @@ public class MetamorphicController : GameModeController<MagmaCoolerController> {
             yield return metaMorphAnimator.PlayWait(metaMorphTakeEnter);
 
             //rock result play
+            M8.SoundPlaylist.instance.Play(soundMorph, false);
+
             rockResultSpriteShape.spriteShape = mRockSelect.metaOutput.spriteShape;
             
             rockResultAnimator.gameObject.SetActive(true);

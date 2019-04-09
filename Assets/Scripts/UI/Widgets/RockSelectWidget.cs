@@ -47,6 +47,12 @@ public class RockSelectWidget : Selectable {
     public Transform rockRotate;
     public float rockRotateAmount;
     public float rockRotateDelay = 0.3f;
+
+    [Header("Audio")]
+    [M8.SoundPlaylist]
+    public string soundProcess;
+    [M8.SoundPlaylist]
+    public string soundSelect;
         
     public bool isProcess { get; private set; } //pointer remains down after delay
 
@@ -172,6 +178,9 @@ public class RockSelectWidget : Selectable {
 
     public void SelectLeft() {
         if(interactable && mCurState == State.None && mRockList.Count > 1) {
+            if(mRockList.Count <= rockDisplayCount && mCurRockInd == 0)
+                return;
+
             mCurTime = 0f;
             mIsRotateLeft = true;
             mCurState = State.Selecting;
@@ -180,6 +189,9 @@ public class RockSelectWidget : Selectable {
 
     public void SelectRight() {
         if(interactable && mCurState == State.None && mRockList.Count > 1) {
+            if(mRockList.Count <= rockDisplayCount && mCurRockInd == mRockList.Count - 1)
+                return;
+
             mCurTime = 0f;
             mIsRotateLeft = false;
             mCurState = State.Selecting;
@@ -366,6 +378,8 @@ public class RockSelectWidget : Selectable {
                 break;
 
             case State.Proceed: {
+                    M8.SoundPlaylist.instance.Play(soundProcess, false);
+
                     int midInd = mRockItems.Length / 2;
                     mRockItems[midInd].fill = 0f;
 
@@ -405,6 +419,8 @@ public class RockSelectWidget : Selectable {
                         else
                             mCurRockInd++;
                     }
+
+                    M8.SoundPlaylist.instance.Play(soundSelect, false);
 
                     UpdateRockDisplay();
 

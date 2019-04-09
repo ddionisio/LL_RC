@@ -27,6 +27,10 @@ public class Collect : MonoBehaviour {
     public M8.Animator.Animate animator;
     [M8.Animator.TakeSelector(animatorField = "animator")]
     public string takeCollect;
+
+    [Header("Sound")]
+    [M8.SoundPlaylist]
+    public string soundCollect;
     
     [Header("Signals")]
     public SignalInteger signalCollect;
@@ -95,6 +99,9 @@ public class Collect : MonoBehaviour {
 
         if(coll) coll.enabled = false;
         if(activator) { activator.Release(); activator.enabled = false; }
+
+        if(!string.IsNullOrEmpty(soundCollect))
+            M8.SoundPlaylist.instance.Play(soundCollect, false);
 
         signalCollect.Invoke(amount);
 

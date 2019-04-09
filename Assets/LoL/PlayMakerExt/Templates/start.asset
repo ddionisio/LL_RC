@@ -507,7 +507,7 @@ MonoBehaviour:
         actionEnabled: 01
         actionIsOpen: 01
         actionStartIndex: 00000000
-        actionHashCodes: 2e72a203
+        actionHashCodes: b5f9f504
         unityObjectParams: []
         fsmGameObjectParams: []
         fsmOwnerDefaultParams: []
@@ -543,6 +543,12 @@ MonoBehaviour:
           showInInspector: 0
           networkSync: 0
           value: 1
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          value: 1
         fsmVector2Params: []
         fsmVector3Params: []
         fsmColorParams: []
@@ -555,15 +561,16 @@ MonoBehaviour:
         customTypeSizes: 02000000
         customTypeNames:
         - HutongGames.PlayMaker.Actions.M8.FsmMusicPlaylistName
-        paramDataType: 2800000007000000120000001100000011000000
+        paramDataType: 280000000700000012000000110000001100000011000000
         paramName:
         - music
         - from
         - stringRef
         - loop
         - immediate
-        paramDataPos: 0000000000000000000000000000000001000000
-        paramByteDataSize: 0000000004000000000000000000000000000000
+        - checkPlaying
+        paramDataPos: 000000000000000000000000000000000100000002000000
+        paramByteDataSize: 000000000400000000000000000000000000000000000000
     - name: Scene Loading
       description: 
       colorIndex: 0

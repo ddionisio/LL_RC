@@ -39,15 +39,23 @@ public class MagmaChamberController : GameModeController<MagmaChamberController>
     [M8.Animator.TakeSelector(animatorField = "animator")]
     public string takeUIExit;
 
+    [Header("Audio")]
+    [M8.SoundPlaylist]
+    public string soundFurnaceProcess;
+
     private Selectable mSelectableActive;
 
     private float mFurnaceActionLastTime;
     private Coroutine mFurnaceActionRout;
 
+    private bool mIsSoundFurnacePlaying;
+
     public void MineralProcess() {
         int mineralsCount = inventory.mineralsCount;
 
         inventory.ClearMineralsCount();
+
+        PlayFurnaceSound();
 
         //machine animation
         if(furnaceAnimator && !string.IsNullOrEmpty(furnaceTakeAction))
@@ -82,6 +90,8 @@ public class MagmaChamberController : GameModeController<MagmaChamberController>
 
         RefreshFireDisplay();
 
+        PlayFurnaceSound();
+
         //machine animation
         if(furnaceAnimator && !string.IsNullOrEmpty(furnaceTakeAction))
             furnaceAnimator.Play(furnaceTakeAction);
@@ -92,6 +102,13 @@ public class MagmaChamberController : GameModeController<MagmaChamberController>
 
         if(rockSelector.rockCount == 0)
             StartCoroutine(DoChangeInterface());
+    }
+
+    void PlayFurnaceSound() {
+        if(!mIsSoundFurnacePlaying) {
+            mIsSoundFurnacePlaying = true;
+            M8.SoundPlaylist.instance.Play(soundFurnaceProcess, delegate (M8.GenericParams parms) { mIsSoundFurnacePlaying = false; }, null);
+        }
     }
 
     protected override void OnInstanceDeinit() {

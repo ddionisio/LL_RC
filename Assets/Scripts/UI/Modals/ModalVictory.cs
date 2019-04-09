@@ -13,6 +13,10 @@ public class ModalVictory : M8.ModalController, M8.IModalPush {
     [Header("UI")]
     public InfoDataListWidget infoList;
 
+    [Header("Sound")]
+    [M8.SoundPlaylist]
+    public string soundPlay;
+
     public void Proceed() {
         //
         if(LoLManager.isInstantiated)
@@ -20,7 +24,7 @@ public class ModalVictory : M8.ModalController, M8.IModalPush {
 
         toScene.Load();
     }
-
+    
     void M8.IModalPush.Push(M8.GenericParams parms) {
         //apply outcome
         CollectController collectCtrl = null;
@@ -33,6 +37,8 @@ public class ModalVictory : M8.ModalController, M8.IModalPush {
             Debug.LogWarning("Collect Controller Not Found!");
             return;
         }
+
+        M8.SoundPlaylist.instance.Play(soundPlay, false);
 
         collectCtrl.ApplyOutcome();
 
