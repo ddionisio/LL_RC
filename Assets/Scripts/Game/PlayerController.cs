@@ -249,6 +249,8 @@ public class PlayerController : MonoBehaviour {
             mCurRout = null;
         }
 
+        animator.animScale = 1f;
+
         bool physicsEnable = false;
 
         if(state == stateSpawn) {
