@@ -54,7 +54,7 @@ LightmapSettings:
     m_EnableBakedLightmaps: 0
     m_EnableRealtimeLightmaps: 0
   m_LightmapEditorSettings:
-    serializedVersion: 10
+    serializedVersion: 12
     m_Resolution: 2
     m_BakeResolution: 40
     m_AtlasSize: 1024
@@ -62,6 +62,7 @@ LightmapSettings:
     m_AOMaxDistance: 1
     m_CompAOExponent: 1
     m_CompAOExponentDirect: 0
+    m_ExtractAmbientOcclusion: 0
     m_Padding: 2
     m_LightmapParameters: {fileID: 0}
     m_LightmapsBakeMode: 1
@@ -76,10 +77,16 @@ LightmapSettings:
     m_PVRDirectSampleCount: 32
     m_PVRSampleCount: 500
     m_PVRBounces: 2
+    m_PVREnvironmentSampleCount: 500
+    m_PVREnvironmentReferencePointCount: 2048
+    m_PVRFilteringMode: 2
+    m_PVRDenoiserTypeDirect: 0
+    m_PVRDenoiserTypeIndirect: 0
+    m_PVRDenoiserTypeAO: 0
     m_PVRFilterTypeDirect: 0
     m_PVRFilterTypeIndirect: 0
     m_PVRFilterTypeAO: 0
-    m_PVRFilteringMode: 1
+    m_PVREnvironmentMIS: 0
     m_PVRCulling: 1
     m_PVRFilteringGaussRadiusDirect: 1
     m_PVRFilteringGaussRadiusIndirect: 5
@@ -88,6 +95,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
+    m_ExportTrainingData: 0
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -251,102 +259,79 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 13.7, y: 82}
-      - {x: 41.7, y: 77}
-      - {x: 41.7, y: 77}
-      - {x: 41.7, y: 69}
-      - {x: 41.7, y: 69}
-      - {x: 49.7, y: 69}
-      - {x: 49.7, y: 69}
-      - {x: 49.7, y: 66}
-      - {x: 49.7, y: 66}
-      - {x: 55.7, y: 66}
-      - {x: 55.7, y: 66}
-      - {x: 55.7, y: 72}
-      - {x: 55.7, y: 72}
-      - {x: 60.7, y: 72}
-      - {x: 60.7, y: 72}
-      - {x: 60.7, y: 66}
-      - {x: 60.7, y: 66}
-      - {x: 65.69999, y: 66}
-      - {x: 65.69999, y: 66}
-      - {x: 65.69999, y: 75}
-      - {x: 65.69999, y: 75}
-      - {x: 70.69999, y: 75}
-      - {x: 70.69999, y: 75}
-      - {x: 70.69999, y: 66}
-      - {x: 70.69999, y: 66}
-      - {x: 77.69999, y: 66}
-      - {x: 77.69999, y: 66}
-      - {x: 77.69999, y: 69}
-      - {x: 77.69999, y: 69}
-      - {x: 83.69999, y: 69}
-      - {x: 83.69999, y: 69}
-      - {x: 83.69999, y: 66}
-      - {x: 83.69999, y: 66}
-      - {x: 89.7, y: 66}
-      - {x: 89.7, y: 66}
-      - {x: 89.7, y: 73}
-      - {x: 89.7, y: 73}
-      - {x: 92.7, y: 73}
-      - {x: 92.7, y: 73}
-      - {x: 92.7, y: 77}
-      - {x: 92.7, y: 77}
-      - {x: 95.7, y: 77}
-      - {x: 95.7, y: 77}
-      - {x: 100.7, y: 75}
-      - {x: 100.7, y: 75}
-      - {x: 102.7, y: 55}
-      - {x: 102.7, y: 55}
-      - {x: 99.7, y: 40}
-      - {x: 99.7, y: 40}
-      - {x: 103.7, y: 29}
-      - {x: 103.7, y: 29}
-      - {x: 99.7, y: 17}
-      - {x: 99.7, y: 17}
-      - {x: 100.7, y: 9}
-      - {x: 100.7, y: 9}
-      - {x: 104.7, y: 7}
-      - {x: 104.7, y: 7}
-      - {x: 104.7, y: 2}
-      - {x: 104.7, y: 2}
-      - {x: 96.23329, y: -3.04249}
-      - {x: 96.23329, y: -3.04249}
-      - {x: 82.88069, y: -1.53328}
-      - {x: 82.88069, y: -1.53328}
-      - {x: 73.7855, y: -8.71695}
-      - {x: 73.7855, y: -8.71695}
-      - {x: 60.73753, y: -6.15155}
-      - {x: 60.73753, y: -6.15155}
-      - {x: 49.7, y: -10}
-      - {x: 49.7, y: -10}
-      - {x: 45.7, y: -10}
-      - {x: 45.7, y: -10}
-      - {x: 45.7, y: -3}
-      - {x: 45.7, y: -3}
-      - {x: 41.7, y: 0}
-      - {x: 41.7, y: 0}
-      - {x: 30.7, y: 0}
-      - {x: 30.7, y: 0}
-      - {x: 21.7, y: -9}
-      - {x: 21.7, y: -9}
-      - {x: 15.7, y: -10}
-      - {x: 15.7, y: -10}
-      - {x: 14.7, y: -7}
-      - {x: 14.7, y: -7}
-      - {x: 12.7, y: -7}
-      - {x: 12.7, y: -7}
-      - {x: 11.7, y: -10}
-      - {x: 11.7, y: -10}
-      - {x: -4.29999, y: -8}
-      - {x: -4.29999, y: -8}
-      - {x: -21.3, y: 7}
-      - {x: -21.3, y: 7}
-      - {x: -21.3, y: 18}
-      - {x: -21.3, y: 18}
-      - {x: 17.7, y: 18}
-      - {x: 17.7, y: 18}
-      - {x: 13.7, y: 82}
+    - - {x: 13.968558, y: 81.69885}
+      - {x: 41.450752, y: 76.79131}
+      - {x: 41.450752, y: 68.96875}
+      - {x: 42.14315, y: 68.75075}
+      - {x: 49.450752, y: 68.75075}
+      - {x: 49.450752, y: 65.96875}
+      - {x: 50.03237, y: 65.750755}
+      - {x: 55.73125, y: 65.75075}
+      - {x: 55.94925, y: 66.332375}
+      - {x: 55.94925, y: 72.03125}
+      - {x: 55.976974, y: 71.750755}
+      - {x: 60.73125, y: 71.75075}
+      - {x: 60.45076, y: 71.66764}
+      - {x: 60.450752, y: 65.96875}
+      - {x: 60.976974, y: 65.750755}
+      - {x: 65.73125, y: 65.75075}
+      - {x: 65.94925, y: 66}
+      - {x: 65.94925, y: 75.03125}
+      - {x: 65.976974, y: 74.75075}
+      - {x: 70.450745, y: 74.75075}
+      - {x: 70.450745, y: 65.96875}
+      - {x: 71.08776, y: 65.750755}
+      - {x: 77.73125, y: 65.75075}
+      - {x: 77.94926, y: 66.59476}
+      - {x: 77.94925, y: 69.03125}
+      - {x: 78.032364, y: 68.75075}
+      - {x: 83.45076, y: 68.75075}
+      - {x: 83.450745, y: 65.96875}
+      - {x: 84.03238, y: 65.750755}
+      - {x: 89.73125, y: 65.75075}
+      - {x: 89.94925, y: 66.387764}
+      - {x: 89.94925, y: 72.750755}
+      - {x: 92.73125, y: 72.75075}
+      - {x: 92.94924, y: 73.22158}
+      - {x: 92.94925, y: 76.75129}
+      - {x: 95.60744, y: 76.76858}
+      - {x: 100.467026, y: 74.82474}
+      - {x: 102.45509, y: 54.94408}
+      - {x: 99.449455, y: 40.018223}
+      - {x: 103.47644, y: 28.88544}
+      - {x: 103.24197, y: 28.414099}
+      - {x: 99.45365, y: 17.049162}
+      - {x: 100.45654, y: 8.938079}
+      - {x: 104.61649, y: 6.763084}
+      - {x: 104.45075, y: 6.7230268}
+      - {x: 104.450745, y: 1.96875}
+      - {x: 104.10346, y: 1.934825}
+      - {x: 96.078896, y: -2.8443432}
+      - {x: 95.52164, y: -2.711224}
+      - {x: 82.87764, y: -1.2821007}
+      - {x: 79.14645, y: -4.165077}
+      - {x: 73.60649, y: -8.540733}
+      - {x: 73.110825, y: -8.330281}
+      - {x: 60.754955, y: -5.9009614}
+      - {x: 49.588432, y: -9.774935}
+      - {x: 45.94925, y: -9.7524805}
+      - {x: 45.94925, y: -2.96875}
+      - {x: 41.824543, y: 0.21815474}
+      - {x: 30.66875, y: 0.24925}
+      - {x: 26.981478, y: -3.3660274}
+      - {x: 21.501657, y: -8.84585}
+      - {x: 15.869961, y: -9.72168}
+      - {x: 14.9265785, y: -6.8915353}
+      - {x: 12.668751, y: -6.7507496}
+      - {x: 11.5380535, y: -9.728566}
+      - {x: -4.3000917, y: -7.748799}
+      - {x: -5.0767813, y: -6.982199}
+      - {x: -21.158518, y: 7.207571}
+      - {x: -21.050753, y: 7.6093307}
+      - {x: -21.050749, y: 17.75075}
+      - {x: 17.73125, y: 17.75075}
+      - {x: 17.948765, y: 18.015549}
+      - {x: 13.968558, y: 81.69885}
 --- !u!114 &30603876
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -359,6 +344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -795,12 +781,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 06ea21af1c106a44e9473c47a7a1af7a, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 8
   m_AdaptiveUV: 1
-  m_UpdateCollider: 1
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 8
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 1
+  m_OptimizeCollider: 1
 --- !u!1971053207 &30603877
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -843,17 +833,9 @@ SpriteShapeRenderer:
   m_ShapeTexture: {fileID: 2800000, guid: 29278d6ec858ec84787447267b5153f5, type: 3}
   m_Sprites:
   - {fileID: 21300000, guid: 5cdf48e00a231d04293bb3ddfcafc217, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   m_LocalAABB:
-    m_Center: {x: 41.700005, y: 36.000053, z: -0.024}
-    m_Extent: {x: 63.125008, y: 46.128494, z: 0.024}
+    m_Center: {x: 41.700005, y: 36.000057, z: 0.000050000002}
+    m_Extent: {x: 63.125008, y: 46.128494, z: 0.000050000002}
 --- !u!1001 &45502667
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1052,6 +1034,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -1119,12 +1102,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 4e77035da74ae5243a04a549a80ba057, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 16
   m_AdaptiveUV: 1
-  m_UpdateCollider: 0
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 4
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 0
+  m_OptimizeCollider: 1
 --- !u!1971053207 &85724472
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -1165,17 +1152,9 @@ SpriteShapeRenderer:
   m_Color: {r: 0.14, g: 0.0784, b: 0.112000026, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 2800000, guid: e2d2e2961fc51a6449f256da4398c69b, type: 3}
-  m_Sprites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  m_Sprites: []
   m_LocalAABB:
-    m_Center: {x: 1.7260463, y: 0.6642747, z: 0}
+    m_Center: {x: 1.7260466, y: 0.6642742, z: 0}
     m_Extent: {x: 4.584856, y: 14.106411, z: 0}
 --- !u!1001 &91973967
 PrefabInstance:
@@ -1422,6 +1401,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -1462,12 +1442,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 06ea21af1c106a44e9473c47a7a1af7a, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 8
   m_AdaptiveUV: 1
-  m_UpdateCollider: 1
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 8
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 1
+  m_OptimizeCollider: 1
 --- !u!1971053207 &103768785
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -1565,6 +1549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -1632,12 +1617,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 4e77035da74ae5243a04a549a80ba057, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 16
   m_AdaptiveUV: 1
-  m_UpdateCollider: 0
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 4
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 0
+  m_OptimizeCollider: 1
 --- !u!1971053207 &115688083
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -2179,6 +2168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -2237,12 +2227,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 4e77035da74ae5243a04a549a80ba057, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 16
   m_AdaptiveUV: 1
-  m_UpdateCollider: 0
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 4
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 0
+  m_OptimizeCollider: 1
 --- !u!1971053207 &208512489
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -2406,6 +2400,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -2473,12 +2468,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 4e77035da74ae5243a04a549a80ba057, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 16
   m_AdaptiveUV: 1
-  m_UpdateCollider: 0
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 4
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 0
+  m_OptimizeCollider: 1
 --- !u!1971053207 &213033356
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -2519,18 +2518,10 @@ SpriteShapeRenderer:
   m_Color: {r: 0.118999995, g: 0.06611111, b: 0.09586111, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 2800000, guid: e2d2e2961fc51a6449f256da4398c69b, type: 3}
-  m_Sprites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  m_Sprites: []
   m_LocalAABB:
-    m_Center: {x: 1.8357682, y: -9.924596, z: 0}
-    m_Extent: {x: 5.4749084, y: 17.149275, z: 0}
+    m_Center: {x: 1.8357682, y: -9.924595, z: 0}
+    m_Extent: {x: 5.4749084, y: 17.149277, z: 0}
 --- !u!1 &216458355
 GameObject:
   m_ObjectHideFlags: 0
@@ -3108,6 +3099,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 1
     m_ControlPoints:
@@ -3130,12 +3122,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: dc5aad61ea4fccc4d85a1145844575e8, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 8
   m_AdaptiveUV: 1
-  m_UpdateCollider: 1
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 8
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 1
+  m_OptimizeCollider: 1
 --- !u!1971053207 &263262773
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -3272,6 +3268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 1
     m_ControlPoints:
@@ -3294,12 +3291,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: dc5aad61ea4fccc4d85a1145844575e8, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 8
   m_AdaptiveUV: 1
-  m_UpdateCollider: 1
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 8
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 1
+  m_OptimizeCollider: 1
 --- !u!1971053207 &265355229
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -3615,6 +3616,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -3655,12 +3657,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 9443f7567a810fb4daf1e149b3d08a5a, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 4
   m_AdaptiveUV: 1
-  m_UpdateCollider: 0
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 4
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 0
+  m_OptimizeCollider: 1
 --- !u!1971053207 &329984879
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -4031,6 +4037,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -4098,12 +4105,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 4e77035da74ae5243a04a549a80ba057, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 16
   m_AdaptiveUV: 1
-  m_UpdateCollider: 0
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 4
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 0
+  m_OptimizeCollider: 1
 --- !u!1971053207 &394263980
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -4144,15 +4155,7 @@ SpriteShapeRenderer:
   m_Color: {r: 0.14, g: 0.0784, b: 0.112000026, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 2800000, guid: e2d2e2961fc51a6449f256da4398c69b, type: 3}
-  m_Sprites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  m_Sprites: []
   m_LocalAABB:
     m_Center: {x: 1.4214399, y: 3.9533863, z: 0}
     m_Extent: {x: 3.9918187, y: 5.9533863, z: 0}
@@ -4240,6 +4243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -4280,12 +4284,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 06ea21af1c106a44e9473c47a7a1af7a, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 8
   m_AdaptiveUV: 1
-  m_UpdateCollider: 1
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 8
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 1
+  m_OptimizeCollider: 1
 --- !u!1971053207 &419777430
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -4383,6 +4391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -4450,12 +4459,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 4e77035da74ae5243a04a549a80ba057, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 16
   m_AdaptiveUV: 1
-  m_UpdateCollider: 0
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 4
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 0
+  m_OptimizeCollider: 1
 --- !u!1971053207 &497134756
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -4636,6 +4649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -4703,12 +4717,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 4e77035da74ae5243a04a549a80ba057, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 16
   m_AdaptiveUV: 1
-  m_UpdateCollider: 0
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 4
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 0
+  m_OptimizeCollider: 1
 --- !u!1971053207 &515840770
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -4797,6 +4815,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -4855,12 +4874,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 4e77035da74ae5243a04a549a80ba057, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 16
   m_AdaptiveUV: 1
-  m_UpdateCollider: 0
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 4
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 0
+  m_OptimizeCollider: 1
 --- !u!1971053207 &532671630
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -5103,6 +5126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -5170,12 +5194,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 4e77035da74ae5243a04a549a80ba057, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 16
   m_AdaptiveUV: 1
-  m_UpdateCollider: 0
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 4
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 0
+  m_OptimizeCollider: 1
 --- !u!1971053207 &570382702
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -5339,6 +5367,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -5406,12 +5435,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 4e77035da74ae5243a04a549a80ba057, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 16
   m_AdaptiveUV: 1
-  m_UpdateCollider: 0
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 4
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 0
+  m_OptimizeCollider: 1
 --- !u!1971053207 &623387103
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -5506,6 +5539,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -5564,12 +5598,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 9443f7567a810fb4daf1e149b3d08a5a, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 4
   m_AdaptiveUV: 1
-  m_UpdateCollider: 0
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 4
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 0
+  m_OptimizeCollider: 1
 --- !u!1971053207 &640219802
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -5706,6 +5744,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 1
     m_ControlPoints:
@@ -5728,12 +5767,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: dc5aad61ea4fccc4d85a1145844575e8, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 8
   m_AdaptiveUV: 1
-  m_UpdateCollider: 1
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 8
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 1
+  m_OptimizeCollider: 1
 --- !u!1971053207 &651282953
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -5865,6 +5908,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 1
     m_ControlPoints:
@@ -5887,12 +5931,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 8226b65a8ea6b874d8f8df0de4b270f0, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 4
   m_AdaptiveUV: 1
-  m_UpdateCollider: 0
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 4
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 0
+  m_OptimizeCollider: 1
 --- !u!1971053207 &681543488
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -6154,6 +6202,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -6212,12 +6261,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 9443f7567a810fb4daf1e149b3d08a5a, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 4
   m_AdaptiveUV: 1
-  m_UpdateCollider: 0
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 4
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 0
+  m_OptimizeCollider: 1
 --- !u!1971053207 &726566678
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -6354,6 +6407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 1
     m_ControlPoints:
@@ -6376,12 +6430,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: dc5aad61ea4fccc4d85a1145844575e8, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 8
   m_AdaptiveUV: 1
-  m_UpdateCollider: 1
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 8
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 1
+  m_OptimizeCollider: 1
 --- !u!1971053207 &735100545
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -6479,6 +6537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -6546,12 +6605,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 4e77035da74ae5243a04a549a80ba057, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 16
   m_AdaptiveUV: 1
-  m_UpdateCollider: 0
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 4
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 0
+  m_OptimizeCollider: 1
 --- !u!1971053207 &744941633
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -6696,6 +6759,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -6835,12 +6899,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 06ea21af1c106a44e9473c47a7a1af7a, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 8
   m_AdaptiveUV: 1
-  m_UpdateCollider: 1
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 8
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 1
+  m_OptimizeCollider: 1
 --- !u!1971053207 &756459556
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -7013,6 +7081,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -7080,12 +7149,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 4e77035da74ae5243a04a549a80ba057, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 16
   m_AdaptiveUV: 1
-  m_UpdateCollider: 0
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 4
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 0
+  m_OptimizeCollider: 1
 --- !u!1971053207 &758760291
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -7381,6 +7454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -7448,12 +7522,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 4e77035da74ae5243a04a549a80ba057, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 16
   m_AdaptiveUV: 1
-  m_UpdateCollider: 0
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 4
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 0
+  m_OptimizeCollider: 1
 --- !u!1971053207 &787098108
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -7581,6 +7659,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 1
     m_ControlPoints:
@@ -7603,12 +7682,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: dc5aad61ea4fccc4d85a1145844575e8, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 8
   m_AdaptiveUV: 1
-  m_UpdateCollider: 1
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 8
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 1
+  m_OptimizeCollider: 1
 --- !u!1971053207 &795080156
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -7742,6 +7825,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -7782,12 +7866,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 8d3e5438ca63e8e40ab22cf86e0dc63a, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 8
   m_AdaptiveUV: 1
-  m_UpdateCollider: 1
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 8
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 1
+  m_OptimizeCollider: 1
 --- !u!1971053207 &806125830
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -8319,6 +8407,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -8368,12 +8457,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 06ea21af1c106a44e9473c47a7a1af7a, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 8
   m_AdaptiveUV: 1
-  m_UpdateCollider: 1
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 8
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 1
+  m_OptimizeCollider: 1
 --- !u!1971053207 &852325502
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -8653,6 +8746,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -8693,12 +8787,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 06ea21af1c106a44e9473c47a7a1af7a, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 8
   m_AdaptiveUV: 1
-  m_UpdateCollider: 1
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 8
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 1
+  m_OptimizeCollider: 1
 --- !u!1971053207 &903003989
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -8796,6 +8894,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -8863,12 +8962,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 4e77035da74ae5243a04a549a80ba057, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 16
   m_AdaptiveUV: 1
-  m_UpdateCollider: 0
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 4
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 0
+  m_OptimizeCollider: 1
 --- !u!1971053207 &929454101
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -9071,6 +9174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 1
     m_ControlPoints:
@@ -9093,12 +9197,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: dc5aad61ea4fccc4d85a1145844575e8, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 8
   m_AdaptiveUV: 1
-  m_UpdateCollider: 1
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 8
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 1
+  m_OptimizeCollider: 1
 --- !u!1971053207 &969616887
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -9557,6 +9665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -9624,12 +9733,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 4e77035da74ae5243a04a549a80ba057, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 16
   m_AdaptiveUV: 1
-  m_UpdateCollider: 0
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 4
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 0
+  m_OptimizeCollider: 1
 --- !u!1971053207 &989908745
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -9795,36 +9908,21 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 11, y: -1.58}
-      - {x: 11, y: -19.58}
-      - {x: 11, y: -19.58}
-      - {x: -23, y: -19.58}
-      - {x: -23, y: -19.58}
-      - {x: -23, y: 25.41999}
-      - {x: -23, y: 25.41999}
-      - {x: 24.82504, y: 23.41875}
-      - {x: 24.82504, y: 23.41875}
-      - {x: -2, y: 9.41999}
-      - {x: -2, y: 9.41999}
-      - {x: -2, y: 1.41999}
-      - {x: -2, y: 1.41999}
-      - {x: -1.92641, y: 1.42072}
-      - {x: -1.72093, y: 1.42248}
-      - {x: -1.40643, y: 1.42466}
-      - {x: -1.00581, y: 1.42663}
-      - {x: -0.54197, y: 1.42777}
-      - {x: -0.03779, y: 1.42746}
-      - {x: 0.48382, y: 1.42508}
-      - {x: 1, y: 1.41999}
-      - {x: 1, y: 1.41999}
-      - {x: 2.39007, y: 1.28829}
-      - {x: 3.97367, y: 0.94713}
-      - {x: 5.63404, y: 0.46649}
-      - {x: 7.25438, y: -0.08365}
-      - {x: 8.71792, y: -0.63335}
-      - {x: 9.90789, y: -1.11262}
-      - {x: 10.70751, y: -1.45149}
-      - {x: 11, y: -1.58}
+    - - {x: 10.75075, y: -1.7449695}
+      - {x: 10.75075, y: -19.330751}
+      - {x: -22.750748, y: -19.330751}
+      - {x: -22.75075, y: 25.160099}
+      - {x: 23.883734, y: 23.208677}
+      - {x: -2.143019, y: 9.626511}
+      - {x: -2.24925, y: 8.9768505}
+      - {x: -2.24925, y: 1.3887482}
+      - {x: -1.2427099, y: 1.1763266}
+      - {x: 0.9738962, y: 1.1721189}
+      - {x: 2.5656722, y: 1.0049785}
+      - {x: 4.380118, y: 0.5804189}
+      - {x: 6.261273, y: -0.0012817308}
+      - {x: 9.508771, y: -1.2178589}
+      - {x: 10.75075, y: -1.7449695}
 --- !u!114 &1001772467
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9837,6 +9935,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -9913,12 +10012,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 06ea21af1c106a44e9473c47a7a1af7a, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 8
   m_AdaptiveUV: 1
-  m_UpdateCollider: 1
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 8
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 1
+  m_OptimizeCollider: 1
 --- !u!1971053207 &1001772468
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -9961,17 +10064,9 @@ SpriteShapeRenderer:
   m_ShapeTexture: {fileID: 2800000, guid: 29278d6ec858ec84787447267b5153f5, type: 3}
   m_Sprites:
   - {fileID: 21300000, guid: 5cdf48e00a231d04293bb3ddfcafc217, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   m_LocalAABB:
-    m_Center: {x: 0.89278793, y: 2.9205961, z: -0.004}
-    m_Extent: {x: 24.01779, y: 22.625599, z: 0.004}
+    m_Center: {x: 0.89278793, y: 2.9205952, z: 0.000050000002}
+    m_Extent: {x: 24.01779, y: 22.625599, z: 0.000050000002}
 --- !u!1 &1018104670
 GameObject:
   m_ObjectHideFlags: 0
@@ -10016,6 +10111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -10083,12 +10179,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 4e77035da74ae5243a04a549a80ba057, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 16
   m_AdaptiveUV: 1
-  m_UpdateCollider: 0
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 4
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 0
+  m_OptimizeCollider: 1
 --- !u!1971053207 &1018104673
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -10234,6 +10334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -10292,12 +10393,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 06ea21af1c106a44e9473c47a7a1af7a, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 8
   m_AdaptiveUV: 1
-  m_UpdateCollider: 1
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 8
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 1
+  m_OptimizeCollider: 1
 --- !u!1971053207 &1018687165
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -10517,7 +10622,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!21 &1029616463
+--- !u!21 &1029475294
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
@@ -10727,6 +10832,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -10794,12 +10900,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 4e77035da74ae5243a04a549a80ba057, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 16
   m_AdaptiveUV: 1
-  m_UpdateCollider: 0
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 4
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 0
+  m_OptimizeCollider: 1
 --- !u!1971053207 &1078268154
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -11019,6 +11129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -11077,12 +11188,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 06ea21af1c106a44e9473c47a7a1af7a, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 8
   m_AdaptiveUV: 1
-  m_UpdateCollider: 1
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 8
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 1
+  m_OptimizeCollider: 1
 --- !u!1971053207 &1087167245
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -11276,6 +11391,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -11343,12 +11459,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 4e77035da74ae5243a04a549a80ba057, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 16
   m_AdaptiveUV: 1
-  m_UpdateCollider: 0
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 4
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 0
+  m_OptimizeCollider: 1
 --- !u!1971053207 &1096788207
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -11471,6 +11591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -11511,12 +11632,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 06ea21af1c106a44e9473c47a7a1af7a, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 8
   m_AdaptiveUV: 1
-  m_UpdateCollider: 1
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 8
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 1
+  m_OptimizeCollider: 1
 --- !u!1971053207 &1158625484
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -11853,6 +11978,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -11920,12 +12046,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 4e77035da74ae5243a04a549a80ba057, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 16
   m_AdaptiveUV: 1
-  m_UpdateCollider: 0
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 4
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 0
+  m_OptimizeCollider: 1
 --- !u!1971053207 &1240829831
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -12014,6 +12144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -12054,12 +12185,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 9443f7567a810fb4daf1e149b3d08a5a, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 4
   m_AdaptiveUV: 1
-  m_UpdateCollider: 0
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 4
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 0
+  m_OptimizeCollider: 1
 --- !u!1971053207 &1248741837
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -12113,7 +12248,7 @@ SpriteShapeRenderer:
   m_LocalAABB:
     m_Center: {x: 8.500065, y: -4.640628, z: -0.0005}
     m_Extent: {x: 21.531315, y: 7.359378, z: 0.0005}
---- !u!21 &1299901865
+--- !u!21 &1258583413
 Material:
   serializedVersion: 6
   m_ObjectHideFlags: 0
@@ -12242,6 +12377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -12309,12 +12445,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 4e77035da74ae5243a04a549a80ba057, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 16
   m_AdaptiveUV: 1
-  m_UpdateCollider: 0
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 4
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 0
+  m_OptimizeCollider: 1
 --- !u!1971053207 &1302513676
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -12403,6 +12543,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -12470,12 +12611,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 4e77035da74ae5243a04a549a80ba057, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 16
   m_AdaptiveUV: 1
-  m_UpdateCollider: 0
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 4
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 0
+  m_OptimizeCollider: 1
 --- !u!1971053207 &1316990242
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -12673,6 +12818,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -12713,12 +12859,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 06ea21af1c106a44e9473c47a7a1af7a, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 8
   m_AdaptiveUV: 1
-  m_UpdateCollider: 1
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 8
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 1
+  m_OptimizeCollider: 1
 --- !u!1971053207 &1344758102
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -12995,6 +13145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -13062,12 +13213,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 4e77035da74ae5243a04a549a80ba057, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 16
   m_AdaptiveUV: 1
-  m_UpdateCollider: 0
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 4
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 0
+  m_OptimizeCollider: 1
 --- !u!1971053207 &1370880920
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -13108,18 +13263,10 @@ SpriteShapeRenderer:
   m_Color: {r: 0.118999995, g: 0.06611111, b: 0.09586111, a: 1}
   m_MaskInteraction: 0
   m_ShapeTexture: {fileID: 2800000, guid: e2d2e2961fc51a6449f256da4398c69b, type: 3}
-  m_Sprites:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  m_Sprites: []
   m_LocalAABB:
-    m_Center: {x: 2.2176137, y: 2.5346227, z: 0}
-    m_Extent: {x: 4.641817, y: 4.5346227, z: 0}
+    m_Center: {x: 2.2176137, y: 2.5346231, z: 0}
+    m_Extent: {x: 4.641817, y: 4.534623, z: 0}
 --- !u!1 &1390124357
 GameObject:
   m_ObjectHideFlags: 0
@@ -13198,6 +13345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -13238,12 +13386,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 06ea21af1c106a44e9473c47a7a1af7a, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 8
   m_AdaptiveUV: 1
-  m_UpdateCollider: 1
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 8
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 1
+  m_OptimizeCollider: 1
 --- !u!1971053207 &1390124361
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -13375,6 +13527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -13415,12 +13568,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 06ea21af1c106a44e9473c47a7a1af7a, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 8
   m_AdaptiveUV: 1
-  m_UpdateCollider: 1
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 8
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 1
+  m_OptimizeCollider: 1
 --- !u!1971053207 &1411938751
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -14063,6 +14220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -14103,12 +14261,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 9443f7567a810fb4daf1e149b3d08a5a, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 4
   m_AdaptiveUV: 1
-  m_UpdateCollider: 0
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 4
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 0
+  m_OptimizeCollider: 1
 --- !u!1971053207 &1434910161
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -14240,6 +14402,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -14280,12 +14443,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 06ea21af1c106a44e9473c47a7a1af7a, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 8
   m_AdaptiveUV: 1
-  m_UpdateCollider: 1
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 8
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 1
+  m_OptimizeCollider: 1
 --- !u!1971053207 &1438633812
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -14383,6 +14550,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -14450,12 +14618,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 4e77035da74ae5243a04a549a80ba057, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 16
   m_AdaptiveUV: 1
-  m_UpdateCollider: 0
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 4
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 0
+  m_OptimizeCollider: 1
 --- !u!1971053207 &1491764979
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -14619,6 +14791,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -14659,12 +14832,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 9443f7567a810fb4daf1e149b3d08a5a, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 4
   m_AdaptiveUV: 1
-  m_UpdateCollider: 0
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 4
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 0
+  m_OptimizeCollider: 1
 --- !u!1971053207 &1498040479
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -14707,17 +14884,9 @@ SpriteShapeRenderer:
   m_ShapeTexture: {fileID: 2800000, guid: e2d2e2961fc51a6449f256da4398c69b, type: 3}
   m_Sprites:
   - {fileID: 21300000, guid: 8197bf2c3b0feb241a280ecb413517ca, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   m_LocalAABB:
-    m_Center: {x: -1.5, y: -4.640625, z: -0.0005}
-    m_Extent: {x: 11.53125, y: 7.359375, z: 0.0005}
+    m_Center: {x: -1.5, y: -4.640625, z: 0.000050000002}
+    m_Extent: {x: 11.53125, y: 7.359375, z: 0.000050000002}
 --- !u!1001 &1533007380
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14875,6 +15044,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -14915,12 +15085,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 06ea21af1c106a44e9473c47a7a1af7a, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 8
   m_AdaptiveUV: 1
-  m_UpdateCollider: 1
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 8
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 1
+  m_OptimizeCollider: 1
 --- !u!1971053207 &1534190635
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -15229,6 +15403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 1
     m_ControlPoints:
@@ -15251,12 +15426,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: dc5aad61ea4fccc4d85a1145844575e8, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 8
   m_AdaptiveUV: 1
-  m_UpdateCollider: 1
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 8
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 1
+  m_OptimizeCollider: 1
 --- !u!1971053207 &1570301358
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -15354,6 +15533,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -15394,12 +15574,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 9443f7567a810fb4daf1e149b3d08a5a, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 4
   m_AdaptiveUV: 1
-  m_UpdateCollider: 0
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 4
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 0
+  m_OptimizeCollider: 1
 --- !u!1971053207 &1591925061
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -15572,6 +15756,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -15639,12 +15824,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 4e77035da74ae5243a04a549a80ba057, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 16
   m_AdaptiveUV: 1
-  m_UpdateCollider: 0
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 4
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 0
+  m_OptimizeCollider: 1
 --- !u!1971053207 &1606455700
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -15823,6 +16012,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -15881,12 +16071,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 4e77035da74ae5243a04a549a80ba057, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 16
   m_AdaptiveUV: 1
-  m_UpdateCollider: 0
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 4
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 0
+  m_OptimizeCollider: 1
 --- !u!1971053207 &1620423511
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -16014,6 +16208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 1
     m_ControlPoints:
@@ -16036,12 +16231,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: dc5aad61ea4fccc4d85a1145844575e8, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 8
   m_AdaptiveUV: 1
-  m_UpdateCollider: 1
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 8
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 1
+  m_OptimizeCollider: 1
 --- !u!1971053207 &1621244663
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -16752,6 +16951,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -16819,12 +17019,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 4e77035da74ae5243a04a549a80ba057, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 16
   m_AdaptiveUV: 1
-  m_UpdateCollider: 0
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 4
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 0
+  m_OptimizeCollider: 1
 --- !u!1971053207 &1707216299
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -17586,6 +17790,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -17626,12 +17831,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 06ea21af1c106a44e9473c47a7a1af7a, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 8
   m_AdaptiveUV: 1
-  m_UpdateCollider: 1
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 8
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 1
+  m_OptimizeCollider: 1
 --- !u!1971053207 &1907087146
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -17982,6 +18191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -18076,12 +18286,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 06ea21af1c106a44e9473c47a7a1af7a, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 8
   m_AdaptiveUV: 1
-  m_UpdateCollider: 1
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 8
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 1
+  m_OptimizeCollider: 1
 --- !u!1971053207 &2001130566
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -18814,6 +19028,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -18881,12 +19096,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 4e77035da74ae5243a04a549a80ba057, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 16
   m_AdaptiveUV: 1
-  m_UpdateCollider: 0
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 4
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 0
+  m_OptimizeCollider: 1
 --- !u!1971053207 &2091344565
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
@@ -19101,6 +19320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90539df1cd5704abcb25fec9f3f5f84b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_LegacyGenerator: 0
   m_Spline:
     m_IsOpenEnded: 0
     m_ControlPoints:
@@ -19141,12 +19361,16 @@ MonoBehaviour:
       spriteIndex: 0
       corner: 0
   m_SpriteShape: {fileID: 11400000, guid: 06ea21af1c106a44e9473c47a7a1af7a, type: 2}
+  m_FillPixelPerUnit: 32
+  m_StretchTiling: 1
   m_SplineDetail: 8
   m_AdaptiveUV: 1
-  m_UpdateCollider: 1
+  m_StretchUV: 0
+  m_WorldSpaceUV: 0
   m_ColliderDetail: 8
   m_ColliderOffset: 0
-  m_ColliderCornerType: 0
+  m_UpdateCollider: 1
+  m_OptimizeCollider: 1
 --- !u!1971053207 &2115088942
 SpriteShapeRenderer:
   m_ObjectHideFlags: 0
