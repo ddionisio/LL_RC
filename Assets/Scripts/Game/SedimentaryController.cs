@@ -131,6 +131,9 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
     [M8.SoundPlaylist]
     public string soundRain;
 
+    [Header("Complete")]
+    public GameObject completeProceedGO;
+
     private bool mIsErosionClicked;
     private int mErosionCount = 0;
     private bool mIsErosionFinish;
@@ -208,6 +211,8 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
 
         if(processRockRequireGO) processRockRequireGO.SetActive(false);
 
+        if(completeProceedGO) completeProceedGO.SetActive(false);
+
         processRockButton.onClick.AddListener(OnProcessRockClick);
         processOrganicButton.onClick.AddListener(OnProcessOrganicClick);
 
@@ -246,7 +251,7 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
             //tell user to make some rocks
             if(processRockRequireGO) processRockRequireGO.SetActive(true);
 
-            exitButton.Select();
+            //exitButton.Select();
         }
         else if(processRockButton.interactable)
             processRockButton.Select();
@@ -501,6 +506,12 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
                 while(M8.ModalManager.main.isBusy || M8.ModalManager.main.IsInStack(rock.modal))
                     yield return null;
             }
+        }
+
+        //show complete proceed if criteria is met
+        if(criteria.IsComplete(inventory)) {
+            if(completeProceedGO)
+                completeProceedGO.SetActive(true);
         }
 
         //wait for rock continue

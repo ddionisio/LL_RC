@@ -49,6 +49,9 @@ public class MetamorphicController : GameModeController<MagmaCoolerController> {
     [M8.SoundPlaylist]
     public string soundMorph;
 
+    [Header("Complete")]
+    public GameObject completeProceedGO;
+
     private RockData mRockSelect;
 
     private bool mIsRockResultContinue;
@@ -73,6 +76,8 @@ public class MetamorphicController : GameModeController<MagmaCoolerController> {
         metaMorphAnimator.gameObject.SetActive(false);
         
         rockResultAnimator.gameObject.SetActive(false);
+
+        if(completeProceedGO) completeProceedGO.SetActive(false);
 
         rockSelectSequence.Init();
         rockResultSequence.Init();
@@ -163,7 +168,7 @@ public class MetamorphicController : GameModeController<MagmaCoolerController> {
             //notify that rocks are needed.
             if(noRocksGO) noRocksGO.SetActive(true);
 
-            exitButton.Select();
+            //exitButton.Select();
         }
     }
 
@@ -184,6 +189,12 @@ public class MetamorphicController : GameModeController<MagmaCoolerController> {
                 while(M8.ModalManager.main.isBusy || M8.ModalManager.main.IsInStack(rock.modal))
                     yield return null;
             }
+        }
+
+        //show complete proceed if criteria is met
+        if(criteria.IsComplete(inventory)) {
+            if(completeProceedGO)
+                completeProceedGO.SetActive(true);
         }
 
         //wait for rock continue

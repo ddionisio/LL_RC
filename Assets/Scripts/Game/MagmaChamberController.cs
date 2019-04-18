@@ -16,6 +16,7 @@ public class MagmaChamberController : GameModeController<MagmaChamberController>
     public GameObject rockProcessorGO;
     public RockSelectWidget rockSelector;
     public Button exitButton;
+    public GameObject exitInstructGO;
 
     [Header("Furnace")]
     public GameObject furnaceMagmaGONone;
@@ -73,6 +74,9 @@ public class MagmaChamberController : GameModeController<MagmaChamberController>
         RefreshFireDisplay();
 
         StartCoroutine(DoChangeInterface());
+
+        //show exit
+        exitInstructGO.SetActive(true);
     }
 
     public void RockProcess(InfoData dat) {
@@ -129,6 +133,8 @@ public class MagmaChamberController : GameModeController<MagmaChamberController>
         rockSelector.processRockCallback += RockProcess;
 
         exitButton.onClick.AddListener(OnExitClicked);
+
+        exitInstructGO.SetActive(false);
 
         EventSystem.current.SetSelectedGameObject(null);
 

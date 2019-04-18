@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.7019608, g: 0.3254902, b: 0.19215688, a: 1}
   m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -233,22 +233,25 @@ MonoBehaviour:
     m_SelectOnDown: {fileID: 0}
     m_SelectOnLeft: {fileID: 0}
     m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
+  m_Transition: 0
   m_Colors:
     m_NormalColor: {r: 0.97647065, g: 0.5529412, b: 0.34509805, a: 1}
     m_HighlightedColor: {r: 0.97647065, g: 0.5529412, b: 0.34509805, a: 1}
     m_PressedColor: {r: 0.5294118, g: 0.227451, b: 0.15294118, a: 1}
+    m_SelectedColor: {r: 0.97647065, g: 0.5529412, b: 0.34509805, a: 1}
     m_DisabledColor: {r: 0.5294118, g: 0.227451, b: 0.15294118, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
     m_HighlightedSprite: {fileID: 0}
     m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
     m_DisabledSprite: {fileID: 0}
   m_AnimationTriggers:
     m_NormalTrigger: Normal
     m_HighlightedTrigger: Highlighted
     m_PressedTrigger: Pressed
+    m_SelectedTrigger: Highlighted
     m_DisabledTrigger: Disabled
   m_Interactable: 1
   m_TargetGraphic: {fileID: 5436990950777239323}
@@ -309,6 +312,7 @@ GameObject:
   - component: {fileID: 2936881070632819916}
   - component: {fileID: 8679665159072345573}
   - component: {fileID: 621287893188623087}
+  - component: {fileID: 1655443824883666815}
   m_Layer: 5
   m_Name: select
   m_TagString: Untagged
@@ -447,4 +451,21 @@ MonoBehaviour:
   pulsePerSecond: 0.65
   startColor: {r: 1, g: 0.8431373, b: 0.6, a: 0.08235294}
   endColor: {r: 1, g: 0.8431373, b: 0.6, a: 0.63529414}
+  realtime: 0
+--- !u!114 &1655443824883666815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8917543620052722976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: beceab6decb4a5e429926cf80206010b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 5436990950777239323}
+  pulsePerSecond: 0.65
+  startColor: {r: 0.97647065, g: 0.5529412, b: 0.34509805, a: 1}
+  endColor: {r: 1, g: 0.8431373, b: 0.6, a: 1}
   realtime: 0

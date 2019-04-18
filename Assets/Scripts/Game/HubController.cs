@@ -7,7 +7,9 @@ public class HubController : GameModeController<HubController> {
     public InventoryData inventory;
 
     protected override IEnumerator Start() {
-        yield return base.Start();
+        do {
+            yield return null;
+        } while(M8.SceneManager.instance.isLoading);
 
         //fail-safe
         var curProgress = LoLManager.instance.curProgress;
@@ -16,7 +18,7 @@ public class HubController : GameModeController<HubController> {
             case 3:
             case 5:
                 //add some minerals
-                if(inventory.mineralsCount == 0) {
+                if(inventory.magma.count == 0 && inventory.mineralsCount == 0) {
                     for(int i = 0; i < inventory.minerals.Length; i++) {
                         if(inventory.minerals[i])
                             inventory.minerals[i].count += 1;
@@ -25,7 +27,7 @@ public class HubController : GameModeController<HubController> {
                 break;
             case 7:
                 //add some organics
-                if(inventory.organicsCount == 0) {
+                if(inventory.rocksCount == 0 && inventory.organicsCount == 0) {
                     for(int i = 0; i < inventory.organics.Length; i++) {
                         if(inventory.organics[i])
                             inventory.organics[i].count += 5;
@@ -34,20 +36,23 @@ public class HubController : GameModeController<HubController> {
                 break;
             case 9:
                 //add some minerals
-                if(inventory.mineralsCount == 0) {
+                if(inventory.magma.count == 0 && inventory.mineralsCount == 0) {
                     for(int i = 0; i < inventory.minerals.Length; i++) {
                         if(inventory.minerals[i])
                             inventory.minerals[i].count += 1;
                     }
                 }
                 //add some organics
-                if(inventory.organicsCount == 0) {
+                /*if(inventory.rocksCount == 0 && inventory.organicsCount == 0) {
                     for(int i = 0; i < inventory.organics.Length; i++) {
                         if(inventory.organics[i])
                             inventory.organics[i].count += 5;
                     }
-                }
+                }*/
                 break;
         }
+
+        if(signalModeChanged)
+            signalModeChanged.Invoke(mode);
     }
 }
