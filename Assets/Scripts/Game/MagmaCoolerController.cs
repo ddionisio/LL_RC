@@ -192,14 +192,16 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
         yield return processSequence.Exit();
 
         //if extrusive is disabled, proceed right away
-        if(!processExtrusiveButton.interactable) {
+        //just proceed
+        StartCoroutine(DoIntrusiveProceed());
+        /*if(!processExtrusiveButton.interactable) {
             StartCoroutine(DoIntrusiveProceed());
         }
         else {
             yield return intrusiveSequence.Enter();
 
             intrusiveProceedButton.Select();
-        }
+        }*/
     }
 
     IEnumerator DoIntrusiveBack() {
@@ -407,14 +409,16 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
         yield return processSequence.Exit();
 
         //if intrusive is disabled, proceed right away
-        if(!processIntrusiveButton.interactable) {
+        //just proceed
+        StartCoroutine(DoExtrusiveProceed());
+        /*if(!processIntrusiveButton.interactable) {
             StartCoroutine(DoExtrusiveProceed());
         }
         else {
             yield return extrusiveSequence.Enter();
 
             extrusiveProceedButton.Select();
-        }
+        }*/
     }
 
     IEnumerator DoExtrusiveBack() {

@@ -25,10 +25,14 @@ public class CollectionItemWidget : MonoBehaviour {
 
     public RockData rockData { get; private set; }
 
+    public bool ignoreNewlySeen { get { return mIgnoreNewlySeen; } set { mIgnoreNewlySeen = value; } }
+
     private Shapes2D.Shape[] mRockShapes;
 
     private Shapes2D.Shape mRockShape;
     private Image mRockShapeImage;
+
+    private bool mIgnoreNewlySeen;
 
     private M8.GenericParams mModalParms = new M8.GenericParams();
 
@@ -37,8 +41,9 @@ public class CollectionItemWidget : MonoBehaviour {
             yield return animator.PlayWait(takeNewlySeen);
     }
     
-    public void Init(RockData aRockData) {
+    public void Init(RockData aRockData, bool ignoreNewlySeen) {
         rockData = aRockData;
+        mIgnoreNewlySeen = ignoreNewlySeen;
 
         if(!mRockShape) {
             if(mRockShapes == null)
@@ -59,7 +64,14 @@ public class CollectionItemWidget : MonoBehaviour {
     public void RefreshDisplay() {
         ResetDisplay();
 
-        if(rockData.isSeen) {
+        bool isSeen = false;
+
+        if(mIgnoreNewlySeen && rockData.isNewlySeen)
+            isSeen = false;
+        else
+            isSeen = rockData.isSeen;
+
+        if(isSeen) {
             if(rockShapesRoot) rockShapesRoot.gameObject.SetActive(true);
             if(selectable) selectable.gameObject.SetActive(true);
 

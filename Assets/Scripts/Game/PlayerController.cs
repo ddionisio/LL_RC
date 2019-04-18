@@ -20,12 +20,16 @@ public class PlayerController : MonoBehaviour {
     public M8.State stateDespawn;
     public M8.State stateNormal;
     public M8.State stateDeath;
+    public M8.State stateQuit; //for quitters
 
     [Header("Move Animate")]
     public SpriteRenderer moveSprite;
     public float moveSpeedNormal = 30f; //speed scale
     public float moveSpeedMinScale = 0.1f;
     public float moveToAirDelay = 0.2f; //delay before switching to air animation when not on ground.
+
+    [Header("For Quitters")]
+    public GameObject quitActiveGO;
 
     [Header("Animations")]
     public M8.Animator.Animate animator;
@@ -62,6 +66,7 @@ public class PlayerController : MonoBehaviour {
     [Header("Signal Invoke")]
     public M8.Signal signalDeath;
     public M8.Signal signalDespawn;
+    public M8.Signal signalQuit; //for quitters
 
     public bool inputEnabled {
         get { return mInputEnabled && stateControl.state == stateNormal; }
@@ -73,6 +78,8 @@ public class PlayerController : MonoBehaviour {
             }
         }
     }
+
+    public int deathCount { get; private set; }
 
     private bool mInputEnabled = true;
 
@@ -117,6 +124,8 @@ public class PlayerController : MonoBehaviour {
             StopCoroutine(mCurRout);
             mCurRout = null;
         }
+
+        if(quitActiveGO) quitActiveGO.SetActive(false);
     }
 
     void OnDestroy() {
@@ -135,6 +144,8 @@ public class PlayerController : MonoBehaviour {
 
             Checkpoint.RemoveStart();
         }
+
+        if(quitActiveGO) quitActiveGO.SetActive(false);
 
         var camFollowGO = GameObject.FindGameObjectWithTag(cameraTagFollow);
         mCameraFollow = camFollowGO.GetComponent<CameraFollow>();
@@ -273,7 +284,12 @@ public class PlayerController : MonoBehaviour {
             mCurRout = StartCoroutine(DoDespawn());
         }
         else if(state == stateDeath) {
+            deathCount++;
+
             mCurRout = StartCoroutine(DoDeath());
+        }
+        else if(state == stateQuit) {
+            mCurRout = StartCoroutine(DoQuitter());
         }
         else if(state == stateNormal) {
             physicsEnable = true;
@@ -342,5 +358,16 @@ public class PlayerController : MonoBehaviour {
         yield return animator.PlayWait(takeDespawn);
 
         signalDespawn.Invoke();
+    }
+
+    IEnumerator DoQuitter() {
+        if(quitActiveGO) quitActiveGO.SetActive(true);
+
+        if(mCameraFollow.follow == transform)
+            mCameraFollow.follow = null;
+
+        yield return animator.PlayWait(takeDespawn);
+
+        signalQuit.Invoke();
     }
 }

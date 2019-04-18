@@ -20,6 +20,9 @@ public class AnimatorEnterExitTrigger : MonoBehaviour {
     private Coroutine mRout;
 
     void OnTriggerEnter2D(Collider2D collision) {
+        if(!gameObject.activeInHierarchy)
+            return;
+
         mIsTriggered = true;
         mLastTriggerTime = Time.time;
 
@@ -28,6 +31,9 @@ public class AnimatorEnterExitTrigger : MonoBehaviour {
     }
 
     void OnTriggerExit2D(Collider2D collision) {
+        if(!gameObject.activeInHierarchy)
+            return;
+
         mIsTriggered = false;
         mLastTriggerTime = Time.time;
 

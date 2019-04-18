@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ModalCollections : M8.ModalController, M8.IModalPush, M8.IModalActive {
+    public const string parmIgnoreNewlySeen = "ignoreNewlySeen";
+
     [System.Serializable]
     public class RockListData {
         public Transform itemRoot;
 
         public CollectionItemWidget[] items { get; private set; }
         
-        public void Init(CollectionItemWidget template, RockData[] rocks) {
+        public void Init(CollectionItemWidget template, RockData[] rocks, bool ignoreNewlySeen) {
             items = new CollectionItemWidget[rocks.Length];
 
             for(int i = 0; i < rocks.Length; i++) {
@@ -17,9 +19,16 @@ public class ModalCollections : M8.ModalController, M8.IModalPush, M8.IModalActi
                 newItem.transform.SetParent(itemRoot, false);
                 newItem.gameObject.SetActive(true);
 
-                newItem.Init(rocks[i]);
+                newItem.Init(rocks[i], ignoreNewlySeen);
 
                 items[i] = newItem;
+            }
+        }
+
+        public void ApplyIgnoreNewlySeen(bool ignoreNewlySeen) {
+            for(int i = 0; i < items.Length; i++) {
+                if(items[i])
+                    items[i].ignoreNewlySeen = ignoreNewlySeen;
             }
         }
 
@@ -67,22 +76,37 @@ public class ModalCollections : M8.ModalController, M8.IModalPush, M8.IModalActi
     public RockListData sedimentaryList;
     public RockListData metamorphicList;
 
+    private bool mIgnoreNewlySeen;
+
     void M8.IModalPush.Push(M8.GenericParams parms) {
+        mIgnoreNewlySeen = false;
+
+        if(parms != null) {
+            if(parms.ContainsKey(parmIgnoreNewlySeen))
+                mIgnoreNewlySeen = parms.GetValue<bool>(parmIgnoreNewlySeen);
+        }
+
         //initialize
         if(igneousList.items == null) {
             var rocks = inventory.rocksIgneous;
-            igneousList.Init(itemTemplate, rocks);
+            igneousList.Init(itemTemplate, rocks, mIgnoreNewlySeen);
         }
+        else
+            igneousList.ApplyIgnoreNewlySeen(mIgnoreNewlySeen);
 
         if(sedimentaryList.items == null) {
             var rocks = inventory.rocksSedimentary;
-            sedimentaryList.Init(itemTemplate, rocks);
+            sedimentaryList.Init(itemTemplate, rocks, mIgnoreNewlySeen);
         }
+        else
+            sedimentaryList.ApplyIgnoreNewlySeen(mIgnoreNewlySeen);
 
         if(metamorphicList.items == null) {
             var rocks = inventory.rocksMetamorphic;
-            metamorphicList.Init(itemTemplate, rocks);
+            metamorphicList.Init(itemTemplate, rocks, mIgnoreNewlySeen);
         }
+        else
+            metamorphicList.ApplyIgnoreNewlySeen(mIgnoreNewlySeen);
 
         //refresh display
         igneousList.RefreshDisplay();
@@ -92,7 +116,8 @@ public class ModalCollections : M8.ModalController, M8.IModalPush, M8.IModalActi
 
     void M8.IModalActive.SetActive(bool aActive) {
         if(aActive) {
-            StartCoroutine(DoReveals());
+            if(!mIgnoreNewlySeen)
+                StartCoroutine(DoReveals());
         }
     }
 
