@@ -9,6 +9,7 @@ public class StateSpawnDespawnController : MonoBehaviour, M8.IPoolSpawnComplete,
     public bool releaseAfterDespawn = true;
 
     [Header("Spawn Info")]
+    public float spawnDelay;
     public M8.State spawnAfterState; //state after spawn finished
 
     [Header("Despawn Info")]
@@ -73,6 +74,9 @@ public class StateSpawnDespawnController : MonoBehaviour, M8.IPoolSpawnComplete,
         }
         else
             yield return null;
+
+        if(spawnDelay > 0f)
+            yield return new WaitForSeconds(spawnDelay);
 
         mRout = null;
 

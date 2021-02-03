@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class InfoDataListWidget : MonoBehaviour {
-    public const int itemCapacity = 16;
+    public const int itemCapacity = 32;
 
     [Header("Info")]
     public InfoDataWidget template;

@@ -18,11 +18,22 @@ public class SpriteShapeAnchor : MonoBehaviour {
 
     public GameObject m_ParentObject;
 
-    // Use this for initialization
-    void Start() {
+    public bool renderEnabled = true;
 
+    private SpriteShapeController mTarget;
+
+    void Awake() {
+        mTarget = GetComponent<SpriteShapeController>();
     }
 
+    // Use this for initialization
+    void Start() {
+        if(mTarget) {
+            mTarget.spriteShapeRenderer.enabled = renderEnabled;
+        }
+    }
+
+#if UNITY_EDITOR
     // Update is called once per frame
     void Update() {
         if(m_ParentObject != null) {
@@ -31,7 +42,6 @@ public class SpriteShapeAnchor : MonoBehaviour {
     }
 
     private static void CopySpline(GameObject src, GameObject dst) {
-#if UNITY_EDITOR
         var parentSpriteShapeController = src.GetComponent<SpriteShapeController>();
         var mirrorSpriteShapeController = dst.GetComponent<SpriteShapeController>();
 
@@ -43,7 +53,7 @@ public class SpriteShapeAnchor : MonoBehaviour {
             dstController.ApplyModifiedProperties();
             EditorUtility.SetDirty(mirrorSpriteShapeController);
         }
-#endif
-    }
 
+    }
+#endif
 }
