@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class CollectionItemWidget : MonoBehaviour {
     public Transform rockShapesRoot;
     public GameObject lockedGO;
+    public bool lockedIsDisplayed;
     public Text titleText;
     public Selectable selectable;
 
@@ -96,7 +97,7 @@ public class CollectionItemWidget : MonoBehaviour {
             }
         }
         else {
-            if(lockedGO) lockedGO.SetActive(true);
+            if(lockedGO) lockedGO.SetActive(lockedIsDisplayed);
         }
     }
 

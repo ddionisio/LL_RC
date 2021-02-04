@@ -29,6 +29,7 @@ public class RockSelectWidget : Selectable {
 
     [Header("Input")]
     public M8.InputAction processInput; //use the accept input action
+    public bool processIsClick;
     public M8.InputAction selectAxisInput; //axis input to select prev/next (-1 = left/down, 1 = right/up)
 
     [Header("Rock")]
@@ -330,11 +331,7 @@ public class RockSelectWidget : Selectable {
                 if(!interactable || !mIsSelected || mRockList.Count == 0)
                     break;
 
-                if(mIsDown || processInput.IsDown()) {
-                    mCurTime = 0f;
-                    mCurState = State.Processing;
-                }
-                else if(mRockList.Count > 1 && selectAxisInput.IsPressed()) {
+                if(mRockList.Count > 1 && selectAxisInput.IsPressed()) {
                     float axisVal = selectAxisInput.GetAxis();
                     if(Mathf.Abs(axisVal) > 0.3f) {
                         mIsRotateLeft = Mathf.Sign(axisVal) < 0f;
@@ -347,6 +344,17 @@ public class RockSelectWidget : Selectable {
 
                         mCurTime = 0f;
                         mCurState = State.Selecting;
+                    }
+                }
+                else {
+                    if(processIsClick) {
+                        if(processInput.IsPressed()) {
+                            mCurState = State.Proceed;
+                        }
+                    }
+                    else if(mIsDown || processInput.IsDown()) {
+                        mCurTime = 0f;
+                        mCurState = State.Processing;
                     }
                 }
                 break;
