@@ -16,7 +16,6 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
     public class RockSpawnInfo {
         public RockSpawnController spawner;
         public SpriteShapeController layerSpriteCtrl;
-        public SpriteShapeColor layerSpriteColor;
         public float fadeInStartDelay = 1f;
 
         public bool isSpawning { get; private set; }
@@ -29,11 +28,11 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
         public IEnumerator Spawn(SpriteShape spriteShape, float delay) {
             layerSpriteCtrl.spriteShape = spriteShape;
             layerSpriteCtrl.gameObject.SetActive(true);
-            
-            var layerClr = layerSpriteColor.color;
+
+            var layerClr = layerSpriteCtrl.spriteShapeRenderer.color;
             layerClr.a = 0f;
 
-            layerSpriteColor.color = layerClr;
+            layerSpriteCtrl.spriteShapeRenderer.color = layerClr;
 
             isSpawning = true;
 
@@ -52,7 +51,7 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
                 var t = Mathf.Clamp01(curTime / delay);
 
                 layerClr.a = t;
-                layerSpriteColor.color = layerClr;
+                layerSpriteCtrl.spriteShapeRenderer.color = layerClr;
             }
                         
             isSpawning = false;
@@ -69,6 +68,7 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
 
     [Header("Process")]
     public SequenceInfo processSequence;
+    public int processRockDisableAtProgress = 7; //set to -1 to disable
     public Button processRockButton;
     public Button processOrganicButton;
     public GameObject processRockRequireGO;
@@ -242,7 +242,7 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
         //int rockTypeCount = inventory.rockTypeValidCount;
         int organicCount = inventory.organicsCount;
 
-        processRockButton.interactable = rockCount >= inventory.sedimentaryRockCount;// && rockTypeCount >= inventory.sedimentaryRockCount;
+        processRockButton.interactable = rockCount >= inventory.sedimentaryRockCount && (processRockDisableAtProgress < 0 || processRockDisableAtProgress != LoLManager.instance.curProgress);// && rockTypeCount >= inventory.sedimentaryRockCount;
         processOrganicButton.interactable = organicCount > 0;
 
         yield return processSequence.Enter();
@@ -447,7 +447,11 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
                 
         if(rockList != null) {
             rockOutput = rockList[Random.Range(0, rockList.Count)];
-            rockOutput.count += inventory.sedimentaryRockCount;
+
+            if(GlobalSettings.isUnlimitedResource)
+                rockOutput.count = GlobalSettings.unlimitedResourceRock;
+            else
+                rockOutput.count += inventory.sedimentaryRockCount;
         }
         //
 
@@ -576,7 +580,9 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
 
         var rockSpawner = sourceSpawners[rockInd];
 
-        dat.count--;
+        if(!GlobalSettings.isUnlimitedResource)
+            dat.count--;
+
         criteria.InvokeUpdate(dat);
 
         mSourceSelects.Add(dat);

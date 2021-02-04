@@ -119,11 +119,15 @@ public class MetamorphicController : GameModeController<MagmaCoolerController> {
 
             //generate rock
             if(mRockSelect.count > 0) {
-                mRockSelect.count--;
+                if(!GlobalSettings.isUnlimitedResource)
+                    mRockSelect.count--;
                 criteria.InvokeUpdate(mRockSelect);
             }
 
-            mRockSelect.metaOutput.count++;
+            if(GlobalSettings.isUnlimitedResource)
+                mRockSelect.metaOutput.count = GlobalSettings.unlimitedResourceRock;
+            else
+                mRockSelect.metaOutput.count++;
             
             mRockResultList.Clear();
             mRockResultList.Add(mRockSelect.metaOutput);

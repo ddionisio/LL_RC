@@ -3,11 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ProgressActiveGO : MonoBehaviour {
+    public enum InactiveDataCheck {
+        None,
+        Greater,
+        Less,
+        AnyRockOrganic,
+        AnyRock
+    }
+
     public int[] progressMatch;
 
     [Header("Show")]
     public GameObject activeGO;
     public GameObject inactiveGO;
+
+    [Header("Inactive")]
+    public InactiveDataCheck inactiveDataCheck;
+    public InventoryData inactiveInventory; //for use in specialized check
+    public InfoData inactiveData;
+    public int inactiveCount;
 
     [Header("FSM")]
     public PlayMakerFSM fsm;
@@ -38,6 +52,31 @@ public class ProgressActiveGO : MonoBehaviour {
                 isMatch = true;
                 break;
             }
+        }
+
+        if(isMatch) {
+            switch(inactiveDataCheck) {
+                case InactiveDataCheck.Greater:
+                    if(inactiveData.count >= inactiveCount)
+                        isMatch = false;
+                    break;
+
+                case InactiveDataCheck.Less:
+                    if(inactiveData.count <= inactiveCount)
+                        isMatch = false;
+                    break;
+
+                case InactiveDataCheck.AnyRockOrganic:
+                    if(inactiveInventory.rocksCount <= 0 && inactiveInventory.organicsCount <= 0)
+                        isMatch = false;
+                    break;
+
+                case InactiveDataCheck.AnyRock:
+                    if(inactiveInventory.rocksCount <= 0)
+                        isMatch = false;
+                    break;
+            }
+            
         }
 
         if(activeGO) activeGO.SetActive(isMatch);

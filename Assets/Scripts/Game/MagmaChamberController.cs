@@ -81,11 +81,16 @@ public class MagmaChamberController : GameModeController<MagmaChamberController>
 
     public void RockProcess(InfoData dat) {
         if(dat.count > 0) {
-            dat.count--;
+            if(GlobalSettings.isUnlimitedResource) {
+                inventory.magma.count = GlobalSettings.unlimitedResourceMagma;
+            }
+            else {
+                dat.count--;
 
-            int magmaValue = 1;
+                int magmaValue = 1;
 
-            inventory.magma.count += magmaValue;
+                inventory.magma.count += magmaValue;
+            }
 
             criteria.InvokeUpdate(dat);
         }

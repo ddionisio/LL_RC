@@ -9,7 +9,6 @@ public class Rock : MonoBehaviour, M8.IPoolSpawn {
 
     [Header("Data")]
     public SpriteShapeController spriteShapeCtrl;
-    public SpriteShapeColor spriteShapeColor;
     public M8.RangeFloat dirAngleRange = new M8.RangeFloat { min = -10f, max = 10f };
     public M8.RangeFloat impulseRange = new M8.RangeFloat { min = 10f, max = 15f };
     public float aliveDelay = 1f; //how long to stay alive after hitting ground
@@ -34,7 +33,7 @@ public class Rock : MonoBehaviour, M8.IPoolSpawn {
 
     void Awake() {
         mBody = GetComponent<Rigidbody2D>();
-        mDefaultColor = spriteShapeColor.color;
+        mDefaultColor = spriteShapeCtrl.spriteShapeRenderer.color;
     }
     
     void M8.IPoolSpawn.OnSpawned(M8.GenericParams parms) {
@@ -64,7 +63,7 @@ public class Rock : MonoBehaviour, M8.IPoolSpawn {
         dir = M8.MathUtil.RotateAngle(dir, dirAngleRange.random);
         mBody.AddForce(dir * impulseRange.random, ForceMode2D.Impulse);
 
-        spriteShapeColor.color = mDefaultColor;
+        spriteShapeCtrl.spriteShapeRenderer.color = mDefaultColor;
 
         StartCoroutine(DoAlive());
     }
@@ -97,7 +96,7 @@ public class Rock : MonoBehaviour, M8.IPoolSpawn {
 
             var t = Mathf.Clamp01(curTime / fadeDelay);
             clr.a = 1f - t;
-            spriteShapeColor.color = clr;
+            spriteShapeCtrl.spriteShapeRenderer.color = clr;
         }
 
         Release();

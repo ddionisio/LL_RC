@@ -156,10 +156,10 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
     protected override IEnumerator Start() {
         yield return base.Start();
 
-        StartCoroutine(DoProcessSelect());
+        StartCoroutine(DoProcessSelect(false));
     }
 
-    IEnumerator DoProcessSelect() {
+    IEnumerator DoProcessSelect(bool selectExit) {
         //check if there's magma
         if(inventory.magma.count > 0) {
             int progress = LoLManager.isInstantiated ? LoLManager.instance.curProgress : 0;
@@ -171,12 +171,16 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
 
             yield return processSequence.Enter();
 
-            if(processIntrusiveButton.interactable)
-                processIntrusiveButton.Select();
-            else if(processExtrusiveButton.interactable)
-                processExtrusiveButton.Select();
-            else
+            if(selectExit)
                 exitButton.Select();
+            else {
+                if(processIntrusiveButton.interactable)
+                    processIntrusiveButton.Select();
+                else if(processExtrusiveButton.interactable)
+                    processExtrusiveButton.Select();
+                else
+                    exitButton.Select();
+            }
         }
         else { //show nothing, just exit
             if(magmaEmptyGO) magmaEmptyGO.SetActive(true);
@@ -209,7 +213,7 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
 
         yield return intrusiveSequence.Exit();
 
-        StartCoroutine(DoProcessSelect());
+        StartCoroutine(DoProcessSelect(true));
     }
 
     IEnumerator DoMode(Mode toMode) {
@@ -368,17 +372,26 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
         if(isIntrusiveGiveAllRocks) { //just give all the rocks, sigh...
             for(int i = 0; i < intrusiveRocks.Length; i++) {
                 var rock = intrusiveRocks[i];
-                rock.count += inventory.igneousOutput;
 
-                var magmaCount = inventory.magma.count - inventory.igneousOutput;
-                if(magmaCount < 0)
-                    magmaCount = 0;
-                inventory.magma.count = magmaCount;
+                if(GlobalSettings.isUnlimitedResource) {
+                    if(rock.count <= 0)
+                        rock.count = GlobalSettings.unlimitedResourceRock;
 
-                mRockResultList.Add(rock);
+                    mRockResultList.Add(rock);
+                }
+                else {
+                    rock.count += inventory.igneousOutput;
 
-                if(magmaCount == 0)
-                    break;
+                    var magmaCount = inventory.magma.count - inventory.igneousOutput;
+                    if(magmaCount < 0)
+                        magmaCount = 0;
+                    inventory.magma.count = magmaCount;
+
+                    mRockResultList.Add(rock);
+
+                    if(magmaCount == 0)
+                        break;
+                }
             }
         }
         else {
@@ -426,7 +439,7 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
 
         yield return extrusiveSequence.Exit();
 
-        StartCoroutine(DoProcessSelect());
+        StartCoroutine(DoProcessSelect(true));
     }
 
     IEnumerator DoExtrusiveProceed() {
@@ -450,11 +463,18 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
         mRockResultList.Clear();
         for(int i = 0; i < extrusiveResultCount; i++) {            
             var rock = extrusiveRocks[i];
-            rock.count += inventory.igneousOutput;
 
-            magmaCount -= inventory.igneousOutput;
-            if(magmaCount < 0)
-                magmaCount = 0;
+            if(GlobalSettings.isUnlimitedResource) {
+                if(rock.count <= 0)
+                    rock.count = GlobalSettings.unlimitedResourceRock;
+            }
+            else {
+                rock.count += inventory.igneousOutput;
+
+                magmaCount -= inventory.igneousOutput;
+                if(magmaCount < 0)
+                    magmaCount = 0;
+            }
 
             mRockResultList.Add(rock);
         }
@@ -497,7 +517,10 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
         }
 
         //wait for rock continue
-        rockResultContinueButton.Select();
+
+        exitButton.Select();
+        //rockResultContinueButton.Select();
+
         mIsRockResultContinue = false;
         while(!mIsRockResultContinue)
             yield return null;
@@ -532,7 +555,7 @@ public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
                 break;
         }
 
-        StartCoroutine(DoProcessSelect());
+        StartCoroutine(DoProcessSelect(false));
     }
 
     void OnExit() {
