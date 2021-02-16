@@ -168,8 +168,13 @@ public class PlayerController : MonoBehaviour {
 
         animator.ResetTake(takeSpawn);
 
-        if(input)
+        if(input) {
             input.ActionAddCallback(OnAct);
+        }
+    }
+
+    void Start() {
+        OnStateChanged(null);
     }
 
     void Update() {

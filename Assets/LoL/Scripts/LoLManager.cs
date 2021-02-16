@@ -125,6 +125,12 @@ public class LoLManager : M8.SingletonBehaviour<LoLManager> {
             return mIsSpeechMute;
         }
     }
+
+    public bool isSpeechQueued {
+        get {
+            return mSpeakQueueRout != null;
+        }
+    }
     
     public event OnCallback progressCallback;
     public event OnCallback completeCallback;
