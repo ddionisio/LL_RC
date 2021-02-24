@@ -372,6 +372,7 @@ GameObject:
   - component: {fileID: 2073398207456525872}
   - component: {fileID: 2073398207456525884}
   - component: {fileID: 4623660619548189231}
+  - component: {fileID: 6116267137718921653}
   m_Layer: 5
   m_Name: rockSelector
   m_TagString: Untagged
@@ -598,6 +599,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 2073398207936473290}
   selectSticky: 1
+--- !u!114 &6116267137718921653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2073398207456525880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4f8efb15caa5804a8cd048d3b5d6430, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2073398207456525885}
+        m_MethodName: Proceed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &2073398207510302608
 GameObject:
   m_ObjectHideFlags: 0

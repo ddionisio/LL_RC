@@ -322,6 +322,22 @@ public class RockSelectWidget : Selectable {
         mIsDown = false;
     }
 
+    public void Proceed() {
+        if(!processIsClick)
+            return;
+
+        if(mCurState != State.None)
+            return;
+
+        if(!interactable || !mIsSelected || mRockList.Count == 0)
+            return;
+
+        if(selectAxisInput.IsPressed())
+            return;
+
+        mCurState = State.Proceed;
+    }
+
     void Update() {
         if(!Application.isPlaying)
             return;
