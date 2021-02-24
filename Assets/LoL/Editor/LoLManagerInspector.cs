@@ -3,6 +3,8 @@ using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
 
+using LoLExt;
+
 [CustomEditor(typeof(LoLManager), true)]
 public class LoLManagerInspector : Editor {
     private int mProgressInput;

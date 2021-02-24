@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using LoLExt;
+
 public class ModalConfirm : M8.ModalController, M8.IModalPush, M8.IModalPop, M8.IModalActive {
     public const string parmTitleTextRef = "confirmTitleTxtRef";
     public const string parmDescTextRef = "confirmDescTxtRef";

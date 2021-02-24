@@ -121,6 +121,34 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &532947515 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3165476074467134627, guid: 44cf8113b93bf2440bcdb19baffe4eab,
+    type: 3}
+  m_PrefabInstance: {fileID: 725599211433927454}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &532947516
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532947515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb8727d4c679154fba211e781ab930d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _gameID: com.daviddionisio.LL_RC
+  _progressMax: 10
+  _userData: {fileID: 11400000, guid: d1570a9011293b94a9b3d84278169e34, type: 2}
+  _settingsData: {fileID: 11400000, guid: 9d49958e44f75d147a748c1b9fa7ee0e, type: 2}
+  _speakQueueStartDelay: 0.3
+  musicPlaylistRootGO: {fileID: 725599211433927456}
+  soundPlaylistRootGO: {fileID: 725599211433927455}
+  signalProgressUpdate: {fileID: 11400000, guid: 639e3a00c6e5d6a468b0762512980c7b,
+    type: 2}
+  localizeText: {fileID: 4900000, guid: abd46d0c4b49c924ebfc478fbe80a64a, type: 3}
 --- !u!1 &602850874
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,6 +211,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8568697559398003339, guid: 44cf8113b93bf2440bcdb19baffe4eab,
         type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8568697559398003339, guid: 44cf8113b93bf2440bcdb19baffe4eab,
+        type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -198,6 +231,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8568697559398003339, guid: 44cf8113b93bf2440bcdb19baffe4eab,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8568697559398003339, guid: 44cf8113b93bf2440bcdb19baffe4eab,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -210,16 +248,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8568697559398003339, guid: 44cf8113b93bf2440bcdb19baffe4eab,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8568697559398003339, guid: 44cf8113b93bf2440bcdb19baffe4eab,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8568697559398003339, guid: 44cf8113b93bf2440bcdb19baffe4eab,
         type: 3}
@@ -238,32 +266,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8609913111461870525, guid: 44cf8113b93bf2440bcdb19baffe4eab, type: 3}
+    - {fileID: 3058867647269501707, guid: 44cf8113b93bf2440bcdb19baffe4eab, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 44cf8113b93bf2440bcdb19baffe4eab, type: 3}
 --- !u!1 &725599211433927455 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 8566354496808799253, guid: 44cf8113b93bf2440bcdb19baffe4eab,
+  m_CorrespondingSourceObject: {fileID: 4289805248626187167, guid: 44cf8113b93bf2440bcdb19baffe4eab,
     type: 3}
   m_PrefabInstance: {fileID: 725599211433927454}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &725599211433927456
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+--- !u!1 &725599211433927456 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8240275831041081163, guid: 44cf8113b93bf2440bcdb19baffe4eab,
+    type: 3}
+  m_PrefabInstance: {fileID: 725599211433927454}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 725599211433927455}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb8727d4c679154fba211e781ab930d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _gameID: com.daviddionisio.LL_RC
-  _progressMax: 10
-  userSettings: {fileID: 11400000, guid: 9ab6acfbc605b1b45aa1c7a95ea3ebb6, type: 2}
-  _speakQueueStartDelay: 0.3
-  signalProgressUpdate: {fileID: 11400000, guid: 639e3a00c6e5d6a468b0762512980c7b,
-    type: 2}
-  localizeText: {fileID: 4900000, guid: abd46d0c4b49c924ebfc478fbe80a64a, type: 3}
 --- !u!1001 &3678700641856523097
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -275,6 +291,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 1843131724091989401, guid: 7e495b56f7127f24f84b1140cfa03d1c,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1843131724091989401, guid: 7e495b56f7127f24f84b1140cfa03d1c,
         type: 3}
@@ -293,6 +314,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1843131724091989401, guid: 7e495b56f7127f24f84b1140cfa03d1c,
         type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1843131724091989401, guid: 7e495b56f7127f24f84b1140cfa03d1c,
+        type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
@@ -305,16 +331,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1843131724091989401, guid: 7e495b56f7127f24f84b1140cfa03d1c,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1843131724091989401, guid: 7e495b56f7127f24f84b1140cfa03d1c,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1843131724091989401, guid: 7e495b56f7127f24f84b1140cfa03d1c,
         type: 3}

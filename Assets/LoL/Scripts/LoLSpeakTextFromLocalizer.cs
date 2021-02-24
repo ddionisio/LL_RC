@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using LoLExt;
+
 public class LoLSpeakTextFromLocalizer : MonoBehaviour {
 
     M8.UI.Texts.Localizer localizer;

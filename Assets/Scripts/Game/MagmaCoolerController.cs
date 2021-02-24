@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+using LoLExt;
+
 public class MagmaCoolerController : GameModeController<MagmaCoolerController> {
     public enum Mode {
         None,

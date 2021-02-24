@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using LoLExt;
+
 public class ModalVictory : M8.ModalController, M8.IModalPush {
     [Header("Data")]
     [M8.TagSelector]

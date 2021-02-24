@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
+using LoLExt;
+
 public class LoLSpeakTextClick : MonoBehaviour, IPointerClickHandler {    
     [M8.Localize]
     public string key;

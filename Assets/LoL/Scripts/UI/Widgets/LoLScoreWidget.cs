@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using LoLExt;
+
 public class LoLScoreWidget : MonoBehaviour {
     public Text target;
 

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using LoLExt;
+
 public class LoLSpeakTextOnEnable : MonoBehaviour {
     [M8.Localize]
     public string key;

@@ -5,6 +5,8 @@ using UnityEngine.U2D;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+using LoLExt;
+
 public class SedimentaryController : GameModeController<SedimentaryController> {
     public enum SourceMode {
         None,

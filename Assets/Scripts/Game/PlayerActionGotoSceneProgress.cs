@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using LoLExt;
+
 /// <summary>
 /// Add this to a trigger
 /// </summary>

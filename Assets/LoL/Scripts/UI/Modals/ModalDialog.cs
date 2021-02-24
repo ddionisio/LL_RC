@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using LoLExt;
+
 public class ModalDialog : M8.ModalController, M8.IModalActive, M8.IModalPush, M8.IModalPop {
     public const string modalNameGeneric = "dialog";
 

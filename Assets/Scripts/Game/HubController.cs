@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using LoLExt;
+
 public class HubController : GameModeController<HubController> {
 
     public InventoryData inventory;

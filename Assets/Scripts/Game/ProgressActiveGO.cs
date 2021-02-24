@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using LoLExt;
+
 public class ProgressActiveGO : MonoBehaviour {
     public enum InactiveDataCheck {
         None,

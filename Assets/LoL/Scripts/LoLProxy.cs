@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using LoLExt;
+
 public class LoLProxy : MonoBehaviour {
     public void Complete() {
         if(LoLManager.isInstantiated)

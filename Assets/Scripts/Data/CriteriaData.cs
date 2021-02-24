@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using LoLExt;
+
 [CreateAssetMenu(fileName = "criteriaData", menuName = "Game/Criteria")]
 public class CriteriaData : M8.SingletonScriptableObject<CriteriaData> {
     [System.Serializable]

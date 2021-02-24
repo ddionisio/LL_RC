@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using LoLExt;
+
 public class LoLSpeechToggleWidget : MonoBehaviour {
     [Header("Display")]
     public GameObject onActiveGO;

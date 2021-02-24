@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+using LoLExt;
+
 public class ModalInfo : M8.ModalController, M8.IModalActive, M8.IModalPush, M8.IModalPop {
     public const string speechGroup = "description";
 
