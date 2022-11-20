@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+using LoLExt;
+
 [CreateAssetMenu(fileName = "inventory", menuName = "Game/Inventory")]
 public class InventoryData : ScriptableObject {
     [Header("Rocks")]
@@ -118,6 +120,7 @@ public class InventoryData : ScriptableObject {
         if(deleteSeen)
             magma.isSeen = false;
 
-        M8.SceneState.instance.userData.Save();
+        //M8.SceneState.instance.userData.Save();
+        LoLManager.instance.userData.Save();
     }
 }

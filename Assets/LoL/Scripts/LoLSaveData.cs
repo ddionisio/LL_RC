@@ -28,21 +28,43 @@ namespace LoLExt {
         public int maximumProgress { get; private set; }
 
         private LoLSaveState mSaveState;
+        private bool mIsMockUp;
+
+        private const string mockUpPrefKey = "LoLMockUp";
+
+        public void SetMockUp(bool isMockUp) {
+            mIsMockUp = isMockUp;
+        }
 
         /// <summary>
         /// Note: This must be called after LoL has instantiated and ready
         /// </summary>
         public override void Load() {
+            if(mIsMockUp) {
+                base.Load();
+                isLoaded = true;
+                return;
+            }
+
             isLoaded = false;
 
             LOLSDK.Instance.LoadState<LoLSaveState>(OnLoaded);
         }
 
         protected override byte[] LoadRawData() {
+            if(mIsMockUp)
+                return System.Convert.FromBase64String(PlayerPrefs.GetString(mockUpPrefKey, ""));
+
             return mSaveState != null ? mSaveState.DecodeRawData() : new byte[0];
         }
 
         protected override void SaveRawData(byte[] dat) {
+            if(mIsMockUp) {
+                PlayerPrefs.SetString(mockUpPrefKey, System.Convert.ToBase64String(dat));
+                PlayerPrefs.Save();
+                return;
+            }
+
             if(mSaveState == null) //fail-safe
                 mSaveState = new LoLSaveState();
 
@@ -52,6 +74,12 @@ namespace LoLExt {
         }
 
         protected override void DeleteRawData() {
+            if(mIsMockUp) {
+                PlayerPrefs.DeleteKey(mockUpPrefKey);
+                PlayerPrefs.Save();
+                return;
+            }
+
             if(mSaveState == null) //fail-safe
                 mSaveState = new LoLSaveState();
 
