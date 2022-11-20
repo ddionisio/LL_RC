@@ -63,6 +63,10 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &948188407638602376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -467,6 +471,10 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &7943265998405785797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1125,6 +1133,10 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &931545078057801671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2102,14 +2114,16 @@ MonoBehaviour:
     _rotationTracks: []
     _rotationKeys: []
     _translationTracks:
-    - id: 2
+    - _version: 3
+      id: 2
       name: Track1
       foldout: 1
       _targetPath: 
       _obj: {fileID: 5367851923622564440}
       pixelSnap: 0
       pixelPerUnit: 100
-    - id: 2
+    - _version: 3
+      id: 2
       name: Track1
       foldout: 1
       _targetPath: 
@@ -2117,54 +2131,54 @@ MonoBehaviour:
       pixelSnap: 0
       pixelPerUnit: 100
     _translationKeys:
-    - version: 2
-      interp: 0
+    - interp: 0
       frame: 1
       easeType: 3
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: -437.61, z: 0}
       endFrame: 10
-      path:
-      - {x: 0, y: -437.61, z: 0}
-      - {x: 0, y: 0, z: 0}
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: -437.61, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 10
       easeType: 3
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: 0, z: 0}
-      endFrame: 10
-      path: []
+      endFrame: -1
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: 32, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 1
       easeType: 2
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: 0, z: 0}
       endFrame: 10
-      path:
-      - {x: 0, y: 0, z: 0}
-      - {x: 0, y: -437.61, z: 0}
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: 32, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 10
       easeType: 2
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: -437.61, z: 0}
-      endFrame: 10
-      path: []
+      endFrame: -1
       isConstSpeed: 1
+      _paths: []
+      position: {x: 0, y: -437.61, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
     _unityAnimationTracks: []
     _unityAnimationKeys: []
     _scaleTracks: []
@@ -2204,7 +2218,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1249881082531535638}
+  - {fileID: 729001991768181476}
   - {fileID: 3070014307532245506}
   - {fileID: 223934135270743169}
   - {fileID: 6312635702158945830}
@@ -2214,7 +2228,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 32}
   m_SizeDelta: {x: 550, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &944568489365720706
@@ -2532,6 +2546,10 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &8019089426871690967
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3570,6 +3588,10 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &8208662688157524087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3703,7 +3725,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 10}
+  m_AnchoredPosition: {x: 0, y: 14}
   m_SizeDelta: {x: 150, y: 40}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &9040733169432794003
@@ -3729,6 +3751,10 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &8781950288018860897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4156,7 +4182,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -49.999992}
+  m_AnchoredPosition: {x: 37, y: -50}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1646639156043199322
@@ -5807,143 +5833,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.32156864}
   m_EffectDistance: {x: 3, y: -3}
   m_UseGraphicAlpha: 1
---- !u!1 &2439999341217114760
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2000434396687267691}
-  - component: {fileID: 7957309841796667083}
-  - component: {fileID: 3751367300842266218}
-  - component: {fileID: 2490778606088321957}
-  m_Layer: 5
-  m_Name: shape
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &2000434396687267691
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2439999341217114760}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1789134499169620501}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 16, y: 16}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7957309841796667083
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2439999341217114760}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 409a53c2fc720400bb482962c5563548, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  settings:
-    _blur: 0
-    _endAngle: 360
-    _fillColor: {r: 0.42, g: 0.42, b: 0.42, a: 1}
-    _fillColor2: {r: 0.37, g: 0.37, b: 0.37, a: 1}
-    _fillOffset: {x: 0, y: 0}
-    _fillPathLoops: 0
-    _fillRotation: 180
-    _fillScale: {x: 1, y: 1}
-    _fillTexture: {fileID: 0}
-    _fillType: 2
-    _gradientAxis: 1
-    _gradientStart: 0.615
-    _gradientType: 0
-    _gridSize: 0.2
-    _innerCutout: {x: 0, y: 0}
-    _invertArc: 0
-    _lineSize: 0.05
-    _obsoleteNumSides: -1
-    _outlineColor: {r: 1, g: 1, b: 1, a: 1}
-    _outlineSize: 4
-    _pathSegments:
-    - p0: {x: -0.3, y: 0, z: 0}
-      p1: {x: 0, y: 0, z: 0}
-      p2: {x: 0.3, y: 0, z: 0}
-    _pathThickness: 0.1
-    _polygonPreset: 0
-    _polyVertices:
-    - {x: 0.4632594, y: 0.45142132}
-    - {x: 0.24017519, y: 0.5}
-    - {x: -0.36547205, y: 0.46163}
-    - {x: -0.48312193, y: 0.35993028}
-    - {x: -0.5, y: -0.004584223}
-    - {x: -0.4528125, y: -0.43526787}
-    - {x: -0.15274629, y: -0.5}
-    - {x: 0.42462254, y: -0.47049472}
-    - {x: 0.48463595, y: -0.30316713}
-    - {x: 0.5, y: 0.284979}
-    _roundness: 0
-    _roundnessBottomLeft: 0
-    _roundnessBottomRight: 0
-    _roundnessPerCorner: 0
-    _roundnessTopLeft: 0
-    _roundnessTopRight: 0
-    _shapeType: 1
-    _startAngle: 0
-    _triangleOffset: 0.5
-    _usePolygonMap: 1
-  wasConverted: 0
-  preConvertedScale: {x: 0, y: 0, z: 0}
---- !u!222 &3751367300842266218
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2439999341217114760}
-  m_CullTransparentMesh: 0
---- !u!114 &2490778606088321957
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2439999341217114760}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.43529415, g: 0.24705884, b: 0.30588236, a: 1}
-  m_RaycastTarget: 0
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &2537958570160670165
 GameObject:
   m_ObjectHideFlags: 0
@@ -6387,7 +6276,8 @@ MonoBehaviour:
     _orientationTracks: []
     _orientationKeys: []
     _propertyTracks:
-    - id: 2
+    - _version: 1
+      id: 2
       name: Track1
       foldout: 1
       _targetPath: 
@@ -6397,7 +6287,8 @@ MonoBehaviour:
       componentName: CollectionItemWidget
       fieldName: 
       propertyName: rockShapeColor
-    - id: 3
+    - _version: 1
+      id: 3
       name: Track2
       foldout: 1
       _targetPath: 
@@ -6407,7 +6298,8 @@ MonoBehaviour:
       componentName: Text
       fieldName: 
       propertyName: color
-    - id: 2
+    - _version: 1
+      id: 2
       name: Track1
       foldout: 1
       _targetPath: 
@@ -6417,7 +6309,8 @@ MonoBehaviour:
       componentName: CollectionItemWidget
       fieldName: 
       propertyName: rockShapeColor
-    - id: 3
+    - _version: 1
+      id: 3
       name: Track2
       foldout: 1
       _targetPath: 
@@ -6428,122 +6321,132 @@ MonoBehaviour:
       fieldName: 
       propertyName: color
     _propertyKeys:
-    - version: 2
-      interp: 1
+    - interp: 1
       frame: 1
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
       endFrame: 10
+      isConstSpeed: 0
+      _paths: []
       val: 0
       valString: 
       valObj: {fileID: 0}
       vect4: {x: 0.18039216, y: 0.10588236, z: 0.12941177, w: 1}
-    - version: 2
-      interp: 1
+    - interp: 1
       frame: 10
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
       endFrame: -1
+      isConstSpeed: 0
+      _paths: []
       val: 0
       valString: 
       valObj: {fileID: 0}
       vect4: {x: 1, y: 1, z: 1, w: 1}
-    - version: 2
-      interp: 1
+    - interp: 1
       frame: 10
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
       endFrame: 14
+      isConstSpeed: 0
+      _paths: []
       val: 0
       valString: 
       valObj: {fileID: 0}
       vect4: {x: 0.97647065, y: 0.5529412, z: 0.34509805, w: 0}
-    - version: 2
-      interp: 1
+    - interp: 1
       frame: 14
       easeType: 3
       amplitude: 0
       period: 0
       customEase: []
       endFrame: 17
+      isConstSpeed: 0
+      _paths: []
       val: 0
       valString: 
       valObj: {fileID: 0}
       vect4: {x: 0.97647065, y: 0.5529412, z: 0.34509805, w: 1}
-    - version: 2
-      interp: 1
+    - interp: 1
       frame: 17
       easeType: 2
       amplitude: 0
       period: 0
       customEase: []
       endFrame: 20
+      isConstSpeed: 0
+      _paths: []
       val: 0
       valString: 
       valObj: {fileID: 0}
       vect4: {x: 1, y: 0.8431373, z: 0.6, w: 1}
-    - version: 2
-      interp: 1
+    - interp: 1
       frame: 20
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
       endFrame: -1
+      isConstSpeed: 0
+      _paths: []
       val: 0
       valString: 
       valObj: {fileID: 0}
       vect4: {x: 0.97647065, y: 0.5529412, z: 0.34509805, w: 1}
-    - version: 2
-      interp: 1
+    - interp: 1
       frame: 1
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
       endFrame: 3
+      isConstSpeed: 0
+      _paths: []
       val: 0
       valString: 
       valObj: {fileID: 0}
       vect4: {x: 1, y: 1, z: 1, w: 1}
-    - version: 2
-      interp: 1
+    - interp: 1
       frame: 3
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
       endFrame: -1
+      isConstSpeed: 0
+      _paths: []
       val: 0
       valString: 
       valObj: {fileID: 0}
       vect4: {x: 1, y: 1, z: 1, w: 1}
-    - version: 2
-      interp: 1
+    - interp: 1
       frame: 1
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
       endFrame: 3
+      isConstSpeed: 0
+      _paths: []
       val: 0
       valString: 
       valObj: {fileID: 0}
       vect4: {x: 0.97647065, y: 0.5529412, z: 0.34509805, w: 1}
-    - version: 2
-      interp: 1
+    - interp: 1
       frame: 3
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
       endFrame: -1
+      isConstSpeed: 0
+      _paths: []
       val: 0
       valString: 
       valObj: {fileID: 0}
@@ -6557,64 +6460,71 @@ MonoBehaviour:
     _unityAnimationTracks: []
     _unityAnimationKeys: []
     _scaleTracks:
-    - id: 4
+    - _version: 1
+      id: 4
       name: Track3
       foldout: 1
       _targetPath: 
       axis: -1
       _obj: {fileID: 3788028952484560917}
-    - id: 4
+    - _version: 1
+      id: 4
       name: Track3
       foldout: 1
       _targetPath: 
       axis: -1
       _obj: {fileID: 3788028952484560917}
     _scaleKeys:
-    - version: 1
-      interp: 1
+    - interp: 1
       frame: 14
       easeType: 3
       amplitude: 0
       period: 0
       customEase: []
-      scale: {x: 1, y: 1, z: 1}
       endFrame: 17
-    - version: 1
-      interp: 1
+      isConstSpeed: 0
+      _paths: []
+      scale: {x: 1, y: 1, z: 1}
+    - interp: 1
       frame: 17
       easeType: 2
       amplitude: 0
       period: 0
       customEase: []
-      scale: {x: 1.1, y: 1.1, z: 1}
       endFrame: 20
-    - version: 1
-      interp: 1
+      isConstSpeed: 0
+      _paths: []
+      scale: {x: 1.1, y: 1.1, z: 1}
+    - interp: 1
       frame: 20
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
-      scale: {x: 1, y: 1, z: 1}
       endFrame: -1
-    - version: 1
-      interp: 1
+      isConstSpeed: 0
+      _paths: []
+      scale: {x: 1, y: 1, z: 1}
+    - interp: 1
       frame: 1
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
-      scale: {x: 1, y: 1, z: 1}
       endFrame: 3
-    - version: 1
-      interp: 1
+      isConstSpeed: 0
+      _paths: []
+      scale: {x: 1, y: 1, z: 1}
+    - interp: 1
       frame: 3
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
-      scale: {x: 1, y: 1, z: 1}
       endFrame: -1
+      isConstSpeed: 0
+      _paths: []
+      scale: {x: 1, y: 1, z: 1}
     _trackLookups:
     - type: 7
       index: 0
@@ -6929,14 +6839,16 @@ MonoBehaviour:
     _rotationTracks: []
     _rotationKeys: []
     _translationTracks:
-    - id: 2
+    - _version: 3
+      id: 2
       name: Track1
       foldout: 1
       _targetPath: 
       _obj: {fileID: 3286232414200953703}
       pixelSnap: 0
       pixelPerUnit: 100
-    - id: 2
+    - _version: 3
+      id: 2
       name: Track1
       foldout: 1
       _targetPath: 
@@ -6944,54 +6856,54 @@ MonoBehaviour:
       pixelSnap: 0
       pixelPerUnit: 100
     _translationKeys:
-    - version: 2
-      interp: 0
+    - interp: 0
       frame: 1
       easeType: 3
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: -437.61, z: 0}
       endFrame: 10
-      path:
-      - {x: 0, y: -437.61, z: 0}
-      - {x: 0, y: 0, z: 0}
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: -437.61, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 10
       easeType: 3
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: 0, z: 0}
-      endFrame: 10
-      path: []
+      endFrame: -1
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: 32, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 1
       easeType: 2
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: 0, z: 0}
       endFrame: 10
-      path:
-      - {x: 0, y: 0, z: 0}
-      - {x: 0, y: -437.61, z: 0}
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: 32, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 10
       easeType: 2
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: -437.61, z: 0}
-      endFrame: 10
-      path: []
+      endFrame: -1
       isConstSpeed: 1
+      _paths: []
+      position: {x: 0, y: -437.61, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
     _unityAnimationTracks: []
     _unityAnimationKeys: []
     _scaleTracks: []
@@ -8255,6 +8167,139 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &3261569819433434739
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 929945174078129229}
+  - component: {fileID: 5121303786970774878}
+  - component: {fileID: 2573038903061814120}
+  - component: {fileID: 2393219307338686130}
+  m_Layer: 5
+  m_Name: shape (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &929945174078129229
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3261569819433434739}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3286232414200953703}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 16, y: 16}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &5121303786970774878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3261569819433434739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 409a53c2fc720400bb482962c5563548, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settings:
+    _blur: 0
+    _endAngle: 360
+    _fillColor: {r: 0.42, g: 0.42, b: 0.42, a: 1}
+    _fillColor2: {r: 0.37, g: 0.37, b: 0.37, a: 1}
+    _fillOffset: {x: 0, y: 0}
+    _fillPathLoops: 0
+    _fillRotation: 180
+    _fillScale: {x: 1, y: 1}
+    _fillTexture: {fileID: 0}
+    _fillType: 2
+    _gradientAxis: 1
+    _gradientStart: 0.615
+    _gradientType: 0
+    _gridSize: 0.2
+    _innerCutout: {x: 0, y: 0}
+    _invertArc: 0
+    _lineSize: 0.05
+    _obsoleteNumSides: -1
+    _outlineColor: {r: 1, g: 1, b: 1, a: 1}
+    _outlineSize: 4
+    _pathSegments:
+    - p0: {x: -0.3, y: 0, z: 0}
+      p1: {x: 0, y: 0, z: 0}
+      p2: {x: 0.3, y: 0, z: 0}
+    _pathThickness: 0.1
+    _polygonPreset: 0
+    _polyVertices:
+    - {x: 0.48629385, y: 0.4791659}
+    - {x: -0.4204972, y: 0.48470968}
+    - {x: -0.5, y: 0.36265206}
+    - {x: -0.4846832, y: -0.4509524}
+    - {x: 0.43461978, y: -0.47193256}
+    - {x: 0.47755975, y: -0.33640525}
+    _roundness: 0
+    _roundnessBottomLeft: 0
+    _roundnessBottomRight: 0
+    _roundnessPerCorner: 0
+    _roundnessTopLeft: 0
+    _roundnessTopRight: 0
+    _shapeType: 1
+    _startAngle: 0
+    _triangleOffset: 0.5
+    _usePolygonMap: 1
+  wasConverted: 0
+  preConvertedScale: {x: 0, y: 0, z: 0}
+--- !u!222 &2573038903061814120
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3261569819433434739}
+  m_CullTransparentMesh: 0
+--- !u!114 &2393219307338686130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3261569819433434739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.43529415, g: 0.24705884, b: 0.30588236, a: 1}
+  m_RaycastTarget: 0
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &3315350428068636289
 GameObject:
   m_ObjectHideFlags: 0
@@ -8617,7 +8662,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 2000434396687267691}
+  - {fileID: 5056194585497731734}
   - {fileID: 1200475306628576269}
   - {fileID: 6868438936535611449}
   - {fileID: 255175718884598388}
@@ -8627,9 +8672,142 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 32}
   m_SizeDelta: {x: 550, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &3608060876980829361
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5056194585497731734}
+  - component: {fileID: 7397622283845272213}
+  - component: {fileID: 4943067380295576480}
+  - component: {fileID: 7802066913608183218}
+  m_Layer: 5
+  m_Name: shape (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &5056194585497731734
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3608060876980829361}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1789134499169620501}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 16, y: 16}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7397622283845272213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3608060876980829361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 409a53c2fc720400bb482962c5563548, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settings:
+    _blur: 0
+    _endAngle: 360
+    _fillColor: {r: 0.42, g: 0.42, b: 0.42, a: 1}
+    _fillColor2: {r: 0.37, g: 0.37, b: 0.37, a: 1}
+    _fillOffset: {x: 0, y: 0}
+    _fillPathLoops: 0
+    _fillRotation: 180
+    _fillScale: {x: 1, y: 1}
+    _fillTexture: {fileID: 0}
+    _fillType: 2
+    _gradientAxis: 1
+    _gradientStart: 0.615
+    _gradientType: 0
+    _gridSize: 0.2
+    _innerCutout: {x: 0, y: 0}
+    _invertArc: 0
+    _lineSize: 0.05
+    _obsoleteNumSides: -1
+    _outlineColor: {r: 1, g: 1, b: 1, a: 1}
+    _outlineSize: 4
+    _pathSegments:
+    - p0: {x: -0.3, y: 0, z: 0}
+      p1: {x: 0, y: 0, z: 0}
+      p2: {x: 0.3, y: 0, z: 0}
+    _pathThickness: 0.1
+    _polygonPreset: 0
+    _polyVertices:
+    - {x: 0.48629385, y: 0.4791659}
+    - {x: -0.4204972, y: 0.48470968}
+    - {x: -0.5, y: 0.36265206}
+    - {x: -0.4846832, y: -0.4509524}
+    - {x: 0.43461978, y: -0.47193256}
+    - {x: 0.47755975, y: -0.33640525}
+    _roundness: 0
+    _roundnessBottomLeft: 0
+    _roundnessBottomRight: 0
+    _roundnessPerCorner: 0
+    _roundnessTopLeft: 0
+    _roundnessTopRight: 0
+    _shapeType: 1
+    _startAngle: 0
+    _triangleOffset: 0.5
+    _usePolygonMap: 1
+  wasConverted: 0
+  preConvertedScale: {x: 0, y: 0, z: 0}
+--- !u!222 &4943067380295576480
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3608060876980829361}
+  m_CullTransparentMesh: 0
+--- !u!114 &7802066913608183218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3608060876980829361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.43529415, g: 0.24705884, b: 0.30588236, a: 1}
+  m_RaycastTarget: 0
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &3639047491380748597
 GameObject:
   m_ObjectHideFlags: 0
@@ -9253,7 +9431,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 32}
   m_SizeDelta: {x: 500, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &3856892791160950396
@@ -9388,7 +9566,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 10}
+  m_AnchoredPosition: {x: 0, y: 14}
   m_SizeDelta: {x: 150, y: 40}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &4322566023185280155
@@ -9414,6 +9592,10 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &7304689865214215679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9742,14 +9924,16 @@ MonoBehaviour:
     _rotationTracks: []
     _rotationKeys: []
     _translationTracks:
-    - id: 2
+    - _version: 1
+      id: 2
       name: Track1
       foldout: 1
       _targetPath: 
       _obj: {fileID: 5834042124169970715}
       pixelSnap: 0
       pixelPerUnit: 100
-    - id: 2
+    - _version: 1
+      id: 2
       name: Track1
       foldout: 1
       _targetPath: 
@@ -9757,54 +9941,54 @@ MonoBehaviour:
       pixelSnap: 0
       pixelPerUnit: 100
     _translationKeys:
-    - version: 2
-      interp: 0
+    - interp: 0
       frame: 1
       easeType: 3
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: 672.42, z: 0}
       endFrame: 10
-      path:
-      - {x: 0, y: 672.42, z: 0}
-      - {x: 0, y: 278, z: 0}
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: 672.42, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 10
       easeType: 3
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: 278, z: 0}
       endFrame: 10
-      path: []
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: 278, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 1
       easeType: 2
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: 278, z: 0}
       endFrame: 10
-      path:
-      - {x: 0, y: 278, z: 0}
-      - {x: 0, y: 672.42, z: 0}
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: 278, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 10
       easeType: 2
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: 672.42, z: 0}
       endFrame: 10
-      path: []
       isConstSpeed: 1
+      _paths: []
+      position: {x: 0, y: 672.42, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
     _unityAnimationTracks: []
     _unityAnimationKeys: []
     _scaleTracks: []
@@ -10067,6 +10251,10 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &4535003468775690235
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10224,7 +10412,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 10}
+  m_AnchoredPosition: {x: 0, y: 14}
   m_SizeDelta: {x: 150, y: 40}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &2111716657654393576
@@ -10250,6 +10438,10 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &7885122590069204696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11304,7 +11496,8 @@ MonoBehaviour:
     _orientationTracks: []
     _orientationKeys: []
     _propertyTracks:
-    - id: 2
+    - _version: 1
+      id: 2
       name: Track1
       foldout: 1
       _targetPath: 
@@ -11314,7 +11507,8 @@ MonoBehaviour:
       componentName: Image
       fieldName: 
       propertyName: color
-    - id: 2
+    - _version: 1
+      id: 2
       name: Track1
       foldout: 1
       _targetPath: 
@@ -11325,50 +11519,54 @@ MonoBehaviour:
       fieldName: 
       propertyName: color
     _propertyKeys:
-    - version: 2
-      interp: 1
+    - interp: 1
       frame: 1
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
       endFrame: 10
+      isConstSpeed: 0
+      _paths: []
       val: 0
       valString: 
       valObj: {fileID: 0}
       vect4: {x: 0, y: 0, z: 0, w: 1}
-    - version: 2
-      interp: 1
+    - interp: 1
       frame: 10
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
       endFrame: -1
+      isConstSpeed: 0
+      _paths: []
       val: 0
       valString: 
       valObj: {fileID: 0}
       vect4: {x: 0, y: 0, z: 0, w: 0}
-    - version: 2
-      interp: 1
+    - interp: 1
       frame: 1
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
       endFrame: 10
+      isConstSpeed: 0
+      _paths: []
       val: 0
       valString: 
       valObj: {fileID: 0}
       vect4: {x: 0, y: 0, z: 0, w: 0}
-    - version: 2
-      interp: 1
+    - interp: 1
       frame: 10
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
       endFrame: -1
+      isConstSpeed: 0
+      _paths: []
       val: 0
       valString: 
       valObj: {fileID: 0}
@@ -11547,7 +11745,8 @@ MonoBehaviour:
     _orientationTracks: []
     _orientationKeys: []
     _propertyTracks:
-    - id: 2
+    - _version: 1
+      id: 2
       name: Track1
       foldout: 1
       _targetPath: 
@@ -11557,7 +11756,8 @@ MonoBehaviour:
       componentName: Image
       fieldName: 
       propertyName: color
-    - id: 3
+    - _version: 1
+      id: 3
       name: Track2
       foldout: 1
       _targetPath: 
@@ -11567,7 +11767,8 @@ MonoBehaviour:
       componentName: Image
       fieldName: 
       propertyName: color
-    - id: 7
+    - _version: 1
+      id: 7
       name: Track6
       foldout: 1
       _targetPath: 
@@ -11577,7 +11778,8 @@ MonoBehaviour:
       componentName: Button
       fieldName: 
       propertyName: interactable
-    - id: 2
+    - _version: 1
+      id: 2
       name: Track1
       foldout: 1
       _targetPath: 
@@ -11587,7 +11789,8 @@ MonoBehaviour:
       componentName: Image
       fieldName: 
       propertyName: color
-    - id: 3
+    - _version: 1
+      id: 3
       name: Track2
       foldout: 1
       _targetPath: 
@@ -11597,7 +11800,8 @@ MonoBehaviour:
       componentName: Image
       fieldName: 
       propertyName: color
-    - id: 7
+    - _version: 1
+      id: 7
       name: Track6
       foldout: 1
       _targetPath: 
@@ -11608,134 +11812,145 @@ MonoBehaviour:
       fieldName: 
       propertyName: interactable
     _propertyKeys:
-    - version: 2
-      interp: 1
+    - interp: 1
       frame: 1
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
       endFrame: 10
+      isConstSpeed: 0
+      _paths: []
       val: 0
       valString: 
       valObj: {fileID: 0}
       vect4: {x: 1, y: 1, z: 1, w: 0}
-    - version: 2
-      interp: 1
+    - interp: 1
       frame: 10
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
       endFrame: -1
+      isConstSpeed: 0
+      _paths: []
       val: 0
       valString: 
       valObj: {fileID: 0}
       vect4: {x: 1, y: 1, z: 1, w: 0.5019608}
-    - version: 2
-      interp: 1
+    - interp: 1
       frame: 1
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
       endFrame: 10
+      isConstSpeed: 0
+      _paths: []
       val: 0
       valString: 
       valObj: {fileID: 0}
       vect4: {x: 1, y: 1, z: 1, w: 0}
-    - version: 2
-      interp: 1
+    - interp: 1
       frame: 10
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
       endFrame: -1
+      isConstSpeed: 0
+      _paths: []
       val: 0
       valString: 
       valObj: {fileID: 0}
       vect4: {x: 1, y: 1, z: 1, w: 0.63529414}
-    - version: 2
-      interp: 2
+    - interp: 2
       frame: 1
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
       endFrame: 35
+      isConstSpeed: 0
+      _paths: []
       val: -1
       valString: 
       valObj: {fileID: 0}
       vect4: {x: 0, y: 0, z: 0, w: 0}
-    - version: 2
-      interp: 2
+    - interp: 2
       frame: 35
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
       endFrame: -1
+      isConstSpeed: 0
+      _paths: []
       val: 1
       valString: 
       valObj: {fileID: 0}
       vect4: {x: 0, y: 0, z: 0, w: 0}
-    - version: 2
-      interp: 1
+    - interp: 1
       frame: 1
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
       endFrame: 10
+      isConstSpeed: 0
+      _paths: []
       val: 0
       valString: 
       valObj: {fileID: 0}
       vect4: {x: 1, y: 1, z: 1, w: 0.5019608}
-    - version: 2
-      interp: 1
+    - interp: 1
       frame: 10
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
       endFrame: -1
+      isConstSpeed: 0
+      _paths: []
       val: 0
       valString: 
       valObj: {fileID: 0}
       vect4: {x: 1, y: 1, z: 1, w: 0}
-    - version: 2
-      interp: 1
+    - interp: 1
       frame: 1
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
       endFrame: 10
+      isConstSpeed: 0
+      _paths: []
       val: 0
       valString: 
       valObj: {fileID: 0}
       vect4: {x: 1, y: 1, z: 1, w: 0.63529414}
-    - version: 2
-      interp: 1
+    - interp: 1
       frame: 10
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
       endFrame: -1
+      isConstSpeed: 0
+      _paths: []
       val: 0
       valString: 
       valObj: {fileID: 0}
       vect4: {x: 1, y: 1, z: 1, w: 0}
-    - version: 2
-      interp: 2
+    - interp: 2
       frame: 1
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
       endFrame: -1
+      isConstSpeed: 0
+      _paths: []
       val: -1
       valString: 
       valObj: {fileID: 0}
@@ -11745,42 +11960,48 @@ MonoBehaviour:
     _rotationTracks: []
     _rotationKeys: []
     _translationTracks:
-    - id: 4
+    - _version: 1
+      id: 4
       name: Track3
       foldout: 1
       _targetPath: 
       _obj: {fileID: 760375308483299893}
       pixelSnap: 0
       pixelPerUnit: 100
-    - id: 5
+    - _version: 1
+      id: 5
       name: Track4
       foldout: 1
       _targetPath: 
       _obj: {fileID: 7365295625119793455}
       pixelSnap: 0
       pixelPerUnit: 100
-    - id: 6
+    - _version: 1
+      id: 6
       name: Track5
       foldout: 1
       _targetPath: 
       _obj: {fileID: 5359423825321516226}
       pixelSnap: 0
       pixelPerUnit: 100
-    - id: 4
+    - _version: 1
+      id: 4
       name: Track3
       foldout: 1
       _targetPath: 
       _obj: {fileID: 760375308483299893}
       pixelSnap: 0
       pixelPerUnit: 100
-    - id: 5
+    - _version: 1
+      id: 5
       name: Track4
       foldout: 1
       _targetPath: 
       _obj: {fileID: 7365295625119793455}
       pixelSnap: 0
       pixelPerUnit: 100
-    - id: 6
+    - _version: 1
+      id: 6
       name: Track5
       foldout: 1
       _targetPath: 
@@ -11788,150 +12009,150 @@ MonoBehaviour:
       pixelSnap: 0
       pixelPerUnit: 100
     _translationKeys:
-    - version: 2
-      interp: 0
+    - interp: 0
       frame: 10
       easeType: 3
       amplitude: 0
       period: 0
       customEase: []
+      endFrame: 20
+      isConstSpeed: 1
+      _paths: []
       position: {x: 0, y: 378.4, z: 0}
-      endFrame: 20
-      path:
-      - {x: 0, y: 378.4, z: 0}
-      - {x: 0, y: 258, z: 0}
-      isConstSpeed: 1
-    - version: 2
-      interp: 0
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 20
       easeType: 3
       amplitude: 0
       period: 0
       customEase: []
+      endFrame: 20
+      isConstSpeed: 1
+      _paths: []
       position: {x: 0, y: 258, z: 0}
-      endFrame: 20
-      path: []
-      isConstSpeed: 1
-    - version: 2
-      interp: 0
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 20
       easeType: 3
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: -456.8, z: 0}
       endFrame: 30
-      path:
-      - {x: 0, y: -456.8, z: 0}
-      - {x: 0, y: 0, z: 0}
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: -456.8, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 30
       easeType: 3
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: 0, z: 0}
       endFrame: 30
-      path: []
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: 0, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 25
       easeType: 3
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 472, y: -364.8, z: 0}
       endFrame: 35
-      path:
-      - {x: 472, y: -364.8, z: 0}
-      - {x: 472, y: -256, z: 0}
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 472, y: -364.8, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 35
       easeType: 3
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 472, y: -256, z: 0}
       endFrame: 35
-      path: []
       isConstSpeed: 1
-    - version: 2
-      interp: 0
-      frame: 1
-      easeType: 2
-      amplitude: 0
-      period: 0
-      customEase: []
-      position: {x: 0, y: 258, z: 0}
-      endFrame: 10
-      path:
-      - {x: 0, y: 258, z: 0}
-      - {x: 0, y: 378.4, z: 0}
-      isConstSpeed: 1
-    - version: 2
-      interp: 0
-      frame: 10
-      easeType: 2
-      amplitude: 0
-      period: 0
-      customEase: []
-      position: {x: 0, y: 378.4, z: 0}
-      endFrame: 10
-      path: []
-      isConstSpeed: 1
-    - version: 2
-      interp: 0
-      frame: 1
-      easeType: 2
-      amplitude: 0
-      period: 0
-      customEase: []
-      position: {x: 0, y: 0, z: 0}
-      endFrame: 10
-      path:
-      - {x: 0, y: 0, z: 0}
-      - {x: 0, y: -456.8, z: 0}
-      isConstSpeed: 1
-    - version: 2
-      interp: 0
-      frame: 10
-      easeType: 2
-      amplitude: 0
-      period: 0
-      customEase: []
-      position: {x: 0, y: -456.8, z: 0}
-      endFrame: 10
-      path: []
-      isConstSpeed: 1
-    - version: 2
-      interp: 0
-      frame: 1
-      easeType: 2
-      amplitude: 0
-      period: 0
-      customEase: []
+      _paths: []
       position: {x: 472, y: -256, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
+      frame: 1
+      easeType: 2
+      amplitude: 0
+      period: 0
+      customEase: []
       endFrame: 10
-      path:
-      - {x: 472, y: -256, z: 0}
-      - {x: 472, y: -364.8, z: 0}
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: 258, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 10
       easeType: 2
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 472, y: -364.8, z: 0}
       endFrame: 10
-      path: []
       isConstSpeed: 1
+      _paths: []
+      position: {x: 0, y: 378.4, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
+      frame: 1
+      easeType: 2
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: 10
+      isConstSpeed: 1
+      _paths: []
+      position: {x: 0, y: 0, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
+      frame: 10
+      easeType: 2
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: 10
+      isConstSpeed: 1
+      _paths: []
+      position: {x: 0, y: -456.8, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
+      frame: 1
+      easeType: 2
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: 10
+      isConstSpeed: 1
+      _paths: []
+      position: {x: 472, y: -256, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
+      frame: 10
+      easeType: 2
+      amplitude: 0
+      period: 0
+      customEase: []
+      endFrame: 10
+      isConstSpeed: 1
+      _paths: []
+      position: {x: 472, y: -364.8, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
     _unityAnimationTracks: []
     _unityAnimationKeys: []
     _scaleTracks: []
@@ -12533,14 +12754,12 @@ MonoBehaviour:
     _pathThickness: 0.1
     _polygonPreset: 0
     _polyVertices:
-    - {x: 0.45168233, y: 0.48457658}
-    - {x: -0.45688063, y: 0.46681702}
-    - {x: -0.5, y: 0.35448414}
-    - {x: -0.48046258, y: -0.3295754}
-    - {x: -0.3896412, y: -0.5}
-    - {x: 0.45802522, y: -0.48526922}
-    - {x: 0.4868573, y: -0.40332505}
-    - {x: 0.49681354, y: 0.39354825}
+    - {x: 0.45168227, y: 0.48457658}
+    - {x: -0.49720743, y: 0.4815429}
+    - {x: -0.49218568, y: -0.3656412}
+    - {x: -0.4582889, y: -0.4721179}
+    - {x: 0.48830998, y: -0.4813767}
+    - {x: 0.49681354, y: 0.3935482}
     _roundness: 0
     _roundnessBottomLeft: 0
     _roundnessBottomRight: 0
@@ -13507,7 +13726,7 @@ MonoBehaviour:
     m_FontSize: 24
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 18
+    m_MinSize: 16
     m_MaxSize: 24
     m_Alignment: 0
     m_AlignByGeometry: 0
@@ -14351,143 +14570,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.32156864}
   m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 1
---- !u!1 &5518604383988603105
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1249881082531535638}
-  - component: {fileID: 1370481909970986584}
-  - component: {fileID: 7214838095562947580}
-  - component: {fileID: 1242146789390843957}
-  m_Layer: 5
-  m_Name: shape
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1249881082531535638
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5518604383988603105}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 5367851923622564440}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 16, y: 16}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1370481909970986584
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5518604383988603105}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 409a53c2fc720400bb482962c5563548, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  settings:
-    _blur: 0
-    _endAngle: 360
-    _fillColor: {r: 0.42, g: 0.42, b: 0.42, a: 1}
-    _fillColor2: {r: 0.37, g: 0.37, b: 0.37, a: 1}
-    _fillOffset: {x: 0, y: 0}
-    _fillPathLoops: 0
-    _fillRotation: 180
-    _fillScale: {x: 1, y: 1}
-    _fillTexture: {fileID: 0}
-    _fillType: 2
-    _gradientAxis: 1
-    _gradientStart: 0.615
-    _gradientType: 0
-    _gridSize: 0.2
-    _innerCutout: {x: 0, y: 0}
-    _invertArc: 0
-    _lineSize: 0.05
-    _obsoleteNumSides: -1
-    _outlineColor: {r: 1, g: 1, b: 1, a: 1}
-    _outlineSize: 4
-    _pathSegments:
-    - p0: {x: -0.3, y: 0, z: 0}
-      p1: {x: 0, y: 0, z: 0}
-      p2: {x: 0.3, y: 0, z: 0}
-    _pathThickness: 0.1
-    _polygonPreset: 0
-    _polyVertices:
-    - {x: 0.4632594, y: 0.45142132}
-    - {x: 0.24017519, y: 0.5}
-    - {x: -0.36547205, y: 0.46163}
-    - {x: -0.48312193, y: 0.35993028}
-    - {x: -0.5, y: -0.004584223}
-    - {x: -0.4528125, y: -0.43526787}
-    - {x: -0.15274629, y: -0.5}
-    - {x: 0.42462254, y: -0.47049472}
-    - {x: 0.48463595, y: -0.30316713}
-    - {x: 0.5, y: 0.284979}
-    _roundness: 0
-    _roundnessBottomLeft: 0
-    _roundnessBottomRight: 0
-    _roundnessPerCorner: 0
-    _roundnessTopLeft: 0
-    _roundnessTopRight: 0
-    _shapeType: 1
-    _startAngle: 0
-    _triangleOffset: 0.5
-    _usePolygonMap: 1
-  wasConverted: 0
-  preConvertedScale: {x: 0, y: 0, z: 0}
---- !u!222 &7214838095562947580
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5518604383988603105}
-  m_CullTransparentMesh: 0
---- !u!114 &1242146789390843957
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5518604383988603105}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.43529415, g: 0.24705884, b: 0.30588236, a: 1}
-  m_RaycastTarget: 0
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &5557885783279684456
 GameObject:
   m_ObjectHideFlags: 0
@@ -15778,7 +15860,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 3299416013306773247}
+  - {fileID: 929945174078129229}
   - {fileID: 7806975658667323863}
   - {fileID: 5267769614863342110}
   - {fileID: 8756618196731687883}
@@ -15788,7 +15870,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 32}
   m_SizeDelta: {x: 550, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6014111340567578608
@@ -15895,6 +15977,10 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &3061959629888219690
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16074,6 +16160,10 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &5583401129746297173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16745,14 +16835,16 @@ MonoBehaviour:
     _rotationTracks: []
     _rotationKeys: []
     _translationTracks:
-    - id: 2
+    - _version: 3
+      id: 2
       name: Track1
       foldout: 1
       _targetPath: 
       _obj: {fileID: 1789963298181804085}
       pixelSnap: 0
       pixelPerUnit: 100
-    - id: 2
+    - _version: 3
+      id: 2
       name: Track1
       foldout: 1
       _targetPath: 
@@ -16760,54 +16852,54 @@ MonoBehaviour:
       pixelSnap: 0
       pixelPerUnit: 100
     _translationKeys:
-    - version: 2
-      interp: 0
+    - interp: 0
       frame: 1
       easeType: 3
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: -450, z: 0}
       endFrame: 10
-      path:
-      - {x: 0, y: -450, z: 0}
-      - {x: 0, y: 0, z: 0}
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: -450, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 10
       easeType: 3
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: 0, z: 0}
-      endFrame: 10
-      path: []
+      endFrame: -1
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: 32, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 1
       easeType: 2
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: 0, z: 0}
       endFrame: 10
-      path:
-      - {x: 0, y: 0, z: 0}
-      - {x: 0, y: -450, z: 0}
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: 32, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 10
       easeType: 2
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: -450, z: 0}
-      endFrame: 10
-      path: []
+      endFrame: -1
       isConstSpeed: 1
+      _paths: []
+      position: {x: 0, y: -450, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
     _unityAnimationTracks: []
     _unityAnimationKeys: []
     _scaleTracks: []
@@ -17276,14 +17368,16 @@ MonoBehaviour:
     _rotationTracks: []
     _rotationKeys: []
     _translationTracks:
-    - id: 2
+    - _version: 1
+      id: 2
       name: Track1
       foldout: 1
       _targetPath: 
       _obj: {fileID: 1752203146073299505}
       pixelSnap: 0
       pixelPerUnit: 100
-    - id: 2
+    - _version: 1
+      id: 2
       name: Track1
       foldout: 1
       _targetPath: 
@@ -17291,54 +17385,54 @@ MonoBehaviour:
       pixelSnap: 0
       pixelPerUnit: 100
     _translationKeys:
-    - version: 2
-      interp: 0
+    - interp: 0
       frame: 1
       easeType: 3
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: -450, z: 0}
       endFrame: 10
-      path:
-      - {x: 0, y: -450, z: 0}
-      - {x: 0, y: 0, z: 0}
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: -450, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 10
       easeType: 3
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: 0, z: 0}
       endFrame: 10
-      path: []
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: 0, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 1
       easeType: 2
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: 0, z: 0}
       endFrame: 10
-      path:
-      - {x: 0, y: 0, z: 0}
-      - {x: 0, y: -450, z: 0}
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: 0, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 10
       easeType: 2
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: -450, z: 0}
       endFrame: 10
-      path: []
       isConstSpeed: 1
+      _paths: []
+      position: {x: 0, y: -450, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
     _unityAnimationTracks: []
     _unityAnimationKeys: []
     _scaleTracks: []
@@ -17494,6 +17588,139 @@ MonoBehaviour:
   startColor: {r: 0.28, g: 0.16705883, b: 0.19999999, a: 1}
   endColor: {r: 0.601, g: 0.35857984, b: 0.4292857, a: 1}
   realtime: 1
+--- !u!1 &6832547448549211783
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 729001991768181476}
+  - component: {fileID: 4131170958023863666}
+  - component: {fileID: 6264280659746009089}
+  - component: {fileID: 1637343507652586278}
+  m_Layer: 5
+  m_Name: shape (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &729001991768181476
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6832547448549211783}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5367851923622564440}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 16, y: 16}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &4131170958023863666
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6832547448549211783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 409a53c2fc720400bb482962c5563548, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  settings:
+    _blur: 0
+    _endAngle: 360
+    _fillColor: {r: 0.42, g: 0.42, b: 0.42, a: 1}
+    _fillColor2: {r: 0.37, g: 0.37, b: 0.37, a: 1}
+    _fillOffset: {x: 0, y: 0}
+    _fillPathLoops: 0
+    _fillRotation: 180
+    _fillScale: {x: 1, y: 1}
+    _fillTexture: {fileID: 0}
+    _fillType: 2
+    _gradientAxis: 1
+    _gradientStart: 0.615
+    _gradientType: 0
+    _gridSize: 0.2
+    _innerCutout: {x: 0, y: 0}
+    _invertArc: 0
+    _lineSize: 0.05
+    _obsoleteNumSides: -1
+    _outlineColor: {r: 1, g: 1, b: 1, a: 1}
+    _outlineSize: 4
+    _pathSegments:
+    - p0: {x: -0.3, y: 0, z: 0}
+      p1: {x: 0, y: 0, z: 0}
+      p2: {x: 0.3, y: 0, z: 0}
+    _pathThickness: 0.1
+    _polygonPreset: 0
+    _polyVertices:
+    - {x: 0.48629385, y: 0.4791659}
+    - {x: -0.4204972, y: 0.48470968}
+    - {x: -0.5, y: 0.36265206}
+    - {x: -0.4846832, y: -0.4509524}
+    - {x: 0.43461978, y: -0.47193256}
+    - {x: 0.47755975, y: -0.33640525}
+    _roundness: 0
+    _roundnessBottomLeft: 0
+    _roundnessBottomRight: 0
+    _roundnessPerCorner: 0
+    _roundnessTopLeft: 0
+    _roundnessTopRight: 0
+    _shapeType: 1
+    _startAngle: 0
+    _triangleOffset: 0.5
+    _usePolygonMap: 1
+  wasConverted: 0
+  preConvertedScale: {x: 0, y: 0, z: 0}
+--- !u!222 &6264280659746009089
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6832547448549211783}
+  m_CullTransparentMesh: 0
+--- !u!114 &1637343507652586278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6832547448549211783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.43529415, g: 0.24705884, b: 0.30588236, a: 1}
+  m_RaycastTarget: 0
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &6845024384493123161
 GameObject:
   m_ObjectHideFlags: 0
@@ -17702,14 +17929,16 @@ MonoBehaviour:
     _rotationTracks: []
     _rotationKeys: []
     _translationTracks:
-    - id: 2
+    - _version: 1
+      id: 2
       name: Track1
       foldout: 1
       _targetPath: 
       _obj: {fileID: 2391076760815426965}
       pixelSnap: 0
       pixelPerUnit: 100
-    - id: 2
+    - _version: 1
+      id: 2
       name: Track1
       foldout: 1
       _targetPath: 
@@ -17717,54 +17946,54 @@ MonoBehaviour:
       pixelSnap: 0
       pixelPerUnit: 100
     _translationKeys:
-    - version: 2
-      interp: 0
+    - interp: 0
       frame: 1
       easeType: 3
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: -506.67, z: 0}
       endFrame: 10
-      path:
-      - {x: 0, y: -506.67, z: 0}
-      - {x: 0, y: 0, z: 0}
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: -506.67, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 10
       easeType: 3
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: 0, z: 0}
       endFrame: 10
-      path: []
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: 0, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 1
       easeType: 2
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: 0, z: 0}
       endFrame: 10
-      path:
-      - {x: 0, y: 0, z: 0}
-      - {x: 0, y: -506.67, z: 0}
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: 0, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 10
       easeType: 2
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: -506.67, z: 0}
       endFrame: 10
-      path: []
       isConstSpeed: 1
+      _paths: []
+      position: {x: 0, y: -506.67, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
     _unityAnimationTracks: []
     _unityAnimationKeys: []
     _scaleTracks: []
@@ -17937,14 +18166,16 @@ MonoBehaviour:
     _rotationTracks: []
     _rotationKeys: []
     _translationTracks:
-    - id: 2
+    - _version: 3
+      id: 2
       name: Track1
       foldout: 1
       _targetPath: 
       _obj: {fileID: 1789134499169620501}
       pixelSnap: 0
       pixelPerUnit: 100
-    - id: 2
+    - _version: 3
+      id: 2
       name: Track1
       foldout: 1
       _targetPath: 
@@ -17952,54 +18183,54 @@ MonoBehaviour:
       pixelSnap: 0
       pixelPerUnit: 100
     _translationKeys:
-    - version: 2
-      interp: 0
+    - interp: 0
       frame: 1
       easeType: 3
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: -437.61, z: 0}
       endFrame: 10
-      path:
-      - {x: 0, y: -437.61, z: 0}
-      - {x: 0, y: 0, z: 0}
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: -437.61, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 10
       easeType: 3
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: 0, z: 0}
-      endFrame: 10
-      path: []
+      endFrame: -1
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: 32, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 1
       easeType: 2
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: 0, z: 0}
       endFrame: 10
-      path:
-      - {x: 0, y: 0, z: 0}
-      - {x: 0, y: -437.61, z: 0}
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: 32, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 10
       easeType: 2
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: -437.61, z: 0}
-      endFrame: 10
-      path: []
+      endFrame: -1
       isConstSpeed: 1
+      _paths: []
+      position: {x: 0, y: -437.61, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
     _unityAnimationTracks: []
     _unityAnimationKeys: []
     _scaleTracks: []
@@ -18780,143 +19011,6 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.32156864}
   m_EffectDistance: {x: 2, y: -2}
   m_UseGraphicAlpha: 1
---- !u!1 &7280001022396791902
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3299416013306773247}
-  - component: {fileID: 6065416664594326661}
-  - component: {fileID: 7620396693091965163}
-  - component: {fileID: 4814709675487828259}
-  m_Layer: 5
-  m_Name: shape
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &3299416013306773247
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7280001022396791902}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 3286232414200953703}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 16, y: 16}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6065416664594326661
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7280001022396791902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 409a53c2fc720400bb482962c5563548, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  settings:
-    _blur: 0
-    _endAngle: 360
-    _fillColor: {r: 0.42, g: 0.42, b: 0.42, a: 1}
-    _fillColor2: {r: 0.37, g: 0.37, b: 0.37, a: 1}
-    _fillOffset: {x: 0, y: 0}
-    _fillPathLoops: 0
-    _fillRotation: 180
-    _fillScale: {x: 1, y: 1}
-    _fillTexture: {fileID: 0}
-    _fillType: 2
-    _gradientAxis: 1
-    _gradientStart: 0.615
-    _gradientType: 0
-    _gridSize: 0.2
-    _innerCutout: {x: 0, y: 0}
-    _invertArc: 0
-    _lineSize: 0.05
-    _obsoleteNumSides: -1
-    _outlineColor: {r: 1, g: 1, b: 1, a: 1}
-    _outlineSize: 4
-    _pathSegments:
-    - p0: {x: -0.3, y: 0, z: 0}
-      p1: {x: 0, y: 0, z: 0}
-      p2: {x: 0.3, y: 0, z: 0}
-    _pathThickness: 0.1
-    _polygonPreset: 0
-    _polyVertices:
-    - {x: 0.4632594, y: 0.45142132}
-    - {x: 0.24017519, y: 0.5}
-    - {x: -0.36547205, y: 0.46163}
-    - {x: -0.48312193, y: 0.35993028}
-    - {x: -0.5, y: -0.004584223}
-    - {x: -0.4528125, y: -0.43526787}
-    - {x: -0.15274629, y: -0.5}
-    - {x: 0.42462254, y: -0.47049472}
-    - {x: 0.48463595, y: -0.30316713}
-    - {x: 0.5, y: 0.284979}
-    _roundness: 0
-    _roundnessBottomLeft: 0
-    _roundnessBottomRight: 0
-    _roundnessPerCorner: 0
-    _roundnessTopLeft: 0
-    _roundnessTopRight: 0
-    _shapeType: 1
-    _startAngle: 0
-    _triangleOffset: 0.5
-    _usePolygonMap: 1
-  wasConverted: 0
-  preConvertedScale: {x: 0, y: 0, z: 0}
---- !u!222 &7620396693091965163
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7280001022396791902}
-  m_CullTransparentMesh: 0
---- !u!114 &4814709675487828259
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7280001022396791902}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.43529415, g: 0.24705884, b: 0.30588236, a: 1}
-  m_RaycastTarget: 0
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!1 &7281311380010493422
 GameObject:
   m_ObjectHideFlags: 0
@@ -19699,8 +19793,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 57, y: 0}
-  m_SizeDelta: {x: -114, y: 0}
+  m_AnchoredPosition: {x: 47, y: 0}
+  m_SizeDelta: {x: -94, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4423894132065747717
 CanvasRenderer:
@@ -19731,11 +19825,11 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 9c6a166d7c725464fa706b520e0ee024, type: 3}
-    m_FontSize: 24
+    m_FontSize: 20
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
+    m_MinSize: 12
+    m_MaxSize: 24
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -19750,7 +19844,9 @@ MonoBehaviour:
 
     3
 
-    4'
+    4
+
+    5'
 --- !u!114 &6644551404658100211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20048,7 +20144,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 10}
+  m_AnchoredPosition: {x: 0, y: 14}
   m_SizeDelta: {x: 150, y: 40}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!222 &8143615272295976491
@@ -20074,6 +20170,10 @@ MonoBehaviour:
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &407014809991140313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20503,16 +20603,12 @@ MonoBehaviour:
     _pathThickness: 0.1
     _polygonPreset: 0
     _polyVertices:
-    - {x: 0.46325946, y: 0.45142132}
-    - {x: 0.24017513, y: 0.5}
+    - {x: 0.48629385, y: 0.4791659}
     - {x: -0.4204972, y: 0.48470968}
     - {x: -0.5, y: 0.36265206}
-    - {x: -0.47483826, y: -0.2809245}
-    - {x: -0.4204972, y: -0.4473667}
-    - {x: -0.21457335, y: -0.5}
-    - {x: 0.42321855, y: -0.4806552}
+    - {x: -0.4846832, y: -0.4509524}
+    - {x: 0.43461978, y: -0.47193256}
     - {x: 0.47755975, y: -0.33640525}
-    - {x: 0.5, y: 0.284979}
     _roundness: 0
     _roundnessBottomLeft: 0
     _roundnessBottomRight: 0
@@ -21672,7 +21768,8 @@ MonoBehaviour:
     _orientationTracks: []
     _orientationKeys: []
     _propertyTracks:
-    - id: 6
+    - _version: 1
+      id: 6
       name: Track5
       foldout: 1
       _targetPath: 
@@ -21682,7 +21779,8 @@ MonoBehaviour:
       componentName: Button
       fieldName: 
       propertyName: interactable
-    - id: 6
+    - _version: 1
+      id: 6
       name: Track5
       foldout: 1
       _targetPath: 
@@ -21693,38 +21791,41 @@ MonoBehaviour:
       fieldName: 
       propertyName: interactable
     _propertyKeys:
-    - version: 2
-      interp: 2
+    - interp: 2
       frame: 1
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
       endFrame: 30
+      isConstSpeed: 0
+      _paths: []
       val: -1
       valString: 
       valObj: {fileID: 0}
       vect4: {x: 0, y: 0, z: 0, w: 0}
-    - version: 2
-      interp: 2
+    - interp: 2
       frame: 30
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
       endFrame: -1
+      isConstSpeed: 0
+      _paths: []
       val: 1
       valString: 
       valObj: {fileID: 0}
       vect4: {x: 0, y: 0, z: 0, w: 0}
-    - version: 2
-      interp: 2
+    - interp: 2
       frame: 1
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
       endFrame: -1
+      isConstSpeed: 0
+      _paths: []
       val: -1
       valString: 
       valObj: {fileID: 0}
@@ -21734,70 +21835,80 @@ MonoBehaviour:
     _rotationTracks: []
     _rotationKeys: []
     _translationTracks:
-    - id: 2
+    - _version: 1
+      id: 2
       name: Track1
       foldout: 1
       _targetPath: 
       _obj: {fileID: 810156905260067951}
       pixelSnap: 0
       pixelPerUnit: 100
-    - id: 3
+    - _version: 1
+      id: 3
       name: Track2
       foldout: 1
       _targetPath: 
       _obj: {fileID: 5334278764406420188}
       pixelSnap: 0
       pixelPerUnit: 100
-    - id: 4
+    - _version: 1
+      id: 4
       name: Track3
       foldout: 1
       _targetPath: 
       _obj: {fileID: 9194225808175672496}
       pixelSnap: 0
       pixelPerUnit: 100
-    - id: 5
+    - _version: 1
+      id: 5
       name: Track4
       foldout: 1
       _targetPath: 
       _obj: {fileID: 8702018785279211147}
       pixelSnap: 0
       pixelPerUnit: 100
-    - id: 7
+    - _version: 1
+      id: 7
       name: Track6
       foldout: 1
       _targetPath: 
       _obj: {fileID: 124104892938811382}
       pixelSnap: 0
       pixelPerUnit: 100
-    - id: 2
+    - _version: 1
+      id: 2
       name: Track1
       foldout: 1
       _targetPath: 
       _obj: {fileID: 810156905260067951}
       pixelSnap: 0
       pixelPerUnit: 100
-    - id: 3
+    - _version: 1
+      id: 3
       name: Track2
       foldout: 1
       _targetPath: 
       _obj: {fileID: 5334278764406420188}
       pixelSnap: 0
       pixelPerUnit: 100
-    - id: 4
+    - _version: 1
+      id: 4
       name: Track3
       foldout: 1
       _targetPath: 
       _obj: {fileID: 9194225808175672496}
       pixelSnap: 0
       pixelPerUnit: 100
-    - id: 5
+    - _version: 1
+      id: 5
       name: Track4
       foldout: 1
       _targetPath: 
       _obj: {fileID: 8702018785279211147}
       pixelSnap: 0
       pixelPerUnit: 100
-    - id: 7
+    - _version: 1
+      id: 7
       name: Track6
       foldout: 1
       _targetPath: 
@@ -21805,246 +21916,246 @@ MonoBehaviour:
       pixelSnap: 0
       pixelPerUnit: 100
     _translationKeys:
-    - version: 2
-      interp: 0
+    - interp: 0
       frame: 1
       easeType: 3
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: 325.8, z: 0}
       endFrame: 10
-      path:
-      - {x: 0, y: 325.8, z: 0}
-      - {x: 0, y: 253, z: 0}
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: 325.8, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 10
       easeType: 3
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: 253, z: 0}
       endFrame: 10
-      path: []
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: 253, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 5
       easeType: 3
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: -323.8, z: 0}
       endFrame: 15
-      path:
-      - {x: 0, y: -323.8, z: 0}
-      - {x: 0, y: 218.5, z: 0}
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: -323.8, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 15
       easeType: 3
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: 218.5, z: 0}
       endFrame: 15
-      path: []
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: 218.5, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 10
       easeType: 3
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: -306.6, z: 0}
       endFrame: 20
-      path:
-      - {x: 0, y: -306.6, z: 0}
-      - {x: 0, y: 80.5, z: 0}
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: -306.6, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 20
       easeType: 3
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: 80.5, z: 0}
       endFrame: 20
-      path: []
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: 80.5, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 15
       easeType: 3
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: -319.4, z: 0}
       endFrame: 25
-      path:
-      - {x: 0, y: -319.4, z: 0}
-      - {x: 0, y: -57.5, z: 0}
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: -319.4, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 25
       easeType: 3
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: -57.5, z: 0}
       endFrame: 25
-      path: []
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: -57.5, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 20
       easeType: 3
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 472, y: -359.3, z: 0}
       endFrame: 30
-      path:
-      - {x: 472, y: -359.3, z: 0}
-      - {x: 472, y: -256, z: 0}
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 472, y: -359.3, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 30
       easeType: 3
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 472, y: -256, z: 0}
       endFrame: 30
-      path: []
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 472, y: -256, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 1
       easeType: 2
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: 253, z: 0}
       endFrame: 10
-      path:
-      - {x: 0, y: 253, z: 0}
-      - {x: 0, y: 325.8, z: 0}
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: 253, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 10
       easeType: 2
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: 325.8, z: 0}
       endFrame: 10
-      path: []
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: 325.8, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 6
       easeType: 2
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: 218.5, z: 0}
       endFrame: 16
-      path:
-      - {x: 0, y: 218.5, z: 0}
-      - {x: 0, y: -323.8, z: 0}
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: 218.5, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 16
       easeType: 2
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: -323.8, z: 0}
       endFrame: 16
-      path: []
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: -323.8, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 3
       easeType: 2
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: 80.5, z: 0}
       endFrame: 13
-      path:
-      - {x: 0, y: 80.5, z: 0}
-      - {x: 0, y: -306.6, z: 0}
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: 80.5, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 13
       easeType: 2
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: -306.6, z: 0}
       endFrame: 13
-      path: []
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: -306.6, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 1
       easeType: 2
       amplitude: 0
       period: 0
       customEase: []
+      endFrame: 10
+      isConstSpeed: 1
+      _paths: []
       position: {x: 0, y: -57.5, z: 0}
-      endFrame: 10
-      path:
-      - {x: 0, y: -57.5, z: 0}
-      - {x: 0, y: -319.4, z: 0}
-      isConstSpeed: 1
-    - version: 2
-      interp: 0
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 10
       easeType: 2
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: -319.4, z: 0}
       endFrame: 10
-      path: []
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: -319.4, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 1
       easeType: 2
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 472, y: -256, z: 0}
       endFrame: 10
-      path:
-      - {x: 472, y: -256, z: 0}
-      - {x: 472, y: -359.3, z: 0}
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 472, y: -256, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 10
       easeType: 2
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 472, y: -359.3, z: 0}
       endFrame: 10
-      path: []
       isConstSpeed: 1
+      _paths: []
+      position: {x: 472, y: -359.3, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
     _unityAnimationTracks: []
     _unityAnimationKeys: []
     _scaleTracks: []
@@ -22982,7 +23093,8 @@ MonoBehaviour:
     _orientationTracks: []
     _orientationKeys: []
     _propertyTracks:
-    - id: 4
+    - _version: 1
+      id: 4
       name: Track3
       foldout: 1
       _targetPath: 
@@ -22992,7 +23104,8 @@ MonoBehaviour:
       componentName: Image
       fieldName: 
       propertyName: color
-    - id: 5
+    - _version: 1
+      id: 5
       name: Track4
       foldout: 1
       _targetPath: 
@@ -23002,7 +23115,8 @@ MonoBehaviour:
       componentName: Image
       fieldName: 
       propertyName: color
-    - id: 4
+    - _version: 1
+      id: 4
       name: Track3
       foldout: 1
       _targetPath: 
@@ -23012,7 +23126,8 @@ MonoBehaviour:
       componentName: Image
       fieldName: 
       propertyName: color
-    - id: 5
+    - _version: 1
+      id: 5
       name: Track4
       foldout: 1
       _targetPath: 
@@ -23023,98 +23138,106 @@ MonoBehaviour:
       fieldName: 
       propertyName: color
     _propertyKeys:
-    - version: 2
-      interp: 1
+    - interp: 1
       frame: 1
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
       endFrame: 7
+      isConstSpeed: 0
+      _paths: []
       val: 0
       valString: 
       valObj: {fileID: 0}
       vect4: {x: 1, y: 1, z: 1, w: 0}
-    - version: 2
-      interp: 1
+    - interp: 1
       frame: 7
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
       endFrame: -1
+      isConstSpeed: 0
+      _paths: []
       val: 0
       valString: 
       valObj: {fileID: 0}
       vect4: {x: 1, y: 1, z: 1, w: 0.6}
-    - version: 2
-      interp: 1
+    - interp: 1
       frame: 1
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
       endFrame: 7
+      isConstSpeed: 0
+      _paths: []
       val: 0
       valString: 
       valObj: {fileID: 0}
       vect4: {x: 1, y: 1, z: 1, w: 0}
-    - version: 2
-      interp: 1
+    - interp: 1
       frame: 7
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
       endFrame: -1
+      isConstSpeed: 0
+      _paths: []
       val: 0
       valString: 
       valObj: {fileID: 0}
       vect4: {x: 1, y: 1, z: 1, w: 0.6}
-    - version: 2
-      interp: 1
+    - interp: 1
       frame: 1
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
       endFrame: 7
+      isConstSpeed: 0
+      _paths: []
       val: 0
       valString: 
       valObj: {fileID: 0}
       vect4: {x: 1, y: 1, z: 1, w: 0.6}
-    - version: 2
-      interp: 1
+    - interp: 1
       frame: 7
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
       endFrame: -1
+      isConstSpeed: 0
+      _paths: []
       val: 0
       valString: 
       valObj: {fileID: 0}
       vect4: {x: 1, y: 1, z: 1, w: 0}
-    - version: 2
-      interp: 1
+    - interp: 1
       frame: 1
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
       endFrame: 7
+      isConstSpeed: 0
+      _paths: []
       val: 0
       valString: 
       valObj: {fileID: 0}
       vect4: {x: 1, y: 1, z: 1, w: 0.6}
-    - version: 2
-      interp: 1
+    - interp: 1
       frame: 7
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
       endFrame: -1
+      isConstSpeed: 0
+      _paths: []
       val: 0
       valString: 
       valObj: {fileID: 0}
@@ -23124,14 +23247,16 @@ MonoBehaviour:
     _rotationTracks: []
     _rotationKeys: []
     _translationTracks:
-    - id: 2
+    - _version: 1
+      id: 2
       name: Track1
       foldout: 1
       _targetPath: 
       _obj: {fileID: 3420009068447395163}
       pixelSnap: 0
       pixelPerUnit: 100
-    - id: 2
+    - _version: 1
+      id: 2
       name: Track1
       foldout: 1
       _targetPath: 
@@ -23139,124 +23264,132 @@ MonoBehaviour:
       pixelSnap: 0
       pixelPerUnit: 100
     _translationKeys:
-    - version: 2
-      interp: 0
+    - interp: 0
       frame: 1
       easeType: 3
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: -440, z: 0}
       endFrame: 10
-      path:
-      - {x: 0, y: -440, z: 0}
-      - {x: 0, y: -238, z: 0}
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: -440, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 10
       easeType: 3
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: -238, z: 0}
       endFrame: 10
-      path: []
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: -238, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 1
       easeType: 2
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: -238, z: 0}
       endFrame: 10
-      path:
-      - {x: 0, y: -238, z: 0}
-      - {x: 0, y: -440, z: 0}
       isConstSpeed: 1
-    - version: 2
-      interp: 0
+      _paths: []
+      position: {x: 0, y: -238, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
+    - interp: 0
       frame: 10
       easeType: 2
       amplitude: 0
       period: 0
       customEase: []
-      position: {x: 0, y: -440, z: 0}
       endFrame: 10
-      path: []
       isConstSpeed: 1
+      _paths: []
+      position: {x: 0, y: -440, z: 0}
+      orientMode: 0
+      orientLockAxis: 0
     _unityAnimationTracks: []
     _unityAnimationKeys: []
     _scaleTracks:
-    - id: 3
+    - _version: 1
+      id: 3
       name: Track2
       foldout: 1
       _targetPath: 
       axis: -1
       _obj: {fileID: 3420009068447395163}
-    - id: 3
+    - _version: 1
+      id: 3
       name: Track2
       foldout: 1
       _targetPath: 
       axis: -1
       _obj: {fileID: 3420009068447395163}
     _scaleKeys:
-    - version: 1
-      interp: 1
+    - interp: 1
       frame: 1
       easeType: 3
       amplitude: 0
       period: 0
       customEase: []
-      scale: {x: 0, y: 1, z: 1}
       endFrame: 7
-    - version: 1
-      interp: 1
+      isConstSpeed: 0
+      _paths: []
+      scale: {x: 0, y: 1, z: 1}
+    - interp: 1
       frame: 7
       easeType: 2
       amplitude: 0
       period: 0
       customEase: []
-      scale: {x: 0.3, y: 1.2, z: 1}
       endFrame: 10
-    - version: 1
-      interp: 1
+      isConstSpeed: 0
+      _paths: []
+      scale: {x: 0.3, y: 1.2, z: 1}
+    - interp: 1
       frame: 10
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
-      scale: {x: 1, y: 1, z: 1}
       endFrame: -1
-    - version: 1
-      interp: 1
+      isConstSpeed: 0
+      _paths: []
+      scale: {x: 1, y: 1, z: 1}
+    - interp: 1
       frame: 1
       easeType: 2
       amplitude: 0
       period: 0
       customEase: []
-      scale: {x: 1, y: 1, z: 1}
       endFrame: 4
-    - version: 1
-      interp: 1
+      isConstSpeed: 0
+      _paths: []
+      scale: {x: 1, y: 1, z: 1}
+    - interp: 1
       frame: 4
       easeType: 3
       amplitude: 0
       period: 0
       customEase: []
-      scale: {x: 0.3, y: 1.2, z: 1}
       endFrame: 10
-    - version: 1
-      interp: 1
+      isConstSpeed: 0
+      _paths: []
+      scale: {x: 0.3, y: 1.2, z: 1}
+    - interp: 1
       frame: 10
       easeType: 1
       amplitude: 0
       period: 0
       customEase: []
-      scale: {x: 0, y: 1, z: 1}
       endFrame: -1
+      isConstSpeed: 0
+      _paths: []
+      scale: {x: 0, y: 1, z: 1}
     _trackLookups:
     - type: 10
       index: 0
@@ -23983,30 +24116,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 96f02c0cb4d8c0142b4052f6efedf191, type: 3}
---- !u!114 &7622772357463730769 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5018379262604176284, guid: 96f02c0cb4d8c0142b4052f6efedf191,
-    type: 3}
-  m_PrefabInstance: {fileID: 3201314191084323277}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5359423825321516229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9c3208c7ade34784eb92281584183c38, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &5359423825321516227 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7353575382533168398, guid: 96f02c0cb4d8c0142b4052f6efedf191,
-    type: 3}
-  m_PrefabInstance: {fileID: 3201314191084323277}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5359423825321516229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &5359423825321516226 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7353575382533168399, guid: 96f02c0cb4d8c0142b4052f6efedf191,
@@ -24019,6 +24128,30 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 3201314191084323277}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5359423825321516227 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7353575382533168398, guid: 96f02c0cb4d8c0142b4052f6efedf191,
+    type: 3}
+  m_PrefabInstance: {fileID: 3201314191084323277}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5359423825321516229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7622772357463730769 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5018379262604176284, guid: 96f02c0cb4d8c0142b4052f6efedf191,
+    type: 3}
+  m_PrefabInstance: {fileID: 3201314191084323277}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5359423825321516229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c3208c7ade34784eb92281584183c38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7473105000608246521
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -24200,18 +24333,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9c3208c7ade34784eb92281584183c38, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &124104892938811383 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7353575382533168398, guid: 96f02c0cb4d8c0142b4052f6efedf191,
-    type: 3}
-  m_PrefabInstance: {fileID: 7473105000608246521}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 124104892938811377}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!224 &124104892938811382 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 7353575382533168399, guid: 96f02c0cb4d8c0142b4052f6efedf191,
@@ -24224,3 +24345,15 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7473105000608246521}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &124104892938811383 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7353575382533168398, guid: 96f02c0cb4d8c0142b4052f6efedf191,
+    type: 3}
+  m_PrefabInstance: {fileID: 7473105000608246521}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 124104892938811377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
