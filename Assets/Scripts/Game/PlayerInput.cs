@@ -49,6 +49,9 @@ public class PlayerInput : MonoBehaviour {
     public M8.InputAction moveHorzInput;
     public M8.InputAction actInput;
 
+    public SignalAxis moveHorzVirtualInput;
+    public SignalButtonState actVirtualInput;
+
     [Header("Sound")]
     [M8.SoundPlaylist]
     public string soundJump;
@@ -70,6 +73,9 @@ public class PlayerInput : MonoBehaviour {
     private float mLastGroundTime;
 
     private M8.CacheList<ActionCallback> mActionCallbacks = new M8.CacheList<ActionCallback>(4);
+
+    private float mVirtualAxis = 0f;
+    private M8.InputAction.ButtonState mVirtualActState = M8.InputAction.ButtonState.None;
 
     public void ActionAddCallback(ActionCallback cb) {
         int actInd = -1;
@@ -97,6 +103,12 @@ public class PlayerInput : MonoBehaviour {
         mJumpCurTime = 0f;
 
         mLastGroundTime = 0f;
+
+        if(moveHorzVirtualInput) moveHorzVirtualInput.callback += OnVirtualAxisUpdate;
+        if(actVirtualInput) actVirtualInput.callback += OnVirtualActUpdate;
+
+        mVirtualAxis = 0f;
+        mVirtualActState = M8.InputAction.ButtonState.None;
     }
 
     void OnDisable() {
@@ -106,13 +118,40 @@ public class PlayerInput : MonoBehaviour {
             if(bodyControl.body)
                 bodyControl.body.sharedMaterial.friction = frictionGroundMove;
         }
+
+        if(moveHorzVirtualInput) moveHorzVirtualInput.callback -= OnVirtualAxisUpdate;
+        if(actVirtualInput) actVirtualInput.callback -= OnVirtualActUpdate;
+    }
+
+    void OnVirtualAxisUpdate(float val) {
+        mVirtualAxis = val;
+    }
+
+    void OnVirtualActUpdate(M8.InputAction.ButtonState state) {
+        mVirtualActState = state;
+    }
+
+    private float GetAxis() {
+        var val = moveHorzInput.GetAxis();
+        if(val == 0f)
+            val = mVirtualAxis;
+
+        return val;
+    }
+
+    private M8.InputAction.ButtonState GetActState() {
+        var state = actInput.GetButtonState();
+        if(state == M8.InputAction.ButtonState.None)
+            state = mVirtualActState;
+
+        return state;
     }
 
     void Update() {
         //movement
         switch(mMoveState) {
             case MoveState.Normal:
-                mMoveHorz = moveHorzInput.GetAxis();
+                mMoveHorz = GetAxis();
 
                 //check if we are sticking to side
                 if(!bodyControl.isGrounded && (bodyControl.collisionFlags & CollisionFlags.Sides) != CollisionFlags.None && mJumpState == JumpState.None) {
@@ -124,7 +163,7 @@ public class PlayerInput : MonoBehaviour {
             case MoveState.SideStick:
                 if(bodyControl.isGrounded) { //revert right away if grounded
                     mMoveState = MoveState.Normal;
-                    mMoveHorz = moveHorzInput.GetAxis();
+                    mMoveHorz = GetAxis();
                 }
                 else if((bodyControl.collisionFlags & CollisionFlags.Sides) == CollisionFlags.None) {
                     //delay a bit (avoids stutter with uneven wall)
@@ -132,11 +171,11 @@ public class PlayerInput : MonoBehaviour {
                         mMoveSideCurTime += Time.deltaTime;
                     else {
                         mMoveState = MoveState.Normal;
-                        mMoveHorz = moveHorzInput.GetAxis();
+                        mMoveHorz = GetAxis();
                     }
                 }
                 else {
-                    var inpHorz = moveHorzInput.GetAxis();
+                    var inpHorz = GetAxis();
                     if(bodyControl.sideFlags == M8.RigidBodyController2D.SideFlags.Left && inpHorz < 0f || bodyControl.sideFlags == M8.RigidBodyController2D.SideFlags.Right && inpHorz > 0f) {
                         mMoveSideCurTime = 0f; //reset delay
                     }
@@ -144,7 +183,7 @@ public class PlayerInput : MonoBehaviour {
                         mMoveSideCurTime += Time.deltaTime;
                     else {
                         mMoveState = MoveState.Normal;
-                        mMoveHorz = moveHorzInput.GetAxis();
+                        mMoveHorz = GetAxis();
                     }
                 }
                 break;
@@ -165,7 +204,7 @@ public class PlayerInput : MonoBehaviour {
         }
 
         //act or jump
-        var actState = actInput.GetButtonState();
+        var actState = GetActState();
         if(actState == M8.InputAction.ButtonState.Pressed) {
             bool isAct = false;
             for(int i = 0; i < mActionCallbacks.Count; i++) {
@@ -225,7 +264,7 @@ public class PlayerInput : MonoBehaviour {
                 break;
 
             case JumpState.Jump:
-                if(mJumpCurTime < jumpDelay && actInput.IsDown() && (bodyControl.collisionFlags & CollisionFlags.Above) == CollisionFlags.None) {
+                if(mJumpCurTime < jumpDelay && GetActState() == M8.InputAction.ButtonState.Down && (bodyControl.collisionFlags & CollisionFlags.Above) == CollisionFlags.None) {
                     bodyControl.body.AddForce(bodyControl.dirHolder.up * jumpForce, ForceMode2D.Force);
                     mJumpCurTime += Time.fixedDeltaTime;
                 }
