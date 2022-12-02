@@ -7,4 +7,6 @@ public struct GlobalSettings {
 
     public const int unlimitedResourceMagma = 100;
     public const int unlimitedResourceRock = 5;
+
+    public const string inputUserKey = "input";
 }
