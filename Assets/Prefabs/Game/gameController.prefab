@@ -69,8 +69,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 55
-        y: 109
+        x: 58
+        y: 111
         width: 100
         height: 32
       isBreakpoint: 0
@@ -130,7 +130,7 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 243
+        x: 254
         y: 118
         width: 150
         height: 32
@@ -142,7 +142,7 @@ MonoBehaviour:
           name: FINISHED
           isSystemEvent: 1
           isGlobal: 0
-        toState: Music
+        toState: Refresh Input
         linkStyle: 0
         linkConstraint: 0
         linkTarget: 0
@@ -223,8 +223,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 217.89062
-        y: 240.82812
+        x: 233.89062
+        y: 304.82812
         width: 109
         height: 32
       isBreakpoint: 0
@@ -342,8 +342,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 415.625
-        y: 263.71094
+        x: 431.625
+        y: 327.71094
         width: 131
         height: 32
       isBreakpoint: 0
@@ -415,8 +415,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 412.96094
-        y: 354.3125
+        x: 428.96094
+        y: 418.3125
         width: 100
         height: 16
       isBreakpoint: 0
@@ -550,8 +550,8 @@ MonoBehaviour:
       colorIndex: 0
       position:
         serializedVersion: 2
-        x: 228
-        y: 181
+        x: 244
+        y: 245
         width: 100
         height: 32
       isBreakpoint: 0
@@ -639,6 +639,85 @@ MonoBehaviour:
         - checkPlaying
         paramDataPos: 000000000000000000000000000000000100000002000000
         paramByteDataSize: 000000000400000000000000000000000000000000000000
+    - name: Refresh Input
+      description: 
+      colorIndex: 0
+      position:
+        serializedVersion: 2
+        x: 251
+        y: 177
+        width: 109
+        height: 32
+      isBreakpoint: 0
+      isSequence: 0
+      hideUnused: 0
+      transitions:
+      - fsmEvent:
+          name: FINISHED
+          isSystemEvent: 1
+          isGlobal: 0
+        toState: Music
+        linkStyle: 0
+        linkConstraint: 0
+        linkTarget: 0
+        colorIndex: 0
+      actionData:
+        actionNames:
+        - HutongGames.PlayMaker.Actions.Game.RefreshInputSettings
+        customNames:
+        - 
+        actionEnabled: 01
+        actionIsOpen: 01
+        actionStartIndex: 00000000
+        actionHashCodes: cd17ee04
+        unityObjectParams: []
+        fsmGameObjectParams: []
+        fsmOwnerDefaultParams: []
+        animationCurveParams: []
+        functionCallParams: []
+        fsmTemplateControlParams: []
+        fsmEventTargetParams: []
+        fsmPropertyParams: []
+        layoutOptionParams: []
+        fsmStringParams: []
+        fsmObjectParams:
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          typeName: M8.UserData
+          value: {fileID: 11400000, guid: 9d49958e44f75d147a748c1b9fa7ee0e, type: 2}
+        - useVariable: 0
+          name: 
+          tooltip: 
+          showInInspector: 0
+          networkSync: 0
+          typeName: SignalVirtualPadLayoutType
+          value: {fileID: 11400000, guid: e168729ec920b3145a7f82eca7e2adf6, type: 2}
+        fsmVarParams: []
+        fsmArrayParams: []
+        fsmEnumParams: []
+        fsmFloatParams: []
+        fsmIntParams: []
+        fsmBoolParams: []
+        fsmVector2Params: []
+        fsmVector3Params: []
+        fsmColorParams: []
+        fsmRectParams: []
+        fsmQuaternionParams: []
+        stringParams: []
+        byteData: 
+        arrayParamSizes: 
+        arrayParamTypes: []
+        customTypeSizes: 
+        customTypeNames: []
+        paramDataType: 1800000018000000
+        paramName:
+        - userData
+        - signal
+        paramDataPos: 0000000001000000
+        paramByteDataSize: 0000000000000000
     events:
     - name: FINISHED
       isSystemEvent: 1
@@ -673,7 +752,7 @@ MonoBehaviour:
     manualUpdate: 0
     outVariableIndices: 
     keepDelayedEventsOnStateExit: 0
-    preprocessed: 1
+    preprocessed: 0
     ExposedEvents: []
     OutputEvents: []
     RestartOnEnable: 1
