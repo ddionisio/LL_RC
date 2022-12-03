@@ -41,6 +41,8 @@ public class VirtualPadLayout : MonoBehaviour {
     void Start() {
         mMainModal = M8.ModalManager.main;
 
+        RefreshPlayer();
+
         if(M8.SceneManager.isInstantiated)
             M8.SceneManager.instance.sceneChangePostCallback += OnSceneChange;
     }
@@ -70,12 +72,12 @@ public class VirtualPadLayout : MonoBehaviour {
     }
 
     private void RefreshPlayer() {
-        mPlayerCtrl = null;
-
-        if(!string.IsNullOrEmpty(playerTag)) {
-            var playerGO = GameObject.FindGameObjectWithTag(playerTag);
-            if(playerGO)
-                mPlayerCtrl = playerGO.GetComponent<PlayerController>();
+        if(!mPlayerCtrl) {
+            if(!string.IsNullOrEmpty(playerTag)) {
+                var playerGO = GameObject.FindGameObjectWithTag(playerTag);
+                if(playerGO)
+                    mPlayerCtrl = playerGO.GetComponent<PlayerController>();
+            }
         }
     }
 
