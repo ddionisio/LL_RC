@@ -7,6 +7,11 @@ public class VirtualPadLayoutTypeActiveGO : MonoBehaviour {
     public VirtualPadLayoutType[] validTypes;
     public GameObject activeGO;
 
+    void OnDisable() {
+        if(activeGO)
+            activeGO.SetActive(false);
+    }
+
     void OnEnable() {
         int typeIndex = 0;
 
