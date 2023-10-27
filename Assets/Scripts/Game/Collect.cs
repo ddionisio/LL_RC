@@ -60,7 +60,7 @@ public class Collect : MonoBehaviour {
         var bodyCtrl = collision.gameObject.GetComponent<M8.RigidBodyController2D>();
         if(bodyCtrl) {
             var flags = bodyCtrl.GetCollisionFlag(collision);
-            if((flags & CollisionFlags.Below) != CollisionFlags.None) {
+            if((flags & M8.RigidBodyController2D.CollisionFlags.Below) != M8.RigidBodyController2D.CollisionFlags.None) {
                 Collected();
             }
         }

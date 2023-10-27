@@ -47,6 +47,8 @@ namespace LoLExt {
 
         public const string settingsSpeechMuteKey = "sp";
 
+        public const string scoreKey = "score";
+
         private const string questionsJSONFilePath = "questions.json";
         private const string startGameJSONFilePath = "startGame.json";
 
@@ -86,15 +88,15 @@ namespace LoLExt {
         public int progressMax { get { return _progressMax; } set { _progressMax = value; } }
 
         public int curProgress { get { return mCurProgress; } }
-        public int curScore { 
-            get { return mCurScore; } 
+        public int curScore {
+            get { return mCurScore; }
             set {
                 if(mCurScore != value) {
                     mCurScore = value;
 
                     scoreUpdateCallback?.Invoke(this);
                 }
-            } 
+            }
         }
 
         public bool isQuestionsReceived { get { return mIsQuestionsReceived; } }
@@ -324,11 +326,13 @@ namespace LoLExt {
 
         public virtual void ApplyProgress(int progress, int score) {
 
-            mCurProgress = Mathf.Clamp(progress, 0, _progressMax);            
+            mCurProgress = Mathf.Clamp(progress, 0, _progressMax);
 
             LOLSDK.Instance.SubmitProgress(score, mCurProgress, _progressMax);
 
             curScore = score;
+
+            _userData.SetInt(scoreKey, curScore);
 
             _userData.Save();
 
@@ -374,9 +378,9 @@ namespace LoLExt {
 #if UNITY_EDITOR
             ILOLSDK webGL = new LoLSDK.MockWebGL();
 #elif UNITY_WEBGL
-            ILOLSDK webGL = new LoLSDK.WebGL();
+        ILOLSDK webGL = new LoLSDK.WebGL();
 #else
-            ILOLSDK webGL = new LoLSDK.MockWebGL();
+        ILOLSDK webGL = new LoLSDK.MockWebGL();
 #endif
 
             // Initialize the object, passing in the WebGL
@@ -384,9 +388,9 @@ namespace LoLExt {
 
             // Register event handlers
 #if !UNITY_EDITOR
-        LOLSDK.Instance.StartGameReceived += new StartGameReceivedHandler(this.HandleStartGame);
-        LOLSDK.Instance.QuestionsReceived += new QuestionListReceivedHandler(this.HandleQuestions);
-        LOLSDK.Instance.LanguageDefsReceived += new LanguageDefsReceivedHandler(this.HandleLanguageDefs);
+    LOLSDK.Instance.StartGameReceived += new StartGameReceivedHandler(this.HandleStartGame);
+    LOLSDK.Instance.QuestionsReceived += new QuestionListReceivedHandler(this.HandleQuestions);
+    LOLSDK.Instance.LanguageDefsReceived += new LanguageDefsReceivedHandler(this.HandleLanguageDefs);
 #endif
 
             mCurProgress = 0;
@@ -432,7 +436,9 @@ namespace LoLExt {
                     yield return null;
                 }
 
-                mCurScore = _userData.score;
+                //mCurScore = _userData.score;
+                mCurScore = _userData.GetInt(scoreKey, _userData.score);
+
                 mCurProgress = _userData.currentProgress;
             }
 

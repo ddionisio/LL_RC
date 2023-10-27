@@ -154,7 +154,7 @@ public class PlayerInput : MonoBehaviour {
                 mMoveHorz = GetAxis();
 
                 //check if we are sticking to side
-                if(!bodyControl.isGrounded && (bodyControl.collisionFlags & CollisionFlags.Sides) != CollisionFlags.None && mJumpState == JumpState.None) {
+                if(!bodyControl.isGrounded && (bodyControl.collisionFlags & M8.RigidBodyController2D.CollisionFlags.Sides) != M8.RigidBodyController2D.CollisionFlags.None && mJumpState == JumpState.None) {
                     if(bodyControl.sideFlags == M8.RigidBodyController2D.SideFlags.Left && mMoveHorz < 0f || bodyControl.sideFlags == M8.RigidBodyController2D.SideFlags.Right && mMoveHorz > 0f) {
                         mMoveState = MoveState.SideStick;
                     }
@@ -165,7 +165,7 @@ public class PlayerInput : MonoBehaviour {
                     mMoveState = MoveState.Normal;
                     mMoveHorz = GetAxis();
                 }
-                else if((bodyControl.collisionFlags & CollisionFlags.Sides) == CollisionFlags.None) {
+                else if((bodyControl.collisionFlags & M8.RigidBodyController2D.CollisionFlags.Sides) == M8.RigidBodyController2D.CollisionFlags.None) {
                     //delay a bit (avoids stutter with uneven wall)
                     if(mMoveSideCurTime < moveSideDelay)
                         mMoveSideCurTime += Time.deltaTime;
@@ -242,7 +242,7 @@ public class PlayerInput : MonoBehaviour {
 
                 mJumpCurTime = 0f;
 
-                if(bodyControl.collisionFlags == CollisionFlags.Sides) {
+                if(bodyControl.collisionFlags == M8.RigidBodyController2D.CollisionFlags.Sides) {
                     var jumpDir = bodyControl.normalSide;
 
                     if((bodyControl.sideFlags & M8.RigidBodyController2D.SideFlags.Left) != M8.RigidBodyController2D.SideFlags.None)
@@ -264,7 +264,7 @@ public class PlayerInput : MonoBehaviour {
                 break;
 
             case JumpState.Jump:
-                if(mJumpCurTime < jumpDelay && GetActState() == M8.InputAction.ButtonState.Down && (bodyControl.collisionFlags & CollisionFlags.Above) == CollisionFlags.None) {
+                if(mJumpCurTime < jumpDelay && GetActState() == M8.InputAction.ButtonState.Down && (bodyControl.collisionFlags & M8.RigidBodyController2D.CollisionFlags.Above) == M8.RigidBodyController2D.CollisionFlags.None) {
                     bodyControl.body.AddForce(bodyControl.dirHolder.up * jumpForce, ForceMode2D.Force);
                     mJumpCurTime += Time.fixedDeltaTime;
                 }
@@ -273,7 +273,7 @@ public class PlayerInput : MonoBehaviour {
                 break;
 
             case JumpState.JumpWait: //just delay, no force
-                if(mJumpCurTime < jumpDelay && (bodyControl.collisionFlags & CollisionFlags.Above) == CollisionFlags.None)
+                if(mJumpCurTime < jumpDelay && (bodyControl.collisionFlags & M8.RigidBodyController2D.CollisionFlags.Above) == M8.RigidBodyController2D.CollisionFlags.None)
                     mJumpCurTime += Time.fixedDeltaTime;
                 else
                     mJumpState = JumpState.None;

@@ -431,11 +431,11 @@ namespace Coffee.UIExtensions
 						}
 						if (m_IsTrail)
 						{
-							_renderer.BakeTrailsMesh (_mesh, cam, true);
+							_renderer.BakeTrailsMesh (_mesh, cam, ParticleSystemBakeMeshOptions.BakePosition);
 						}
 						else
 						{
-							_renderer.BakeMesh (_mesh, cam, true);
+							_renderer.BakeMesh (_mesh, cam, ParticleSystemBakeMeshOptions.BakePosition);
 						}
 						Profiler.EndSample ();
 
