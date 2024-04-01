@@ -9,6 +9,7 @@ public class CollectionItemWidget : MonoBehaviour {
     public bool lockedIsDisplayed;
     public Text titleText;
     public Selectable selectable;
+    public Material rockUIMaterial;
 
     public M8.Animator.Animate animator;
     [M8.Animator.TakeSelector(animatorField = "animator")]
@@ -28,14 +29,15 @@ public class CollectionItemWidget : MonoBehaviour {
 
     public bool ignoreNewlySeen { get { return mIgnoreNewlySeen; } set { mIgnoreNewlySeen = value; } }
 
-    private Shapes2D.Shape[] mRockShapes;
+    private Image[] mRockShapeImages;
 
-    private Shapes2D.Shape mRockShape;
     private Image mRockShapeImage;
 
     private bool mIgnoreNewlySeen;
 
     private M8.GenericParams mModalParms = new M8.GenericParams();
+
+    private Material mMaterial;
 
     public IEnumerator PlayNewlySeen() {
         if(animator && !string.IsNullOrEmpty(takeNewlySeen))
@@ -46,26 +48,34 @@ public class CollectionItemWidget : MonoBehaviour {
         rockData = aRockData;
         mIgnoreNewlySeen = ignoreNewlySeen;
 
-        if(!mRockShape) {
-            if(mRockShapes == null)
-                mRockShapes = rockShapesRoot.GetComponentsInChildren<Shapes2D.Shape>();
+		if(!mMaterial)
+			mMaterial = new Material(rockUIMaterial);
 
-            if(mRockShapes.Length > 0) {
-                int rockShapeInd = Random.Range(0, mRockShapes.Length);
+		mMaterial.SetTexture(Rock.materialRockTextureOverlay, rockData.spriteShape.fillTexture);
 
-                for(int i = 0; i < mRockShapes.Length; i++)
-                    mRockShapes[i].gameObject.SetActive(rockShapeInd == i);
-
-                mRockShape = mRockShapes[rockShapeInd];
-                mRockShapeImage = mRockShape.GetComponent<Image>();
+		if(!mRockShapeImage) {
+            if(mRockShapeImages == null) {
+                mRockShapeImages = new Image[rockShapesRoot.childCount];
+                for(int i = 0; i < rockShapesRoot.childCount; i++)
+                    mRockShapeImages[i] = rockShapesRoot.GetChild(i).GetComponent<Image>();
             }
+
+            if(mRockShapeImages.Length > 0) {
+                int rockShapeInd = Random.Range(0, mRockShapeImages.Length);
+
+                for(int i = 0; i < mRockShapeImages.Length; i++)
+					mRockShapeImages[i].gameObject.SetActive(rockShapeInd == i);
+
+                mRockShapeImage = mRockShapeImages[rockShapeInd];
+				mRockShapeImage.material = mMaterial;
+			}
         }
     }
 
     public void RefreshDisplay() {
         ResetDisplay();
 
-        bool isSeen = false;
+        bool isSeen;
 
         if(mIgnoreNewlySeen && rockData.isNewlySeen)
             isSeen = false;
@@ -81,11 +91,8 @@ public class CollectionItemWidget : MonoBehaviour {
                 titleText.gameObject.SetActive(true);
             }
 
-            if(mRockShape)
-                mRockShape.settings.fillTexture = rockData.spriteShape.fillTexture;
-
-            //reset take, wait for it to be played
-            if(rockData.isNewlySeen) {
+			//reset take, wait for it to be played
+			if(rockData.isNewlySeen) {
                 if(animator && !string.IsNullOrEmpty(takeNewlySeen))
                     animator.ResetTake(takeNewlySeen);
             }
@@ -108,8 +115,15 @@ public class CollectionItemWidget : MonoBehaviour {
             M8.ModalManager.main.Open(rockData.modal, mModalParms);
         }
     }
-    
-    private void ResetDisplay() {
+
+	void OnDestroy() {
+		if(mMaterial) {
+            Destroy(mMaterial);
+            mMaterial = null;
+		}
+	}
+
+	private void ResetDisplay() {
         if(rockShapesRoot) rockShapesRoot.gameObject.SetActive(false);
         if(lockedGO) lockedGO.SetActive(false);
         if(selectable) selectable.gameObject.SetActive(false);

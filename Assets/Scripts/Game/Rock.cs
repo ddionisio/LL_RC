@@ -4,7 +4,9 @@ using UnityEngine;
 using UnityEngine.U2D;
 
 public class Rock : MonoBehaviour, M8.IPoolSpawn {
-    public const string parmDir = "dir";
+    public const string materialRockTextureOverlay = "_Overlay";
+
+	public const string parmDir = "dir";
     public const string parmSpriteShape = "spriteShape";
 
     [Header("Data")]
