@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using TMPro;
+
 using LoLExt;
 
 public class ModalConfirm : M8.ModalController, M8.IModalPush, M8.IModalPop, M8.IModalActive {
@@ -11,8 +13,8 @@ public class ModalConfirm : M8.ModalController, M8.IModalPush, M8.IModalPop, M8.
     public const string parmCallback = "confirmCB";
 
     [Header("UI")]
-    public Text titleText;
-    public Text descText;
+    public TMP_Text titleText;
+    public TMP_Text descText;
     
     private System.Action<bool> mCallback;
 

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
+
+using TMPro;
 
 using LoLExt;
 
@@ -17,8 +18,8 @@ public class ModalInfo : M8.ModalController, M8.IModalActive, M8.IModalPush, M8.
     public Image imageIllustrate;
     public bool isImageIllustrateResize; //if true, set to correct size upon change
 
-    public Text titleLabel;
-    public Text descLabel;
+    public TMP_Text titleLabel;
+    public TMP_Text descLabel;
 
     public Selectable selectOnActive;
 

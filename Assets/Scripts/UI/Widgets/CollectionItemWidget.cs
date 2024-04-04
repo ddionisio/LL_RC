@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using TMPro;
+
 public class CollectionItemWidget : MonoBehaviour {
     public Transform rockShapesRoot;
     public GameObject lockedGO;
     public bool lockedIsDisplayed;
-    public Text titleText;
+    public TMP_Text titleText;
     public Selectable selectable;
     public Material rockUIMaterial;
 

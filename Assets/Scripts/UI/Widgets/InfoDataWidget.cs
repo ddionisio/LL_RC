@@ -4,12 +4,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+using TMPro;
+
 public class InfoDataWidget : Selectable, IPointerClickHandler, ISubmitHandler {
     [Header("Info")]
     public Image iconImage;
     public RawImage iconRawImage;
 
-    public Text titleLabel;
+    public TMP_Text titleLabel;
 
     public GameObject newActiveGO;
 
