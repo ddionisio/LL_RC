@@ -5,6 +5,8 @@ using UnityEngine.U2D;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
+using TMPro;
+
 using LoLExt;
 
 public class SedimentaryController : GameModeController<SedimentaryController> {
@@ -104,7 +106,7 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
 
     public float erosionDelay = 0.5f;
         
-    public Text erosionGrainText;
+    public TMP_Text erosionGrainText;
     [M8.Localize]
     public string erosionGrainSizeTitleTextRef;
 

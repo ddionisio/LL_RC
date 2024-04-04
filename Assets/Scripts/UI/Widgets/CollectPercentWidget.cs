@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using TMPro;
+
 public class CollectPercentWidget : MonoBehaviour {
     [M8.TagSelector]
     public string collectControllerTag;
 
     [Header("UI")]
-    public Text numberText;
+    public TMP_Text numberText;
     public string numberTextFormat = "{0}%";
     public float numberUpdateDelay = 1f;
 

@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using TMPro;
+
 public class CriteriaWidget : MonoBehaviour {
     public RawImage iconImage;
 
-    public Text countText;
+    public TMP_Text countText;
     public string countTextFormat = "00";
 
     public GameObject unlockedGO;

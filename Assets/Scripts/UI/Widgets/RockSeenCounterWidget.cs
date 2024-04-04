@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using TMPro;
+
 public class RockSeenCounterWidget : MonoBehaviour {
     [Header("Data")]
     public InventoryData inventory;
@@ -10,7 +12,7 @@ public class RockSeenCounterWidget : MonoBehaviour {
     [Header("UI")]
     [M8.Localize]
     public string textFormatRef;
-    public Text label;
+    public TMP_Text label;
 
     void OnEnable() {
         int rockSeen = 0;

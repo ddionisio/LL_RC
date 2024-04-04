@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+using TMPro;
+
 public class MagmaWidget : MonoBehaviour {
     [Header("Info")]
     public MagmaData magma;
@@ -10,7 +12,7 @@ public class MagmaWidget : MonoBehaviour {
     public float percentUpdateDelay = 1f;
 
     [Header("UI")]
-    public Text percentText;
+    public TMP_Text percentText;
     public Image percentSlider;
     public bool percentSliderInvert = true;
 

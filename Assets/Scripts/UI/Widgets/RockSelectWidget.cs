@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+using TMPro;
+
 public class RockSelectWidget : Selectable {
     public enum State {
         None,
@@ -33,8 +35,8 @@ public class RockSelectWidget : Selectable {
     public M8.InputAction selectAxisInput; //axis input to select prev/next (-1 = left/down, 1 = right/up)
 
     [Header("Rock")]
-    public Text rockTitleText;
-    public Text rockCountText;
+    public TMP_Text rockTitleText;
+    public TMP_Text rockCountText;
     public string rockCountFormat = "00";
 
     public float rockProcessDelay = 1f; //delay before processing while pointer is down
