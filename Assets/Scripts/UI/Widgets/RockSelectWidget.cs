@@ -65,6 +65,12 @@ public class RockSelectWidget : Selectable {
         }
     }
 
+    public InfoData currentRock {
+        get {
+            return mCurRockInd >= 0 && mCurRockInd < mRockList.Count ? mRockList[mCurRockInd] : null;
+        }
+    }
+
     private bool mIsSelected;
     private bool mIsDown;
 
