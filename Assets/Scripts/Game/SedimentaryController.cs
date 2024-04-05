@@ -120,7 +120,12 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
 
     public float compactCementDelay = 1.5f;
 
-    [Header("Rock Result")]
+    [Header("Rock Hints")]
+    public SedimentaryRockHintGroupWidget hintWidget;
+    public RockSedimentaryData[] hintRocks;
+	public RockSedimentaryData[] hintOrganicRocks;
+
+	[Header("Rock Result")]
     public SequenceInfo rockResultSequence;
     public InfoDataListWidget rockResultWidget;
     public Button rockResultContinueButton;
@@ -217,7 +222,9 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
 
         if(completeProceedGO) completeProceedGO.SetActive(false);
 
-        processRockButton.onClick.AddListener(OnProcessRockClick);
+        if(hintWidget) hintWidget.active = false;
+
+		processRockButton.onClick.AddListener(OnProcessRockClick);
         processOrganicButton.onClick.AddListener(OnProcessOrganicClick);
 
         sourceSelect.processRockCallback += OnSourceSelectProcess;
@@ -263,8 +270,6 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
             processOrganicButton.Select();
     }
 
-    delegate IEnumerator routFunc();
-
     IEnumerator DoSourceSelect() {
         ClearSelection();
 
@@ -277,11 +282,15 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
             case SourceMode.Rock:
                 sourceSelectCount = inventory.sedimentaryRockCount;
                 sourceSelect.inventoryFilter = rockFilter;
-                break;
+
+				if(hintWidget) hintWidget.Setup(hintRocks);
+				break;
             case SourceMode.Organic:
                 sourceSelectCount = 1;
                 sourceSelect.inventoryFilter = organicFilter;
-                break;
+
+				if(hintWidget) hintWidget.Setup(hintOrganicRocks);
+				break;
             default: //fail-safe
                 sourceSelectCount = 0;
                 break;
@@ -291,6 +300,14 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
         //
 
         yield return sourceSequence.Enter();
+
+        //only show hint during select if organic
+        if(mCurMode == SourceMode.Organic) {
+            if(hintWidget) {
+                hintWidget.active = true;
+                yield return hintWidget.PlayEnterWait();
+            }
+        }
 
         sourceSelect.Select();
 
@@ -324,7 +341,15 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
     }
 
     IEnumerator DoErosion() {
-        if(erosionGrainText)
+		//show hint if in rock mode
+		if(mCurMode == SourceMode.Rock) {
+			if(hintWidget) {
+				hintWidget.active = true;
+				yield return hintWidget.PlayEnterWait();
+			}
+		}
+
+		if(erosionGrainText)
             erosionGrainText.text = string.Format("{0}: ----", M8.Localize.Get(erosionGrainSizeTitleTextRef));
 
         yield return rockErosionSequence.Enter();
@@ -409,7 +434,7 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
 
         erosionFinishButton.interactable = false;
 
-        yield return rockErosionSequence.Exit();
+		yield return rockErosionSequence.Exit();
         
         StartCoroutine(DoCompactCementation());
     }
@@ -492,9 +517,17 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
 
         criteria.InvokeUpdate(rockOutput);
 
-        yield return new WaitForSeconds(compactCementDelay);
+        if(hintWidget)
+            hintWidget.Unlock(rockOutput);
 
-        StartCoroutine(DoRockResult());
+		yield return new WaitForSeconds(compactCementDelay);
+
+        if(hintWidget) {
+            yield return hintWidget.PlayExitWait();
+            hintWidget.active = false;
+        }
+
+		StartCoroutine(DoRockResult());
     }
     
     IEnumerator DoRockResult() {
@@ -537,7 +570,7 @@ public class SedimentaryController : GameModeController<SedimentaryController> {
             compactCementAnimator.gameObject.SetActive(false);
         }
 
-        StartCoroutine(DoProcessSelect());
+		StartCoroutine(DoProcessSelect());
     }
 
     void OnProcessRockClick() {
